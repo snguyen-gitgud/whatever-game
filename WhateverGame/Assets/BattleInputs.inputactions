@@ -1,0 +1,166 @@
+{
+    "name": "BattleInputs",
+    "maps": [
+        {
+            "name": "MainBattleControl",
+            "id": "f5c6f559-acca-4fb5-bdcb-91cbeb1949e8",
+            "actions": [
+                {
+                    "name": "CursorMovement",
+                    "type": "Value",
+                    "id": "5fbbdba6-9294-4e39-94f5-dff55cd0ec0f",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "CameraAngle",
+                    "type": "Value",
+                    "id": "165fc474-d5ad-44ad-885a-fe6f349e0fa1",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "A_Button",
+                    "type": "Button",
+                    "id": "46fac9fc-5be2-4210-b6c9-10e2aa2b4cd4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "X_Button",
+                    "type": "Button",
+                    "id": "a5a16d0b-4630-48c6-92cb-d210ddeddfb0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Y_Button",
+                    "type": "Button",
+                    "id": "0847c058-45ca-4b21-ba12-462b2f213559",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "B_Button",
+                    "type": "Button",
+                    "id": "feca244a-36e4-4f24-81f8-9f05470eeff3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MultiCast_Button",
+                    "type": "Button",
+                    "id": "6d782d4c-db15-4f76-bd40-5cd3284cb45e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1e2d6665-c5b2-4063-9907-c628ec945770",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "BattleControl",
+                    "action": "CursorMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "16d40137-ef2b-4504-acec-4bf0357bde3a",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "BattleControl",
+                    "action": "A_Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "16339e10-4f6d-4bf7-81dc-9e684f1b8471",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "BattleControl",
+                    "action": "X_Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3dd2a984-3859-44bc-87dd-84923fe5302f",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "BattleControl",
+                    "action": "Y_Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "862d4038-9acb-43e7-b556-9f837ab708bc",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "BattleControl",
+                    "action": "B_Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d1bbc3a7-0142-4849-aace-465f3410c987",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "BattleControl",
+                    "action": "CameraAngle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "84eab85d-3e26-435a-a124-14fc860c4d49",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "BattleControl",
+                    "action": "MultiCast_Button",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "BattleControl",
+            "bindingGroup": "BattleControl",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
