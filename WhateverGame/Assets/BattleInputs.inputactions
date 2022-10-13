@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MultiCast_Button",
+                    "name": "R_Shoulder",
                     "type": "Button",
                     "id": "6d782d4c-db15-4f76-bd40-5cd3284cb45e",
                     "expectedControlType": "Button",
@@ -143,7 +143,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "BattleControl",
-                    "action": "MultiCast_Button",
+                    "action": "R_Shoulder",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

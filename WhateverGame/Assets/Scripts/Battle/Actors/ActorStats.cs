@@ -10,6 +10,7 @@ public class ActorStats : MonoBehaviour
     public float baseSpeed = 20f;
 
     [Header("Specific stats")]
+    public int healthPoint = 100;
     public int speed = 100;
 
     [Header("Concurrent stats")]

@@ -18,6 +18,9 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
     public List<GridUnit> gridUnitsList = new List<GridUnit>();
     [SerializeField, HideInInspector] public List<GridUnit> _gridUnitsList = new List<GridUnit>();
 
+    [Header("Pointer settings")]
+    public Transform cursorRoot;
+
     //internals
     [HideInInspector] public GridCursor gridCursor;
     GridUnit current_highlighted_grid_unit = null;
@@ -37,6 +40,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
         targetTerrain.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
 
         DOTween.SetTweensCapacity(1000, 100);
+        gridCur.transform.position = gridUnitsList[0].transform.position + Vector3.up * gridUnitSize * 0.5f;
     }
 
     public void ClearGridData()
@@ -302,35 +306,47 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
 
     private void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Mathf.Abs(InputProcessor.GetInstance().leftStick.magnitude) > 0f)
         {
-            if (hit.transform.tag.Contains("GridUnit") == true)
+            DOTween.Kill(grid_cursor_tween);
+            gridCur.transform.position += InputProcessor.GetInstance().leftStick * Time.deltaTime * 8f;
+
+            Ray ray = new Ray(cursorRoot.position + (Vector3.up * 100f), Vector3.down);
+            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
             {
-                if (last_hit.transform?.gameObject != null && hit.transform.gameObject == last_hit.transform.gameObject)
-                    return;
+                if (hit.transform.tag.Contains("GridUnit") == true)
+                {
+                    if (last_hit.transform?.gameObject != null && hit.transform.gameObject == last_hit.transform.gameObject)
+                        return;
 
-                last_hit = hit;
-
-                if (grid_cursor_tween != null)
-                    DOTween.Kill(grid_cursor_tween);
-
-                grid_cursor_tween = gridCur.transform.DOMove(hit.transform.position + Vector3.up * gridUnitSize * 0.5f, 0.1f, false);
-
-                //FindPath(gridUnitsList[0], hit.transform.GetComponent<GridUnit>());
-                //FindArea(hit.transform.GetComponent<GridUnit>(), 4);
-
-                current_highlighted_grid_unit = hit.transform.GetComponent<GridUnit>();
-            }
-            else
-            {
-                gridCur.transform.position = Vector3.one * 9999.9f;
+                    last_hit = hit;
+                    current_highlighted_grid_unit = hit.transform.GetComponent<GridUnit>();
+                }
             }
         }
         else
         {
-            gridCur.transform.position = Vector3.one * 9999.9f;
+            Ray ray = new Ray(cursorRoot.position + (Vector3.up * 100f), Vector3.down);
+            //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.tag.Contains("GridUnit") == true)
+                {
+                    if (last_hit.transform?.gameObject != null && hit.transform.gameObject == last_hit.transform.gameObject && gridCur.transform.position == hit.transform.position + Vector3.up * gridUnitSize * 0.5f)
+                        return;
+
+                    last_hit = hit;
+
+                    if (grid_cursor_tween != null)
+                        DOTween.Kill(grid_cursor_tween);
+
+                    grid_cursor_tween = gridCur.transform.DOMove(hit.transform.position + Vector3.up * gridUnitSize * 0.5f, 0.1f, false);
+                    current_highlighted_grid_unit = hit.transform.GetComponent<GridUnit>();
+                }
+            }
         }
     }
 

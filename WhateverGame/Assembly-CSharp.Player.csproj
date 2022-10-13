@@ -64,10 +64,12 @@
     <Compile Include="Assets\Scripts\Common\CustomEvents.cs" />
     <Compile Include="Assets\Scripts\Common\PersistantAndSingletonBehavior.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\ActorAnimationController.cs" />
+    <Compile Include="Assets\Scripts\Common\BattleInputs.cs" />
     <Compile Include="Assets\Scripts\Grid\GridUnit.cs" />
     <Compile Include="Assets\UniGLTF\Samples\UniHumanoid\HumanBuilderTest.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleMaster.cs" />
-    <Compile Include="Assets\Scripts\Common\BattleInputs.cs" />
+    <Compile Include="Assets\Scripts\Common\SelfSpin.cs" />
+    <Compile Include="Assets\Scripts\Common\InputProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\SimplestarGame\SimpleURPToonLitOutlineExample\Resources\SimpleURPToonLitOutlineExample\SimpleURPToonLitOutlineExample_LightingEquation.hlsl" />

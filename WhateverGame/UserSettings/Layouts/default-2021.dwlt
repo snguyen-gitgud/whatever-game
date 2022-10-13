@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1357.3334
   m_ShowMode: 4
-  m_Title: BattleInputs (Input Actions)
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 243
+  controlID: 112
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 603.3334
     height: 1307.3334
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 160
+  controlID: 113
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 161
+  controlID: 114
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: InputActionEditorWindow
+  m_Name: SceneView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -269,9 +269,9 @@ MonoBehaviour:
     y: 0
     width: 1504.6666
     height: 806
-  m_MinSize: {x: 602, y: 321}
+  m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 12}
+  m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
   - {fileID: 22}
@@ -280,8 +280,8 @@ MonoBehaviour:
   - {fileID: 15}
   - {fileID: 14}
   - {fileID: 12}
-  m_Selected: 6
-  m_LastSelected: 2
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -334,8 +334,8 @@ MonoBehaviour:
     m_SearchString: 
   m_ActionsTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 5caee972
-    m_LastClickedID: 1927917148
+    m_SelectedIDs: ccfae6af
+    m_LastClickedID: -1343817012
     m_ExpandedIDs: c58bab9965d5039cccfae6affa6cb1eb07b615310270b63268e49e47740d6a4d
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -402,7 +402,7 @@ MonoBehaviour:
       \"type\": \"Button\",\n                    \"id\": \"feca244a-36e4-4f24-81f8-9f05470eeff3\",\n                   
       \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
-      },\n                {\n                    \"name\": \"MultiCast_Button\",\n                   
+      },\n                {\n                    \"name\": \"R_Shoulder\",\n                   
       \"type\": \"Button\",\n                    \"id\": \"6d782d4c-db15-4f76-bd40-5cd3284cb45e\",\n                   
       \"expectedControlType\": \"Button\",\n                    \"processors\": \"\",\n                   
       \"interactions\": \"\",\n                    \"initialStateCheck\": false\n               
@@ -443,7 +443,7 @@ MonoBehaviour:
       \"id\": \"84eab85d-3e26-435a-a124-14fc860c4d49\",\n                    \"path\":
       \"<Gamepad>/rightShoulder\",\n                    \"interactions\": \"\",\n                   
       \"processors\": \"\",\n                    \"groups\": \"BattleControl\",\n                   
-      \"action\": \"MultiCast_Button\",\n                    \"isComposite\": false,\n                   
+      \"action\": \"R_Shoulder\",\n                    \"isComposite\": false,\n                   
       \"isPartOfComposite\": false\n                }\n            ]\n        }\n   
       ],\n    \"controlSchemes\": [\n        {\n            \"name\": \"BattleControl\",\n           
       \"bindingGroup\": \"BattleControl\",\n            \"devices\": [\n               
@@ -859,7 +859,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 64720100
     m_LastClickedID: 94820
-    m_ExpandedIDs: 00000000d6890100d8890100da890100dc890100
+    m_ExpandedIDs: 00000000e0890100e2890100e4890100e6890100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -887,7 +887,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d6890100d8890100da890100dc890100
+    m_ExpandedIDs: 00000000e0890100e2890100e4890100e6890100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1014,22 +1014,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/Prefabs/Battle/Actors/Player
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Prefabs/Battle/Actors/Player
   m_LastFoldersGridSize: -1
   m_LastProjectPath: G:\work\GitGud\WhateverGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 51.666626}
-    m_SelectedIDs: d6890100
-    m_LastClickedID: 100822
-    m_ExpandedIDs: 00000000d6890100d8890100da890100dc89010000ca9a3bffffff7f
+    m_SelectedIDs: d06f1900
+    m_LastClickedID: 1667024
+    m_ExpandedIDs: 00000000e0890100e2890100e4890100e6890100fe8901000a8a01000c8a0100ca6f190000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1057,7 +1057,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d6890100d8890100da890100dc890100
+    m_ExpandedIDs: 00000000e0890100e2890100e4890100e6890100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1187,9 +1187,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 848a0100
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 0efbffff
+      m_ExpandedIDs: 0efbffff7486000030a8000014d6000082f70000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1205,7 +1205,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 4}
+        m_ClientGUIView: {fileID: 3}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -1439,9 +1439,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1.4956505, y: -5.0228095, z: 6.3577685}
+    m_Target: {x: -0.9277381, y: 1.250788, z: -0.120625734}
     speed: 2
-    m_Value: {x: 1.4956505, y: -5.0228095, z: 6.3577685}
+    m_Value: {x: -0.9277381, y: 1.250788, z: -0.120625734}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1488,13 +1488,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.2686066, y: 0.05486923, z: -0.01532674, w: 0.9615686}
+    m_Target: {x: 0.11162501, y: 0.02682835, z: -0.0030139047, w: 0.9933882}
     speed: 2
-    m_Value: {x: 0.26860538, y: 0.05486898, z: -0.01532667, w: 0.96156424}
+    m_Value: {x: 0.1116245, y: 0.02682823, z: -0.003013891, w: 0.9933837}
   m_Size:
-    m_Target: 6.2620916
+    m_Target: 1.7775884
     speed: 2
-    m_Value: 6.2620916
+    m_Value: 1.7775884
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1512,8 +1512,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: 0.0023992343, y: -0.0029995372, z: 0.0000092217115,
-    w: 1.0000035}
+  m_LastSceneViewRotation: {x: 0.11162501, y: 0.02682835, z: -0.0030139047, w: 0.9933882}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 

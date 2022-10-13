@@ -41,6 +41,7 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
             allActorsList[i].transform.position = gridManager.gridUnitsList[i].cachedWorldPos;
             allActorsList[i].occupied_grid_unit = gridManager.gridUnitsList[i];
             allActorsList[i].occupied_grid_unit.occupiedState = allActorsList[i].actorTeams;
+            allActorsList[i].occupied_grid_unit.occupiedActor = allActorsList[i];
         }
 
         for (int i = 0; i < allActorsList.Count; i++)
@@ -74,9 +75,7 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
             a.actorControlStates = ActorControlStates.AP_STAG;
         }
         action_queue.Add(actor);
-        action_queue[0].StartTurn(action_queue[0]);
-        action_queue.RemoveAt(0);
-        action_queue.TrimExcess();
+        ProcessNextTurn();
     }
 
     public void CurrentActorTurnEnds()
@@ -93,9 +92,16 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
                 a.actorControlStates = ActorControlStates.AP_STAG;
             }
 
-            action_queue[0].StartTurn(action_queue[0]);
-            action_queue.RemoveAt(0);
-            action_queue.TrimExcess();
+            ProcessNextTurn();
         }
+    }
+
+    public void ProcessNextTurn()
+    {
+        gridManager.gridCur.transform.position = action_queue[0].occupied_grid_unit.cachedWorldPos + Vector3.up * gridManager.gridUnitSize * 0.5f;
+
+        action_queue[0].StartTurn(action_queue[0]);
+        action_queue.RemoveAt(0);
+        action_queue.TrimExcess();
     }
 }

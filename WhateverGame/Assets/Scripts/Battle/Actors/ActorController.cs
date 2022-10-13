@@ -130,9 +130,9 @@ public class ActorController : MonoBehaviour
         if (camera == null)
             camera = Camera.main;
 
-        moveCostRect.anchoredPosition = camera.WorldToScreenPoint(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().cachedWorldPos + (Vector3.up * 3f));
+        moveCostRect.anchoredPosition = camera.WorldToScreenPoint(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().cachedWorldPos - (Vector3.up * 1f));
 
-        if (Input.GetMouseButtonUp(0))
+        if (InputProcessor.GetInstance().buttonSouth)
         {
             BattleMaster.GetInstance().gridManager.ClearAreaHighlight();
             ReceiveDestinationGridUnit(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit());
@@ -168,6 +168,7 @@ public class ActorController : MonoBehaviour
     {
         actorControlStates = ActorControlStates.MOVING;
         occupied_grid_unit.occupiedState = GridUnitOccupationStates.FREE;
+        occupied_grid_unit.occupiedActor = null;
         actorAnimationController.PlayMove();
         move_path.RemoveAt(move_path.Count - 1);
         Vector3[] path = new Vector3[move_path.Count];
@@ -203,6 +204,7 @@ public class ActorController : MonoBehaviour
         
         actorAnimationController.PlayIdle();
         occupied_grid_unit = move_path[0];
+        move_path[0].occupiedActor = this;
         BattleMaster.GetInstance().ClearPathHighlight();
 
         yield return new WaitForSeconds(1.0f);

@@ -82,7 +82,7 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""MultiCast_Button"",
+                    ""name"": ""R_Shoulder"",
                     ""type"": ""Button"",
                     ""id"": ""6d782d4c-db15-4f76-bd40-5cd3284cb45e"",
                     ""expectedControlType"": ""Button"",
@@ -165,7 +165,7 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""BattleControl"",
-                    ""action"": ""MultiCast_Button"",
+                    ""action"": ""R_Shoulder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -194,7 +194,7 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
         m_MainBattleControl_X_Button = m_MainBattleControl.FindAction("X_Button", throwIfNotFound: true);
         m_MainBattleControl_Y_Button = m_MainBattleControl.FindAction("Y_Button", throwIfNotFound: true);
         m_MainBattleControl_B_Button = m_MainBattleControl.FindAction("B_Button", throwIfNotFound: true);
-        m_MainBattleControl_MultiCast_Button = m_MainBattleControl.FindAction("MultiCast_Button", throwIfNotFound: true);
+        m_MainBattleControl_R_Shoulder = m_MainBattleControl.FindAction("R_Shoulder", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -260,7 +260,7 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_MainBattleControl_X_Button;
     private readonly InputAction m_MainBattleControl_Y_Button;
     private readonly InputAction m_MainBattleControl_B_Button;
-    private readonly InputAction m_MainBattleControl_MultiCast_Button;
+    private readonly InputAction m_MainBattleControl_R_Shoulder;
     public struct MainBattleControlActions
     {
         private @BattleInputs m_Wrapper;
@@ -271,7 +271,7 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
         public InputAction @X_Button => m_Wrapper.m_MainBattleControl_X_Button;
         public InputAction @Y_Button => m_Wrapper.m_MainBattleControl_Y_Button;
         public InputAction @B_Button => m_Wrapper.m_MainBattleControl_B_Button;
-        public InputAction @MultiCast_Button => m_Wrapper.m_MainBattleControl_MultiCast_Button;
+        public InputAction @R_Shoulder => m_Wrapper.m_MainBattleControl_R_Shoulder;
         public InputActionMap Get() { return m_Wrapper.m_MainBattleControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -299,9 +299,9 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
                 @B_Button.started -= m_Wrapper.m_MainBattleControlActionsCallbackInterface.OnB_Button;
                 @B_Button.performed -= m_Wrapper.m_MainBattleControlActionsCallbackInterface.OnB_Button;
                 @B_Button.canceled -= m_Wrapper.m_MainBattleControlActionsCallbackInterface.OnB_Button;
-                @MultiCast_Button.started -= m_Wrapper.m_MainBattleControlActionsCallbackInterface.OnMultiCast_Button;
-                @MultiCast_Button.performed -= m_Wrapper.m_MainBattleControlActionsCallbackInterface.OnMultiCast_Button;
-                @MultiCast_Button.canceled -= m_Wrapper.m_MainBattleControlActionsCallbackInterface.OnMultiCast_Button;
+                @R_Shoulder.started -= m_Wrapper.m_MainBattleControlActionsCallbackInterface.OnR_Shoulder;
+                @R_Shoulder.performed -= m_Wrapper.m_MainBattleControlActionsCallbackInterface.OnR_Shoulder;
+                @R_Shoulder.canceled -= m_Wrapper.m_MainBattleControlActionsCallbackInterface.OnR_Shoulder;
             }
             m_Wrapper.m_MainBattleControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -324,9 +324,9 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
                 @B_Button.started += instance.OnB_Button;
                 @B_Button.performed += instance.OnB_Button;
                 @B_Button.canceled += instance.OnB_Button;
-                @MultiCast_Button.started += instance.OnMultiCast_Button;
-                @MultiCast_Button.performed += instance.OnMultiCast_Button;
-                @MultiCast_Button.canceled += instance.OnMultiCast_Button;
+                @R_Shoulder.started += instance.OnR_Shoulder;
+                @R_Shoulder.performed += instance.OnR_Shoulder;
+                @R_Shoulder.canceled += instance.OnR_Shoulder;
             }
         }
     }
@@ -348,6 +348,6 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
         void OnX_Button(InputAction.CallbackContext context);
         void OnY_Button(InputAction.CallbackContext context);
         void OnB_Button(InputAction.CallbackContext context);
-        void OnMultiCast_Button(InputAction.CallbackContext context);
+        void OnR_Shoulder(InputAction.CallbackContext context);
     }
 }

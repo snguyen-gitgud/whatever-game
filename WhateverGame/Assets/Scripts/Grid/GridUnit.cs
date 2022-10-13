@@ -19,6 +19,7 @@ public class GridUnit : MonoBehaviour
     public Vector2Int gridPos = new Vector2Int();
     public bool isTraversible = true;
     public GridUnitOccupationStates occupiedState = GridUnitOccupationStates.FREE;
+    public ActorController occupiedActor = null;
 
     public new Renderer renderer = null;
     public GameObject pathIndicator;
