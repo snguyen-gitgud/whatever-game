@@ -36,7 +36,7 @@ public class GridUnit : MonoBehaviour
         if (renderer == null)
             renderer = this.GetComponent<Renderer>();
 
-        renderer.material.SetFloat("_Transparency", 0.5f);
+        renderer.material.SetFloat("_Transparency", 0.75f);
     }
 
     public void ClearAreaHighlight()

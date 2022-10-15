@@ -25,6 +25,15 @@ public class ActorController : MonoBehaviour
     public TMPro.TextMeshProUGUI moveCostText;
     public RectTransform moveCostRect;
 
+    [Header("Vcam settings")]
+    public Transform vcamTarget;
+    public Cinemachine.CinemachineVirtualCamera vcam;
+    [Range(0f, 15f)] public float vcamYOffsetMin = 0f;
+    [Range(0f, 15f)] public float vcamYOffsetMax = 15f;
+
+    //internals
+    [HideInInspector] public Cinemachine.CinemachineOrbitalTransposer vcamTransposer;
+
     private void OnEnable()
     {
         
@@ -38,6 +47,8 @@ public class ActorController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        vcamTransposer = vcam.GetCinemachineComponent<Cinemachine.CinemachineOrbitalTransposer>();
+
         if (actorStats == null)
             actorStats = this.GetComponent<ActorStats>();
 
@@ -49,6 +60,24 @@ public class ActorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //vcam control
+        if (InputProcessor.GetInstance().rightStick.y > 0.05f && vcamTransposer.m_FollowOffset.y <= vcamYOffsetMax)
+        {
+            vcamTransposer.m_FollowOffset += new Vector3(0f, InputProcessor.GetInstance().rightStick.y * Time.deltaTime * 8f, 0f);
+        }
+
+        if (InputProcessor.GetInstance().rightStick.y < -0.05f && vcamTransposer.m_FollowOffset.y >= vcamYOffsetMin)
+        {
+            vcamTransposer.m_FollowOffset += new Vector3(0f, InputProcessor.GetInstance().rightStick.y * Time.deltaTime * 8f, 0f);
+        }
+
+        if (Mathf.Abs(InputProcessor.GetInstance().rightStick.x) >= 0.05f)
+        {
+            vcamTransposer.m_XAxis.Value -= InputProcessor.GetInstance().rightStick.x;
+        }
+
+
+        //process states
         if (actorControlStates == ActorControlStates.READY_TO_MOVE)
         {
             ProcessReadyToMoveState();
@@ -61,6 +90,11 @@ public class ActorController : MonoBehaviour
 
     public void ProcessAPGenState()
     {
+        if (vcam_target != null)
+            DOTween.Kill(vcam_target);
+
+        vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
+
         actorStats.apBar += (actorStats.baseSpeed * (actorStats.speed * 0.01f)) * Time.deltaTime * 3.0f;
         actorUI.apBar.fillAmount = actorStats.apBar / 100f;
 
@@ -77,25 +111,35 @@ public class ActorController : MonoBehaviour
             return;
 
         Debug.Log(actor.gameObject.name + " starts turn.");
+        vcam.Priority = 11;
 
         actorStats.actionPoint = actorStats.maxActionPoint;
         actorUI.apPoints.fillAmount = (actorStats.actionPoint * 1f) / (actorStats.maxActionPoint * 1f);
 
         actorControlStates = ActorControlStates.START_TURN;
 
-        
+        if (vcam_target != null)
+            DOTween.Kill(vcam_target);
+
+        vcam_target = vcamTarget.DOMove(this.transform.position, 1f);
 
         ReadyToMoveState();
     }
 
     new Camera camera;
+    Tween vcam_target;
     public void ProcessReadyToMoveState()
     {
         if (move_area.Contains(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit()) == false)
             return;
 
         List<GridUnit> path = BattleMaster.GetInstance().gridManager.FindPath(occupied_grid_unit, BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit(), actorTeams);
-        
+
+        if (vcam_target != null)
+            DOTween.Kill(vcam_target);
+
+        vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
+
         if (path != null)
         {
             int sum = 0;
@@ -144,6 +188,7 @@ public class ActorController : MonoBehaviour
     {
         actorControlStates = ActorControlStates.READY_TO_MOVE;
         moveCostIndicator.SetActive(true);
+        
         move_area = BattleMaster.GetInstance().FindArea(occupied_grid_unit, actorStats.actionPoint + 1, actorTeams);
     }
 
@@ -167,6 +212,10 @@ public class ActorController : MonoBehaviour
     IEnumerator MoveSequence(List<GridUnit> move_path)
     {
         actorControlStates = ActorControlStates.MOVING;
+
+        vcamTarget.DOMove(this.transform.position, 1f);
+        yield return new WaitForSeconds(1.0f);
+
         occupied_grid_unit.occupiedState = GridUnitOccupationStates.FREE;
         occupied_grid_unit.occupiedActor = null;
         actorAnimationController.PlayMove();
@@ -210,7 +259,7 @@ public class ActorController : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         occupied_grid_unit.occupiedState = actorTeams;
 
-        BattleMaster.GetInstance().CurrentActorTurnEnds();
+        EndTurn();
     }
 
     public void CalculateAndReduceAPAfterMove(Vector3 new_forward)
@@ -236,7 +285,9 @@ public class ActorController : MonoBehaviour
     public void EndTurn()
     {
         actorUI.apBar.fillAmount = 0f;
-        CustomEvents.GetInstance().ActorEndTurn();
+        BattleMaster.GetInstance().birdEyeVcam.GetCinemachineComponent<Cinemachine.CinemachineOrbitalTransposer>().m_XAxis.Value = vcamTransposer.m_XAxis.Value;
+        vcam.Priority = 0;
+        BattleMaster.GetInstance().CurrentActorTurnEnds(vcamTransposer.m_FollowOffset, vcamTransposer.m_XAxis.Value);
     }
 }
 

@@ -309,7 +309,12 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
         if (Mathf.Abs(InputProcessor.GetInstance().leftStick.magnitude) > 0f)
         {
             DOTween.Kill(grid_cursor_tween);
-            gridCur.transform.position += InputProcessor.GetInstance().leftStick * Time.deltaTime * 8f;
+
+            var forward = Camera.main.transform.forward;
+            var right = Camera.main.transform.right;
+            Vector3 desiredMoveDirection = forward * InputProcessor.GetInstance().leftStick.z + right * InputProcessor.GetInstance().leftStick.x;
+            desiredMoveDirection = Vector3.ProjectOnPlane(desiredMoveDirection, Vector3.up).normalized;
+            gridCur.transform.position += desiredMoveDirection * Time.deltaTime * 8f;
 
             Ray ray = new Ray(cursorRoot.position + (Vector3.up * 100f), Vector3.down);
             //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

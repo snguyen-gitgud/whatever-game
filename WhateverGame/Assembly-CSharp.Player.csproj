@@ -68,8 +68,8 @@
     <Compile Include="Assets\Scripts\Grid\GridUnit.cs" />
     <Compile Include="Assets\UniGLTF\Samples\UniHumanoid\HumanBuilderTest.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleMaster.cs" />
-    <Compile Include="Assets\Scripts\Common\SelfSpin.cs" />
     <Compile Include="Assets\Scripts\Common\InputProcessor.cs" />
+    <Compile Include="Assets\Scripts\Common\SelfSpin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\SimplestarGame\SimpleURPToonLitOutlineExample\Resources\SimpleURPToonLitOutlineExample\SimpleURPToonLitOutlineExample_LightingEquation.hlsl" />

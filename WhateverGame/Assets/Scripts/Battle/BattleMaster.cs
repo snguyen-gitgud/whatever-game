@@ -14,6 +14,8 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
     [Header("Camera")]
     public Cinemachine.CinemachineVirtualCamera birdEyeVcam;
     public Cinemachine.CinemachineTargetGroup targetGroup;
+    public Vector3 vcamFollowOffset = new Vector3();
+    public float vcamXAxisValue = 0f;
 
     //internals
     List<ActorController> allActorsList = new List<ActorController>();
@@ -49,7 +51,7 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
             targetGroup.AddMember(allActorsList[i].transform, 1f, 4f);
         }
 
-        CurrentActorTurnEnds();
+        CurrentActorTurnEnds(new Vector3(0f, 6f, -15f), 0);
     }
 
     public List<GridUnit> FindArea(GridUnit start_point, int range, GridUnitOccupationStates occupation_team)
@@ -78,8 +80,11 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
         ProcessNextTurn();
     }
 
-    public void CurrentActorTurnEnds()
+    public void CurrentActorTurnEnds(Vector3 follow_offset, float x_value)
     {
+        vcamFollowOffset = follow_offset;
+        vcamXAxisValue = x_value;
+
         foreach (ActorController actor in allActorsList)
         {
             actor.actorControlStates = ActorControlStates.AP_GEN;
@@ -99,6 +104,8 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
     public void ProcessNextTurn()
     {
         gridManager.gridCur.transform.position = action_queue[0].occupied_grid_unit.cachedWorldPos + Vector3.up * gridManager.gridUnitSize * 0.5f;
+        action_queue[0].vcamTransposer.m_FollowOffset = vcamFollowOffset;
+        action_queue[0].vcamTransposer.m_XAxis.Value = vcamXAxisValue;
 
         action_queue[0].StartTurn(action_queue[0]);
         action_queue.RemoveAt(0);
