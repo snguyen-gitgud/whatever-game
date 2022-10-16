@@ -21,11 +21,14 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
     [Header("Pointer settings")]
     public Transform cursorRoot;
 
+    [Header("UI")]
+    public Transform actorDetails;
+
     //internals
     [HideInInspector] public GridCursor gridCursor;
     GridUnit current_highlighted_grid_unit = null;
     Tween grid_cursor_tween;
-    RaycastHit last_hit;
+    RaycastHit last_hit = new RaycastHit();
 
     private void OnEnable()
     {
@@ -41,6 +44,14 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
 
         DOTween.SetTweensCapacity(1000, 100);
         gridCur.transform.position = gridUnitsList[0].transform.position + Vector3.up * gridUnitSize * 0.5f;
+
+        actorDetails.localPosition = new Vector3(400f, 0f, 0f);
+
+        Ray ray = new Ray(gridUnitsList[0].transform.position + (Vector3.up * 100f), Vector3.down);
+        if (Physics.Raycast(ray, out last_hit))
+        {
+            //intentionally empty
+        }
     }
 
     public void ClearGridData()
@@ -156,7 +167,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
 
         //CustomEvents.GetInstance().ToggleGridUnitRendererLock(false);
         return ret_list;
-    }    
+    }
 
     public void ClearPathHighlight()
     {
@@ -313,6 +324,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
             var forward = Camera.main.transform.forward;
             var right = Camera.main.transform.right;
             Vector3 desiredMoveDirection = forward * InputProcessor.GetInstance().leftStick.z + right * InputProcessor.GetInstance().leftStick.x;
+            
             desiredMoveDirection = Vector3.ProjectOnPlane(desiredMoveDirection, Vector3.up).normalized;
             gridCur.transform.position += desiredMoveDirection * Time.deltaTime * 8f;
 
@@ -326,8 +338,30 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                     if (last_hit.transform?.gameObject != null && hit.transform.gameObject == last_hit.transform.gameObject)
                         return;
 
+                    Vector3 desiredUpDirection = (hit.transform.position - new Vector3(hit.transform.position.x, gridCur.transform.position.y, hit.transform.position.z));
+                    gridCur.transform.position += desiredUpDirection + Vector3.up * gridUnitSize * 0.5f;
+
                     last_hit = hit;
                     current_highlighted_grid_unit = hit.transform.GetComponent<GridUnit>();
+
+                    if (current_highlighted_grid_unit.occupiedActor != null)
+                    {
+                        actorDetails.DOLocalMoveX(0f, 0.25f);
+                    }
+                    else
+                    {
+                        if (DOTween.IsTweening(actorDetails) == true)
+                            DOTween.Kill(actorDetails);
+
+                        actorDetails.DOLocalMoveX(400f, 0.25f);
+                    }
+                }
+                else
+                {
+                    if (DOTween.IsTweening(actorDetails) == true)
+                        DOTween.Kill(actorDetails);
+
+                    actorDetails.DOLocalMoveX(400f, 0.25f);
                 }
             }
         }
@@ -350,7 +384,40 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
 
                     grid_cursor_tween = gridCur.transform.DOMove(hit.transform.position + Vector3.up * gridUnitSize * 0.5f, 0.1f, false);
                     current_highlighted_grid_unit = hit.transform.GetComponent<GridUnit>();
+
+                    if (current_highlighted_grid_unit.occupiedActor != null)
+                    {
+                        actorDetails.DOLocalMoveX(0f, 0.25f);
+                    }
+                    else
+                    {
+                        if (DOTween.IsTweening(actorDetails) == true)
+                            DOTween.Kill(actorDetails);
+
+                        actorDetails.DOLocalMoveX(400f, 0.25f);
+                    }
                 }
+                else
+                {
+                    if (grid_cursor_tween != null)
+                        DOTween.Kill(grid_cursor_tween);
+
+                    grid_cursor_tween = gridCur.transform.DOMove(last_hit.transform.position + Vector3.up * gridUnitSize * 0.5f, 0.1f, false);
+                    current_highlighted_grid_unit = last_hit.transform.GetComponent<GridUnit>();
+
+                    if (DOTween.IsTweening(actorDetails) == true)
+                        DOTween.Kill(actorDetails);
+
+                    actorDetails.DOLocalMoveX(400f, 0.25f);
+                }
+            }
+            else
+            {
+                if (grid_cursor_tween != null)
+                    DOTween.Kill(grid_cursor_tween);
+
+                grid_cursor_tween = gridCur.transform.DOMove(last_hit.transform.position + Vector3.up * gridUnitSize * 0.5f, 0.1f, false);
+                current_highlighted_grid_unit = last_hit.transform.GetComponent<GridUnit>();
             }
         }
     }
@@ -358,7 +425,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
     public GridUnit GetHighLightedGridUnit()
     {
         return current_highlighted_grid_unit;
-    }    
+    }
 
     public void OnBeforeSerialize()
     {

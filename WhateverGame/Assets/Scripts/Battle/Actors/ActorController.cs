@@ -130,6 +130,8 @@ public class ActorController : MonoBehaviour
     Tween vcam_target;
     public void ProcessReadyToMoveState()
     {
+        vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
+
         if (move_area.Contains(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit()) == false)
             return;
 
@@ -137,8 +139,6 @@ public class ActorController : MonoBehaviour
 
         if (vcam_target != null)
             DOTween.Kill(vcam_target);
-
-        vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
 
         if (path != null)
         {
