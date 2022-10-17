@@ -58,8 +58,10 @@
   <ItemGroup>
     <Compile Include="Assets\UniGLTF\Samples\UniHumanoid\RuntimeBvhLoader.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\ActorController.cs" />
-    <Compile Include="Assets\Scripts\Battle\Actors\ActorStats.cs" />
+    <Compile Include="Assets\Scripts\Battle\Actors\ActorInfo.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\ActorUI.cs" />
+    <Compile Include="Assets\Scriptables\Classes\ScriptableActorClass.cs" />
+    <Compile Include="Assets\Scripts\Battle\BattleActorDetails.cs" />
     <Compile Include="Assets\Scripts\Grid\GridManager.cs" />
     <Compile Include="Assets\Scripts\Common\CustomEvents.cs" />
     <Compile Include="Assets\Scripts\Common\PersistantAndSingletonBehavior.cs" />

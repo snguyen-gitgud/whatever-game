@@ -19,6 +19,7 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
 
     //internals
     List<ActorController> allActorsList = new List<ActorController>();
+    ActorController last_actor;
 
     private void OnEnable()
     {
@@ -51,6 +52,8 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
             targetGroup.AddMember(allActorsList[i].transform, 1f, 4f);
         }
 
+        last_actor = allActorsList[0];
+
         CurrentActorTurnEnds(new Vector3(0f, 6f, -15f), 0);
     }
 
@@ -77,14 +80,11 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
             a.actorControlStates = ActorControlStates.AP_STAG;
         }
         action_queue.Add(actor);
-        ProcessNextTurn();
+        ProcessNextTurn(last_actor.vcamTransposer.m_FollowOffset, last_actor.vcamTransposer.m_XAxis.Value);
     }
 
     public void CurrentActorTurnEnds(Vector3 follow_offset, float x_value)
     {
-        vcamFollowOffset = follow_offset;
-        vcamXAxisValue = x_value;
-
         foreach (ActorController actor in allActorsList)
         {
             actor.actorControlStates = ActorControlStates.AP_GEN;
@@ -97,17 +97,25 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
                 a.actorControlStates = ActorControlStates.AP_STAG;
             }
 
-            ProcessNextTurn();
+            ProcessNextTurn(follow_offset, x_value);
         }
     }
 
-    public void ProcessNextTurn()
+    public void ProcessNextTurn(Vector3 follow_offset, float x_value)
     {
+        vcamFollowOffset = follow_offset;
+        vcamXAxisValue = x_value;
+        foreach (ActorController actor in allActorsList)
+        {
+            actor.vcam.Priority = 0;
+        }
+
         gridManager.gridCur.transform.position = action_queue[0].occupied_grid_unit.cachedWorldPos + Vector3.up * gridManager.gridUnitSize * 0.5f;
         action_queue[0].vcamTransposer.m_FollowOffset = vcamFollowOffset;
         action_queue[0].vcamTransposer.m_XAxis.Value = vcamXAxisValue;
 
         action_queue[0].StartTurn(action_queue[0]);
+        last_actor = action_queue[0];
         action_queue.RemoveAt(0);
         action_queue.TrimExcess();
     }

@@ -22,6 +22,7 @@ public class InputProcessor : PersistantAndSingletonBehavior<InputProcessor>
     
     [Header("Right stick")]
     public Vector2 rightStick = new Vector2();
+    public bool invertRightStick = false;
 
     private void Update()
     {
@@ -95,6 +96,9 @@ public class InputProcessor : PersistantAndSingletonBehavior<InputProcessor>
                 rightStick = new Vector2(cam.x, cam.y).normalized;
             else
                 rightStick = Vector2.zero;
+
+            if (invertRightStick)
+                rightStick *= -1f;
         }
     }
 }

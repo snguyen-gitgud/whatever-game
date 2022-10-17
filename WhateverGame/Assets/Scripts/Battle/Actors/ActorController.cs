@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 
 [RequireComponent(typeof(ActorAnimationController))]
-[RequireComponent(typeof(ActorStats))]
+[RequireComponent(typeof(ActorInfo))]
 [RequireComponent(typeof(ActorUI))]
 public class ActorController : MonoBehaviour
 {
@@ -16,11 +16,10 @@ public class ActorController : MonoBehaviour
     public ActorAnimationController actorAnimationController;
 
     [Header("Stats")]
-    public ActorStats actorStats;
+    public ActorInfo actorStats;
 
     [Header("UI")]
     public ActorUI actorUI;
-    public Sprite actorPortrait;
     public GameObject moveCostIndicator;
     public TMPro.TextMeshProUGUI moveCostText;
     public RectTransform moveCostRect;
@@ -33,6 +32,7 @@ public class ActorController : MonoBehaviour
 
     //internals
     [HideInInspector] public Cinemachine.CinemachineOrbitalTransposer vcamTransposer;
+    float bonus_stam_regen_rate = 1f;
 
     private void OnEnable()
     {
@@ -50,7 +50,7 @@ public class ActorController : MonoBehaviour
         vcamTransposer = vcam.GetCinemachineComponent<Cinemachine.CinemachineOrbitalTransposer>();
 
         if (actorStats == null)
-            actorStats = this.GetComponent<ActorStats>();
+            actorStats = this.GetComponent<ActorInfo>();
 
         moveCostIndicator.SetActive(false);
 
@@ -95,7 +95,7 @@ public class ActorController : MonoBehaviour
 
         vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
 
-        actorStats.apBar += (actorStats.baseSpeed * (actorStats.speed * 0.01f)) * Time.deltaTime * 3.0f;
+        actorStats.apBar += (actorStats.baseSpeed * (actorStats.currentStats.speed * 0.01f)) * Time.deltaTime * 2.0f * bonus_stam_regen_rate;
         actorUI.apBar.fillAmount = actorStats.apBar / 100f;
 
         if (actorStats.apBar >= 100f)
@@ -113,8 +113,8 @@ public class ActorController : MonoBehaviour
         Debug.Log(actor.gameObject.name + " starts turn.");
         vcam.Priority = 11;
 
-        actorStats.actionPoint = actorStats.maxActionPoint;
-        actorUI.apPoints.fillAmount = (actorStats.actionPoint * 1f) / (actorStats.maxActionPoint * 1f);
+        actorStats.staminaPoint = actorStats.maxStaminaPoint;
+        actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
 
         actorControlStates = ActorControlStates.START_TURN;
 
@@ -189,7 +189,7 @@ public class ActorController : MonoBehaviour
         actorControlStates = ActorControlStates.READY_TO_MOVE;
         moveCostIndicator.SetActive(true);
         
-        move_area = BattleMaster.GetInstance().FindArea(occupied_grid_unit, actorStats.actionPoint + 1, actorTeams);
+        move_area = BattleMaster.GetInstance().FindArea(occupied_grid_unit, actorStats.staminaPoint + 1, actorTeams);
     }
 
     public void ReceiveDestinationGridUnit(GridUnit destination)
@@ -267,26 +267,27 @@ public class ActorController : MonoBehaviour
         float dot = Vector3.Dot(new_forward, Vector3.right);
         if (Mathf.Abs(dot) <= 0.1f) //90
         {
-            actorStats.actionPoint -= 1;
+            actorStats.staminaPoint -= 1;
         }
         else if (Mathf.Abs(dot) <= 1.1f &&
                  Mathf.Abs(dot) >= 0.9f) //0 and 180
         {
-            actorStats.actionPoint -= 1;
+            actorStats.staminaPoint -= 1;
         }
         else //diagonals
         {
-            actorStats.actionPoint -= 2;
+            actorStats.staminaPoint -= 2;
         }
 
-        actorUI.apPoints.fillAmount = (actorStats.actionPoint * 1f) / (actorStats.maxActionPoint * 1f);
+        actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
     }
 
     public void EndTurn()
     {
+        bonus_stam_regen_rate = 1f + (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
         actorUI.apBar.fillAmount = 0f;
         BattleMaster.GetInstance().birdEyeVcam.GetCinemachineComponent<Cinemachine.CinemachineOrbitalTransposer>().m_XAxis.Value = vcamTransposer.m_XAxis.Value;
-        vcam.Priority = 0;
+        //vcam.Priority = 0;
         BattleMaster.GetInstance().CurrentActorTurnEnds(vcamTransposer.m_FollowOffset, vcamTransposer.m_XAxis.Value);
     }
 }
