@@ -394,6 +394,24 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                     if (current_highlighted_grid_unit.occupiedActor != null)
                     {
                         actorDetails.DOLocalMoveX(0f, 0.25f);
+                        actorDetails.parent.GetComponent<BattleActorDetails>().SetDisplayData(current_highlighted_grid_unit.occupiedActor.actorStats.actorPortrait,
+                                                                                       current_highlighted_grid_unit.occupiedActor.actorStats.actorName,
+                                                                                       current_highlighted_grid_unit.occupiedActor.actorStats.currentStats.level,
+                                                                                       current_highlighted_grid_unit.occupiedActor.actorStats.currentStats.healthPoint,
+                                                                                       current_highlighted_grid_unit.occupiedActor.actorStats.baseStats.healthPoint,
+                                                                                       current_highlighted_grid_unit.occupiedActor.actorUI.apBar.fillAmount);
+                    }
+                    else
+                    {
+                        if (DOTween.IsTweening(actorDetails) == true)
+                            DOTween.Kill(actorDetails);
+
+                        actorDetails.DOLocalMoveX(400f, 0.25f);
+                    }
+
+                    if (current_highlighted_grid_unit.occupiedActor != null)
+                    {
+                        actorDetails.DOLocalMoveX(0f, 0.25f);
                     }
                     else
                     {

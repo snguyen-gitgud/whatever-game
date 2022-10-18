@@ -1,7 +1,7 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 [RequireComponent(typeof(ActorAnimationController))]
 [RequireComponent(typeof(ActorInfo))]
@@ -23,6 +23,10 @@ public class ActorController : MonoBehaviour
     public GameObject moveCostIndicator;
     public TMPro.TextMeshProUGUI moveCostText;
     public RectTransform moveCostRect;
+    public BattleActorDetails actorDetails;
+    public Color normalAPGenColor;
+    public Color exhautedAPGenColor;
+    public Color acceleratedAPGenColor;
 
     [Header("Vcam settings")]
     public Transform vcamTarget;
@@ -33,10 +37,12 @@ public class ActorController : MonoBehaviour
     //internals
     [HideInInspector] public Cinemachine.CinemachineOrbitalTransposer vcamTransposer;
     float bonus_stam_regen_rate = 1f;
+    bool is_moved = false;
+    bool is_acted = false;
 
     private void OnEnable()
     {
-        
+
     }
 
     private void OnDestroy()
@@ -76,9 +82,21 @@ public class ActorController : MonoBehaviour
             vcamTransposer.m_XAxis.Value -= InputProcessor.GetInstance().rightStick.x;
         }
 
-
         //process states
-        if (actorControlStates == ActorControlStates.READY_TO_MOVE)
+        if (actorControlStates == ActorControlStates.WAITING_FOR_COMMAND)
+        {
+            //commands
+            if (InputProcessor.GetInstance().buttonSouth)
+            {
+                ReadyToMoveState();
+            }
+
+            if (InputProcessor.GetInstance().buttonShoulderL)
+            {
+                EndTurn();
+            }
+        }
+        else if (actorControlStates == ActorControlStates.READY_TO_MOVE)
         {
             ProcessReadyToMoveState();
         }
@@ -95,11 +113,12 @@ public class ActorController : MonoBehaviour
 
         vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
 
-        actorStats.apBar += (actorStats.baseSpeed * (actorStats.currentStats.speed * 0.01f)) * Time.deltaTime * 2.0f * bonus_stam_regen_rate;
+        actorStats.apBar += (actorStats.baseSpeed * (actorStats.currentStats.speed * 0.01f)) * Time.deltaTime * (1.0f + bonus_stam_regen_rate);
         actorUI.apBar.fillAmount = actorStats.apBar / 100f;
 
         if (actorStats.apBar >= 100f)
         {
+            actorUI.apBar.color = normalAPGenColor;
             actorStats.apBar = 0f;
             BattleMaster.GetInstance().StartNewActorTurn(this);
         }
@@ -116,24 +135,36 @@ public class ActorController : MonoBehaviour
         actorStats.staminaPoint = actorStats.maxStaminaPoint;
         actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
 
-        actorControlStates = ActorControlStates.START_TURN;
+        actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
 
         if (vcam_target != null)
             DOTween.Kill(vcam_target);
 
         vcam_target = vcamTarget.DOMove(this.transform.position, 1f);
 
-        ReadyToMoveState();
+        actorDetails.SetDisplayData(actorStats.actorPortrait, actorStats.actorName, actorStats.currentStats.level, actorStats.currentStats.healthPoint, actorStats.baseStats.healthPoint, actorUI.apBar.fillAmount);
+        actorDetails.transform.GetChild(0).DOMoveX(200f, 0.25f);
+
+        moveCostRect.transform.DOMoveY(300f, .25f);
+
+        is_moved = false;
+        is_acted = false;
     }
 
     new Camera camera;
     Tween vcam_target;
     public void ProcessReadyToMoveState()
     {
+        if (is_moved == true)
+            return;
+
         vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
 
         if (move_area.Contains(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit()) == false)
+        {
+            moveCostText.text = 0 + " stamina";
             return;
+        }
 
         List<GridUnit> path = BattleMaster.GetInstance().gridManager.FindPath(occupied_grid_unit, BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit(), actorTeams);
 
@@ -168,13 +199,15 @@ public class ActorController : MonoBehaviour
                     sum += 2;
                 }
             }
-            moveCostText.text = (sum - 1) + " AP";
+            moveCostText.text = (sum - 1) + " stamina";
+        }
+        else
+        {
+            moveCostText.text = 0 + " stamina";
         }
 
         if (camera == null)
             camera = Camera.main;
-
-        moveCostRect.anchoredPosition = camera.WorldToScreenPoint(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().cachedWorldPos - (Vector3.up * 1f));
 
         if (InputProcessor.GetInstance().buttonSouth)
         {
@@ -186,10 +219,26 @@ public class ActorController : MonoBehaviour
     List<GridUnit> move_area = new List<GridUnit>();
     public void ReadyToMoveState()
     {
+        if (is_moved == true)
+            return;
+
         actorControlStates = ActorControlStates.READY_TO_MOVE;
         moveCostIndicator.SetActive(true);
-        
+
         move_area = BattleMaster.GetInstance().FindArea(occupied_grid_unit, actorStats.staminaPoint + 1, actorTeams);
+
+        actorDetails.transform.GetChild(0).DOMoveX(-200f, 0.25f);
+
+        moveCostRect.transform.DOMoveY(-600f, .25f);
+    }
+
+    public void WaitingForCommandState()
+    {
+        actorDetails.transform.GetChild(0).DOMoveX(200f, 0.25f);
+
+        moveCostRect.transform.DOMoveY(300f, .25f);
+
+        actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
     }
 
     public void ReceiveDestinationGridUnit(GridUnit destination)
@@ -228,7 +277,8 @@ public class ActorController : MonoBehaviour
 
         if (path.Length > 1)
         {
-            this.transform.DOPath(path, move_path.Count - 1, PathType.Linear, PathMode.Full3D).OnWaypointChange((way_point_index) => {
+            this.transform.DOPath(path, move_path.Count - 1, PathType.Linear, PathMode.Full3D).OnWaypointChange((way_point_index) =>
+            {
                 if (path.Length > 0 && way_point_index < path.Length)
                 {
                     Vector3 new_forward = Vector3.ProjectOnPlane((path[way_point_index] - this.transform.GetChild(0).position).normalized, Vector3.up);
@@ -250,7 +300,7 @@ public class ActorController : MonoBehaviour
             CalculateAndReduceAPAfterMove(new_forward);
             yield return new WaitForSeconds(1.0f);
         }
-        
+
         actorAnimationController.PlayIdle();
         occupied_grid_unit = move_path[0];
         move_path[0].occupiedActor = this;
@@ -259,7 +309,8 @@ public class ActorController : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         occupied_grid_unit.occupiedState = actorTeams;
 
-        EndTurn();
+        is_moved = true;
+        WaitingForCommandState();
     }
 
     public void CalculateAndReduceAPAfterMove(Vector3 new_forward)
@@ -285,8 +336,17 @@ public class ActorController : MonoBehaviour
     public void EndTurn()
     {
         bonus_stam_regen_rate = 1f + (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
+        if (bonus_stam_regen_rate < 1f)
+            actorUI.apBar.color = exhautedAPGenColor;
+        else if (bonus_stam_regen_rate == 1f)
+            actorUI.apBar.color = normalAPGenColor;
+        else
+            actorUI.apBar.color = acceleratedAPGenColor;
+
         actorUI.apBar.fillAmount = 0f;
         BattleMaster.GetInstance().birdEyeVcam.GetCinemachineComponent<Cinemachine.CinemachineOrbitalTransposer>().m_XAxis.Value = vcamTransposer.m_XAxis.Value;
+        actorDetails.transform.GetChild(0).DOMoveX(-200f, 0.25f);
+        moveCostRect.transform.DOMoveY(-600f, .25f);
         //vcam.Priority = 0;
         BattleMaster.GetInstance().CurrentActorTurnEnds(vcamTransposer.m_FollowOffset, vcamTransposer.m_XAxis.Value);
     }
@@ -296,7 +356,7 @@ public enum ActorControlStates
 {
     AP_GEN = 0,
     AP_STAG,
-    START_TURN,
+    WAITING_FOR_COMMAND,
     READY_TO_MOVE,
     MOVING,
     ACTING
