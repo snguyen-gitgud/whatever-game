@@ -85,16 +85,7 @@ public class ActorController : MonoBehaviour
         //process states
         if (actorControlStates == ActorControlStates.WAITING_FOR_COMMAND)
         {
-            //commands
-            if (InputProcessor.GetInstance().buttonSouth)
-            {
-                ReadyToMoveState();
-            }
-
-            if (InputProcessor.GetInstance().buttonShoulderL)
-            {
-                EndTurn();
-            }
+            ProcessWaitingForCommandState();
         }
         else if (actorControlStates == ActorControlStates.READY_TO_MOVE)
         {
@@ -106,6 +97,22 @@ public class ActorController : MonoBehaviour
         }
     }
 
+    public void ProcessWaitingForCommandState()
+    {
+        vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
+
+        //commands
+        if (InputProcessor.GetInstance().buttonSouth)
+        {
+            ReadyToMoveState();
+        }
+
+        if (InputProcessor.GetInstance().buttonShoulderL)
+        {
+            EndTurn();
+        }
+    }
+
     public void ProcessAPGenState()
     {
         if (vcam_target != null)
@@ -113,7 +120,7 @@ public class ActorController : MonoBehaviour
 
         vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
 
-        actorStats.apBar += (actorStats.baseSpeed * (actorStats.currentStats.speed * 0.01f)) * Time.deltaTime * (1.0f + bonus_stam_regen_rate);
+        actorStats.apBar += (actorStats.baseSpeed * (actorStats.currentStats.speed * 0.01f)) * Time.deltaTime * (1.0f + (bonus_stam_regen_rate * 2f));
         actorUI.apBar.fillAmount = actorStats.apBar / 100f;
 
         if (actorStats.apBar >= 100f)
@@ -162,7 +169,7 @@ public class ActorController : MonoBehaviour
 
         if (move_area.Contains(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit()) == false)
         {
-            moveCostText.text = 0 + " stamina";
+            moveCostText.text = 0 + "/8 stamina";
             return;
         }
 
@@ -199,11 +206,11 @@ public class ActorController : MonoBehaviour
                     sum += 2;
                 }
             }
-            moveCostText.text = (sum - 1) + " stamina";
+            moveCostText.text = "<color=#" + ColorUtility.ToHtmlStringRGBA(exhautedAPGenColor) + ">-" + (sum - 1) + "</color>/8 stamina"; 
         }
         else
         {
-            moveCostText.text = 0 + " stamina";
+            moveCostText.text = 0 + "/8 stamina";
         }
 
         if (camera == null)
@@ -285,7 +292,7 @@ public class ActorController : MonoBehaviour
                     if (new_forward.magnitude > 0.1f)
                         this.transform.GetChild(0).forward = new_forward;
 
-                    CalculateAndReduceAPAfterMove(new_forward);
+                    CalculateAndReduceStaminaAfterMove(new_forward);
                 }
             });
             yield return new WaitForSeconds(1.0f * (move_path.Count - 1));
@@ -297,7 +304,7 @@ public class ActorController : MonoBehaviour
                 this.transform.GetChild(0).forward = new_forward;
             this.transform.DOMove(path[0], 1.0f);
 
-            CalculateAndReduceAPAfterMove(new_forward);
+            CalculateAndReduceStaminaAfterMove(new_forward);
             yield return new WaitForSeconds(1.0f);
         }
 
@@ -313,7 +320,7 @@ public class ActorController : MonoBehaviour
         WaitingForCommandState();
     }
 
-    public void CalculateAndReduceAPAfterMove(Vector3 new_forward)
+    public void CalculateAndReduceStaminaAfterMove(Vector3 new_forward)
     {
         float dot = Vector3.Dot(new_forward, Vector3.right);
         if (Mathf.Abs(dot) <= 0.1f) //90
@@ -331,6 +338,7 @@ public class ActorController : MonoBehaviour
         }
 
         actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
+        actorDetails.actorStaminaSlider.fillAmount = actorUI.apPoints.fillAmount;
     }
 
     public void EndTurn()

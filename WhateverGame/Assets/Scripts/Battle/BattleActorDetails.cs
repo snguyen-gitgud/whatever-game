@@ -13,6 +13,7 @@ public class BattleActorDetails : MonoBehaviour
     public Image actorHPSlider;
     public TextMeshProUGUI actorAP;
     public Image actorAPSlider;
+    public Image actorStaminaSlider;
 
     public void SetDisplayData(Sprite img, string name, int level, int hp, int hp_max, float ap)
     {
@@ -21,7 +22,7 @@ public class BattleActorDetails : MonoBehaviour
         actorLevel.text = "Level: " + level.ToString();
         actorHP.text = hp + "/" + hp_max;
         actorHPSlider.fillAmount = (hp * 1f) / (hp_max * 1f);
-        actorAP.text = ap * 100f + "%";
-        actorAPSlider.fillAmount = ap;
+        if (actorAP != null) actorAP.text = ap * 100f + "%";
+        if (actorAPSlider != null) actorAPSlider.fillAmount = ap;
     }
 }
