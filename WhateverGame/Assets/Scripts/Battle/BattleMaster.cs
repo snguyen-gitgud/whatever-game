@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +22,7 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
 
     private void OnEnable()
     {
-        
+
     }
 
     private void OnDisable()
@@ -77,7 +76,11 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
     {
         foreach (ActorController a in allActorsList)
         {
-            a.actorControlStates = ActorControlStates.AP_STAG;
+            if (a.actorControlStates == ActorControlStates.AP_GEN)
+                a.actorControlStates = ActorControlStates.AP_STAG;
+            else if (a.actorControlStates == ActorControlStates.CASTING_GEN)
+                a.actorControlStates = ActorControlStates.CASTING_STAG;
+
         }
         action_queue.Add(actor);
         ProcessNextTurn(last_actor.vcamTransposer.m_FollowOffset, last_actor.vcamTransposer.m_XAxis.Value);
@@ -87,14 +90,20 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
     {
         foreach (ActorController actor in allActorsList)
         {
-            actor.actorControlStates = ActorControlStates.AP_GEN;
+            if (actor.actorControlStates == ActorControlStates.CASTING_STAG)
+                actor.actorControlStates = ActorControlStates.CASTING_GEN;
+            else 
+                actor.actorControlStates = ActorControlStates.AP_GEN;
         }
 
         if (action_queue.Count > 0)
         {
             foreach (ActorController a in allActorsList)
             {
-                a.actorControlStates = ActorControlStates.AP_STAG;
+                if (a.actorControlStates == ActorControlStates.AP_GEN)
+                    a.actorControlStates = ActorControlStates.AP_STAG;
+                else if (a.actorControlStates == ActorControlStates.CASTING_GEN)
+                    a.actorControlStates = ActorControlStates.CASTING_STAG;
             }
 
             ProcessNextTurn(follow_offset, x_value);

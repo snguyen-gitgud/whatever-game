@@ -229,7 +229,7 @@ public class ActorController : MonoBehaviour
 
         actorDetails.transform.GetChild(0).DOMoveX(-200f, 0.25f);
 
-        moveCostRect.transform.DOMoveY(-600f, .25f);
+        moveCostRect.transform.DOMoveY(-200f, .25f);
     }
 
     public void WaitingForCommandState()
@@ -359,5 +359,7 @@ public enum ActorControlStates
     WAITING_FOR_COMMAND,
     READY_TO_MOVE,
     MOVING,
-    ACTING
+    CASTING_GEN,
+    CASTING_STAG,
+    CASTING
 }
