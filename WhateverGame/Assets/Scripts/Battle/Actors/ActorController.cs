@@ -17,16 +17,16 @@ public class ActorController : MonoBehaviour
 
     [Header("Stats")]
     public ActorInfo actorStats;
+    public float burn_out_dur = 3f;
 
     [Header("UI")]
     public ActorUI actorUI;
-    public GameObject moveCostIndicator;
-    public TMPro.TextMeshProUGUI moveCostText;
-    public RectTransform moveCostRect;
     public BattleActorDetails actorDetails;
     public Color normalAPGenColor;
     public Color exhautedAPGenColor;
     public Color acceleratedAPGenColor;
+    public Color PlayerTeamBGColor;
+    public Color OpponentTeamBGColor;
 
     [Header("Vcam settings")]
     public Transform vcamTarget;
@@ -36,9 +36,10 @@ public class ActorController : MonoBehaviour
 
     //internals
     [HideInInspector] public Cinemachine.CinemachineOrbitalTransposer vcamTransposer;
-    float bonus_stam_regen_rate = 1f;
+    float stam_regen_rate = 1f;
     bool is_moved = false;
     bool is_acted = false;
+    float current_burn_out = 0.0f;
 
     private void OnEnable()
     {
@@ -57,8 +58,6 @@ public class ActorController : MonoBehaviour
 
         if (actorStats == null)
             actorStats = this.GetComponent<ActorInfo>();
-
-        moveCostIndicator.SetActive(false);
 
         actorAnimationController.PlayIdle();
     }
@@ -95,6 +94,24 @@ public class ActorController : MonoBehaviour
         {
             ProcessAPGenState();
         }
+        else if (actorControlStates == ActorControlStates.BURNED_OUT_GEN)
+        {
+            current_burn_out += Time.deltaTime;
+            actorUI.apBar.color = exhautedAPGenColor;
+            actorStats.apBar = current_burn_out / burn_out_dur;
+
+            if (current_burn_out >= burn_out_dur)
+            {
+                current_burn_out = 0f;
+                actorStats.apBar = 0f;
+                stam_regen_rate = 1f;
+                actorUI.apBar.color = normalAPGenColor;
+                actorControlStates = ActorControlStates.AP_GEN;
+                actorAnimationController.PlayIdle();
+                if (actorUI.apBar.gameObject.GetComponent<SelfBlinkingUI>() != null)
+                    Destroy(actorUI.apBar.gameObject.GetComponent<SelfBlinkingUI>());
+            }
+        }
     }
 
     public void ProcessWaitingForCommandState()
@@ -120,7 +137,7 @@ public class ActorController : MonoBehaviour
 
         vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
 
-        actorStats.apBar += (actorStats.baseSpeed * (actorStats.currentStats.speed * 0.01f)) * Time.deltaTime * (1.0f + (bonus_stam_regen_rate * 2f));
+        actorStats.apBar += (actorStats.baseSpeed * (actorStats.currentStats.speed * 0.01f)) * Time.deltaTime * Mathf.Abs(stam_regen_rate);
         actorUI.apBar.fillAmount = actorStats.apBar / 100f;
 
         if (actorStats.apBar >= 100f)
@@ -149,10 +166,11 @@ public class ActorController : MonoBehaviour
 
         vcam_target = vcamTarget.DOMove(this.transform.position, 1f);
 
-        actorDetails.SetDisplayData(actorStats.actorPortrait, actorStats.actorName, actorStats.currentStats.level, actorStats.currentStats.healthPoint, actorStats.baseStats.healthPoint, actorUI.apBar.fillAmount);
-        actorDetails.transform.GetChild(0).DOMoveX(200f, 0.25f);
+        actorDetails.SetDisplayData(actorStats.actorPortrait, actorStats.actorName, actorStats.currentStats.level, actorStats.currentStats.healthPoint, actorStats.baseStats.healthPoint, actorUI.apBar.fillAmount, actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
+        actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
 
-        moveCostRect.transform.DOMoveY(300f, .25f);
+        actorDetails.actorStaminaSlider.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f) * 0.5f;
+        actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;      
 
         is_moved = false;
         is_acted = false;
@@ -169,7 +187,7 @@ public class ActorController : MonoBehaviour
 
         if (move_area.Contains(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit()) == false)
         {
-            moveCostText.text = 0 + "/8 stamina";
+            actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
             return;
         }
 
@@ -206,11 +224,11 @@ public class ActorController : MonoBehaviour
                     sum += 2;
                 }
             }
-            moveCostText.text = "<color=#" + ColorUtility.ToHtmlStringRGBA(exhautedAPGenColor) + ">-" + (sum - 1) + "</color>/8 stamina"; 
+            actorDetails.actorStaminaPreviewSlider.fillAmount = ((sum - 1) * 1f) / 16f;
         }
         else
         {
-            moveCostText.text = 0 + "/8 stamina";
+            actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
         }
 
         if (camera == null)
@@ -230,21 +248,12 @@ public class ActorController : MonoBehaviour
             return;
 
         actorControlStates = ActorControlStates.READY_TO_MOVE;
-        moveCostIndicator.SetActive(true);
 
         move_area = BattleMaster.GetInstance().FindArea(occupied_grid_unit, actorStats.staminaPoint + 1, actorTeams);
-
-        actorDetails.transform.GetChild(0).DOMoveX(-200f, 0.25f);
-
-        moveCostRect.transform.DOMoveY(-200f, .25f);
     }
 
     public void WaitingForCommandState()
     {
-        actorDetails.transform.GetChild(0).DOMoveX(200f, 0.25f);
-
-        moveCostRect.transform.DOMoveY(300f, .25f);
-
         actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
     }
 
@@ -259,8 +268,7 @@ public class ActorController : MonoBehaviour
         if (move_area.Contains(destination) == false)
             return;
 
-        moveCostIndicator.SetActive(false);
-
+        actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
         List<GridUnit> move_path = BattleMaster.GetInstance().FindPath(occupied_grid_unit, destination, actorTeams);
         StartCoroutine(MoveSequence(move_path));
     }
@@ -338,23 +346,38 @@ public class ActorController : MonoBehaviour
         }
 
         actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
-        actorDetails.actorStaminaSlider.fillAmount = actorUI.apPoints.fillAmount;
+        actorDetails.actorStaminaSlider.fillAmount = actorUI.apPoints.fillAmount * 0.5f;
     }
 
     public void EndTurn()
     {
-        bonus_stam_regen_rate = 1f + (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
-        if (bonus_stam_regen_rate < 1f)
+        stam_regen_rate = 1f + (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
+        if (stam_regen_rate < 1f)
+        {
+            stam_regen_rate *= .5f;
             actorUI.apBar.color = exhautedAPGenColor;
-        else if (bonus_stam_regen_rate == 1f)
+        }
+        else if (stam_regen_rate == 1f)
             actorUI.apBar.color = normalAPGenColor;
-        else
+        else if (stam_regen_rate > 1f)
+        {
+            stam_regen_rate *= 2f;
             actorUI.apBar.color = acceleratedAPGenColor;
+        }
+        else if (stam_regen_rate <= 0.0f)
+        {
+            stam_regen_rate = 0.0f;
+            actorUI.apBar.color = exhautedAPGenColor;
+            current_burn_out = 0f;
+            SelfBlinkingUI selfBlinking = actorUI.apBar.gameObject.AddComponent<SelfBlinkingUI>();
+            selfBlinking.blinking_speed = 4f;
+            actorControlStates = ActorControlStates.BURNED_OUT_GEN;
+            actorAnimationController.PlayBurnOut();
+        }
 
         actorUI.apBar.fillAmount = 0f;
         BattleMaster.GetInstance().birdEyeVcam.GetCinemachineComponent<Cinemachine.CinemachineOrbitalTransposer>().m_XAxis.Value = vcamTransposer.m_XAxis.Value;
-        actorDetails.transform.GetChild(0).DOMoveX(-200f, 0.25f);
-        moveCostRect.transform.DOMoveY(-600f, .25f);
+        actorDetails.transform.GetChild(0).DOLocalMoveX(-800f, 0.25f);
         //vcam.Priority = 0;
         BattleMaster.GetInstance().CurrentActorTurnEnds(vcamTransposer.m_FollowOffset, vcamTransposer.m_XAxis.Value);
     }
@@ -369,5 +392,7 @@ public enum ActorControlStates
     MOVING,
     CASTING_GEN,
     CASTING_STAG,
-    CASTING
+    CASTING,
+    BURNED_OUT_GEN,
+    BURN_OUT_STAG
 }

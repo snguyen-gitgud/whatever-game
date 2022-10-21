@@ -8,11 +8,17 @@ public class ActorAnimationController : MonoBehaviour
 
     public void PlayIdle()
     {
+        animator.SetTrigger("Idle");
         animator.SetFloat("Move", 0f);
     }
 
     public void PlayMove()
     {
         animator.SetFloat("Move", 1f);
+    }
+
+    public void PlayBurnOut()
+    {
+        animator.SetTrigger("BurnOut");
     }
 }

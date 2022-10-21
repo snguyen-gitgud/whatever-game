@@ -72,6 +72,8 @@
     <Compile Include="Assets\Scripts\Battle\BattleMaster.cs" />
     <Compile Include="Assets\Scripts\Common\InputProcessor.cs" />
     <Compile Include="Assets\Scripts\Common\SelfSpin.cs" />
+    <Compile Include="Assets\Scripts\Common\SelfBlinkingUI.cs" />
+    <Compile Include="Assets\Scripts\Common\SelfSpinning.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\SimplestarGame\SimpleURPToonLitOutlineExample\Resources\SimpleURPToonLitOutlineExample\SimpleURPToonLitOutlineExample_LightingEquation.hlsl" />

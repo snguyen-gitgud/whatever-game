@@ -11,18 +11,19 @@ public class BattleActorDetails : MonoBehaviour
     public TextMeshProUGUI actorLevel;
     public TextMeshProUGUI actorHP;
     public Image actorHPSlider;
-    public TextMeshProUGUI actorAP;
     public Image actorAPSlider;
     public Image actorStaminaSlider;
+    public Image actorStaminaPreviewSlider;
+    public Image teamBG;
 
-    public void SetDisplayData(Sprite img, string name, int level, int hp, int hp_max, float ap)
+    public void SetDisplayData(Sprite img, string name, int level, int hp, int hp_max, float ap, Color team_color)
     {
         actorPortrait.sprite = img;
         actorName.text = name;
         actorLevel.text = "Level: " + level.ToString();
         actorHP.text = hp + "/" + hp_max;
         actorHPSlider.fillAmount = (hp * 1f) / (hp_max * 1f);
-        if (actorAP != null) actorAP.text = ap * 100f + "%";
         if (actorAPSlider != null) actorAPSlider.fillAmount = ap;
+        teamBG.color = team_color;
     }
 }

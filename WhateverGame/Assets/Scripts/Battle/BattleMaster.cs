@@ -80,7 +80,8 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
                 a.actorControlStates = ActorControlStates.AP_STAG;
             else if (a.actorControlStates == ActorControlStates.CASTING_GEN)
                 a.actorControlStates = ActorControlStates.CASTING_STAG;
-
+            else if (a.actorControlStates == ActorControlStates.BURNED_OUT_GEN)
+                a.actorControlStates = ActorControlStates.BURN_OUT_STAG;
         }
         action_queue.Add(actor);
         ProcessNextTurn(last_actor.vcamTransposer.m_FollowOffset, last_actor.vcamTransposer.m_XAxis.Value);
@@ -92,7 +93,11 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
         {
             if (actor.actorControlStates == ActorControlStates.CASTING_STAG)
                 actor.actorControlStates = ActorControlStates.CASTING_GEN;
-            else 
+            else if (actor.actorControlStates == ActorControlStates.AP_STAG)
+                actor.actorControlStates = ActorControlStates.AP_GEN;
+            else if (actor.actorControlStates == ActorControlStates.BURN_OUT_STAG)
+                actor.actorControlStates = ActorControlStates.BURNED_OUT_GEN;
+            else
                 actor.actorControlStates = ActorControlStates.AP_GEN;
         }
 
@@ -104,6 +109,8 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
                     a.actorControlStates = ActorControlStates.AP_STAG;
                 else if (a.actorControlStates == ActorControlStates.CASTING_GEN)
                     a.actorControlStates = ActorControlStates.CASTING_STAG;
+                else if (a.actorControlStates == ActorControlStates.BURNED_OUT_GEN)
+                    a.actorControlStates = ActorControlStates.BURN_OUT_STAG;
             }
 
             ProcessNextTurn(follow_offset, x_value);
