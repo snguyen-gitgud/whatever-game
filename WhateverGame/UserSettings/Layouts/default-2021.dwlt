@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1357.3334
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Hierarchy
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 127
+  controlID: 120
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 107
+  controlID: 121
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 108
+  controlID: 122
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -269,8 +269,8 @@ MonoBehaviour:
     y: 0
     width: 1558.6666
     height: 806
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c262c1329a02fa49b5cb4c297106f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MinSize: {x: 139, y: 29}
+  m_MinSize: {x: 135, y: 29}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: ProBuilder
@@ -856,7 +856,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 64720100
     m_LastClickedID: 94820
-    m_ExpandedIDs: 000000004ee4000050e4000052e4000054e40000
+    m_ExpandedIDs: 00000000e2e30000e4e30000e6e30000e8e30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -884,7 +884,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004ee4000050e4000052e4000054e40000
+    m_ExpandedIDs: 00000000e2e30000e4e30000e6e30000e8e30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1011,22 +1011,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/3rdParty/Animations/EverydayMotionPack/Motion/01_Idle
+    - Assets/Prefabs/Battle/Actors/Player
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/3rdParty/Animations/EverydayMotionPack/Motion/01_Idle
+  - Assets/Prefabs/Battle/Actors/Player
   m_LastFoldersGridSize: -1
   m_LastProjectPath: G:\work\GitGud\WhateverGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 6af30c00
-    m_LastClickedID: 848746
-    m_ExpandedIDs: 000000004ee4000050e4000052e4000054e400005ce400006ae4000078e40000c2e400006cf30c006ef30c0000ca9a3bffffff7f
+    m_SelectedIDs: 42e50000
+    m_LastClickedID: 58690
+    m_ExpandedIDs: 00000000e2e30000e4e30000e6e30000e8e30000f2e3000000e4000058e400005ae400003ae5000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1054,7 +1054,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000004ee4000050e4000052e4000054e40000
+    m_ExpandedIDs: 00000000e2e30000e4e30000e6e30000e8e30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1184,9 +1184,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 94faffff
-      m_LastClickedID: -1388
-      m_ExpandedIDs: 1037f7ff36ebf7ff38ebf7ff3eebf7ff66f6ffff98f6ffff9ef6ffff68f7ffff6cf7ffff94faffff08fbffff0cfbffff0efbffffbc9b00003ca7000050ad0000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: a623fcff4862fcff0efbffff26790000ae8c00003eb0000074c400001cca0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1288,7 +1288,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 25.333334}
+      snapOffset: {x: 0, y: 24.666666}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-transform-toolbar
@@ -1436,9 +1436,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1208.3412, y: 422.239, z: -6.4476547}
+    m_Target: {x: 1281.1687, y: 410.51855, z: 40.076775}
     speed: 2
-    m_Value: {x: 1208.3412, y: 422.239, z: -6.4476547}
+    m_Value: {x: 1069.184, y: 630.95, z: -0.074640684}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1489,9 +1489,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1620.3365
+    m_Target: 1316.852
     speed: 2
-    m_Value: 1620.3365
+    m_Value: 122.7979
   m_Ortho:
     m_Target: 1
     speed: 2

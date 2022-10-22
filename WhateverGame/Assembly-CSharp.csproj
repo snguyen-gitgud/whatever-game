@@ -70,9 +70,9 @@
     <Compile Include="Assets\Scripts\Grid\GridUnit.cs" />
     <Compile Include="Assets\UniGLTF\Samples\UniHumanoid\HumanBuilderTest.cs" />
     <Compile Include="Assets\Scripts\Battle\BattleMaster.cs" />
+    <Compile Include="Assets\Scripts\Common\SelfBlinkingUI.cs" />
     <Compile Include="Assets\Scripts\Common\InputProcessor.cs" />
     <Compile Include="Assets\Scripts\Common\SelfSpin.cs" />
-    <Compile Include="Assets\Scripts\Common\SelfBlinkingUI.cs" />
     <Compile Include="Assets\Scripts\Common\SelfSpinning.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -315,6 +315,18 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
 
     private void Update()
     {
+        if (current_highlighted_grid_unit != null && current_highlighted_grid_unit.occupiedActor != null)
+        {
+            actorDetails.DOLocalMoveX(-250f, 0.25f);
+            actorDetails.parent.GetComponent<BattleActorDetails>().SetDisplayData(current_highlighted_grid_unit.occupiedActor.actorStats.actorPortrait,
+                                                                           current_highlighted_grid_unit.occupiedActor.actorStats.actorName,
+                                                                           current_highlighted_grid_unit.occupiedActor.actorStats.currentStats.level,
+                                                                           current_highlighted_grid_unit.occupiedActor.actorStats.currentStats.healthPoint,
+                                                                           current_highlighted_grid_unit.occupiedActor.actorStats.baseStats.healthPoint,
+                                                                           current_highlighted_grid_unit.occupiedActor.actorUI.apBar.fillAmount,
+                                                                           current_highlighted_grid_unit.occupiedActor.actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? current_highlighted_grid_unit.occupiedActor.PlayerTeamBGColor : current_highlighted_grid_unit.occupiedActor.OpponentTeamBGColor);
+        }
+
         if (Mathf.Abs(InputProcessor.GetInstance().leftStick.magnitude) > 0f)
         {
             DOTween.Kill(grid_cursor_tween);
@@ -443,18 +455,6 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                 grid_cursor_tween = gridCur.transform.DOMove(last_hit.transform.position + Vector3.up * gridUnitSize * 0.5f, 0.1f, false);
                 current_highlighted_grid_unit = last_hit.transform.GetComponent<GridUnit>();
             }
-        }
-
-        if (current_highlighted_grid_unit != null && current_highlighted_grid_unit.occupiedActor != null)
-        {
-            actorDetails.DOLocalMoveX(-250f, 0.25f);
-            actorDetails.parent.GetComponent<BattleActorDetails>().SetDisplayData(current_highlighted_grid_unit.occupiedActor.actorStats.actorPortrait,
-                                                                           current_highlighted_grid_unit.occupiedActor.actorStats.actorName,
-                                                                           current_highlighted_grid_unit.occupiedActor.actorStats.currentStats.level,
-                                                                           current_highlighted_grid_unit.occupiedActor.actorStats.currentStats.healthPoint,
-                                                                           current_highlighted_grid_unit.occupiedActor.actorStats.baseStats.healthPoint,
-                                                                           current_highlighted_grid_unit.occupiedActor.actorUI.apBar.fillAmount,
-                                                                           current_highlighted_grid_unit.occupiedActor.actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? current_highlighted_grid_unit.occupiedActor.PlayerTeamBGColor : current_highlighted_grid_unit.occupiedActor.OpponentTeamBGColor);
         }
     }
 
