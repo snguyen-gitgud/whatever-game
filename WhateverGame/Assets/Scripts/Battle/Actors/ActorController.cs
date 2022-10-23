@@ -38,6 +38,10 @@ public class ActorController : MonoBehaviour
     public Cinemachine.CinemachineVirtualCamera vcam;
     [Range(0f, 15f)] public float vcamYOffsetMin = 0f;
     [Range(0f, 15f)] public float vcamYOffsetMax = 15f;
+    public Transform castingVCamsHolder;
+    public Transform executingVCamsHolder;
+    public List<Cinemachine.CinemachineVirtualCamera> castingVCamsList = new List<Cinemachine.CinemachineVirtualCamera>();
+    public List<Cinemachine.CinemachineVirtualCamera> executingVCamsList = new List<Cinemachine.CinemachineVirtualCamera>();
 
     //internals
     [HideInInspector] public Cinemachine.CinemachineOrbitalTransposer vcamTransposer;
@@ -62,6 +66,12 @@ public class ActorController : MonoBehaviour
     void Start()
     {
         vcamTransposer = vcam.GetCinemachineComponent<Cinemachine.CinemachineOrbitalTransposer>();
+
+        castingVCamsList.Clear();
+        castingVCamsList.AddRange(castingVCamsHolder.GetComponentsInChildren<Cinemachine.CinemachineVirtualCamera>());
+
+        executingVCamsList.Clear();
+        executingVCamsList.AddRange(executingVCamsHolder.GetComponentsInChildren<Cinemachine.CinemachineVirtualCamera>());
 
         if (actorStats == null)
             actorStats = this.GetComponent<ActorInfo>();
@@ -195,6 +205,11 @@ public class ActorController : MonoBehaviour
             return;
         }
 
+        actorDetails.actorStaminaPreviewSlider.fillAmount = (current_skill_overload_level * currentChosenSkill.skillStaminaCost) / 16f;
+        if (actorDetails.actorStaminaPreviewSlider.fillAmount > actorDetails.actorStaminaSlider.fillAmount)
+            actorDetails.actorStaminaPreviewSlider.fillAmount = actorDetails.actorStaminaSlider.fillAmount;
+        actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = (current_skill_overload_level * currentChosenSkill.skillStaminaCost) / 16f;
+
         if (InputProcessor.GetInstance().buttonSouth)
         {
             if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == this)
@@ -204,6 +219,8 @@ public class ActorController : MonoBehaviour
                 return;
 
             currentChosenSkill.CastingSkill(this, current_skill_overload_level, BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit());
+            actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
+            actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
             BattleMaster.GetInstance().gridManager.ClearAreaHighlight();
             actorControlStates = ActorControlStates.CASTING_STAG;
             BattleMaster.GetInstance().CurrentActorTurnEnds(vcamTransposer.m_FollowOffset, vcamTransposer.m_XAxis.Value);
@@ -222,12 +239,10 @@ public class ActorController : MonoBehaviour
         if (InputProcessor.GetInstance().buttonShoulderL && current_skill_overload_level <= 0)
         {
             actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
+            actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
             currentChosenSkill = null;
             WaitingForCommandState();
         }
-
-        if (currentChosenSkill != null)
-            actorDetails.actorStaminaPreviewSlider.fillAmount = (current_skill_overload_level * currentChosenSkill.skillStaminaCost) / 16f;
     }
 
     public void ProcessAPGenState()

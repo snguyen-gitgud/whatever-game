@@ -55,6 +55,7 @@ public class BaseActorStats
     public int dodgeChance = 5;
     public int blockChance = 10;
     public int critChance = 10;
+    public int critResist = 0;
     public int accuracy = 80;
 
     public BaseActorStats() { }
@@ -72,6 +73,7 @@ public class BaseActorStats
         dodgeChance = stats.dodgeChance;
         blockChance = stats.blockChance;
         critChance = stats.critChance;
+        critResist = stats.critResist;
         accuracy = stats.accuracy;
     }
 }

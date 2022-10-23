@@ -76,6 +76,7 @@
     <Compile Include="Assets\Scripts\Common\SelfSpin.cs" />
     <Compile Include="Assets\Scripts\Battle\Skills\BaseSkill.cs" />
     <Compile Include="Assets\Scripts\Common\SelfSpinning.cs" />
+    <Compile Include="Assets\Scripts\Common\ShieldHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />

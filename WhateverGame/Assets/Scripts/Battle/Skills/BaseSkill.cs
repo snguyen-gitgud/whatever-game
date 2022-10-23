@@ -16,6 +16,8 @@ public class BaseSkill : MonoBehaviour
     public int skillStaminaCost = 2;
     public int skillOverLoadLevel = 1;
     public int skillMaxOverLoadLevel = 3;
+    public int skillAccuracyBonus = 0;
+    public DamageTypes damageTypes = DamageTypes.PHYSICAL;
 
     [Header("Vcam settings")]
     public Cinemachine.CinemachineVirtualCamera castingVCam;
@@ -31,8 +33,15 @@ public class BaseSkill : MonoBehaviour
 
     Vector3 og_model_pos = new Vector3();
 
+    public virtual int CalculateOutput(int bonus_multiplier)
+    {
+        return 0;
+    }
+
     public virtual void CastingSkill(ActorController actor, int overload_level = 1, GridUnit target_grid_tile = null)
     {
+        castingVCam = actor.castingVCamsList[Random.Range(0, actor.castingVCamsList.Count)];
+        executingVCam = actor.executingVCamsList[Random.Range(0, actor.executingVCamsList.Count)];
         shake = executingVCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
         actorController = actor;
@@ -45,17 +54,23 @@ public class BaseSkill : MonoBehaviour
         actorController.actorStats.staminaPoint -= skillStaminaCost * skillOverLoadLevel;
         actorController.actorUI.apPoints.fillAmount = (actorController.actorStats.staminaPoint * 1f) / (actorController.actorStats.maxStaminaPoint * 1f);
         actorController.actorDetails.actorStaminaSlider.fillAmount = actorController.actorUI.apPoints.fillAmount * 0.5f;
-
-        Vector3 new_forward = actor.transform.forward;
-        new_forward = Vector3.ProjectOnPlane(target_grid_tile.cachedWorldPos - actor.transform.position, Vector3.up).normalized;
-        actor.transform.GetChild(0).forward = new_forward;
-        og_model_pos = actor.transform.GetChild(0).position;
-        actor.transform.GetChild(0).position += actor.transform.GetChild(0).forward;
+        actorController.actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
+        actorController.actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
     }
 
     public virtual void Executekill()
     {
+        Vector3 new_forward = actorController.transform.GetChild(0).forward;
+        new_forward = Vector3.ProjectOnPlane(targetGridUnit.cachedWorldPos - actorController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
+        actorController.transform.GetChild(0).forward = new_forward;
+        og_model_pos = actorController.transform.GetChild(0).position;
+        actorController.transform.GetChild(0).position += new_forward;
+
+        actorController.actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
+        actorController.actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
+
         castingVCam.Priority = 99;
+        targetController = targetGridUnit.occupiedActor;
         StartCoroutine(ExecuteSkillSequence());
     }
 
@@ -79,4 +94,12 @@ public class BaseSkill : MonoBehaviour
         actorAnimationController.PlayIdle();
         actorController.WaitingForCommandState();
     }
+}
+
+public enum DamageTypes
+{
+    PHYSICAL,
+    MAGICAL,
+    MIXED,
+    PURE
 }

@@ -14,6 +14,7 @@ public class BattleActorDetails : MonoBehaviour
     public Image actorAPSlider;
     public Image actorStaminaSlider;
     public Image actorStaminaPreviewSlider;
+    public Image actorStaminaInDebtPreviewSlider;
     public Image teamBG;
 
     public void SetDisplayData(Sprite img, string name, int level, int hp, int hp_max, float ap, Color team_color)
