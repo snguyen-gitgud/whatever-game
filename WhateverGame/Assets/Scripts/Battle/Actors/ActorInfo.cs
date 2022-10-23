@@ -1,4 +1,7 @@
 using UnityEngine;
+using DG.Tweening;
+using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class ActorInfo : MonoBehaviour
@@ -20,8 +23,20 @@ public class ActorInfo : MonoBehaviour
     public float apBar = 0f;
     public int staminaPoint = 6;
 
+    [Header("Abilities")]
+    public Transform normalAttackHolder;
+    public Transform skillsHolder;
+    public BaseSkill actorNormalAttack;
+    public List<BaseSkill> actorSkillsList = new List<BaseSkill>();
+
+    //internals
+
     private void Start()
     {
+        actorNormalAttack = normalAttackHolder.GetComponentsInChildren<BaseSkill>(true)[0];
+        actorSkillsList.Clear();
+        actorSkillsList.AddRange(skillsHolder.GetComponentsInChildren<BaseSkill>(true));
+
         currentStats = new BaseActorStats(baseStats);
     }
 }
@@ -88,3 +103,5 @@ public enum ElementalProperty
     HOLY,
     DARK
 }
+
+

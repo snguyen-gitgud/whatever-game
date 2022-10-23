@@ -8,17 +8,43 @@ public class ActorAnimationController : MonoBehaviour
 
     public void PlayIdle()
     {
-        animator.SetTrigger("Idle");
+        animator.CrossFadeInFixedTime("Locomotion", .25f);
         animator.SetFloat("Move", 0f);
     }
 
     public void PlayMove()
     {
+        animator.CrossFadeInFixedTime("Locomotion", .25f);
         animator.SetFloat("Move", 1f);
     }
 
     public void PlayBurnOut()
     {
-        animator.SetTrigger("BurnOut");
+        animator.CrossFadeInFixedTime("BurnOut", .25f);
+    }
+
+    public void PlayGetHit()
+    {
+        animator.CrossFadeInFixedTime("GetHit", .1f);
+    }
+
+    public void PlayCasting()
+    {
+        animator.CrossFadeInFixedTime("Casting", .25f);
+    }
+
+    public void PlayNormalAttack_1()
+    {
+        animator.CrossFadeInFixedTime("NormalAttack_1", .01f);
+    }
+
+    public void PlayNormalAttack_2()
+    {
+        animator.CrossFadeInFixedTime("NormalAttack_2", .01f);
+    }
+
+    public void PlayNormalAttack_3()
+    {
+        animator.CrossFadeInFixedTime("NormalAttack_3", .01f);
     }
 }

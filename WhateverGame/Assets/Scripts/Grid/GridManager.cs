@@ -12,6 +12,8 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
     public Terrain targetTerrain;
     public GameObject gridUnitPref;
     public GameObject gridCur;
+    public Color PlayerTeamBGColor;
+    public Color OpponentTeamBGColor;
 
     [Range(1, 10)] public int gridUnitSize = 2;
     [Range(15, 100)] public int gridSize = 10;
@@ -125,7 +127,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
         targetTerrain.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
     }
 
-    public List<GridUnit> FindArea(GridUnit start_point, int range, GridUnitOccupationStates occupation_team)
+    public List<GridUnit> FindArea(GridUnit start_point, int range, GridUnitOccupationStates occupation_team, bool include_occupied = false)
     {
         foreach (GridUnit unit in gridUnitsList)
         {
@@ -151,7 +153,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
             {
                 temp.Add(unit);
             }
-            processed_grid_unit_list.AddRange(ProcessNeighborsForPathFinding(temp, i, occupation_team, true));
+            processed_grid_unit_list.AddRange(ProcessNeighborsForPathFinding(temp, i, occupation_team, true, include_occupied));
             processed_grid_unit_list = processed_grid_unit_list.Distinct().ToList();
             i++;
         }
@@ -160,7 +162,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
         ret_list.AddRange(processed_grid_unit_list);
         foreach (GridUnit unit in ret_list)
         {
-            unit.AreaHighlight(unit.gridUnitPathScore);
+            unit.AreaHighlight(unit.gridUnitPathScore, occupation_team == GridUnitOccupationStates.PLAYER_TEAM? PlayerTeamBGColor : OpponentTeamBGColor);
         }
 
         //CustomEvents.GetInstance().ToggleGridUnitRendererLock(false);
@@ -278,7 +280,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
         return ret_list;
     }
 
-    public List<GridUnit> ProcessNeighborsForPathFinding(List<GridUnit> processed_grid_unit_list, int iteration, GridUnitOccupationStates team_state = GridUnitOccupationStates.PLAYER_TEAM, bool exclude_diagonal = false)
+    public List<GridUnit> ProcessNeighborsForPathFinding(List<GridUnit> processed_grid_unit_list, int iteration, GridUnitOccupationStates team_state = GridUnitOccupationStates.PLAYER_TEAM, bool exclude_diagonal = false, bool include_occupied = false)
     {
         //Debug.Log("Search grid iteration number: " + iterartion);
 
@@ -293,8 +295,11 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
 
             foreach (GridUnit neighbor in processees)
             {
-                if (neighbor.occupiedState != GridUnitOccupationStates.FREE /*&& root.occupiedState != team_state*/)
-                    continue;
+                if (include_occupied == false)
+                {
+                    if (neighbor.occupiedState != GridUnitOccupationStates.FREE /*&& root.occupiedState != team_state*/)
+                        continue;
+                }
 
                 if (neighbor.isTraversible == false)
                     continue;
@@ -313,6 +318,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
         return neighbors_list;
     }
 
+    [HideInInspector] public bool cursor_lock = false;
     private void Update()
     {
         if (current_highlighted_grid_unit != null && current_highlighted_grid_unit.occupiedActor != null)
@@ -327,7 +333,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                                                                            current_highlighted_grid_unit.occupiedActor.actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? current_highlighted_grid_unit.occupiedActor.PlayerTeamBGColor : current_highlighted_grid_unit.occupiedActor.OpponentTeamBGColor);
         }
 
-        if (Mathf.Abs(InputProcessor.GetInstance().leftStick.magnitude) > 0f)
+        if (Mathf.Abs(InputProcessor.GetInstance().leftStick.magnitude) > 0f && cursor_lock == false)
         {
             DOTween.Kill(grid_cursor_tween);
 

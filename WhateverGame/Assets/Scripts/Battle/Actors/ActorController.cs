@@ -17,16 +17,21 @@ public class ActorController : MonoBehaviour
 
     [Header("Stats")]
     public ActorInfo actorStats;
-    public float burn_out_dur = 3f;
+    public float burn_out_dur = 5f;
 
     [Header("UI")]
     public ActorUI actorUI;
     public BattleActorDetails actorDetails;
+
     public Color normalAPGenColor;
     public Color exhautedAPGenColor;
     public Color acceleratedAPGenColor;
+    public Color castingGenColor;
+
     public Color PlayerTeamBGColor;
     public Color OpponentTeamBGColor;
+    
+    public GameObject commandControlUI;
 
     [Header("Vcam settings")]
     public Transform vcamTarget;
@@ -38,8 +43,10 @@ public class ActorController : MonoBehaviour
     [HideInInspector] public Cinemachine.CinemachineOrbitalTransposer vcamTransposer;
     float stam_regen_rate = 1f;
     bool is_moved = false;
-    bool is_acted = false;
+    [HideInInspector] public bool is_acted = false;
     float current_burn_out = 0.0f;
+    [HideInInspector] public BaseSkill currentChosenSkill = null;
+    [HideInInspector] public float current_casting_value = 0f;
 
     private void OnEnable()
     {
@@ -99,17 +106,39 @@ public class ActorController : MonoBehaviour
             current_burn_out += Time.deltaTime;
             actorUI.apBar.color = exhautedAPGenColor;
             actorStats.apBar = current_burn_out / burn_out_dur;
+            actorUI.apBar.fillAmount = actorStats.apBar;
 
             if (current_burn_out >= burn_out_dur)
             {
                 current_burn_out = 0f;
                 actorStats.apBar = 0f;
+                actorUI.apBar.fillAmount = actorStats.apBar;
                 stam_regen_rate = 1f;
                 actorUI.apBar.color = normalAPGenColor;
                 actorControlStates = ActorControlStates.AP_GEN;
                 actorAnimationController.PlayIdle();
                 if (actorUI.apBar.gameObject.GetComponent<SelfBlinkingUI>() != null)
                     Destroy(actorUI.apBar.gameObject.GetComponent<SelfBlinkingUI>());
+            }
+        }
+        else if (actorControlStates == ActorControlStates.WAITING_FOR_TARGET)
+        {
+            ProcessWaitingForTarget();
+        }
+        else if (actorControlStates == ActorControlStates.CASTING_GEN)
+        {
+            current_casting_value += Time.deltaTime;
+            actorUI.apBar.color = castingGenColor;
+            actorStats.apBar = current_casting_value / currentChosenSkill.skillCastingDuration;
+            actorUI.apBar.fillAmount = actorStats.apBar;
+
+            if (current_casting_value >= currentChosenSkill.skillCastingDuration)
+            {
+                actorControlStates = ActorControlStates.CASTING;
+                actorUI.apBar.color = normalAPGenColor;
+                actorStats.apBar = 0f;
+                actorUI.apBar.fillAmount = actorStats.apBar;
+                BattleMaster.GetInstance().StartNewActorTurn(this);
             }
         }
     }
@@ -121,13 +150,84 @@ public class ActorController : MonoBehaviour
         //commands
         if (InputProcessor.GetInstance().buttonSouth)
         {
+            if (is_moved == true)
+                return;
+
+            DOTween.Kill(commandControlUI.transform);
+            commandControlUI.transform.DOScale(Vector3.zero, .25f);
             ReadyToMoveState();
         }
 
         if (InputProcessor.GetInstance().buttonShoulderL)
         {
+            DOTween.Kill(commandControlUI.transform);
+            commandControlUI.transform.DOScale(Vector3.zero, .25f);
             EndTurn();
         }
+
+        if (InputProcessor.GetInstance().buttonWest)
+        {
+            if (is_acted == true)
+                return;
+
+            DOTween.Kill(commandControlUI.transform);
+            commandControlUI.transform.DOScale(Vector3.zero, .25f);
+            NormalAttackCommandSelected();
+        }
+    }
+
+    List<GridUnit> skill_range_area = new List<GridUnit>();
+    public void NormalAttackCommandSelected()
+    {
+        actorControlStates = ActorControlStates.WAITING_FOR_TARGET;
+        current_skill_overload_level = 1;
+        currentChosenSkill = actorStats.actorNormalAttack;
+        skill_range_area.Clear();
+        skill_range_area = BattleMaster.GetInstance().gridManager.FindArea(occupied_grid_unit, currentChosenSkill.skillRange + 1, actorTeams, true);
+    }
+
+    int current_skill_overload_level = 1;
+    public void ProcessWaitingForTarget()
+    {
+        if (currentChosenSkill == null)
+        {
+            actorControlStates = ActorControlStates.AP_GEN;
+            return;
+        }
+
+        if (InputProcessor.GetInstance().buttonSouth)
+        {
+            if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == this)
+                return;
+
+            if (skill_range_area.Contains(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit()) == false)
+                return;
+
+            currentChosenSkill.CastingSkill(this, current_skill_overload_level, BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit());
+            BattleMaster.GetInstance().gridManager.ClearAreaHighlight();
+            actorControlStates = ActorControlStates.CASTING_STAG;
+            BattleMaster.GetInstance().CurrentActorTurnEnds(vcamTransposer.m_FollowOffset, vcamTransposer.m_XAxis.Value);
+        }
+
+        if (InputProcessor.GetInstance().buttonShoulderR && current_skill_overload_level < currentChosenSkill.skillMaxOverLoadLevel)
+        {
+            current_skill_overload_level++;
+        }
+
+        if (InputProcessor.GetInstance().buttonShoulderL && current_skill_overload_level >= 1)
+        {
+            current_skill_overload_level--;
+        }
+
+        if (InputProcessor.GetInstance().buttonShoulderL && current_skill_overload_level <= 0)
+        {
+            actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
+            currentChosenSkill = null;
+            WaitingForCommandState();
+        }
+
+        if (currentChosenSkill != null)
+            actorDetails.actorStaminaPreviewSlider.fillAmount = (current_skill_overload_level * currentChosenSkill.skillStaminaCost) / 16f;
     }
 
     public void ProcessAPGenState()
@@ -152,28 +252,39 @@ public class ActorController : MonoBehaviour
     {
         if (this != actor)
             return;
+        
+        if (currentChosenSkill == null) //new turn
+        {
+            Debug.Log(actor.gameObject.name + " starts turn.");
+            vcam.Priority = 11;
 
-        Debug.Log(actor.gameObject.name + " starts turn.");
-        vcam.Priority = 11;
+            actorStats.staminaPoint = actorStats.maxStaminaPoint;
+            actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
 
-        actorStats.staminaPoint = actorStats.maxStaminaPoint;
-        actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
+            actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
+            DOTween.Kill(commandControlUI.transform);
+            commandControlUI.transform.DOScale(Vector3.one, .25f).SetDelay(.25f);
 
-        actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
+            if (vcam_target != null)
+                DOTween.Kill(vcam_target);
 
-        if (vcam_target != null)
-            DOTween.Kill(vcam_target);
+            vcam_target = vcamTarget.DOMove(this.transform.position, 1f);
 
-        vcam_target = vcamTarget.DOMove(this.transform.position, 1f);
+            actorDetails.SetDisplayData(actorStats.actorPortrait, actorStats.actorName, actorStats.currentStats.level, actorStats.currentStats.healthPoint, actorStats.baseStats.healthPoint, actorUI.apBar.fillAmount, actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
+            actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
 
-        actorDetails.SetDisplayData(actorStats.actorPortrait, actorStats.actorName, actorStats.currentStats.level, actorStats.currentStats.healthPoint, actorStats.baseStats.healthPoint, actorUI.apBar.fillAmount, actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
-        actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
+            actorDetails.actorStaminaSlider.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f) * 0.5f;
+            actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
 
-        actorDetails.actorStaminaSlider.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f) * 0.5f;
-        actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;      
-
-        is_moved = false;
-        is_acted = false;
+            is_moved = false;
+            is_acted = false;
+        }
+        else //continue casting
+        {
+            vcam.Priority = 11;
+            actorUI.headerHolder.gameObject.SetActive(false);
+            currentChosenSkill.Executekill();
+        }
     }
 
     new Camera camera;
@@ -254,7 +365,10 @@ public class ActorController : MonoBehaviour
 
     public void WaitingForCommandState()
     {
+        actorUI.headerHolder.gameObject.SetActive(true);
         actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
+        DOTween.Kill(commandControlUI.transform);
+        commandControlUI.transform.DOScale(Vector3.one, .25f);
     }
 
     public void ReceiveDestinationGridUnit(GridUnit destination)
@@ -354,14 +468,14 @@ public class ActorController : MonoBehaviour
         stam_regen_rate = 1f + (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
         if (stam_regen_rate < 1f)
         {
-            stam_regen_rate *= .5f;
+            //stam_regen_rate *= .5f;
             actorUI.apBar.color = exhautedAPGenColor;
         }
         else if (stam_regen_rate == 1f)
             actorUI.apBar.color = normalAPGenColor;
         else if (stam_regen_rate > 1f)
         {
-            stam_regen_rate *= 2f;
+            //stam_regen_rate *= 2f;
             actorUI.apBar.color = acceleratedAPGenColor;
         }
         else if (stam_regen_rate <= 0.0f)
@@ -375,10 +489,13 @@ public class ActorController : MonoBehaviour
             actorAnimationController.PlayBurnOut();
         }
 
+        DOTween.Kill(commandControlUI.transform);
+        commandControlUI.transform.DOScale(Vector3.zero, .25f);
+
         actorUI.apBar.fillAmount = 0f;
         BattleMaster.GetInstance().birdEyeVcam.GetCinemachineComponent<Cinemachine.CinemachineOrbitalTransposer>().m_XAxis.Value = vcamTransposer.m_XAxis.Value;
-        actorDetails.transform.GetChild(0).DOLocalMoveX(-800f, 0.25f);
-        //vcam.Priority = 0;
+        actorDetails.transform.GetChild(0).DOLocalMoveX(-800f, 0.25f).SetDelay(.25f);
+        currentChosenSkill = null;
         BattleMaster.GetInstance().CurrentActorTurnEnds(vcamTransposer.m_FollowOffset, vcamTransposer.m_XAxis.Value);
     }
 }
@@ -390,9 +507,11 @@ public enum ActorControlStates
     WAITING_FOR_COMMAND,
     READY_TO_MOVE,
     MOVING,
+    WAITING_FOR_TARGET,
     CASTING_GEN,
     CASTING_STAG,
     CASTING,
     BURNED_OUT_GEN,
-    BURN_OUT_STAG
+    BURN_OUT_STAG,
+    ALL_STAG
 }

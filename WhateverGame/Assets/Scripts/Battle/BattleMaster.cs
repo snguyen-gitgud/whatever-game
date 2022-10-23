@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleMaster : SingletonBehavior<BattleMaster>
 {
     [Header("Actors settings")]
-    public List<ActorController> playerActorsList = new List<ActorController>();
-    public List<ActorController> opponentActorsList = new List<ActorController>();
+    public Transform playerActorHolder;
+    public Transform opponentActorHolder;
 
     [Header("Grid settings")]
     public GridManager gridManager;
@@ -16,7 +17,16 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
     public Vector3 vcamFollowOffset = new Vector3();
     public float vcamXAxisValue = 0f;
 
+    [Header("UI")]
+    public GameObject actorAPProgressionPref;
+    public Transform actorAPProgressionHolder;
+    public Transform actorCastingProgressionHolder;
+
     //internals
+    List<GameObject> actorAPProgressionsList = new List<GameObject>();
+    List<GameObject> actorCastingProgressionsList = new List<GameObject>();
+    List<ActorController> playerActorsList = new List<ActorController>();
+    List<ActorController> opponentActorsList = new List<ActorController>();
     List<ActorController> allActorsList = new List<ActorController>();
     ActorController last_actor;
 
@@ -32,6 +42,11 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
 
     private void Start()
     {
+        playerActorsList.Clear();
+        opponentActorsList.Clear();
+        playerActorsList.AddRange(playerActorHolder.GetComponentsInChildren<ActorController>(true));
+        opponentActorsList.AddRange(opponentActorHolder.GetComponentsInChildren<ActorController>(true));
+
         allActorsList.Clear();
         allActorsList.AddRange(playerActorsList);
         allActorsList.AddRange(opponentActorsList);
@@ -46,9 +61,21 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
             allActorsList[i].occupied_grid_unit.occupiedActor = allActorsList[i];
         }
 
+        actorAPProgressionsList.Clear();
+        actorCastingProgressionsList.Clear();
         for (int i = 0; i < allActorsList.Count; i++)
         {
             targetGroup.AddMember(allActorsList[i].transform, 1f, 4f);
+
+            GameObject go = Instantiate(actorAPProgressionPref, actorAPProgressionHolder);
+            go.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = allActorsList[i].actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? allActorsList[i].PlayerTeamBGColor : allActorsList[i].OpponentTeamBGColor;
+            go.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = allActorsList[i].actorStats.actorPortrait;
+            actorAPProgressionsList.Add(go);
+
+            go = Instantiate(actorAPProgressionPref, actorCastingProgressionHolder);
+            go.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = allActorsList[i].actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? allActorsList[i].PlayerTeamBGColor : allActorsList[i].OpponentTeamBGColor;
+            go.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = allActorsList[i].actorStats.actorPortrait;
+            actorCastingProgressionsList.Add(go);
         }
 
         last_actor = allActorsList[0];
@@ -134,5 +161,46 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
         last_actor = action_queue[0];
         action_queue.RemoveAt(0);
         action_queue.TrimExcess();
+    }
+
+    private void Update()
+    {
+        foreach (GameObject go in actorAPProgressionsList)
+        {
+            int index = actorAPProgressionsList.IndexOf(go);
+            if (allActorsList[index].actorControlStates == ActorControlStates.AP_GEN ||
+                allActorsList[index].actorControlStates == ActorControlStates.AP_STAG ||
+                allActorsList[index].actorControlStates == ActorControlStates.ALL_STAG)
+            {
+                go.SetActive(true);
+                go.GetComponent<Slider>().value = allActorsList[index].actorUI.apBar.fillAmount;
+            }
+            else if (allActorsList[index].actorControlStates != ActorControlStates.CASTING_GEN ||  
+                     allActorsList[index].actorControlStates != ActorControlStates.CASTING_STAG)
+            {
+                go.SetActive(true);
+                go.GetComponent<Slider>().value = 1f;
+            }
+            else
+                go.SetActive(false);
+        }
+
+        foreach (GameObject go in actorCastingProgressionsList)
+        {
+            int index = actorCastingProgressionsList.IndexOf(go);
+            if (allActorsList[index].actorControlStates == ActorControlStates.CASTING_GEN ||
+                allActorsList[index].actorControlStates == ActorControlStates.CASTING_STAG)
+            {
+                go.SetActive(true);
+                go.GetComponent<Slider>().value = allActorsList[index].actorUI.apBar.fillAmount;
+            }
+            else if (allActorsList[index].actorControlStates == ActorControlStates.CASTING)
+            {
+                go.SetActive(true);
+                go.GetComponent<Slider>().value = 1f;
+            }
+            else
+                go.SetActive(false);
+        }
     }
 }

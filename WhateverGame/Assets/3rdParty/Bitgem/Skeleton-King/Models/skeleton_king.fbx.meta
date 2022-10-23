@@ -1,0 +1,281 @@
+fileFormatVersion: 2
+guid: 900f7bb790b8305418a0f9edf064af9c
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: ball_l
+    100002: ball_r
+    100004: calf_l
+    100006: calf_r
+    100008: Character1_LeftFootIndex1
+    100010: Character1_LeftFootIndex2
+    100012: Character1_RightFootIndex1
+    100014: Character1_RightFootIndex2
+    100016: clavicle_l
+    100018: clavicle_r
+    100020: cloak_left_01
+    100022: cloak_left_02
+    100024: cloak_left_03
+    100026: cloak_left_04
+    100028: cloak_right_01
+    100030: cloak_right_02
+    100032: cloak_right_03
+    100034: cloak_right_04
+    100036: foot_l
+    100038: foot_r
+    100040: front_cloth_01
+    100042: front_cloth_02
+    100044: front_cloth_03
+    100046: hair_left_01
+    100048: hair_left_02
+    100050: hair_right_01
+    100052: hair_right_02
+    100054: hand_l
+    100056: hand_r
+    100058: head
+    100060: index_01_l
+    100062: index_01_r
+    100064: index_02_l
+    100066: index_02_r
+    100068: index_03_l
+    100070: index_03_r
+    100072: jaw
+    100074: kneepad_left
+    100076: kneepad_right
+    100078: lowerarm_l
+    100080: lowerarm_r
+    100082: middle_01_l
+    100084: middle_01_r
+    100086: middle_02_l
+    100088: middle_02_r
+    100090: middle_03_l
+    100092: middle_03_r
+    100094: neck_01
+    100096: pelvis
+    100098: ring_01_l
+    100100: ring_01_r
+    100102: ring_02_l
+    100104: ring_02_r
+    100106: ring_03_l
+    100108: ring_03_r
+    100110: root
+    100112: shoulder_pad_left
+    100114: shoulder_pad_right
+    100116: //RootNode
+    100118: skeleton_king
+    100120: skeleton_king_sword
+    100122: spine_01
+    100124: spine_02
+    100126: spine_03
+    100128: sword1
+    100130: thigh_l
+    100132: thigh_r
+    100134: thumb_01_l
+    100136: thumb_01_r
+    100138: thumb_02_l
+    100140: thumb_02_r
+    100142: thumb_03_l
+    100144: thumb_03_r
+    100146: upperarm_l
+    100148: upperarm_r
+    400000: ball_l
+    400002: ball_r
+    400004: calf_l
+    400006: calf_r
+    400008: Character1_LeftFootIndex1
+    400010: Character1_LeftFootIndex2
+    400012: Character1_RightFootIndex1
+    400014: Character1_RightFootIndex2
+    400016: clavicle_l
+    400018: clavicle_r
+    400020: cloak_left_01
+    400022: cloak_left_02
+    400024: cloak_left_03
+    400026: cloak_left_04
+    400028: cloak_right_01
+    400030: cloak_right_02
+    400032: cloak_right_03
+    400034: cloak_right_04
+    400036: foot_l
+    400038: foot_r
+    400040: front_cloth_01
+    400042: front_cloth_02
+    400044: front_cloth_03
+    400046: hair_left_01
+    400048: hair_left_02
+    400050: hair_right_01
+    400052: hair_right_02
+    400054: hand_l
+    400056: hand_r
+    400058: head
+    400060: index_01_l
+    400062: index_01_r
+    400064: index_02_l
+    400066: index_02_r
+    400068: index_03_l
+    400070: index_03_r
+    400072: jaw
+    400074: kneepad_left
+    400076: kneepad_right
+    400078: lowerarm_l
+    400080: lowerarm_r
+    400082: middle_01_l
+    400084: middle_01_r
+    400086: middle_02_l
+    400088: middle_02_r
+    400090: middle_03_l
+    400092: middle_03_r
+    400094: neck_01
+    400096: pelvis
+    400098: ring_01_l
+    400100: ring_01_r
+    400102: ring_02_l
+    400104: ring_02_r
+    400106: ring_03_l
+    400108: ring_03_r
+    400110: root
+    400112: shoulder_pad_left
+    400114: shoulder_pad_right
+    400116: skeleton_king
+    400118: //RootNode
+    400120: skeleton_king_sword
+    400122: spine_01
+    400124: spine_02
+    400126: spine_03
+    400128: sword1
+    400130: thigh_l
+    400132: thigh_r
+    400134: thumb_01_l
+    400136: thumb_01_r
+    400138: thumb_02_l
+    400140: thumb_02_r
+    400142: thumb_03_l
+    400144: thumb_03_r
+    400146: upperarm_l
+    400148: upperarm_r
+    2100000: skeleton_king_mat
+    4300000: skeleton_king_sword
+    4300002: skeleton_king
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: skeleton_king
+    13700002: skeleton_king_sword
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skeleton_king_mat
+    second: {fileID: 2100000, guid: 0c99699c105bb414eb50a60ad54677c8, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 1390
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -31,12 +31,13 @@ public class GridUnit : MonoBehaviour
         aoeIndicator.SetActive(false);
     }
 
-    public void AreaHighlight(int range_score)
+    public void AreaHighlight(int range_score, Color color)
     {
         if (renderer == null)
             renderer = this.GetComponent<Renderer>();
 
         renderer.material.SetFloat("_Transparency", 0.75f);
+        renderer.material.SetColor("_Color", color);
     }
 
     public void ClearAreaHighlight()
