@@ -19,6 +19,8 @@ public class BaseSkill : MonoBehaviour
     public int skillAccuracyBonus = 0;
     public DamageTypes damageTypes = DamageTypes.PHYSICAL;
 
+    public int baseDamage = 5;
+
     [Header("Vcam settings")]
     public Cinemachine.CinemachineVirtualCamera castingVCam;
     public Cinemachine.CinemachineVirtualCamera executingVCam;
@@ -31,12 +33,7 @@ public class BaseSkill : MonoBehaviour
     public ActorAnimationController actorAnimationController;
     public CinemachineBasicMultiChannelPerlin shake;
 
-    Vector3 og_model_pos = new Vector3();
-
-    public virtual int CalculateOutput(int bonus_multiplier)
-    {
-        return 0;
-    }
+    [HideInInspector] public Vector3 og_model_pos = new Vector3();
 
     public virtual void CastingSkill(ActorController actor, int overload_level = 1, GridUnit target_grid_tile = null)
     {
@@ -60,12 +57,6 @@ public class BaseSkill : MonoBehaviour
 
     public virtual void Executekill()
     {
-        Vector3 new_forward = actorController.transform.GetChild(0).forward;
-        new_forward = Vector3.ProjectOnPlane(targetGridUnit.cachedWorldPos - actorController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
-        actorController.transform.GetChild(0).forward = new_forward;
-        og_model_pos = actorController.transform.GetChild(0).position;
-        actorController.transform.GetChild(0).position += new_forward;
-
         actorController.actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
         actorController.actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
 

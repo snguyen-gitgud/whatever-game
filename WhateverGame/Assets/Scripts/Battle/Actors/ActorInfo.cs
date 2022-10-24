@@ -76,6 +76,11 @@ public class BaseActorStats
         critResist = stats.critResist;
         accuracy = stats.accuracy;
     }
+
+    public void GetHit(int damage)
+    {
+        healthPoint += damage;
+    }
 }
 
 [System.Serializable]

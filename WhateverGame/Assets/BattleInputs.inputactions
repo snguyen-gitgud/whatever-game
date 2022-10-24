@@ -76,7 +76,7 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "BattleControl",
+                    "groups": "BattleControlGamePad",
                     "action": "CursorMovement",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -87,7 +87,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "BattleControl",
+                    "groups": "BattleControlGamePad",
                     "action": "A_Button",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -98,7 +98,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
-                    "groups": "BattleControl",
+                    "groups": "BattleControlGamePad",
                     "action": "X_Button",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -109,7 +109,7 @@
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "BattleControl",
+                    "groups": "BattleControlGamePad",
                     "action": "Y_Button",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -120,7 +120,7 @@
                     "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "BattleControl",
+                    "groups": "BattleControlGamePad",
                     "action": "B_Button",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -131,7 +131,7 @@
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "BattleControl",
+                    "groups": "BattleControlGamePad",
                     "action": "CameraAngle",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -142,7 +142,7 @@
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "BattleControl",
+                    "groups": "BattleControlGamePad",
                     "action": "R_Shoulder",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -152,8 +152,8 @@
     ],
     "controlSchemes": [
         {
-            "name": "BattleControl",
-            "bindingGroup": "BattleControl",
+            "name": "BattleControlGamePad",
+            "bindingGroup": "BattleControlGamePad",
             "devices": [
                 {
                     "devicePath": "<Gamepad>",

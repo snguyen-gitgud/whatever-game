@@ -98,7 +98,7 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""BattleControl"",
+                    ""groups"": ""BattleControlGamePad"",
                     ""action"": ""CursorMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -109,7 +109,7 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""BattleControl"",
+                    ""groups"": ""BattleControlGamePad"",
                     ""action"": ""A_Button"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -120,7 +120,7 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""BattleControl"",
+                    ""groups"": ""BattleControlGamePad"",
                     ""action"": ""X_Button"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -131,7 +131,7 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""BattleControl"",
+                    ""groups"": ""BattleControlGamePad"",
                     ""action"": ""Y_Button"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -142,7 +142,7 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""BattleControl"",
+                    ""groups"": ""BattleControlGamePad"",
                     ""action"": ""B_Button"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -153,7 +153,7 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""BattleControl"",
+                    ""groups"": ""BattleControlGamePad"",
                     ""action"": ""CameraAngle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -164,7 +164,7 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""BattleControl"",
+                    ""groups"": ""BattleControlGamePad"",
                     ""action"": ""R_Shoulder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -174,8 +174,8 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""BattleControl"",
-            ""bindingGroup"": ""BattleControl"",
+            ""name"": ""BattleControlGamePad"",
+            ""bindingGroup"": ""BattleControlGamePad"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Gamepad>"",
@@ -331,13 +331,13 @@ public partial class @BattleInputs : IInputActionCollection2, IDisposable
         }
     }
     public MainBattleControlActions @MainBattleControl => new MainBattleControlActions(this);
-    private int m_BattleControlSchemeIndex = -1;
-    public InputControlScheme BattleControlScheme
+    private int m_BattleControlGamePadSchemeIndex = -1;
+    public InputControlScheme BattleControlGamePadScheme
     {
         get
         {
-            if (m_BattleControlSchemeIndex == -1) m_BattleControlSchemeIndex = asset.FindControlSchemeIndex("BattleControl");
-            return asset.controlSchemes[m_BattleControlSchemeIndex];
+            if (m_BattleControlGamePadSchemeIndex == -1) m_BattleControlGamePadSchemeIndex = asset.FindControlSchemeIndex("BattleControlGamePad");
+            return asset.controlSchemes[m_BattleControlGamePadSchemeIndex];
         }
     }
     public interface IMainBattleControlActions

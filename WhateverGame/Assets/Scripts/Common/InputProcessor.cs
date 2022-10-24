@@ -24,11 +24,19 @@ public class InputProcessor : PersistantAndSingletonBehavior<InputProcessor>
     public Vector2 rightStick = new Vector2();
     public bool invertRightStick = false;
 
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
         var gamepad = Gamepad.current;
         if (gamepad == null)
-            return; // No gamepad connected.
+        {
+            controllerTypes = ControllerTypes.MOUSE_KEYBOARD;
+        }
+
         if (controllerTypes == ControllerTypes.PC_XBOX)
         {
             if (gamepad.buttonSouth.wasPressedThisFrame)
@@ -100,6 +108,96 @@ public class InputProcessor : PersistantAndSingletonBehavior<InputProcessor>
             if (invertRightStick)
                 rightStick *= -1f;
         }
+
+        if (controllerTypes == ControllerTypes.MOUSE_KEYBOARD)
+        {
+            Keyboard keyboard = Keyboard.current;
+            if (keyboard.downArrowKey.wasPressedThisFrame)
+            {
+                buttonSouth = true;
+            }
+            else
+            {
+                buttonSouth = false;
+            }
+
+            if (keyboard.upArrowKey.wasPressedThisFrame)
+            {
+                buttonNorth = true;
+            }
+            else
+            {
+                buttonNorth = false;
+            }
+
+            if (keyboard.rightArrowKey.wasPressedThisFrame)
+            {
+                buttonEast = true;
+            }
+            else
+            {
+                buttonEast = false;
+            }
+
+            if (keyboard.leftArrowKey.wasPressedThisFrame)
+            {
+                buttonWest = true;
+            }
+            else
+            {
+                buttonWest = false;
+            }
+
+            if (keyboard.spaceKey.wasPressedThisFrame)
+            {
+                buttonShoulderR = true;
+            }
+            else
+            {
+                buttonShoulderR = false;
+            }
+
+            if (keyboard.escapeKey.wasPressedThisFrame)
+            {
+                buttonShoulderL = true;
+            }
+            else
+            {
+                buttonShoulderL = false;
+            }
+
+            Vector2 move = new Vector2();
+            if (keyboard.wKey.isPressed)
+                move = Vector2.up;
+            else
+                move = Vector2.zero;
+
+            if (keyboard.sKey.isPressed)
+                move = Vector2.down;
+            else
+                move = Vector2.zero;
+
+            if (keyboard.aKey.isPressed)
+                move = Vector2.left;
+            else
+                move = Vector2.zero;
+
+            if (keyboard.dKey.isPressed)
+                move = Vector2.right;
+            else
+                move = Vector2.zero;
+
+            leftStick = new Vector3(move.x, 0f, move.y);
+
+            //Vector2 cam = gamepad.rightStick.ReadValue();
+            //if (cam.magnitude > 0.05f)
+            //    rightStick = new Vector2(cam.x, cam.y).normalized;
+            //else
+            //    rightStick = Vector2.zero;
+
+            //if (invertRightStick)
+            //    rightStick *= -1f;
+        }
     }
 }
 
@@ -107,5 +205,6 @@ public enum ControllerTypes
 {
     PC_XBOX,
     PS,
-    SWITCH
+    SWITCH,
+    MOUSE_KEYBOARD
 }
