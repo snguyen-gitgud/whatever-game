@@ -7,6 +7,10 @@ using DG.Tweening;
 [System.Serializable]
 public class BaseSkill : MonoBehaviour
 {
+    [Header("Skill id")]
+    public string skillName = "";
+    [TextArea(15, 20)] public string skillDescription = "";
+
     [Header("VFX")]
     [Range(1, 10)] public int skillRange = 1;
     public float skillCastingDuration = 0.5f;
@@ -18,7 +22,6 @@ public class BaseSkill : MonoBehaviour
     public int skillMaxOverLoadLevel = 3;
     public int skillAccuracyBonus = 0;
     public DamageTypes damageTypes = DamageTypes.PHYSICAL;
-
     public int baseDamage = 5;
 
     [Header("Vcam settings")]

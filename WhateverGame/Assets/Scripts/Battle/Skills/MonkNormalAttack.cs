@@ -30,7 +30,7 @@ public class MonkNormalAttack : BaseSkill
         Debug.Log(this.gameObject.name + " executing Monk normal attack sequence.");
         actorAnimationController.PlayNormalAttack_1();
         shake.m_FrequencyGain = 1f;
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.161f);
 
         if (targetController != null)
         {
@@ -40,9 +40,10 @@ public class MonkNormalAttack : BaseSkill
             {
                 targetController.actorAnimationController.PlayGetHit();
                 targetController.actorStats.currentStats.GetHit(data.output);
-
                 shake.m_AmplitudeGain = 1f;
-                yield return new WaitForSeconds(.15f);
+                Time.timeScale = 0.1f;
+                yield return new WaitForSecondsRealtime(.1f);
+                Time.timeScale = 1f;
                 shake.m_AmplitudeGain = 0f;
             }
             else if (data.isMiss)
@@ -53,7 +54,9 @@ public class MonkNormalAttack : BaseSkill
             else if (data.isBlocked)
             {
                 // blocked 
-
+                Vector3 new_forward = targetController.transform.GetChild(0).forward;
+                new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
+                targetController.transform.GetChild(0).forward = new_forward;
             }
         }
 
@@ -70,9 +73,11 @@ public class MonkNormalAttack : BaseSkill
                 {
                     targetController.actorAnimationController.PlayGetHit();
                     targetController.actorStats.currentStats.GetHit(data.output);
-
                     shake.m_AmplitudeGain = 1f;
-                    yield return new WaitForSeconds(.5f);
+                    Time.timeScale = 0.1f;
+
+                    yield return new WaitForSecondsRealtime(.25f);
+                    Time.timeScale = 1f;
                     shake.m_AmplitudeGain = 0f;
                 }
                 else if (data.isMiss)
@@ -83,7 +88,9 @@ public class MonkNormalAttack : BaseSkill
                 else if (data.isBlocked)
                 {
                     // blocked 
-
+                    Vector3 new_forward = targetController.transform.GetChild(0).forward;
+                    new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
+                    targetController.transform.GetChild(0).forward = new_forward;
                 }
             }
         }
@@ -92,7 +99,7 @@ public class MonkNormalAttack : BaseSkill
         {
             actorAnimationController.PlayNormalAttack_3();
             shake.m_FrequencyGain = 5f;
-            yield return new WaitForSeconds(.125f);
+            yield return new WaitForSeconds(.261f);
             if (targetController != null)
             {
                 ClashData data = ShieldHelpers.CalculateClashOutput(actorController, targetController, this, 2);
@@ -102,8 +109,14 @@ public class MonkNormalAttack : BaseSkill
                     targetController.actorAnimationController.PlayGetHit();
                     targetController.actorStats.currentStats.GetHit(data.output);
 
+                    targetController.actorStats.apBar -= 10f;
+                    targetController.actorUI.apBar.fillAmount = targetController.actorStats.apBar / 100f;
+
                     shake.m_AmplitudeGain = 1f;
-                    yield return new WaitForSeconds(.875f);
+                    Time.timeScale = 0.1f;
+
+                    yield return new WaitForSecondsRealtime(.5f);
+                    Time.timeScale = 1f;
                     shake.m_AmplitudeGain = 0f;
                 }
                 else if (data.isMiss)
@@ -114,7 +127,9 @@ public class MonkNormalAttack : BaseSkill
                 else if (data.isBlocked)
                 {
                     // blocked 
-
+                    Vector3 new_forward = targetController.transform.GetChild(0).forward;
+                    new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
+                    targetController.transform.GetChild(0).forward = new_forward;
                 }
             }
         }

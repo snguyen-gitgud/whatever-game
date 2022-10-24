@@ -108,8 +108,7 @@ public class InputProcessor : PersistantAndSingletonBehavior<InputProcessor>
             if (invertRightStick)
                 rightStick *= -1f;
         }
-
-        if (controllerTypes == ControllerTypes.MOUSE_KEYBOARD)
+        else if (controllerTypes == ControllerTypes.MOUSE_KEYBOARD)
         {
             Keyboard keyboard = Keyboard.current;
             if (keyboard.downArrowKey.wasPressedThisFrame)
@@ -166,28 +165,22 @@ public class InputProcessor : PersistantAndSingletonBehavior<InputProcessor>
                 buttonShoulderL = false;
             }
 
-            Vector2 move = new Vector2();
+            float x, y = 0f;
             if (keyboard.wKey.isPressed)
-                move = Vector2.up;
+                y = 1f;
+            else if (keyboard.sKey.isPressed)
+                y = -1f;
             else
-                move = Vector2.zero;
-
-            if (keyboard.sKey.isPressed)
-                move = Vector2.down;
-            else
-                move = Vector2.zero;
+                y = 0f;
 
             if (keyboard.aKey.isPressed)
-                move = Vector2.left;
+                x = -1f;
+            else if (keyboard.dKey.isPressed)
+                x = 1f;
             else
-                move = Vector2.zero;
+                x = 0f;
 
-            if (keyboard.dKey.isPressed)
-                move = Vector2.right;
-            else
-                move = Vector2.zero;
-
-            leftStick = new Vector3(move.x, 0f, move.y);
+            leftStick = new Vector3(x, 0f,y).normalized;
 
             //Vector2 cam = gamepad.rightStick.ReadValue();
             //if (cam.magnitude > 0.05f)
