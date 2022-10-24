@@ -38,12 +38,12 @@ public class ActorAnimationController : MonoBehaviour
         animator.CrossFadeInFixedTime("NormalAttack_1", .01f);
     }
 
-    public void PlayNormalAttack_2()
+    public void PlayNormalAttack_2(GameObject vfx = null)
     {
         animator.CrossFadeInFixedTime("NormalAttack_2", .01f);
     }
 
-    public void PlayNormalAttack_3()
+    public void PlayNormalAttack_3(GameObject vfx = null)
     {
         animator.CrossFadeInFixedTime("NormalAttack_3", .01f);
     }

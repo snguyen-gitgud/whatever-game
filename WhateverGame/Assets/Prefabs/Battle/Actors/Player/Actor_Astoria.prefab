@@ -224,8 +224,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386701903397520728}
-  m_LocalRotation: {x: -0, y: 3.9955663e-33, z: 1.1027518e-24, w: 1}
-  m_LocalPosition: {x: 0, y: 1.75, z: -3}
+  m_LocalRotation: {x: -1e-45, y: 0.28978413, z: -0, w: 0.95709205}
+  m_LocalPosition: {x: -2, y: 1.75, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -818,7 +818,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1447682430018414883}
-  m_LocalRotation: {x: 6.175332e-16, y: 0.9541764, z: 1.969076e-15, w: -0.29924473}
+  m_LocalRotation: {x: 6.13799e-16, y: 0.9541764, z: 1.9571692e-15, w: -0.29924473}
   m_LocalPosition: {x: 0.64, y: 1.75, z: 0.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2913,6 +2913,7 @@ MonoBehaviour:
     dodgeChance: 5
     blockChance: 10
     critChance: 20
+    critResist: 0
     accuracy: 80
   currentStats:
     level: 1
@@ -2926,6 +2927,7 @@ MonoBehaviour:
     dodgeChance: 5
     blockChance: 10
     critChance: 10
+    critResist: 0
     accuracy: 80
   actorClass: 1
   actorName: Astoria

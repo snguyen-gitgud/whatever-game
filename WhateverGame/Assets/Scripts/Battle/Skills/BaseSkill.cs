@@ -38,8 +38,13 @@ public class BaseSkill : MonoBehaviour
 
     [HideInInspector] public Vector3 og_model_pos = new Vector3();
 
+    [HideInInspector] public Guirao.UltimateTextDamage.UltimateTextDamageManager textManager;
+
     public virtual void CastingSkill(ActorController actor, int overload_level = 1, GridUnit target_grid_tile = null)
     {
+        GameObject go = GameObject.FindGameObjectWithTag("TextDamage");
+        textManager = go.GetComponent<Guirao.UltimateTextDamage.UltimateTextDamageManager>();
+
         castingVCam = actor.castingVCamsList[Random.Range(0, actor.castingVCamsList.Count)];
         executingVCam = actor.executingVCamsList[Random.Range(0, actor.executingVCamsList.Count)];
         shake = executingVCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();

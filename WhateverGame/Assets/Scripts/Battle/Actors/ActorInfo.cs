@@ -77,7 +77,7 @@ public class BaseActorStats
         accuracy = stats.accuracy;
     }
 
-    public void GetHit(int damage)
+    public void HealthChange(int damage)
     {
         healthPoint += damage;
     }

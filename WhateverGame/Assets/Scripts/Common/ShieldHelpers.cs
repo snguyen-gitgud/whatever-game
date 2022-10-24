@@ -17,6 +17,20 @@ public static class ShieldHelpers
     {
         ClashData ret = new ClashData();
 
+        float dot_prod = Vector3.Dot(caster.transform.GetChild(0).forward.normalized, target.transform.GetChild(0).forward.normalized);
+        float dist = Vector3.Distance(caster.transform.position, target.transform.position);
+        if (dist >= 0.25f)
+        {
+            if (dot_prod <= -0.9f)
+            {
+                ret.isAmbush = true;
+            }
+            else
+                ret.isAmbush = false;
+        }
+        else
+            ret.isAmbush = false;
+
         if (skill.damageTypes == DamageTypes.PHYSICAL)
         {
             ret.output = (((skill.baseDamage + caster.actorStats.currentStats.pAtk) * bonus_multiplier)) - target.actorStats.currentStats.pDef;
@@ -52,6 +66,12 @@ public static class ShieldHelpers
         else
             ret.isCrit = false;
 
+        if (ret.isAmbush)
+        {
+            ret.output *= 3;
+            ret.output /= 2;
+        }
+
         return ret;
     }
 }
@@ -61,5 +81,6 @@ public class ClashData
     public bool isMiss = false;
     public bool isBlocked = false;
     public bool isCrit = false;
+    public bool isAmbush = false;
     public int output = 0;
 }

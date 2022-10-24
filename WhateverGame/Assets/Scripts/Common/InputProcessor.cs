@@ -192,6 +192,20 @@ public class InputProcessor : PersistantAndSingletonBehavior<InputProcessor>
             //    rightStick *= -1f;
         }
     }
+
+    public void VibrateController(float magnitude_low, float magnitude_high, float duration)
+    {
+        Gamepad gamepad = Gamepad.current;
+        if (gamepad != null)
+            StartCoroutine(VibrateControllerSequence(gamepad, magnitude_low, magnitude_high, duration));
+    }
+
+    IEnumerator VibrateControllerSequence(Gamepad gamepad, float magnitude_low, float magnitude_high, float duration)
+    {
+        gamepad.SetMotorSpeeds(magnitude_low, magnitude_high);
+        yield return new WaitForSeconds(duration);
+        gamepad.SetMotorSpeeds(0f, 0f);
+    }
 }
 
 public enum ControllerTypes
