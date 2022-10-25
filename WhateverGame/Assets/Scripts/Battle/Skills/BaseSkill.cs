@@ -40,6 +40,9 @@ public class BaseSkill : MonoBehaviour
 
     [HideInInspector] public Guirao.UltimateTextDamage.UltimateTextDamageManager textManager;
 
+    [HideInInspector]
+    public bool isReactive = false;
+
     public virtual void CastingSkill(ActorController actor, int overload_level = 1, GridUnit target_grid_tile = null)
     {
         GameObject go = GameObject.FindGameObjectWithTag("TextDamage");
@@ -68,7 +71,8 @@ public class BaseSkill : MonoBehaviour
         actorController.actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
         actorController.actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
 
-        castingVCam.Priority = 99;
+        if (isReactive == false) 
+            castingVCam.Priority = 99;
         targetController = targetGridUnit.occupiedActor;
         StartCoroutine(ExecuteSkillSequence());
     }
@@ -78,10 +82,19 @@ public class BaseSkill : MonoBehaviour
         BattleMaster.GetInstance().gridManager.cursor_lock = true;
         DOTween.Kill(BattleMaster.GetInstance().gridManager.gridCursor.transform);
         BattleMaster.GetInstance().gridManager.gridCursor.transform.position = targetGridUnit.cachedWorldPos + Vector3.up * BattleMaster.GetInstance().gridManager.gridUnitSize * 0.5f;
-        yield return new WaitForSeconds(2f);
+        if (isReactive == false) 
+            yield return new WaitForSeconds(2f);
+
         executingVCam.Priority = 99;
         castingVCam.Priority = 0;
         yield return new WaitForSeconds(1f);
+    }
+
+    public virtual IEnumerator TriggerReactive()
+    {
+        yield return StartCoroutine(targetController.actorStats.actorReactiveSkill.ReactiveSkillSequence(targetController, actorController, skillOverLoadLevel));
+        yield return new WaitForSeconds(1f);
+        EndSkill();
     }
 
     public virtual void EndSkill()

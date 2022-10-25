@@ -43,9 +43,10 @@ public class MonkNormalAttack : BaseSkill
 
         if (targetController != null)
         {
-            textManager.Add("Ambush", targetController.transform.position + Vector3.up * 1.5f, "critical");
             ClashData data = ShieldHelpers.CalculateClashOutput(actorController, targetController, this, 1);
-            
+            if (data.isAmbush)
+                textManager.Add("Ambush", targetController.transform.position + Vector3.up * 1.5f, "critical");
+
             if (!data.isMiss && !data.isBlocked)
             {
                 InputProcessor.GetInstance().VibrateController(.25f, .25f, .1f);
@@ -147,8 +148,17 @@ public class MonkNormalAttack : BaseSkill
                     if (data.isCrit) textManager.Add("Critical hit", targetController.transform.position + Vector3.up * 1.5f, "critical");
                     textManager.Add((-data.output).ToString(), targetController.transform.position + Vector3.up * 1.5f, "default");
 
-                    targetController.actorStats.apBar -= 10f;
-                    targetController.actorUI.apBar.fillAmount = targetController.actorStats.apBar / 100f;
+                    if (targetController.actorControlStates == ActorControlStates.AP_STAG)
+                    {
+                        targetController.actorStats.apBar -= 10f;
+                        targetController.actorUI.apBar.fillAmount = targetController.actorStats.apBar / 100f;
+                    }
+                    else if (targetController.actorControlStates == ActorControlStates.CASTING_STAG)
+                    {
+                        targetController.current_casting_value -= (targetController.current_casting_value * 0.9f);
+                        targetController.actorStats.apBar = targetController.current_casting_value / targetController.currentChosenSkill.skillCastingDuration;
+                        targetController.actorUI.apBar.fillAmount = targetController.actorStats.apBar;
+                    }
 
                     shake.m_AmplitudeGain = 1f;
                     Time.timeScale = 0.1f;
@@ -175,7 +185,11 @@ public class MonkNormalAttack : BaseSkill
         }
 
         yield return new WaitForSeconds(1f);
-        EndSkill();
+
+        if (isReactive == false)
+        {
+            StartCoroutine(base.TriggerReactive());
+        }
     }
 
     public override void EndSkill()

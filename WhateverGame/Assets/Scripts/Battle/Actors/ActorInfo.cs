@@ -26,8 +26,10 @@ public class ActorInfo : MonoBehaviour
     [Header("Abilities")]
     public Transform normalAttackHolder;
     public Transform skillsHolder;
+    public Transform reactiveHolder;
     public BaseSkill actorNormalAttack;
     public List<BaseSkill> actorSkillsList = new List<BaseSkill>();
+    public BaseReactiveSkill actorReactiveSkill;
 
     //internals
 
@@ -36,6 +38,7 @@ public class ActorInfo : MonoBehaviour
         actorNormalAttack = normalAttackHolder.GetComponentsInChildren<BaseSkill>(true)[0];
         actorSkillsList.Clear();
         actorSkillsList.AddRange(skillsHolder.GetComponentsInChildren<BaseSkill>(true));
+        actorReactiveSkill = reactiveHolder.GetComponentsInChildren<BaseReactiveSkill>(true)[0];
 
         currentStats = new BaseActorStats(baseStats);
     }

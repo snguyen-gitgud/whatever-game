@@ -82,6 +82,15 @@ public class ActorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //sync UI display
+        actorDetails.SetDisplayData(actorStats.actorPortrait,
+                                    actorStats.actorName,
+                                    actorStats.currentStats.level,
+                                    actorStats.currentStats.healthPoint,
+                                    actorStats.baseStats.healthPoint,
+                                    actorUI.apBar.fillAmount,
+                                    actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
+
         //vcam control
         if (InputProcessor.GetInstance().rightStick.y > 0.05f && vcamTransposer.m_FollowOffset.y <= vcamYOffsetMax)
         {
