@@ -1,9 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SelfSpin : MonoBehaviour
-{
+public class SelfSpin : MonoBehaviour {
 
     [SerializeField]
     public enum SpinDirection
@@ -19,17 +18,15 @@ public class SelfSpin : MonoBehaviour
     float reverse = 1.0f;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start () {
         if (is_reversed == false)
             reverse = 1.0f;
         else
             reverse = -1.0f;
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
+	}
+	
+	// Update is called once per frame
+	void FixedUpdate () {
         if (spin_axis == SpinDirection.Y)
             transform.Rotate(Vector3.up, SpinSpeed * reverse);
         else if (spin_axis == SpinDirection.Z)

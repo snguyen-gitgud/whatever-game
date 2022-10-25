@@ -11,11 +11,6 @@ public class BaseSkill : MonoBehaviour
     public string skillName = "";
     [TextArea(15, 20)] public string skillDescription = "";
 
-    [Header("VFX")]
-    [Range(1, 10)] public int skillRange = 1;
-    public float skillCastingDuration = 0.5f;
-    public float skillVfxDuration = 1f;
-
     [Header("Skill settings")]
     public int skillStaminaCost = 2;
     public int skillOverLoadLevel = 1;
@@ -36,12 +31,18 @@ public class BaseSkill : MonoBehaviour
     public ActorAnimationController actorAnimationController;
     public CinemachineBasicMultiChannelPerlin shake;
 
+    [Header("Common VFX")]
+    [Range(1, 10)] public int skillRange = 1;
+    public float skillCastingDuration = 0.5f;
+    public GameObject skillCastingVfx;
+
     [HideInInspector] public Vector3 og_model_pos = new Vector3();
 
     [HideInInspector] public Guirao.UltimateTextDamage.UltimateTextDamageManager textManager;
 
-    [HideInInspector]
-    public bool isReactive = false;
+    [HideInInspector] public bool isReactive = false;
+
+    [HideInInspector] public GameObject skillCastingVfxObj;
 
     public virtual void CastingSkill(ActorController actor, int overload_level = 1, GridUnit target_grid_tile = null)
     {
@@ -64,6 +65,9 @@ public class BaseSkill : MonoBehaviour
         actorController.actorDetails.actorStaminaSlider.fillAmount = actorController.actorUI.apPoints.fillAmount * 0.5f;
         actorController.actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
         actorController.actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
+
+        if (skillCastingVfx != null)
+            skillCastingVfxObj = Instantiate(skillCastingVfx, actorController.transform.GetChild(0));
     }
 
     public virtual void Executekill()
@@ -85,6 +89,7 @@ public class BaseSkill : MonoBehaviour
         if (isReactive == false) 
             yield return new WaitForSeconds(2f);
 
+        Destroy(skillCastingVfxObj);
         executingVCam.Priority = 99;
         castingVCam.Priority = 0;
         yield return new WaitForSeconds(1f);
@@ -92,8 +97,19 @@ public class BaseSkill : MonoBehaviour
 
     public virtual IEnumerator TriggerReactive()
     {
-        yield return StartCoroutine(targetController.actorStats.actorReactiveSkill.ReactiveSkillSequence(targetController, actorController, skillOverLoadLevel));
-        yield return new WaitForSeconds(1f);
+        if (targetController.actorStats.actorReactiveSkill.ReactiveCheck(targetController, actorController) == true)
+        {
+            Vector3 new_forward = targetController.transform.GetChild(0).forward;
+            new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
+            targetController.transform.GetChild(0).forward = new_forward;
+
+            yield return StartCoroutine(targetController.actorStats.actorReactiveSkill.ReactiveSkillSequence(targetController, actorController, skillOverLoadLevel));
+            yield return new WaitForSeconds(1f);
+            targetController.actorStats.actorReactiveSkill.react_skill.castingVCam.Priority = 0;
+            targetController.actorStats.actorReactiveSkill.react_skill.executingVCam.Priority = 0;
+            targetController.actorAnimationController.PlayIdle();
+        }
+        
         EndSkill();
     }
 

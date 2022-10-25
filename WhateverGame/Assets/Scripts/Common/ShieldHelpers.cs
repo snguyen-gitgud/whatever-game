@@ -17,14 +17,9 @@ public static class ShieldHelpers
 
         float dot_prod = Vector3.Dot(caster.transform.GetChild(0).forward.normalized, target.transform.GetChild(0).forward.normalized);
         float dist = Vector3.Distance(caster.transform.position, target.transform.position);
-        if (dist >= 0.25f)
+        if (dot_prod > 0.9f)
         {
-            if (dot_prod <= -0.9f)
-            {
-                ret.isAmbush = true;
-            }
-            else
-                ret.isAmbush = false;
+            ret.isAmbush = true;
         }
         else
             ret.isAmbush = false;
@@ -66,8 +61,7 @@ public static class ShieldHelpers
 
         if (ret.isAmbush)
         {
-            ret.output *= 3;
-            ret.output /= 2;
+            ret.output *= 2;
         }
 
         return ret;

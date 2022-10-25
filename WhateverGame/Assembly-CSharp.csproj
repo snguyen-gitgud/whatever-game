@@ -58,53 +58,168 @@
   <ItemGroup>
     <Compile Include="Assets\UniGLTF\Samples\UniHumanoid\RuntimeBvhLoader.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\ActorController.cs" />
+    <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Demo\Scripts\TextDamageClicker.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\TestingUnitTests.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Utils\ColorGradingCurve.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ECCameraShake.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\ScreenSpaceReflectionComponent.cs" />
+    <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Demo\Scripts\UIDemo.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\PathSplineEndless.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\PostProcessingProfile.cs" />
+    <Compile Include="Assets\Scripts\Stage\RoomBehavior.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\ActorInfo.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\PostProcessingContext.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\MotionBlurComponent.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\CameraShakeCaller.cs" />
     <Compile Include="Assets\Scripts\Battle\Skills\MonkNormalAttack.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ECProjectile.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\scripts\particleColorChangerMaster.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\ActorUI.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\PostProcessingComponent.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ECCameraShakeCaller.cs" />
+    <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Scripts\UITextDamage.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\PathBezier2d.cs" />
+    <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Demo\Scripts\TextDamageClickerChaotic.cs" />
+    <Compile Include="Assets\Scripts\Common\SelfTurnOff.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerWeaponBehavior.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\BloomModel.cs" />
     <Compile Include="Assets\Scriptables\Classes\ScriptableActorClass.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Framework\LTDescrOptional.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\GeneralSequencer.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\BattleActorDetails.cs" />
+    <Compile Include="Assets\3rdParty\VFX\Pixelation\Example\Scripts\PointLight.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerStateModifier.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\FxaaComponent.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\LogoCinematic.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Battle\ReactiveSkills\CounterReactiveSkill.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\ChromaticAberrationComponent.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\BuiltinDebugViewsComponent.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Archived\TestingPunch.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballGroupAttribute.cs" />
     <Compile Include="Assets\Scripts\Grid\GridManager.cs" />
     <Compile Include="Assets\Scripts\Common\CustomEvents.cs" />
-    <Compile Include="Assets\Scripts\Common\PersistantAndSingletonBehavior.cs" />
-    <Compile Include="Assets\Scripts\Battle\Actors\ActorAnimationController.cs" />
-    <Compile Include="Assets\Scripts\Common\BattleInputs.cs" />
-    <Compile Include="Assets\Scripts\Grid\GridUnit.cs" />
-    <Compile Include="Assets\Scripts\Common\ShieldHelpers.cs" />
-    <Compile Include="Assets\UniGLTF\Samples\UniHumanoid\HumanBuilderTest.cs" />
-    <Compile Include="Assets\Scripts\Battle\BattleMaster.cs" />
-    <Compile Include="Assets\Scripts\Common\SelfBlinkingUI.cs" />
-    <Compile Include="Assets\Scripts\Common\InputProcessor.cs" />
-    <Compile Include="Assets\Scripts\Common\SelfSpin.cs" />
-    <Compile Include="Assets\Scripts\Battle\Skills\BaseSkill.cs" />
-    <Compile Include="Assets\Scripts\Common\SelfSpinning.cs" />
-    <Compile Include="Assets\3rdParty\UltimateTextDamage\Demo\Scripts\Helpers\LookAtCameraTextDamage.cs" />
-    <Compile Include="Assets\3rdParty\UltimateTextDamage\Demo\Scripts\TextDamageClickerChaotic.cs" />
-    <Compile Include="Assets\3rdParty\UltimateTextDamage\Scripts\UltimateTextDamageManager.cs" />
-    <Compile Include="Assets\3rdParty\UltimateTextDamage\Demo\Scripts\TextDamageClicker.cs" />
-    <Compile Include="Assets\3rdParty\UltimateTextDamage\Scripts\ForceLayout.cs" />
-    <Compile Include="Assets\3rdParty\UltimateTextDamage\Scripts\NumberConvertor.cs" />
-    <Compile Include="Assets\3rdParty\UltimateTextDamage\Scripts\UITextDamage.cs" />
-    <Compile Include="Assets\3rdParty\UltimateTextDamage\Demo\Scripts\Helpers\RandomizeOffsetX.cs" />
-    <Compile Include="Assets\3rdParty\UltimateTextDamage\Demo\Scripts\TextDamageStackClicker.cs" />
-    <Compile Include="Assets\3rdParty\UltimateTextDamage\Demo\Scripts\UIDemo.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\packs\WebDemoAssets\scripts\ECProjectile.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\packs\WebDemoAssets\scripts\ECCameraShake.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\packs\WebDemoAssets\scripts\ECCameraShakeProjectile.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\packs\WebDemoAssets\scripts\ECCameraShakeCaller.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\slashEffectDemoMeleeCombat.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\characterCallerMeleeCombat.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\scripts\ECdestroyMe.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\scripts\ECparticleColorChangerMaster.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\TimeController.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\instantiateEffectCallerMeleeCombat.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\packs\WebDemoAssets\scripts\ECExplodingProjectile.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\packs\WebDemoAssets\scripts\ECEffectActor.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\packs\WebDemoAssets\scripts\ECprojectileActor.cs" />
-    <Compile Include="Assets\3rdParty\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\nextEffectMeleeCombat.cs" />
+    <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Demo\Scripts\Helpers\LookAtCameraTextDamage.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\EyeAdaptationModel.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\PostProcessingBehaviour.cs" />
     <Compile Include="Assets\Scripts\Common\SelfKill.cs" />
+    <Compile Include="Assets\Scripts\Common\PersistantAndSingletonBehavior.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\VignetteComponent.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\FogModel.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\PostProcessingModel.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\slashEffectDemoMeleeCombat.cs" />
+    <Compile Include="Assets\Scripts\AI\ArmoredDummyBehavior.cs" />
+    <Compile Include="Assets\3rdParty\VFX\Pixelation\Example\Scripts\ImageEffectBase.cs" />
+    <Compile Include="Assets\Scripts\Common\SelfSpin.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\GeneralAdvancedTechniques.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\GeneralBasics2d.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\MotionBlurModel.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\scripts\ECdestroyMe.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\scripts\destroyMe.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ExplodingProjectile.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\PathSpline2d.cs" />
+    <Compile Include="Assets\Scripts\Player\AnimatorEffects.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\AmbientOcclusionModel.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\BuiltinDebugViewsModel.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\ChromaticAberrationModel.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\DepthOfFieldComponent.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\instantiateEffectCallerMeleeCombat.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\scripts\ECparticleColorChangerMaster.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\AmbientOcclusionComponent.cs" />
+    <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Demo\Scripts\Helpers\RandomizeOffsetX.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Archived\TestingRigidbodyCS.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\Following.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\DitheringModel.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Framework\LeanTween.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Framework\LTDescr.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Framework\LeanTweenExt.cs" />
+    <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Scripts\UltimateTextDamageManager.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Framework\LTSeq.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\GeneralUISpace.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
+    <Compile Include="Assets\Scripts\Battle\Actors\ActorAnimationController.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\GeneralSimpleUI.cs" />
+    <Compile Include="Assets\3rdParty\Stylized 3D Tools\Scripts\Rotator.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\PathBezier.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ECCameraShakeProjectile.cs" />
+    <Compile Include="Assets\Scripts\Common\BattleInputs.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\TimeController.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\projectileActor.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerAbilityManager.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\BloomComponent.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\PathSplines.cs" />
+    <Compile Include="Assets\Scripts\Grid\GridUnit.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\GeneralEventsListeners.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Common\GameMasterBehavior.cs" />
+    <Compile Include="Assets\3rdParty\VFX\Pixelation\Scripts\Chunky.cs" />
+    <Compile Include="Assets\Scripts\Common\CommonRefManager.cs" />
+    <Compile Include="Assets\Scripts\AI\AIStatBehavior.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\CameraShakeProjectile.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\TestingZLegacy.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\DitheringComponent.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\TestingZLegacyExt.cs" />
+    <Compile Include="Assets\Scripts\Player\RootMotionAdapter.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\characterCallerMeleeCombat.cs" />
+    <Compile Include="Assets\Scripts\Common\ShieldHelpers.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\ColorGradingComponent.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerAnimationController.cs" />
+    <Compile Include="Assets\UniGLTF\Samples\UniHumanoid\HumanBuilderTest.cs" />
+    <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Scripts\ForceLayout.cs" />
+    <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Demo\Scripts\TextDamageStackClicker.cs" />
+    <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Scripts\NumberConvertor.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\GeneralEasingTypes.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ECEffectActor.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ECprojectileActor.cs" />
+    <Compile Include="Assets\Scripts\Battle\BattleMaster.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\EffectActor.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
+    <Compile Include="Assets\3rdParty\VFX\Pixelation\Scripts\Pixelation.cs" />
+    <Compile Include="Assets\Scripts\ShurikenBakedMeshEmitter.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\GeneralCameraShake.cs" />
+    <Compile Include="Assets\3rdParty\VFX\Pixelation\Example\Scripts\Plane.cs" />
+    <Compile Include="Assets\Scripts\AI\AIWeaponBehavior.cs" />
+    <Compile Include="Assets\Scripts\Common\SelfBlinkingUI.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Utils\GraphicsUtils.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Framework\LeanAudio.cs" />
+    <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\TaaComponent.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\VignetteModel.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\GrainModel.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ECExplodingProjectile.cs" />
+    <Compile Include="Assets\Scripts\Stage\ElevatorBehavior.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\PathSpline.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\GrainComponent.cs" />
+    <Compile Include="Assets\Scripts\AI\BaseAIBehavior.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\UserLutModel.cs" />
+    <Compile Include="Assets\Scripts\Stage\SpikeBehavior.cs" />
+    <Compile Include="Assets\Scripts\Common\InputProcessor.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Framework\LeanSmooth.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\PathSplineTrack.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\UserLutComponent.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Framework\LeanTest.cs" />
+    <Compile Include="Assets\Scripts\Battle\Skills\BaseSkill.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\CameraShake.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\PathSplinePerformance.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\EyeAdaptationComponent.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\ColorGradingModel.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\ScreenSpaceReflectionModel.cs" />
+    <Compile Include="Assets\Scripts\Battle\ReactiveSkills\BaseReactiveSkill.cs" />
+    <Compile Include="Assets\Scripts\Stage\StageManagerBehavior.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Components\FogComponent.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\DepthOfFieldModel.cs" />
+    <Compile Include="Assets\Scripts\Player\InputAdapter.cs" />
+    <Compile Include="Assets\Scripts\LeanTween\Examples\Scripts\GeneralBasic.cs" />
+    <Compile Include="Assets\Scripts\Common\SelfSpinning.cs" />
+    <Compile Include="Assets\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
+    <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\nextEffectMeleeCombat.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\3rdParty\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
+    <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
     <None Include="Assets\3rdParty\SimplestarGame\SimpleURPToonLitOutlineExample\Resources\SimpleURPToonLitOutlineExample\SimpleURPToonLitOutlineExample_LightingEquation.hlsl" />
     <None Include="Assets\3rdParty\SoftMask\Shaders\Generated\Resources\TMP_Bitmap-Mobile - SoftMask.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -114,20 +229,20 @@
     <None Include="Assets\3rdParty\Toon Fantasy Nature\ToonShading\Shaders\TFF_ToonWater.shader" />
     <None Include="Assets\readme.txt" />
     <None Include="Assets\3rdParty\SoftMask\Shaders\Generated\Resources\TMP_SDF - SoftMask.shader" />
-    <None Include="Assets\3rdParty\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_akarami_blend.shader" />
+    <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_akarami_blend.shader" />
     <None Include="Assets\3rdParty\SimplestarGame\SimpleURPToonLitOutlineExample\Resources\SimpleURPToonLitOutlineExample\SimpleURPToonLitOutlineExample_Shared.hlsl" />
-    <None Include="Assets\3rdParty\EffectCore\packs\StylizedMeleeCombatPack1\Tips &amp; Documentations Stylized Melee Pack 1.txt" />
+    <None Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\Tips &amp; Documentations Stylized Melee Pack 1.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\3rdParty\UltimateTextDamage\Fonts\damage.fnt" />
+    <None Include="Assets\3rdParty\VFX\UltimateTextDamage\Fonts\damage.fnt" />
     <None Include="Assets\3rdParty\Toon Fantasy Nature\ToonShading\Shaders\TFF_ToonFire.shader" />
     <None Include="Assets\3rdParty\Toon Fantasy Nature\ToonShading\Shaders\TFF_CustomToonOutline.shader" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_attribute.hlsl" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_vertex.hlsl" />
     <None Include="Assets\3rdParty\SimplestarGame\SimpleURPToonLitOutlineExample\Resources\SimpleURPToonLitOutlineExample\SimpleURPToonLitOutlineExample.shader" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_uv.hlsl" />
-    <None Include="Assets\3rdParty\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_hair_ds.shader" />
+    <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_hair_ds.shader" />
     <None Include="Assets\VRMShaders\GLTF\IO\Resources\UniGLTF\NormalMapExporter.shader" />
-    <None Include="Assets\3rdParty\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_hada.shader" />
+    <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_hada.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_lighting_mtoon.hlsl" />
@@ -138,9 +253,9 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_forward_vertex.hlsl" />
     <None Include="Assets\VRMShaders\GLTF\IO\Resources\UniGLTF\StandardMapExporter.shader" />
-    <None Include="Assets\3rdParty\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_fuku_ds.shader" />
-    <None Include="Assets\3rdParty\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_eyelash_blend.shader" />
-    <None Include="Assets\3rdParty\UltimateTextDamage\UTDVersion.txt" />
+    <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_fuku_ds.shader" />
+    <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_eyelash_blend.shader" />
+    <None Include="Assets\3rdParty\VFX\UltimateTextDamage\UTDVersion.txt" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_forward_fragment.hlsl" />
     <None Include="Assets\3rdParty\Toon Fantasy Nature\Documentation\Usage Guidelines.txt" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_alpha.hlsl" />
@@ -157,18 +272,18 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_utility.hlsl" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
-    <None Include="Assets\3rdParty\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_hada_blend.shader" />
+    <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_hada_blend.shader" />
     <None Include="Assets\VRMShaders\GLTF\IO\Resources\UniGLTF\StandardMapImporter.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\3rdParty\Sweet Land GUI\READ ME.txt" />
     <None Include="Assets\3rdParty\Toon Fantasy Nature\ToonShading\Shaders\TFF_CustomToonVegetation.shader" />
-    <None Include="Assets\3rdParty\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
+    <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
     <None Include="Assets\3rdParty\SimplestarGame\SimpleURPToonLitOutlineExample\Resources\Unity-Technologies\ShaderGraph-Custom-Lighting\Includes\CustomLighting.hlsl" />
     <None Include="Assets\3rdParty\SoftMask\Shaders\Resources\SoftMask.shader" />
     <None Include="Assets\3rdParty\SoftMask\Shaders\Generated\Resources\TMP_SDF-Mobile Masking - SoftMask.shader" />
     <None Include="Assets\VRMShaders\GLTF\UniUnlit\Resources\UniGLTF\UniUnlit.shader" />
     <None Include="Assets\3rdParty\RPG Music Starter Pack\README.txt" />
-    <None Include="Assets\3rdParty\UltimateTextDamage\Fonts\basic_shadow_stroke_42.fnt" />
+    <None Include="Assets\3rdParty\VFX\UltimateTextDamage\Fonts\basic_shadow_stroke_42.fnt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\3rdParty\Toon Fantasy Nature\ToonShading\Shaders\TFF_CustomToon.shader" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_normal.hlsl" />
@@ -178,11 +293,11 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\3rdParty\SoftMask\Shaders\Generated\Resources\TMP_SDF-Mobile - SoftMask.shader" />
-    <None Include="Assets\3rdParty\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_hair.shader" />
+    <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_hair.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\3rdParty\SoftMask\Shaders\Resources\SoftMask.cginc" />
     <None Include="Assets\3rdParty\Toon Fantasy Nature\ToonShading\Shaders\TFF_CustomGrass.shader" />
-    <None Include="Assets\3rdParty\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_eye_blend.shader" />
+    <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_eye_blend.shader" />
     <None Include="Assets\3rdParty\Toon Fantasy Nature\Documentation\URP_Instructions.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_define.hlsl" />
@@ -431,32 +546,38 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>G:\Tools\Unity\2021.3.11f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Burst.Cecil.Mdb">
-      <HintPath>Library\PackageCache\com.unity.burst@1.8.0\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
+    <Reference Include="Unity.Analytics.StandardEvents">
+      <HintPath>Library\PackageCache\com.unity.analytics@3.3.5\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Cecil.Pdb">
-      <HintPath>Library\PackageCache\com.unity.burst@1.8.0\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Cecil">
-      <HintPath>Library\PackageCache\com.unity.burst@1.8.0\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Burst.Cecil.Rocks">
-      <HintPath>Library\PackageCache\com.unity.burst@1.8.0\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
+    <Reference Include="clipper_library">
+      <HintPath>Library\PackageCache\com.unity.cinemachine@2.8.6\Runtime\ThirdParty\clipper_library.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>Library\PackageCache\com.unity.analytics@3.3.5\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>Library\PackageCache\com.unity.analytics@3.3.5\Unity.Analytics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Mdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Rocks">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>Library\PackageCache\com.unity.analytics@3.3.5\Unity.Analytics.Tracker.dll</HintPath>
@@ -836,9 +957,9 @@
       <Project>{C23B84C1-3EA5-9F5E-DD00-981D3B221EE7}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.InternalAPIEngineBridge.001.csproj">
-      <Project>{B88E986D-42F4-E9F9-51E6-A2A7F384A8EC}</Project>
-      <Name>Unity.InternalAPIEngineBridge.001</Name>
+    <ProjectReference Include="Unity.Recorder.Editor.csproj">
+      <Project>{902CCF75-7325-36C7-52E3-2EC25AD4CF9B}</Project>
+      <Name>Unity.Recorder.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{DA0C93BA-89AA-6612-83C5-760349BFDF41}</Project>
@@ -860,6 +981,10 @@
       <Project>{0EFB56FC-2B04-F254-DF73-9030EEA850F4}</Project>
       <Name>Unity.TextMeshPro.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Formats.Fbx.Editor.csproj">
+      <Project>{C8466F5B-63FD-C700-871E-C3FA3574D281}</Project>
+      <Name>Unity.Formats.Fbx.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="MK.Toon.Editor.csproj">
       <Project>{D09E81E6-012B-1FA3-54A2-299A5AA8724B}</Project>
       <Name>MK.Toon.Editor</Name>
@@ -876,21 +1001,13 @@
       <Project>{2EBECCE5-2A7B-8D65-A614-695775300367}</Project>
       <Name>UniGLTF</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.2D.IK.Editor.csproj">
-      <Project>{565D12C6-CFD1-4E5C-889B-5D43A2A0DB51}</Project>
-      <Name>Unity.2D.IK.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj">
       <Project>{5AE19345-7B87-4A9A-680A-736FA4D204A4}</Project>
       <Name>Unity.VisualScripting.SettingsProvider.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.csproj">
-      <Project>{B5C7577A-83B0-5A57-3DF4-5840E2B51E53}</Project>
-      <Name>Unity.ProBuilder</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.2D.Path.Editor.csproj">
-      <Project>{6206B6CD-38B5-E002-FC54-C9AFCD733C13}</Project>
-      <Name>Unity.2D.Path.Editor</Name>
+    <ProjectReference Include="UnityEngine.Advertisements.csproj">
+      <Project>{41E8A65D-7EAD-9CD0-FE5B-373FB0ADA7D4}</Project>
+      <Name>UnityEngine.Advertisements</Name>
     </ProjectReference>
     <ProjectReference Include="SoftMask.csproj">
       <Project>{F134A91F-13C5-A7C6-4BD5-B24A48136882}</Project>
@@ -912,25 +1029,41 @@
       <Project>{8B737DB4-0EEC-5E35-1023-3BE66AD7494B}</Project>
       <Name>Unity.RenderPipelines.Core.ShaderLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{ABFF5521-7BCF-D9AD-065E-9F147130BE61}</Project>
-      <Name>UnityEngine.UI</Name>
+    <ProjectReference Include="UnityEngine.SpatialTracking.csproj">
+      <Project>{AB463AE4-C178-F285-8C44-79599B10303B}</Project>
+      <Name>UnityEngine.SpatialTracking</Name>
     </ProjectReference>
     <ProjectReference Include="UniGLTF.Samples.ScreenSpace.csproj">
       <Project>{A984126B-D970-2043-3A24-EA263A39B548}</Project>
       <Name>UniGLTF.Samples.ScreenSpace</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.2D.IK.Runtime.csproj">
-      <Project>{3C21E403-BFE5-01E0-92A9-3C2BDF530C44}</Project>
-      <Name>Unity.2D.IK.Runtime</Name>
+    <ProjectReference Include="Autodesk.Fbx.csproj">
+      <Project>{BF23475C-E9BC-6DE2-AF18-B0D817151A9A}</Project>
+      <Name>Autodesk.Fbx</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Analytics.DataPrivacy.csproj">
+      <Project>{9F4DC40C-EAB1-9078-FBE4-BDF01FBDBE59}</Project>
+      <Name>Unity.Analytics.DataPrivacy</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{ABFF5521-7BCF-D9AD-065E-9F147130BE61}</Project>
+      <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.multiplayer-hlapi.Runtime.csproj">
+      <Project>{73D96952-5D5C-305D-15DA-A516FEB5B149}</Project>
+      <Name>com.unity.multiplayer-hlapi.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
+      <Project>{54BAB946-8E39-860D-5C67-23B1B9F712CD}</Project>
+      <Name>Unity.ShaderGraph.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="SoftMask-Editor.csproj">
       <Project>{A1B67BBC-B7CE-38BD-91E5-D1AEF448D95B}</Project>
       <Name>SoftMask-Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
-      <Project>{54BAB946-8E39-860D-5C67-23B1B9F712CD}</Project>
-      <Name>Unity.ShaderGraph.Editor</Name>
+    <ProjectReference Include="Unity.Sequences.Editor.csproj">
+      <Project>{839789E5-5EA9-25B9-6BA0-F8AB09B7FD28}</Project>
+      <Name>Unity.Sequences.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Cinemachine.csproj">
       <Project>{16572FE6-6A76-7565-9CAF-2A1F03F3302E}</Project>
@@ -944,13 +1077,21 @@
       <Project>{75E8B11D-B4B3-C598-073F-2BA0A6B64AA5}</Project>
       <Name>VRM</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Sequences.csproj">
+      <Project>{4D154BA9-89A3-AABB-4E05-0A5982F86C91}</Project>
+      <Name>Unity.Sequences</Name>
+    </ProjectReference>
     <ProjectReference Include="MK.RampCreator.csproj">
       <Project>{82E3B873-5013-7336-494C-2BB98DD2AA9D}</Project>
       <Name>MK.RampCreator</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.2D.Animation.Triangle.Runtime.csproj">
-      <Project>{520CB154-0D75-1FD8-BD95-14072D97663E}</Project>
-      <Name>Unity.2D.Animation.Triangle.Runtime</Name>
+    <ProjectReference Include="Unity.Formats.Fbx.Runtime.csproj">
+      <Project>{5376C710-094D-CC13-4D8C-BB5CB5384F63}</Project>
+      <Name>Unity.Formats.Fbx.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Formats.Alembic.Runtime.csproj">
+      <Project>{2C68640F-3E04-A6AA-46D5-8EDCEB9B259B}</Project>
+      <Name>Unity.Formats.Alembic.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj">
       <Project>{33BD5189-1835-748A-4B9C-04E4FA782FFF}</Project>
@@ -964,17 +1105,25 @@
       <Project>{DE7017C8-7531-A9D3-F7F9-811B6BDA614E}</Project>
       <Name>Unity.Mathematics.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.2D.Common.Editor.csproj">
-      <Project>{99D1757B-8F55-FA41-7B02-20CC0A0B1FDD}</Project>
-      <Name>Unity.2D.Common.Editor</Name>
+    <ProjectReference Include="UnityEngine.Monetization.csproj">
+      <Project>{A4169E78-47EF-714B-837B-D85F70F96480}</Project>
+      <Name>UnityEngine.Monetization</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.csproj">
+      <Project>{55E765DF-F805-BBAB-BACB-820538D4C4B9}</Project>
+      <Name>Unity.Recorder</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Flow.Editor.csproj">
       <Project>{34020FAC-000A-4CE7-A26B-2646F8E912FA}</Project>
       <Name>Unity.VisualScripting.Flow.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.2D.Animation.Editor.csproj">
-      <Project>{9A46D629-BF30-69D2-2F34-9EE37A1B3848}</Project>
-      <Name>Unity.2D.Animation.Editor</Name>
+    <ProjectReference Include="Unity.2D.Tilemap.Editor.csproj">
+      <Project>{EC3ACD0B-87CD-2E78-07CF-E25776B40FD5}</Project>
+      <Name>Unity.2D.Tilemap.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Base.csproj">
+      <Project>{1F9CC6EC-FBED-D6E6-2E3D-700AC2778CD8}</Project>
+      <Name>Unity.Recorder.Base</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Universal.Runtime.csproj">
       <Project>{63C698EC-0058-D1A6-0881-ADB440355358}</Project>
@@ -984,17 +1133,21 @@
       <Project>{5360F3C4-AAC2-D4E5-3B72-1965184C1E2C}</Project>
       <Name>PPv2URPConverters</Name>
     </ProjectReference>
+    <ProjectReference Include="com.unity.multiplayer-hlapi.Editor.csproj">
+      <Project>{44A7A92A-FD1A-6EDF-BD4D-47395B42668F}</Project>
+      <Name>com.unity.multiplayer-hlapi.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="MK.MeshUtility.csproj">
       <Project>{084F926A-1432-595F-05DD-AF490AB6A4BF}</Project>
       <Name>MK.MeshUtility</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.AddOns.Editor.csproj">
-      <Project>{07F82A8F-B59D-6FED-CC85-6A978FBA4739}</Project>
-      <Name>Unity.ProBuilder.AddOns.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.VisualStudio.Editor.csproj">
       <Project>{E67F2F63-E2DD-EE50-2610-8F045F6B3E45}</Project>
       <Name>Unity.VisualStudio.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Autodesk.Fbx.Editor.csproj">
+      <Project>{1BE96E37-310F-08E1-12BF-A41970324315}</Project>
+      <Name>Autodesk.Fbx.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="MK.MKTextureChannelPacker.csproj">
       <Project>{EB5A38D3-242E-8E2C-0590-ADB0C6E21D93}</Project>
@@ -1020,14 +1173,6 @@
       <Project>{3CCE4365-E97F-65D4-C7CC-E8336C328F29}</Project>
       <Name>Unity.2D.Sprite.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.InternalAPIEditorBridge.001.csproj">
-      <Project>{F8DCBB07-4153-5F6F-08C6-4805D5B1EAA0}</Project>
-      <Name>Unity.InternalAPIEditorBridge.001</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.Editor.csproj">
-      <Project>{6AA41A9F-2794-D7F8-F801-AE8FB832A8F4}</Project>
-      <Name>Unity.ProBuilder.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
       <Project>{1FFC046C-2A9B-EFF4-43DB-0A73F95E5702}</Project>
       <Name>Unity.VisualScripting.Flow</Name>
@@ -1035,6 +1180,10 @@
     <ProjectReference Include="Unity.PlasticSCM.Editor.csproj">
       <Project>{22CF6D54-42D9-CE6A-7AA0-131F1850CF8B}</Project>
       <Name>Unity.PlasticSCM.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.multiplayer-weaver.Editor.csproj">
+      <Project>{24310C99-06C4-2DCD-EE33-0C03EDE134C1}</Project>
+      <Name>com.unity.multiplayer-weaver.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj">
       <Project>{62886308-D672-606D-E6BA-4F7955F96D66}</Project>
@@ -1064,9 +1213,9 @@
       <Project>{C48F279C-6015-BB18-4F50-803622997444}</Project>
       <Name>Unity.RenderPipelines.Universal.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.AssetIdRemapUtility.csproj">
-      <Project>{BAF2C30B-C150-7BC4-6B14-D63BE94541D3}</Project>
-      <Name>Unity.ProBuilder.AssetIdRemapUtility</Name>
+    <ProjectReference Include="UnityEngine.XR.LegacyInputHelpers.csproj">
+      <Project>{D0CE9266-08B1-7CA9-6331-50E6E9E89708}</Project>
+      <Name>UnityEngine.XR.LegacyInputHelpers</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Shared.Editor.csproj">
       <Project>{1B2582F0-8C9A-7F35-7AC0-715FFA5DBC25}</Project>
@@ -1076,81 +1225,33 @@
       <Project>{D92E4CE5-A82C-B541-3AF6-B3F697D26E48}</Project>
       <Name>Unity.Services.Core.Environments</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.2D.Animation.Runtime.csproj">
-      <Project>{9FE10398-17E8-6623-C4D4-65BFC8424A36}</Project>
-      <Name>Unity.2D.Animation.Runtime</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.Editor.csproj">
       <Project>{B2644835-5FA1-8293-2AD7-36C99CEDDC47}</Project>
       <Name>Unity.Timeline.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj">
-      <Project>{9C932198-012A-FEAF-263C-FA527BF7BC43}</Project>
-      <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.2D.Common.Runtime.csproj">
-      <Project>{101E6F22-1B44-DEE5-0D96-1C82FBFCA441}</Project>
-      <Name>Unity.2D.Common.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.2D.SpriteShape.Editor.csproj">
-      <Project>{D3C8E869-2A94-D11D-0718-5738ADE63985}</Project>
-      <Name>Unity.2D.SpriteShape.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj">
-      <Project>{AE117563-AA49-464D-13AC-21867F9BFD9D}</Project>
-      <Name>Unity.RenderPipelines.Core.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.2D.SpriteShape.Runtime.csproj">
-      <Project>{A3BBE2EB-41A9-5016-3234-88DC32695BB8}</Project>
-      <Name>Unity.2D.SpriteShape.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VisualScripting.State.csproj">
-      <Project>{65B55062-247C-F238-5374-C3977B0CA51D}</Project>
-      <Name>Unity.VisualScripting.State</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.SpatialTracking.csproj">
-      <Project>{AB463AE4-C178-F285-8C44-79599B10303B}</Project>
-      <Name>UnityEngine.SpatialTracking</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.Monetization.csproj">
-      <Project>{A4169E78-47EF-714B-837B-D85F70F96480}</Project>
-      <Name>UnityEngine.Monetization</Name>
-    </ProjectReference>
-    <ProjectReference Include="com.unity.multiplayer-hlapi.Editor.csproj">
-      <Project>{44A7A92A-FD1A-6EDF-BD4D-47395B42668F}</Project>
-      <Name>com.unity.multiplayer-hlapi.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.XR.LegacyInputHelpers.csproj">
       <Project>{3CFCDD89-FDB4-ACE5-DD14-9EBD247A227F}</Project>
       <Name>UnityEditor.XR.LegacyInputHelpers</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj">
+      <Project>{9C932198-012A-FEAF-263C-FA527BF7BC43}</Project>
+      <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEditor.SpatialTracking.csproj">
       <Project>{15E9E6AF-0FFE-E439-AFFD-13815B3DBB03}</Project>
       <Name>UnityEditor.SpatialTracking</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityEngine.Advertisements.csproj">
-      <Project>{41E8A65D-7EAD-9CD0-FE5B-373FB0ADA7D4}</Project>
-      <Name>UnityEngine.Advertisements</Name>
+    <ProjectReference Include="Unity.Formats.Alembic.Editor.csproj">
+      <Project>{AC3E4461-BFC7-238A-CC52-766EC047A456}</Project>
+      <Name>Unity.Formats.Alembic.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.2D.Tilemap.Editor.csproj">
-      <Project>{EC3ACD0B-87CD-2E78-07CF-E25776B40FD5}</Project>
-      <Name>Unity.2D.Tilemap.Editor</Name>
+    <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj">
+      <Project>{AE117563-AA49-464D-13AC-21867F9BFD9D}</Project>
+      <Name>Unity.RenderPipelines.Core.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Analytics.DataPrivacy.csproj">
-      <Project>{9F4DC40C-EAB1-9078-FBE4-BDF01FBDBE59}</Project>
-      <Name>Unity.Analytics.DataPrivacy</Name>
-    </ProjectReference>
-    <ProjectReference Include="com.unity.multiplayer-hlapi.Runtime.csproj">
-      <Project>{73D96952-5D5C-305D-15DA-A516FEB5B149}</Project>
-      <Name>com.unity.multiplayer-hlapi.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="com.unity.multiplayer-weaver.Editor.csproj">
-      <Project>{24310C99-06C4-2DCD-EE33-0C03EDE134C1}</Project>
-      <Name>com.unity.multiplayer-weaver.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.XR.LegacyInputHelpers.csproj">
-      <Project>{D0CE9266-08B1-7CA9-6331-50E6E9E89708}</Project>
-      <Name>UnityEngine.XR.LegacyInputHelpers</Name>
+    <ProjectReference Include="Unity.VisualScripting.State.csproj">
+      <Project>{65B55062-247C-F238-5374-C3977B0CA51D}</Project>
+      <Name>Unity.VisualScripting.State</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

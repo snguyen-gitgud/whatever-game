@@ -25,7 +25,17 @@ public class ActorAnimationController : MonoBehaviour
 
     public void PlayGetHit()
     {
-        animator.CrossFadeInFixedTime("GetHit", .1f);
+        animator.CrossFadeInFixedTime("GetHit" + Random.Range(1, 4), .1f);
+    }
+
+    public void PlayBlock()
+    {
+        animator.CrossFadeInFixedTime("Block", .1f);
+    }
+
+    public void PlayDodge()
+    {
+        animator.CrossFadeInFixedTime("Dodge", .1f);
     }
 
     public void PlayCasting()

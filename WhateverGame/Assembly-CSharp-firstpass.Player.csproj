@@ -272,8 +272,26 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\AOT\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst.Cecil.Pdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
+    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="clipper_library">
+      <HintPath>Library\PackageCache\com.unity.cinemachine@2.8.6\Runtime\ThirdParty\clipper_library.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Mdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Rocks">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
@@ -646,10 +664,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.InternalAPIEngineBridge.001.Player.csproj">
-      <Project>{8960574B-E228-2EC7-3DB3-4547CD4BFD1B}</Project>
-      <Name>Unity.InternalAPIEngineBridge.001.Player</Name>
-    </ProjectReference>
     <ProjectReference Include="UniHumanoid.Player.csproj">
       <Project>{FC516441-2028-606F-2772-D6313BD12090}</Project>
       <Name>UniHumanoid.Player</Name>
@@ -666,9 +680,9 @@
       <Project>{EFCFD109-FBFF-9DC2-D612-CDA28F8C4E1C}</Project>
       <Name>UniGLTF.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.Player.csproj">
-      <Project>{8A6F9971-5BA5-FB44-2F32-EE44A26A9AB5}</Project>
-      <Name>Unity.ProBuilder.Player</Name>
+    <ProjectReference Include="UnityEngine.Advertisements.Player.csproj">
+      <Project>{EEBDA650-D764-9E09-2324-8B103E0823B5}</Project>
+      <Name>UnityEngine.Advertisements.Player</Name>
     </ProjectReference>
     <ProjectReference Include="SoftMask.Player.csproj">
       <Project>{D3B2C79F-375A-769D-F41E-3EC249FDDB1E}</Project>
@@ -682,17 +696,29 @@
       <Project>{27F9B5AE-827B-933C-F508-B1E016BA392C}</Project>
       <Name>Unity.RenderPipelines.Core.ShaderLibrary.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.Player.csproj">
-      <Project>{79AFB9D5-CC3C-44A9-4263-712968A7C6F4}</Project>
-      <Name>UnityEngine.UI.Player</Name>
+    <ProjectReference Include="UnityEngine.SpatialTracking.Player.csproj">
+      <Project>{E7D4E3C4-A1BC-F14A-3DFA-659214400ED3}</Project>
+      <Name>UnityEngine.SpatialTracking.Player</Name>
     </ProjectReference>
     <ProjectReference Include="UniGLTF.Samples.ScreenSpace.Player.csproj">
       <Project>{2A97B888-5ED4-1F3E-0EE4-406E83ACB6EC}</Project>
       <Name>UniGLTF.Samples.ScreenSpace.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.2D.IK.Runtime.Player.csproj">
-      <Project>{35E722C8-7A4D-E950-6CF9-1C74D92133FC}</Project>
-      <Name>Unity.2D.IK.Runtime.Player</Name>
+    <ProjectReference Include="Autodesk.Fbx.Player.csproj">
+      <Project>{4350D508-40E3-88A7-4F9F-7FBFECBF25D8}</Project>
+      <Name>Autodesk.Fbx.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Analytics.DataPrivacy.Player.csproj">
+      <Project>{6D3CAED1-6A91-6000-3890-95C287AC5BF8}</Project>
+      <Name>Unity.Analytics.DataPrivacy.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.Player.csproj">
+      <Project>{79AFB9D5-CC3C-44A9-4263-712968A7C6F4}</Project>
+      <Name>UnityEngine.UI.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.multiplayer-hlapi.Runtime.Player.csproj">
+      <Project>{AE052563-A605-746E-9EA6-C36430348CE7}</Project>
+      <Name>com.unity.multiplayer-hlapi.Runtime.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Cinemachine.Player.csproj">
       <Project>{5B95557F-B048-69B7-851D-38359D183194}</Project>
@@ -702,9 +728,17 @@
       <Project>{7F6307D5-8CF7-A06E-8AED-DA58A406B9AE}</Project>
       <Name>VRM.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.2D.Animation.Triangle.Runtime.Player.csproj">
-      <Project>{2D14EBE0-57AA-4065-C0EF-C5A6FF6D10E3}</Project>
-      <Name>Unity.2D.Animation.Triangle.Runtime.Player</Name>
+    <ProjectReference Include="Unity.Sequences.Player.csproj">
+      <Project>{8C7528B3-2B5D-61D6-A42D-CCD4CD31B78E}</Project>
+      <Name>Unity.Sequences.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Formats.Fbx.Runtime.Player.csproj">
+      <Project>{571ECD9D-1F01-9E58-C15C-9BEBABF55DA3}</Project>
+      <Name>Unity.Formats.Fbx.Runtime.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Formats.Alembic.Runtime.Player.csproj">
+      <Project>{6642DD41-F1A8-AF95-EBF6-48A846A7A215}</Project>
+      <Name>Unity.Formats.Alembic.Runtime.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.Player.csproj">
       <Project>{A08531F1-5706-F5B4-7493-22E177C631B6}</Project>
@@ -713,6 +747,18 @@
     <ProjectReference Include="MK.Toon.Player.csproj">
       <Project>{D87F25E4-A94D-CAEC-6BDD-510B5D28661E}</Project>
       <Name>MK.Toon.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Monetization.Player.csproj">
+      <Project>{60722F62-4039-8798-6A82-A29D07925392}</Project>
+      <Name>UnityEngine.Monetization.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Player.csproj">
+      <Project>{06D684EC-2506-2143-E07C-30DA38BFCEFC}</Project>
+      <Name>Unity.Recorder.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Base.Player.csproj">
+      <Project>{E538437D-8855-075E-A612-E5380E56F4AB}</Project>
+      <Name>Unity.Recorder.Base.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Universal.Runtime.Player.csproj">
       <Project>{230A58B7-9725-C97F-2928-FB7AC25300BE}</Project>
@@ -754,53 +800,21 @@
       <Project>{0E8951BB-D745-23C8-7464-9A2C3209ED9E}</Project>
       <Name>Unity.Burst.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="UnityEngine.XR.LegacyInputHelpers.Player.csproj">
+      <Project>{D87FF919-A724-670E-9114-2C7D01E8A61B}</Project>
+      <Name>UnityEngine.XR.LegacyInputHelpers.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Services.Core.Environments.Player.csproj">
       <Project>{22EFAB47-02CD-0A9A-BDC3-44AAB31EC744}</Project>
       <Name>Unity.Services.Core.Environments.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.2D.Animation.Runtime.Player.csproj">
-      <Project>{36C66057-186F-1283-4BBD-6C036332A22A}</Project>
-      <Name>Unity.2D.Animation.Runtime.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.Player.csproj">
       <Project>{30CE08D7-3155-81A1-678C-65C58673A46A}</Project>
       <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.2D.Common.Runtime.Player.csproj">
-      <Project>{2630E303-18E4-ED5D-77ED-6590AA1532E7}</Project>
-      <Name>Unity.2D.Common.Runtime.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.2D.SpriteShape.Runtime.Player.csproj">
-      <Project>{54130B0A-BD19-FF74-B563-19A3F60E034C}</Project>
-      <Name>Unity.2D.SpriteShape.Runtime.Player</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.State.Player.csproj">
       <Project>{0DD95AB1-AF44-155F-8648-01C68F969E59}</Project>
       <Name>Unity.VisualScripting.State.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.SpatialTracking.Player.csproj">
-      <Project>{E7D4E3C4-A1BC-F14A-3DFA-659214400ED3}</Project>
-      <Name>UnityEngine.SpatialTracking.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.Monetization.Player.csproj">
-      <Project>{60722F62-4039-8798-6A82-A29D07925392}</Project>
-      <Name>UnityEngine.Monetization.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.Advertisements.Player.csproj">
-      <Project>{EEBDA650-D764-9E09-2324-8B103E0823B5}</Project>
-      <Name>UnityEngine.Advertisements.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Analytics.DataPrivacy.Player.csproj">
-      <Project>{6D3CAED1-6A91-6000-3890-95C287AC5BF8}</Project>
-      <Name>Unity.Analytics.DataPrivacy.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="com.unity.multiplayer-hlapi.Runtime.Player.csproj">
-      <Project>{AE052563-A605-746E-9EA6-C36430348CE7}</Project>
-      <Name>com.unity.multiplayer-hlapi.Runtime.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.XR.LegacyInputHelpers.Player.csproj">
-      <Project>{D87FF919-A724-670E-9114-2C7D01E8A61B}</Project>
-      <Name>UnityEngine.XR.LegacyInputHelpers.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

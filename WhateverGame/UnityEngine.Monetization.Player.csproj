@@ -56,42 +56,42 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Product.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Analytics.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\AndroidPlacementContentOperations.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\IosNativePromoAdapter.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\AndroidAnalytics.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\PlacementContentStateChangeEventArgs.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\AndroidNativePromoAdapter.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Placeholder.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Monetization.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Creator.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\PlacementContentState.cs" />
     <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\IosAnalytics.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\AndroidJavaObjectExtensions.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Store.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\PlacementContentType.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\PromoMetadata.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\MetaData.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\UnsupportedPlatform.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\IPurchasingAdapter.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Configuration.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\EditorPlacementContentOperations.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\IPlacementContentOperations.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\PlacementContent.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\JavaEnumUtilities.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\UnityServicesErrorEventArgs.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\TransactionError.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\IMonetizationPlatform.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\EditorNativePromoAdapter.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\JavaMapUtilities.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\IosPlacementContentOperations.cs" />
     <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\MonetizationPlatform.cs" />
-    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\PurchasingAdapterCallbacks.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\AndroidAnalytics.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\AndroidNativePromoAdapter.cs" />
     <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\MiniJSON.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\PlacementContentType.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\AssemblyInfo.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\EditorNativePromoAdapter.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\PurchasingAdapterCallbacks.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Analytics.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Configuration.cs" />
     <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\INativePromoAdapter.cs" />
     <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\PlacementContentReadyEventArgs.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Creator.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Store.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\IPlacementContentOperations.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\PlacementContentStateChangeEventArgs.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\JavaEnumUtilities.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\IosNativePromoAdapter.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\MetaData.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\EditorPlacementContentOperations.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\UnityServicesErrorEventArgs.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Product.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Placeholder.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\PlacementContentState.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\JavaMapUtilities.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\PromoMetadata.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\UnsupportedPlatform.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\IosPlacementContentOperations.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\TransactionError.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\AndroidPlacementContentOperations.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\IPurchasingAdapter.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\PlacementContent.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\IMonetizationPlatform.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\AndroidJavaObjectExtensions.cs" />
+    <Compile Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\Monetization.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.ads@3.4.7\Runtime\Monetization\UnityEngine.Monetization.asmdef" />
@@ -298,8 +298,26 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\AOT\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst.Cecil.Pdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
+    </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="clipper_library">
+      <HintPath>Library\PackageCache\com.unity.cinemachine@2.8.6\Runtime\ThirdParty\clipper_library.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Mdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Rocks">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.7.8\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>

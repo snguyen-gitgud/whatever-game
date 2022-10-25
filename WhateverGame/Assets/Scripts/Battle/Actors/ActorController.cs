@@ -318,6 +318,13 @@ public class ActorController : MonoBehaviour
         if (is_moved == true)
             return;
 
+        if (InputProcessor.GetInstance().buttonShoulderL)
+        {
+            BattleMaster.GetInstance().gridManager.ClearAreaHighlight();
+            WaitingForCommandState();
+            return;
+        }
+
         vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
 
         if (move_area.Contains(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit()) == false)

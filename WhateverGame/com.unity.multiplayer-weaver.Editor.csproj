@@ -57,13 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.multiplayer-hlapi@1.0.6\Editor\Tools\Weaver\MessageClassProcessor.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer-hlapi@1.0.6\Editor\Tools\Weaver\Helpers.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer-hlapi@1.0.6\Editor\Tools\Weaver\UNetWeaver.cs" />
-    <Compile Include="Library\PackageCache\com.unity.multiplayer-hlapi@1.0.6\Editor\Tools\Weaver\MonoBehaviourProcessor.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer-hlapi@1.0.6\Editor\Tools\Weaver\UNetBehaviourProcessor.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer-hlapi@1.0.6\Editor\Tools\Weaver\SyncListStructProcessor.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer-hlapi@1.0.6\Editor\Tools\Weaver\UNetWeaver.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer-hlapi@1.0.6\Editor\Tools\Weaver\MonoBehaviourProcessor.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer-hlapi@1.0.6\Editor\Tools\Weaver\AssemblyInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.multiplayer-hlapi@1.0.6\Editor\Tools\Weaver\Program.cs" />
+    <Compile Include="Library\PackageCache\com.unity.multiplayer-hlapi@1.0.6\Editor\Tools\Weaver\Helpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.multiplayer-hlapi@1.0.6\Editor\Tools\Weaver\com.unity.multiplayer-weaver.Editor.asmdef" />
