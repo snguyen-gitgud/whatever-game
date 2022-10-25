@@ -97,7 +97,7 @@ public class BaseSkill : MonoBehaviour
 
     public virtual IEnumerator TriggerReactive()
     {
-        if (targetController.actorStats.actorReactiveSkill.ReactiveCheck(targetController, actorController) == true)
+        if (targetController != null && targetController.actorStats.actorReactiveSkill.ReactiveCheck(targetController, actorController) == true)
         {
             Vector3 new_forward = targetController.transform.GetChild(0).forward;
             new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
