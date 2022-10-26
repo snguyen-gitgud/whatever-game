@@ -58,6 +58,7 @@ public class BaseSkill : MonoBehaviour
         skillOverLoadLevel = overload_level;
         targetGridUnit = target_grid_tile;
         targetController = target_grid_tile.occupiedActor;
+        og_model_pos = actorController.transform.GetChild(0).position;
 
         actorController.is_acted = true;
         actorController.actorStats.staminaPoint -= skillStaminaCost * skillOverLoadLevel;
@@ -66,11 +67,14 @@ public class BaseSkill : MonoBehaviour
         actorController.actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
         actorController.actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
 
+        if (skillCastingVfxObj != null)
+            Destroy(skillCastingVfxObj);
+
         if (skillCastingVfx != null)
             skillCastingVfxObj = Instantiate(skillCastingVfx, actorController.transform.GetChild(0));
     }
 
-    public virtual void Executekill()
+    public virtual void Executekill(bool is_pincer = false)
     {
         actorController.actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
         actorController.actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
@@ -78,7 +82,8 @@ public class BaseSkill : MonoBehaviour
         if (isReactive == false) 
             castingVCam.Priority = 99;
         targetController = targetGridUnit.occupiedActor;
-        StartCoroutine(ExecuteSkillSequence());
+        if (is_pincer == false) 
+            StartCoroutine(ExecuteSkillSequence());
     }
 
     public virtual IEnumerator ExecuteSkillSequence()
@@ -145,7 +150,7 @@ public class BaseSkill : MonoBehaviour
             BaseSkill pincer_skill = pincer_actor.actorStats.actorNormalAttack;
             pincer_skill.isReactive = true;
             pincer_skill.CastingSkill(pincer_actor, skillOverLoadLevel, targetController.occupied_grid_unit);
-
+            pincer_skill.Executekill(true);
             yield return StartCoroutine(pincer_skill.ExecuteSkillSequence());
             pincer_skill.isReactive = false;
             yield return new WaitForSeconds(1f);

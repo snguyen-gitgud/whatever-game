@@ -688,6 +688,10 @@
       <Project>{D3B2C79F-375A-769D-F41E-3EC249FDDB1E}</Project>
       <Name>SoftMask.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.ProBuilder.Player.csproj">
+      <Project>{8A6F9971-5BA5-FB44-2F32-EE44A26A9AB5}</Project>
+      <Name>Unity.ProBuilder.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.InputSystem.Player.csproj">
       <Project>{4ED45AEB-F267-8261-6623-1037F69932C9}</Project>
       <Name>Unity.InputSystem.Player</Name>
@@ -815,10 +819,6 @@
     <ProjectReference Include="Unity.VisualScripting.State.Player.csproj">
       <Project>{0DD95AB1-AF44-155F-8648-01C68F969E59}</Project>
       <Name>Unity.VisualScripting.State.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.Player.csproj">
-      <Project>{8A6F9971-5BA5-FB44-2F32-EE44A26A9AB5}</Project>
-      <Name>Unity.ProBuilder.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

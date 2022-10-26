@@ -58,8 +58,8 @@
   <ItemGroup>
     <Compile Include="Assets\UniGLTF\Editor\UniGLTF\UniGLTFPreference.cs" />
     <Compile Include="Assets\UniGLTF\Editor\UniGLTF\Serialization\CollectionSerializationBase.cs" />
-    <Compile Include="Assets\UniGLTF\Editor\JsonSchema\JsonSchemaType.cs" />
     <Compile Include="Assets\UniGLTF\Editor\UniGLTF\ScriptedImporter\RemapEditorAnimation.cs" />
+    <Compile Include="Assets\UniGLTF\Editor\JsonSchema\JsonSchemaType.cs" />
     <Compile Include="Assets\UniGLTF\Editor\MeshUtility\MeshProcessDialog.cs" />
     <Compile Include="Assets\UniGLTF\Editor\Animation\AnimationCurveData.cs" />
     <Compile Include="Assets\UniGLTF\Editor\Generator\FormatWriter.cs" />

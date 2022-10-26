@@ -131,8 +131,8 @@
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Controls\InputControl.cs" />
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Utilities\Observables\Observer.cs" />
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Events\IInputEventTypeInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Events\InputEventListener.cs" />
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Devices\Remote\RemoteInputPlayerConnection.cs" />
+    <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Events\InputEventListener.cs" />
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Editor\AssetEditor\InputBindingPropertiesView.cs" />
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Devices\Commands\QueryKeyNameCommand.cs" />
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Editor\PropertyDrawers\InputControlPathDrawer.cs" />
@@ -175,8 +175,8 @@
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Events\TextEvent.cs" />
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Devices\InputDevice.cs" />
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Plugins\DualShock\DualShockSupport.cs" />
-    <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Utilities\TypeTable.cs" />
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Controls\Processors\NormalizeVector3Processor.cs" />
+    <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Utilities\TypeTable.cs" />
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Controls\Processors\ScaleVector2Processor.cs" />
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\Editor\ControlPicker\IInputControlPickerLayout.cs" />
     <Compile Include="Library\PackageCache\com.unity.inputsystem@1.4.3\InputSystem\State\IInputStateCallbackReceiver.cs" />

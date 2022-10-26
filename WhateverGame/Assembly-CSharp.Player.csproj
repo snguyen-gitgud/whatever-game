@@ -167,6 +167,10 @@
     <Compile Include="Assets\Scripts\Common\SelfSpinning.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\nextEffectMeleeCombat.cs" />
+    <Compile Include="Assets\Scripts\Common\CurvedLineRenderer.cs" />
+    <Compile Include="Assets\Scripts\Common\LineSmoother.cs" />
+    <Compile Include="Assets\Scripts\Common\CurvedLinePoint.cs" />
+    <Compile Include="Assets\3rdParty\ArcTarget\Script\ArcTarget_C.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
@@ -198,6 +202,7 @@
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_lighting_mtoon.hlsl" />
     <None Include="Assets\3rdParty\SoftMask\Shaders\Resources\SoftMaskETC1.shader" />
     <None Include="Assets\ShaderGraph\AlphaBlend\AlwaysOnTopUnlit.shader" />
+    <None Include="Assets\3rdParty\ArcTarget\Read Me\Read Me.txt" />
     <None Include="Assets\3rdParty\Toon Fantasy Nature\ToonShading\Shaders\TFF_Board_Cutout.shader" />
     <None Include="Assets\3rdParty\SoftMask\Shaders\Resources\SoftMaskPremultipliedAlpha.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
@@ -874,6 +879,10 @@
       <Project>{D3B2C79F-375A-769D-F41E-3EC249FDDB1E}</Project>
       <Name>SoftMask.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.ProBuilder.Player.csproj">
+      <Project>{8A6F9971-5BA5-FB44-2F32-EE44A26A9AB5}</Project>
+      <Name>Unity.ProBuilder.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.InputSystem.Player.csproj">
       <Project>{4ED45AEB-F267-8261-6623-1037F69932C9}</Project>
       <Name>Unity.InputSystem.Player</Name>
@@ -1001,10 +1010,6 @@
     <ProjectReference Include="Unity.VisualScripting.State.Player.csproj">
       <Project>{0DD95AB1-AF44-155F-8648-01C68F969E59}</Project>
       <Name>Unity.VisualScripting.State.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.Player.csproj">
-      <Project>{8A6F9971-5BA5-FB44-2F32-EE44A26A9AB5}</Project>
-      <Name>Unity.ProBuilder.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

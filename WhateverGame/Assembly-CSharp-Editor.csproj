@@ -866,6 +866,10 @@
       <Project>{F134A91F-13C5-A7C6-4BD5-B24A48136882}</Project>
       <Name>SoftMask</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.ProBuilder.csproj">
+      <Project>{B5C7577A-83B0-5A57-3DF4-5840E2B51E53}</Project>
+      <Name>Unity.ProBuilder</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{818E34D1-2770-85AA-CE79-33AB0369D1B9}</Project>
       <Name>UnityEditor.UI</Name>
@@ -994,6 +998,10 @@
       <Project>{084F926A-1432-595F-05DD-AF490AB6A4BF}</Project>
       <Name>MK.MeshUtility</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.ProBuilder.AddOns.Editor.csproj">
+      <Project>{07F82A8F-B59D-6FED-CC85-6A978FBA4739}</Project>
+      <Name>Unity.ProBuilder.AddOns.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VisualStudio.Editor.csproj">
       <Project>{E67F2F63-E2DD-EE50-2610-8F045F6B3E45}</Project>
       <Name>Unity.VisualStudio.Editor</Name>
@@ -1025,6 +1033,10 @@
     <ProjectReference Include="Unity.2D.Sprite.Editor.csproj">
       <Project>{3CCE4365-E97F-65D4-C7CC-E8336C328F29}</Project>
       <Name>Unity.2D.Sprite.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ProBuilder.Editor.csproj">
+      <Project>{6AA41A9F-2794-D7F8-F801-AE8FB832A8F4}</Project>
+      <Name>Unity.ProBuilder.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Flow.csproj">
       <Project>{1FFC046C-2A9B-EFF4-43DB-0A73F95E5702}</Project>
@@ -1066,6 +1078,10 @@
       <Project>{C48F279C-6015-BB18-4F50-803622997444}</Project>
       <Name>Unity.RenderPipelines.Universal.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.ProBuilder.AssetIdRemapUtility.csproj">
+      <Project>{BAF2C30B-C150-7BC4-6B14-D63BE94541D3}</Project>
+      <Name>Unity.ProBuilder.AssetIdRemapUtility</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEngine.XR.LegacyInputHelpers.csproj">
       <Project>{D0CE9266-08B1-7CA9-6331-50E6E9E89708}</Project>
       <Name>UnityEngine.XR.LegacyInputHelpers</Name>
@@ -1105,22 +1121,6 @@
     <ProjectReference Include="Unity.VisualScripting.State.csproj">
       <Project>{65B55062-247C-F238-5374-C3977B0CA51D}</Project>
       <Name>Unity.VisualScripting.State</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.csproj">
-      <Project>{B5C7577A-83B0-5A57-3DF4-5840E2B51E53}</Project>
-      <Name>Unity.ProBuilder</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.AddOns.Editor.csproj">
-      <Project>{07F82A8F-B59D-6FED-CC85-6A978FBA4739}</Project>
-      <Name>Unity.ProBuilder.AddOns.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.Editor.csproj">
-      <Project>{6AA41A9F-2794-D7F8-F801-AE8FB832A8F4}</Project>
-      <Name>Unity.ProBuilder.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.AssetIdRemapUtility.csproj">
-      <Project>{BAF2C30B-C150-7BC4-6B14-D63BE94541D3}</Project>
-      <Name>Unity.ProBuilder.AssetIdRemapUtility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

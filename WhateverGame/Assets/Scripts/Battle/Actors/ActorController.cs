@@ -33,6 +33,8 @@ public class ActorController : MonoBehaviour
     
     public GameObject commandControlUI;
 
+    public GameObject line;
+
     [Header("Vcam settings")]
     public Transform vcamTarget;
     public Cinemachine.CinemachineVirtualCamera vcam;
@@ -75,6 +77,10 @@ public class ActorController : MonoBehaviour
 
         if (actorStats == null)
             actorStats = this.GetComponent<ActorInfo>();
+
+        line.GetComponent<ArcTarget_C>().StartColor = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
+        line.GetComponent<ArcTarget_C>().EndColor = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
+        line.SetActive(false);
 
         actorAnimationController.PlayIdle();
     }
@@ -206,6 +212,7 @@ public class ActorController : MonoBehaviour
     }
 
     int current_skill_overload_level = 1;
+    ActorController last_pincer_actor = null;
     public void ProcessWaitingForTarget()
     {
         if (currentChosenSkill == null)
@@ -219,16 +226,68 @@ public class ActorController : MonoBehaviour
             actorDetails.actorStaminaPreviewSlider.fillAmount = actorDetails.actorStaminaSlider.fillAmount;
         actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = (current_skill_overload_level * currentChosenSkill.skillStaminaCost) / 16f;
 
+        if (last_pincer_actor)
+            last_pincer_actor.line.SetActive(false);
+
+        ActorController pincer_actor = null;
+
+        if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() != null &&
+            BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor != null &&
+            BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor != this)
+        {
+            if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == null)
+                line.GetComponent<ArcTarget_C>().EndPoint = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().transform;
+            else
+                line.GetComponent<ArcTarget_C>().EndPoint = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor.line.GetComponent<ArcTarget_C>().StartPoint;
+
+            line.SetActive(true);
+
+            ActorController targetController = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor;
+            List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, targetController.actorTeams, true, false);
+            foreach (GridUnit tile in pincer_range)
+            {
+                if (tile.occupiedActor != null)
+                {
+                    if (Vector3.Dot(Vector3.ProjectOnPlane(tile.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up),
+                                    Vector3.ProjectOnPlane(this.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up))
+                        <= -0.9f)
+                    {
+                        pincer_actor = tile.occupiedActor;
+                        break;
+                    }
+                }
+            }
+
+            if (pincer_actor != null)
+            {
+                pincer_actor.line.SetActive(true);
+                pincer_actor.line.GetComponent<ArcTarget_C>().EndPoint = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().transform;
+            }
+
+            last_pincer_actor = pincer_actor;
+        }
+        else
+        {
+            line.SetActive(false);
+            if (pincer_actor) 
+                pincer_actor.line.SetActive(false);
+        }
+
         if (InputProcessor.GetInstance().buttonSouth)
         {
             if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() == null ||
-                BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == null ||
+                //BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == null ||
                 BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == this)
                 return;
 
             if (skill_range_area.Contains(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit()) == false)
                 return;
 
+            line.SetActive(false);
+            if (pincer_actor)
+                pincer_actor.line.SetActive(false);
+
+            actorDetails.transform.GetChild(0).DOLocalMoveX(-800f, 0.25f).SetDelay(.25f);
             currentChosenSkill.CastingSkill(this, current_skill_overload_level, BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit());
             actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
             actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
@@ -249,6 +308,9 @@ public class ActorController : MonoBehaviour
 
         if (InputProcessor.GetInstance().buttonShoulderL && current_skill_overload_level <= 0)
         {
+            line.SetActive(false);
+            if (pincer_actor)
+                pincer_actor.line.SetActive(false);
             actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
             actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
             currentChosenSkill = null;
@@ -301,12 +363,14 @@ public class ActorController : MonoBehaviour
 
             actorDetails.actorStaminaSlider.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f) * 0.5f;
             actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
+            actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
 
             is_moved = false;
             is_acted = false;
         }
         else //continue casting
         {
+            actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
             vcam.Priority = 11;
             actorUI.headerHolder.gameObject.SetActive(false);
             currentChosenSkill.Executekill();
@@ -398,6 +462,8 @@ public class ActorController : MonoBehaviour
 
     public void WaitingForCommandState()
     {
+        BattleMaster.GetInstance().gridManager.ClearAreaHighlight();
+        BattleMaster.GetInstance().gridManager.ClearPathHighlight();
         actorUI.headerHolder.gameObject.SetActive(true);
         actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
         DOTween.Kill(commandControlUI.transform);
@@ -516,6 +582,7 @@ public class ActorController : MonoBehaviour
             stam_regen_rate = 0.0f;
             actorUI.apBar.color = exhautedAPGenColor;
             current_burn_out = 0f;
+            burn_out_dur = 3f;
             SelfBlinkingUI selfBlinking = actorUI.apBar.gameObject.AddComponent<SelfBlinkingUI>();
             selfBlinking.blinking_speed = 4f;
             actorControlStates = ActorControlStates.BURNED_OUT_GEN;

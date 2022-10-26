@@ -14,27 +14,27 @@ public class MonkNormalAttack : BaseSkill
     public override void CastingSkill(ActorController actor, int overload_level = 1, GridUnit target = null)
     {
         base.CastingSkill(actor, overload_level, target);
-        Debug.Log(actorController.gameObject.name + " casting Monk normal attack.");
+        //Debug.Log(actorController.gameObject.name + " casting Monk normal attack.");
         actorAnimationController.PlayCasting();
     }
 
-    public override void Executekill()
+    public override void Executekill(bool is_pincer = false)
     {
         Vector3 new_forward = actorController.transform.GetChild(0).forward;
         new_forward = Vector3.ProjectOnPlane(targetGridUnit.cachedWorldPos - actorController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
         actorController.transform.GetChild(0).forward = new_forward;
-        og_model_pos = actorController.transform.GetChild(0).position;
-        actorController.transform.GetChild(0).position += new_forward;
+        //og_model_pos = actorController.transform.GetChild(0).position;
+        //actorController.transform.GetChild(0).position += new_forward;
 
         base.Executekill();
-        Debug.Log(actorController.gameObject.name + " executing Monk normal attack.");
+        //Debug.Log(actorController.gameObject.name + " executing Monk normal attack.");
     }
 
     public override IEnumerator ExecuteSkillSequence()
     {
         yield return base.ExecuteSkillSequence();
 
-        Debug.Log(actorController.gameObject.name + " executing Monk normal attack sequence.");
+        //Debug.Log(actorController.gameObject.name + " executing Monk normal attack sequence.");
         actorAnimationController.PlayNormalAttack_1();
         GameObject atk_vfx = Instantiate(atk1VFX, actorController.transform.GetChild(0));
         atk_vfx.transform.position += Vector3.up * 1.5f;
@@ -50,7 +50,7 @@ public class MonkNormalAttack : BaseSkill
 
             if (!data.isMiss && !data.isBlocked || data.isAmbush && !data.isBlocked)
             {
-                InputProcessor.GetInstance().VibrateController(.25f, .25f, .1f);
+                InputProcessor.GetInstance().VibrateController(.125f, .125f, .1f);
                 targetController.actorAnimationController.PlayGetHit();
                 GameObject hit_vfx = Instantiate(hitVFX, targetController.transform.GetChild(0));
                 hit_vfx.transform.position += (Vector3.up * 1.5f) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));
@@ -94,7 +94,7 @@ public class MonkNormalAttack : BaseSkill
 
                 if (!data.isMiss && !data.isBlocked || data.isAmbush && !data.isBlocked)
                 {
-                    InputProcessor.GetInstance().VibrateController(.35f, .35f, .25f);
+                    InputProcessor.GetInstance().VibrateController(.235f, .235f, .25f);
                     targetController.actorAnimationController.PlayGetHit();
                     GameObject hit_vfx = Instantiate(hitVFX, targetController.transform.GetChild(0));
                     hit_vfx.transform.position += (Vector3.up * 1.5f) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));
@@ -140,7 +140,7 @@ public class MonkNormalAttack : BaseSkill
 
                 if (!data.isMiss && !data.isBlocked || data.isAmbush && !data.isBlocked)
                 {
-                    InputProcessor.GetInstance().VibrateController(.5f, .5f, .5f);
+                    InputProcessor.GetInstance().VibrateController(.35f, .35f, .5f);
                     targetController.actorAnimationController.PlayGetHit();
                     GameObject hit_vfx = Instantiate(hitVFX, targetController.transform.GetChild(0));
                     hit_vfx.transform.position += (Vector3.up * 1.5f) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));

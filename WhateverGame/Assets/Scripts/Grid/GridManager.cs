@@ -127,12 +127,12 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
         targetTerrain.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
     }
 
-    public List<GridUnit> FindArea(GridUnit start_point, int range, GridUnitOccupationStates occupation_team, bool include_occupied = false)
+    public List<GridUnit> FindArea(GridUnit start_point, int range, GridUnitOccupationStates occupation_team, bool include_occupied = false, bool high_light = true)
     {
         foreach (GridUnit unit in gridUnitsList)
         {
             unit.gridUnitPathScore = -1;
-            unit.ClearAreaHighlight();
+            if (high_light) unit.ClearAreaHighlight();
         }
 
         List<GridUnit> ret_list = new List<GridUnit>();
@@ -160,10 +160,11 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
         processed_grid_unit_list.Remove(start_point);
 
         ret_list.AddRange(processed_grid_unit_list);
-        foreach (GridUnit unit in ret_list)
-        {
-            unit.AreaHighlight(unit.gridUnitPathScore, occupation_team == GridUnitOccupationStates.PLAYER_TEAM? PlayerTeamBGColor : OpponentTeamBGColor);
-        }
+        if (high_light)
+            foreach (GridUnit unit in ret_list)
+            {
+                unit.AreaHighlight(unit.gridUnitPathScore, occupation_team == GridUnitOccupationStates.PLAYER_TEAM? PlayerTeamBGColor : OpponentTeamBGColor);
+            }
 
         //CustomEvents.GetInstance().ToggleGridUnitRendererLock(false);
         return ret_list;
