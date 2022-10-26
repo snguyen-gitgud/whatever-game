@@ -816,6 +816,10 @@
       <Project>{0DD95AB1-AF44-155F-8648-01C68F969E59}</Project>
       <Name>Unity.VisualScripting.State.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.ProBuilder.Player.csproj">
+      <Project>{8A6F9971-5BA5-FB44-2F32-EE44A26A9AB5}</Project>
+      <Name>Unity.ProBuilder.Player</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

@@ -189,7 +189,7 @@ public class MonkNormalAttack : BaseSkill
 
         if (isReactive == false)
         {
-            StartCoroutine(base.TriggerReactive());
+            StartCoroutine(base.PostAttack());
         }
     }
 

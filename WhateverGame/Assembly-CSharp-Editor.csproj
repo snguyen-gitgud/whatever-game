@@ -86,7 +86,6 @@
     <Compile Include="Assets\PostProcessing\Editor\Monitors\WaveformMonitor.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Models\ChromaticAberrationEditor.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Models\DepthOfFieldModelEditor.cs" />
-    <Compile Include="Assets\Scripts\LeanTween\Editor\LeanTweenDocumentationEditor.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Utils\CurveEditor.cs" />
     <Compile Include="Assets\Editor\CustomEditorExtension.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Utils\FxStyles.cs" />
@@ -1106,6 +1105,22 @@
     <ProjectReference Include="Unity.VisualScripting.State.csproj">
       <Project>{65B55062-247C-F238-5374-C3977B0CA51D}</Project>
       <Name>Unity.VisualScripting.State</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ProBuilder.csproj">
+      <Project>{B5C7577A-83B0-5A57-3DF4-5840E2B51E53}</Project>
+      <Name>Unity.ProBuilder</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ProBuilder.AddOns.Editor.csproj">
+      <Project>{07F82A8F-B59D-6FED-CC85-6A978FBA4739}</Project>
+      <Name>Unity.ProBuilder.AddOns.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ProBuilder.Editor.csproj">
+      <Project>{6AA41A9F-2794-D7F8-F801-AE8FB832A8F4}</Project>
+      <Name>Unity.ProBuilder.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ProBuilder.AssetIdRemapUtility.csproj">
+      <Project>{BAF2C30B-C150-7BC4-6B14-D63BE94541D3}</Project>
+      <Name>Unity.ProBuilder.AssetIdRemapUtility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

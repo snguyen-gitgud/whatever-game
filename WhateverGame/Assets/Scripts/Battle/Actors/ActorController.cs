@@ -221,7 +221,9 @@ public class ActorController : MonoBehaviour
 
         if (InputProcessor.GetInstance().buttonSouth)
         {
-            if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == this)
+            if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() == null ||
+                BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == null ||
+                BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == this)
                 return;
 
             if (skill_range_area.Contains(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit()) == false)

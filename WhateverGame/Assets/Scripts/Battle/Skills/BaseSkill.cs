@@ -95,7 +95,18 @@ public class BaseSkill : MonoBehaviour
         yield return new WaitForSeconds(1f);
     }
 
-    public virtual IEnumerator TriggerReactive()
+    public virtual IEnumerator PostAttack()
+    {
+        //reactive
+        yield return StartCoroutine(ReactiveSkill());
+
+        //pincer
+        yield return StartCoroutine(PincerSkill());
+
+        EndSkill();
+    }
+
+    public virtual IEnumerator ReactiveSkill()
     {
         if (targetController != null && targetController.actorStats.actorReactiveSkill.ReactiveCheck(targetController, actorController) == true)
         {
@@ -109,8 +120,39 @@ public class BaseSkill : MonoBehaviour
             targetController.actorStats.actorReactiveSkill.react_skill.executingVCam.Priority = 0;
             targetController.actorAnimationController.PlayIdle();
         }
-        
-        EndSkill();
+    }
+
+    public virtual IEnumerator PincerSkill()
+    {
+        ActorController pincer_actor = null;
+        List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, targetController.actorTeams, true);
+        foreach (GridUnit tile in pincer_range)
+        {
+            if (tile.occupiedActor != null)
+            {
+                if (Vector3.Dot(Vector3.ProjectOnPlane(tile.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up),
+                                Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up))
+                    <= -0.9f)
+                {
+                    pincer_actor = tile.occupiedActor;
+                    break;
+                }
+            }
+        }
+
+        if (pincer_actor != null)
+        {
+            BaseSkill pincer_skill = pincer_actor.actorStats.actorNormalAttack;
+            pincer_skill.isReactive = true;
+            pincer_skill.CastingSkill(pincer_actor, skillOverLoadLevel, targetController.occupied_grid_unit);
+
+            yield return StartCoroutine(pincer_skill.ExecuteSkillSequence());
+            pincer_skill.isReactive = false;
+            yield return new WaitForSeconds(1f);
+            pincer_actor.actorStats.actorNormalAttack.castingVCam.Priority = 0;
+            pincer_actor.actorStats.actorNormalAttack.executingVCam.Priority = 0;
+            pincer_actor.actorAnimationController.PlayIdle();
+        }
     }
 
     public virtual void EndSkill()
