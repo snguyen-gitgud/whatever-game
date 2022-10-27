@@ -20,6 +20,7 @@ public class BaseSkill : MonoBehaviour
     public int baseDamage = 5;
 
     [Header("Vcam settings")]
+    public float vcam_offset_Y = 1.5f;
     public Cinemachine.CinemachineVirtualCamera castingVCam;
     public Cinemachine.CinemachineVirtualCamera executingVCam;
 
@@ -41,6 +42,7 @@ public class BaseSkill : MonoBehaviour
     [HideInInspector] public Guirao.UltimateTextDamage.UltimateTextDamageManager textManager;
 
     [HideInInspector] public bool isReactive = false;
+    [HideInInspector] public bool isPincer = false;
 
     [HideInInspector] public GameObject skillCastingVfxObj;
 
@@ -60,6 +62,8 @@ public class BaseSkill : MonoBehaviour
         targetController = target_grid_tile.occupiedActor;
         og_model_pos = actorController.transform.GetChild(0).position;
 
+        vcam_offset_Y = actor.actorStats.vcam_offset_Y;
+
         actorController.is_acted = true;
         actorController.actorStats.staminaPoint -= skillStaminaCost * skillOverLoadLevel;
         actorController.actorUI.apPoints.fillAmount = (actorController.actorStats.staminaPoint * 1f) / (actorController.actorStats.maxStaminaPoint * 1f);
@@ -78,6 +82,13 @@ public class BaseSkill : MonoBehaviour
     {
         actorController.actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
         actorController.actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
+
+        isPincer = is_pincer;
+
+        if (is_pincer == false)
+            BattleMaster.GetInstance().OnShowAnnounce(this.skillName, actorController.actorTeams == GridUnitOccupationStates.PLAYER_TEAM? actorController.PlayerTeamBGColor:actorController.OpponentTeamBGColor);
+        else
+            BattleMaster.GetInstance().OnShowAnnounce("Pincer: " + this.skillName, actorController.actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? actorController.PlayerTeamBGColor : actorController.OpponentTeamBGColor);
 
         if (isReactive == false) 
             castingVCam.Priority = 99;
@@ -108,6 +119,7 @@ public class BaseSkill : MonoBehaviour
         //pincer
         yield return StartCoroutine(PincerSkill());
 
+        yield return new WaitForSeconds(1f);
         EndSkill();
     }
 
@@ -118,6 +130,8 @@ public class BaseSkill : MonoBehaviour
             Vector3 new_forward = targetController.transform.GetChild(0).forward;
             new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
             targetController.transform.GetChild(0).forward = new_forward;
+
+            BattleMaster.GetInstance().OnShowAnnounce(targetController.actorStats.actorReactiveSkill.reactiveSkillName, targetController.actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? actorController.PlayerTeamBGColor : actorController.OpponentTeamBGColor);
 
             yield return StartCoroutine(targetController.actorStats.actorReactiveSkill.ReactiveSkillSequence(targetController, actorController, skillOverLoadLevel));
             yield return new WaitForSeconds(1f);
@@ -152,6 +166,7 @@ public class BaseSkill : MonoBehaviour
             pincer_skill.CastingSkill(pincer_actor, skillOverLoadLevel, targetController.occupied_grid_unit);
             pincer_skill.Executekill(true);
             yield return StartCoroutine(pincer_skill.ExecuteSkillSequence());
+
             pincer_skill.isReactive = false;
             yield return new WaitForSeconds(1f);
             pincer_actor.actorStats.actorNormalAttack.castingVCam.Priority = 0;

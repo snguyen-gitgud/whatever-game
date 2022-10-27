@@ -26,7 +26,7 @@ public class MonkNormalAttack : BaseSkill
         //og_model_pos = actorController.transform.GetChild(0).position;
         //actorController.transform.GetChild(0).position += new_forward;
 
-        base.Executekill();
+        base.Executekill(is_pincer);
         //Debug.Log(actorController.gameObject.name + " executing Monk normal attack.");
     }
 
@@ -37,7 +37,7 @@ public class MonkNormalAttack : BaseSkill
         //Debug.Log(actorController.gameObject.name + " executing Monk normal attack sequence.");
         actorAnimationController.PlayNormalAttack_1();
         GameObject atk_vfx = Instantiate(atk1VFX, actorController.transform.GetChild(0));
-        atk_vfx.transform.position += Vector3.up * 1.5f;
+        atk_vfx.transform.position += Vector3.up * vcam_offset_Y;
 
         shake.m_FrequencyGain = 1f;
         yield return new WaitForSeconds(.161f);
@@ -46,18 +46,18 @@ public class MonkNormalAttack : BaseSkill
         {
             ClashData data = ShieldHelpers.CalculateClashOutput(actorController, targetController, this, 1);
             if (data.isAmbush)
-                textManager.Add("Ambush", targetController.transform.GetChild(0).position + Vector3.up * 1.5f, "critical");
+                textManager.Add("Ambush", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
 
             if (!data.isMiss && !data.isBlocked || data.isAmbush && !data.isBlocked)
             {
                 InputProcessor.GetInstance().VibrateController(.125f, .125f, .1f);
                 targetController.actorAnimationController.PlayGetHit();
                 GameObject hit_vfx = Instantiate(hitVFX, targetController.transform.GetChild(0));
-                hit_vfx.transform.position += (Vector3.up * 1.5f) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));
+                hit_vfx.transform.position += (Vector3.up * vcam_offset_Y) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));
 
                 targetController.actorStats.currentStats.HealthChange(-data.output);
-                if (data.isCrit) textManager.Add("Critical hit", targetController.transform.GetChild(0).position + Vector3.up * 1.5f, "critical");
-                textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * 1.5f, "default");
+                if (data.isCrit) textManager.Add("Critical hit", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
+                textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
                 shake.m_AmplitudeGain = 1f;
                 Time.timeScale = 0.1f;
                 yield return new WaitForSecondsRealtime(.1f);
@@ -67,12 +67,12 @@ public class MonkNormalAttack : BaseSkill
             else if (data.isMiss)
             {
                 // miss
-                textManager.Add("Miss", targetController.transform.GetChild(0).position + Vector3.up * 1.5f, "default");
+                textManager.Add("Miss", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
             }
             else if (data.isBlocked)
             {
                 // blocked 
-                textManager.Add("block", targetController.transform.GetChild(0).position + Vector3.up * 1.5f, "default");
+                textManager.Add("block", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
 
                 Vector3 new_forward = targetController.transform.GetChild(0).forward;
                 new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
@@ -84,7 +84,7 @@ public class MonkNormalAttack : BaseSkill
         {
             actorAnimationController.PlayNormalAttack_2();
             atk_vfx = Instantiate(atk2VFX, actorController.transform.GetChild(0));
-            atk_vfx.transform.position += Vector3.up * 1.5f;
+            atk_vfx.transform.position += Vector3.up * vcam_offset_Y;
 
             shake.m_FrequencyGain = 3f;
             yield return new WaitForSeconds(.3667f);
@@ -97,11 +97,11 @@ public class MonkNormalAttack : BaseSkill
                     InputProcessor.GetInstance().VibrateController(.235f, .235f, .25f);
                     targetController.actorAnimationController.PlayGetHit();
                     GameObject hit_vfx = Instantiate(hitVFX, targetController.transform.GetChild(0));
-                    hit_vfx.transform.position += (Vector3.up * 1.5f) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));
+                    hit_vfx.transform.position += (Vector3.up * vcam_offset_Y) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));
 
                     targetController.actorStats.currentStats.HealthChange(-data.output);
-                    if (data.isCrit) textManager.Add("Critical hit", targetController.transform.GetChild(0).position + Vector3.up * 1.5f, "critical");
-                    textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * 1.5f, "default");
+                    if (data.isCrit) textManager.Add("Critical hit", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
+                    textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
                     shake.m_AmplitudeGain = 1f;
                     Time.timeScale = 0.1f;
 
@@ -112,12 +112,12 @@ public class MonkNormalAttack : BaseSkill
                 else if (data.isMiss)
                 {
                     // miss
-                    textManager.Add("Miss", targetController.transform.GetChild(0).position + Vector3.up * 1.5f, "default");
+                    textManager.Add("Miss", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
                 }
                 else if (data.isBlocked)
                 {
                     // blocked 
-                    textManager.Add("block", targetController.transform.GetChild(0).position + Vector3.up * 1.5f, "default");
+                    textManager.Add("block", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
 
                     Vector3 new_forward = targetController.transform.GetChild(0).forward;
                     new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
@@ -130,7 +130,7 @@ public class MonkNormalAttack : BaseSkill
         {
             actorAnimationController.PlayNormalAttack_3();
             atk_vfx = Instantiate(atk3VFX, actorController.transform.GetChild(0));
-            atk_vfx.transform.position += Vector3.up * 1.5f;
+            atk_vfx.transform.position += Vector3.up * vcam_offset_Y;
 
             shake.m_FrequencyGain = 5f;
             yield return new WaitForSeconds(.261f);
@@ -143,11 +143,11 @@ public class MonkNormalAttack : BaseSkill
                     InputProcessor.GetInstance().VibrateController(.35f, .35f, .5f);
                     targetController.actorAnimationController.PlayGetHit();
                     GameObject hit_vfx = Instantiate(hitVFX, targetController.transform.GetChild(0));
-                    hit_vfx.transform.position += (Vector3.up * 1.5f) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));
+                    hit_vfx.transform.position += (Vector3.up * vcam_offset_Y) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));
 
                     targetController.actorStats.currentStats.HealthChange(-data.output);
-                    if (data.isCrit) textManager.Add("Critical hit", targetController.transform.GetChild(0).position + Vector3.up * 1.5f, "critical");
-                    textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * 1.5f, "default");
+                    if (data.isCrit) textManager.Add("Critical hit", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
+                    textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
 
                     if (targetController.actorControlStates == ActorControlStates.AP_STAG)
                     {
@@ -171,12 +171,12 @@ public class MonkNormalAttack : BaseSkill
                 else if (data.isMiss)
                 {
                     // miss
-                    textManager.Add("Miss", targetController.transform.GetChild(0).position + Vector3.up * 1.5f, "default");
+                    textManager.Add("Miss", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
                 }
                 else if (data.isBlocked)
                 {
                     // blocked 
-                    textManager.Add("block", targetController.transform.GetChild(0).position + Vector3.up * 1.5f, "default");
+                    textManager.Add("block", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
 
                     Vector3 new_forward = targetController.transform.GetChild(0).forward;
                     new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
@@ -187,7 +187,7 @@ public class MonkNormalAttack : BaseSkill
 
         yield return new WaitForSeconds(1f);
 
-        if (isReactive == false)
+        if (isReactive == false && isPincer == false)
         {
             StartCoroutine(base.PostAttack());
         }

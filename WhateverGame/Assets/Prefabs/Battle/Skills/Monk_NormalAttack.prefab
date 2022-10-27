@@ -44,14 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ebf3d61de65c6049aed8a4f186e0ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillName: 
-  skillDescription: 
+  skillName: Attack
+  skillDescription: Monk's default attack
   skillStaminaCost: 2
   skillOverLoadLevel: 1
   skillMaxOverLoadLevel: 3
   skillAccuracyBonus: 15
   damageTypes: 0
   baseDamage: 3
+  vcam_offset_Y: 1.5
   castingVCam: {fileID: 0}
   executingVCam: {fileID: 0}
   actorController: {fileID: 0}
@@ -60,12 +61,13 @@ MonoBehaviour:
   actorAnimationController: {fileID: 0}
   shake: {fileID: 0}
   skillRange: 1
-  skillCastingDuration: 0.5
+  skillCastingDuration: 0.125
   skillCastingVfx: {fileID: 1524292575317532, guid: de2cde6e41b30c64f8972773425f5eb3,
     type: 3}
   og_model_pos: {x: 0, y: 0, z: 0}
   textManager: {fileID: 0}
   isReactive: 0
+  skillCastingVfxObj: {fileID: 0}
   atk1VFX: {fileID: 1494690074406284, guid: 57440dbfb1445424da3c053f987f61f4, type: 3}
   atk2VFX: {fileID: 1494690074406284, guid: c6f5514a3e652ae40b6168d2a6c69643, type: 3}
   atk3VFX: {fileID: 1494690074406284, guid: a21fc5d4bcc3bac41a5c224bd05c46f0, type: 3}

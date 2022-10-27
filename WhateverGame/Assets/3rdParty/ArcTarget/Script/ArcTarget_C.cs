@@ -193,7 +193,7 @@ public class ArcTarget_C : MonoBehaviour
 
         //Find middle pos
         dist = Vector3.Distance(StartPoint.position, EndPoint.position);
-        middle = Vector3.Lerp(StartPoint.position, EndPoint.position, .5f) + new Vector3(0, ArcHeight * dist / 5, 0);
+        middle = Vector3.Lerp(StartPoint.position, EndPoint.position, .5f) + new Vector3(0, StartPoint == EndPoint? 0f : ArcHeight * dist / 5, 0);
         end = Vector3.Slerp(end, EndPoint.position, Time.deltaTime * ArcDelay);
 
         //Line Render Arc

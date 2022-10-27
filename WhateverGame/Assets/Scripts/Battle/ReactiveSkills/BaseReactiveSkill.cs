@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaseReactiveSkill : MonoBehaviour
 {
+    public string reactiveSkillName = "Counter";
     public BaseSkill react_skill = null;
 
     public virtual bool ReactiveCheck(ActorController actor, ActorController target)

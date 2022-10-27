@@ -47,7 +47,7 @@ public class ActorController : MonoBehaviour
 
     //internals
     [HideInInspector] public Cinemachine.CinemachineOrbitalTransposer vcamTransposer;
-    float stam_regen_rate = 1f;
+    //float stam_regen_rate = 1f;
     bool is_moved = false;
     [HideInInspector] public bool is_acted = false;
     float current_burn_out = 0.0f;
@@ -137,8 +137,9 @@ public class ActorController : MonoBehaviour
             {
                 current_burn_out = 0f;
                 actorStats.apBar = 0f;
+                ap_bank = 0;
                 actorUI.apBar.fillAmount = actorStats.apBar;
-                stam_regen_rate = 1f;
+                //stam_regen_rate = 1f;
                 actorUI.apBar.color = normalAPGenColor;
                 actorControlStates = ActorControlStates.AP_GEN;
                 actorAnimationController.PlayIdle();
@@ -226,14 +227,9 @@ public class ActorController : MonoBehaviour
             actorDetails.actorStaminaPreviewSlider.fillAmount = actorDetails.actorStaminaSlider.fillAmount;
         actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = (current_skill_overload_level * currentChosenSkill.skillStaminaCost) / 16f;
 
-        if (last_pincer_actor)
-            last_pincer_actor.line.SetActive(false);
-
         ActorController pincer_actor = null;
 
-        if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() != null &&
-            //BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor != null &&
-            BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor != this)
+        if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() != null)
         {
             if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == null)
                 line.GetComponent<ArcTarget_C>().EndPoint = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().transform;
@@ -243,7 +239,7 @@ public class ActorController : MonoBehaviour
             line.SetActive(true);
 
             ActorController targetController = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor;
-            if (targetController != null)
+            if (targetController != null && targetController != last_pincer_actor && targetController != this)
             {
                 List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, targetController.actorTeams, true, false);
                 foreach (GridUnit tile in pincer_range)
@@ -254,7 +250,9 @@ public class ActorController : MonoBehaviour
                                         Vector3.ProjectOnPlane(this.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up))
                             <= -0.9f)
                         {
-                            pincer_actor = tile.occupiedActor;
+                            if (tile.occupiedActor.actorTeams == this.actorTeams)
+                                pincer_actor = tile.occupiedActor;
+
                             break;
                         }
                     }
@@ -270,15 +268,14 @@ public class ActorController : MonoBehaviour
             }
             else
             {
-                if (pincer_actor)
-                    pincer_actor.line.SetActive(false);
-                last_pincer_actor = null;
+                if (last_pincer_actor != null)
+                    last_pincer_actor.line.SetActive(false);
             }
         }
         else
         {
             line.SetActive(false);
-            if (pincer_actor) 
+            if (pincer_actor != null)
                 pincer_actor.line.SetActive(false);
         }
 
@@ -305,7 +302,7 @@ public class ActorController : MonoBehaviour
             BattleMaster.GetInstance().CurrentActorTurnEnds(vcamTransposer.m_FollowOffset, vcamTransposer.m_XAxis.Value);
         }
 
-        if (InputProcessor.GetInstance().buttonShoulderR && current_skill_overload_level < currentChosenSkill.skillMaxOverLoadLevel)
+        if (InputProcessor.GetInstance().buttonShoulderR && current_skill_overload_level < currentChosenSkill.skillMaxOverLoadLevel /*&& (ap_bank >= 0 || ap_bank < 0 && actorStats.staminaPoint >= currentChosenSkill.skillStaminaCost)*/)
         {
             current_skill_overload_level++;
         }
@@ -334,7 +331,7 @@ public class ActorController : MonoBehaviour
 
         vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
 
-        actorStats.apBar += (actorStats.baseSpeed * (actorStats.currentStats.speed * 0.01f)) * Time.deltaTime * Mathf.Abs(stam_regen_rate);
+        actorStats.apBar += (actorStats.baseSpeed * (actorStats.currentStats.speed * 0.01f)) * Time.deltaTime /** Mathf.Abs(stam_regen_rate + 1f)*/;
         actorUI.apBar.fillAmount = actorStats.apBar / 100f;
 
         if (actorStats.apBar >= 100f)
@@ -345,6 +342,7 @@ public class ActorController : MonoBehaviour
         }
     }
 
+    int ap_bank = 0;
     public void StartTurn(ActorController actor)
     {
         if (this != actor)
@@ -355,7 +353,7 @@ public class ActorController : MonoBehaviour
             Debug.Log(actor.gameObject.name + " starts turn.");
             vcam.Priority = 11;
 
-            actorStats.staminaPoint = actorStats.maxStaminaPoint;
+            actorStats.staminaPoint = actorStats.maxStaminaPoint + ap_bank;
             actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
 
             actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
@@ -381,7 +379,7 @@ public class ActorController : MonoBehaviour
         {
             actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
             vcam.Priority = 11;
-            actorUI.headerHolder.gameObject.SetActive(false);
+            //actorUI.headerHolder.gameObject.SetActive(false);
             currentChosenSkill.Executekill();
         }
     }
@@ -466,17 +464,25 @@ public class ActorController : MonoBehaviour
 
         actorControlStates = ActorControlStates.READY_TO_MOVE;
 
-        move_area = BattleMaster.GetInstance().FindArea(occupied_grid_unit, actorStats.staminaPoint + 1, actorTeams);
+        int range = actorStats.staminaPoint;
+        if (range > actorStats.maxStaminaPoint)
+            range = actorStats.maxStaminaPoint;
+        move_area = BattleMaster.GetInstance().FindArea(occupied_grid_unit, range + 1, actorTeams);
     }
 
     public void WaitingForCommandState()
     {
         BattleMaster.GetInstance().gridManager.ClearAreaHighlight();
         BattleMaster.GetInstance().gridManager.ClearPathHighlight();
-        actorUI.headerHolder.gameObject.SetActive(true);
+        //actorUI.headerHolder.gameObject.SetActive(true);
+        
         actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
         DOTween.Kill(commandControlUI.transform);
         commandControlUI.transform.DOScale(Vector3.one, .25f);
+        DOTween.Kill(actorDetails.transform.GetChild(0));
+        actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
+
+        BattleMaster.GetInstance().gridManager.gridCur.transform.position = this.occupied_grid_unit.transform.position + Vector3.up * BattleMaster.GetInstance().gridManager.gridUnitSize * 0.5f;
     }
 
     public void ReceiveDestinationGridUnit(GridUnit destination)
@@ -573,30 +579,40 @@ public class ActorController : MonoBehaviour
 
     public void EndTurn()
     {
-        stam_regen_rate = 1f + (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
-        if (stam_regen_rate < 1f)
+        ap_bank = actorStats.staminaPoint;
+        if (ap_bank > 8)
+            ap_bank = 8;
+        else if (ap_bank <= -8)
         {
-            //stam_regen_rate *= .5f;
-            actorUI.apBar.color = exhautedAPGenColor;
-        }
-        else if (stam_regen_rate == 1f)
-            actorUI.apBar.color = normalAPGenColor;
-        else if (stam_regen_rate > 1f)
-        {
-            //stam_regen_rate *= 2f;
-            actorUI.apBar.color = acceleratedAPGenColor;
-        }
-        else if (stam_regen_rate <= 0.0f)
-        {
-            stam_regen_rate = 0.0f;
-            actorUI.apBar.color = exhautedAPGenColor;
             current_burn_out = 0f;
             burn_out_dur = 3f;
-            SelfBlinkingUI selfBlinking = actorUI.apBar.gameObject.AddComponent<SelfBlinkingUI>();
-            selfBlinking.blinking_speed = 4f;
             actorControlStates = ActorControlStates.BURNED_OUT_GEN;
             actorAnimationController.PlayBurnOut();
         }
+        //stam_regen_rate = 1f + (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
+        //if (stam_regen_rate < 1f)
+        //{
+        //    //stam_regen_rate *= .5f;
+        //    actorUI.apBar.color = exhautedAPGenColor;
+        //}
+        //else if (stam_regen_rate == 1f)
+        //    actorUI.apBar.color = normalAPGenColor;
+        //else if (stam_regen_rate > 1f)
+        //{
+        //    //stam_regen_rate *= 2f;
+        //    actorUI.apBar.color = acceleratedAPGenColor;
+        //}
+        //else if (stam_regen_rate <= 0.0f)
+        //{
+        //    stam_regen_rate = 0.0f;
+        //    actorUI.apBar.color = exhautedAPGenColor;
+        //    current_burn_out = 0f;
+        //    burn_out_dur = 3f;
+        //    SelfBlinkingUI selfBlinking = actorUI.apBar.gameObject.AddComponent<SelfBlinkingUI>();
+        //    selfBlinking.blinking_speed = 4f;
+        //    actorControlStates = ActorControlStates.BURNED_OUT_GEN;
+        //    actorAnimationController.PlayBurnOut();
+        //}
 
         DOTween.Kill(commandControlUI.transform);
         commandControlUI.transform.DOScale(Vector3.zero, .25f);

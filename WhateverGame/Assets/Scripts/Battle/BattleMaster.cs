@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using DG.Tweening;
 
 public class BattleMaster : SingletonBehavior<BattleMaster>
 {
@@ -21,6 +23,8 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
     public GameObject actorAPProgressionPref;
     public Transform actorAPProgressionHolder;
     public Transform actorCastingProgressionHolder;
+    public GameObject announceObj;
+    public TextMeshProUGUI announceText;
 
     //internals
     List<GameObject> actorAPProgressionsList = new List<GameObject>();
@@ -42,6 +46,8 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
 
     private void Start()
     {
+        announceObj.transform.localScale = new Vector3(1f, 0f, 1f);
+
         playerActorsList.Clear();
         opponentActorsList.Clear();
         playerActorsList.AddRange(playerActorHolder.GetComponentsInChildren<ActorController>(true));
@@ -202,5 +208,15 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
             else
                 go.SetActive(false);
         }
+    }
+
+    public void OnShowAnnounce(string txt, Color color)
+    {
+        DOTween.Kill(announceObj);
+        announceText.text = txt;
+        announceObj.transform.GetChild(0).GetComponent<Image>().color = color;
+        announceObj.transform.DOScaleY(1f, 0.25f).OnComplete(() => {
+            announceObj.transform.DOScaleY(0f, 0.25f).SetDelay(2f);
+        });
     }
 }

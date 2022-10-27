@@ -153,10 +153,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartPoint: {fileID: 8373472051776534297}
-  EndPoint: {fileID: 0}
+  EndPoint: {fileID: 8373472051776534297}
   UseMousePos: 0
-  ArcDelay: 10
-  TargetDelay: 10
+  ArcDelay: 999
+  TargetDelay: 999
   HitDistance: 200
   DecalOffset: 8
   TargetDecal: {fileID: 0}

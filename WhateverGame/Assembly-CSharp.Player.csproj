@@ -109,6 +109,7 @@
     <Compile Include="Assets\PostProcessing\Runtime\Models\ChromaticAberrationModel.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Components\DepthOfFieldComponent.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\instantiateEffectCallerMeleeCombat.cs" />
+    <Compile Include="Assets\3rdParty\ArcTarget\Script\ArcTarget_C.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\scripts\ECparticleColorChangerMaster.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Components\AmbientOcclusionComponent.cs" />
     <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Demo\Scripts\Helpers\RandomizeOffsetX.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Assets\Scripts\Battle\Actors\ActorAnimationController.cs" />
     <Compile Include="Assets\3rdParty\Stylized 3D Tools\Scripts\Rotator.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ECCameraShakeProjectile.cs" />
+    <Compile Include="Assets\Scripts\Common\CurvedLineRenderer.cs" />
     <Compile Include="Assets\Scripts\Common\BattleInputs.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\TimeController.cs" />
@@ -152,9 +154,11 @@
     <Compile Include="Assets\PostProcessing\Runtime\Models\GrainModel.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ECExplodingProjectile.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Components\GrainComponent.cs" />
+    <Compile Include="Assets\Scripts\Common\LineSmoother.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\UserLutModel.cs" />
     <Compile Include="Assets\Scripts\Common\InputProcessor.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Components\UserLutComponent.cs" />
+    <Compile Include="Assets\Scripts\Common\CurvedLinePoint.cs" />
     <Compile Include="Assets\Scripts\Battle\Skills\BaseSkill.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\CameraShake.cs" />
@@ -167,10 +171,6 @@
     <Compile Include="Assets\Scripts\Common\SelfSpinning.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\nextEffectMeleeCombat.cs" />
-    <Compile Include="Assets\Scripts\Common\CurvedLineRenderer.cs" />
-    <Compile Include="Assets\Scripts\Common\LineSmoother.cs" />
-    <Compile Include="Assets\Scripts\Common\CurvedLinePoint.cs" />
-    <Compile Include="Assets\3rdParty\ArcTarget\Script\ArcTarget_C.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />

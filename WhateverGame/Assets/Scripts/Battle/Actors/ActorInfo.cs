@@ -9,6 +9,7 @@ public class ActorInfo : MonoBehaviour
     [Header("Core stats")]
     public int maxStaminaPoint = 6;
     public float baseSpeed = 20f;
+    public float vcam_offset_Y = 1.5f;
 
     [Header("Specific stats")]
     public BaseActorStats baseStats = new BaseActorStats();
