@@ -232,7 +232,7 @@ public class ActorController : MonoBehaviour
         ActorController pincer_actor = null;
 
         if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() != null &&
-            BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor != null &&
+            //BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor != null &&
             BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor != this)
         {
             if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == null)
@@ -243,28 +243,37 @@ public class ActorController : MonoBehaviour
             line.SetActive(true);
 
             ActorController targetController = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor;
-            List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, targetController.actorTeams, true, false);
-            foreach (GridUnit tile in pincer_range)
+            if (targetController != null)
             {
-                if (tile.occupiedActor != null)
+                List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, targetController.actorTeams, true, false);
+                foreach (GridUnit tile in pincer_range)
                 {
-                    if (Vector3.Dot(Vector3.ProjectOnPlane(tile.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up),
-                                    Vector3.ProjectOnPlane(this.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up))
-                        <= -0.9f)
+                    if (tile.occupiedActor != null)
                     {
-                        pincer_actor = tile.occupiedActor;
-                        break;
+                        if (Vector3.Dot(Vector3.ProjectOnPlane(tile.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up),
+                                        Vector3.ProjectOnPlane(this.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up))
+                            <= -0.9f)
+                        {
+                            pincer_actor = tile.occupiedActor;
+                            break;
+                        }
                     }
                 }
-            }
 
-            if (pincer_actor != null)
+                if (pincer_actor != null)
+                {
+                    pincer_actor.line.SetActive(true);
+                    pincer_actor.line.GetComponent<ArcTarget_C>().EndPoint = targetController.line.GetComponent<ArcTarget_C>().StartPoint;
+                }
+
+                last_pincer_actor = pincer_actor;
+            }
+            else
             {
-                pincer_actor.line.SetActive(true);
-                pincer_actor.line.GetComponent<ArcTarget_C>().EndPoint = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().transform;
+                if (pincer_actor)
+                    pincer_actor.line.SetActive(false);
+                last_pincer_actor = null;
             }
-
-            last_pincer_actor = pincer_actor;
         }
         else
         {
