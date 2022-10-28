@@ -51,7 +51,7 @@ MonoBehaviour:
   skillMaxOverLoadLevel: 3
   skillAccuracyBonus: 15
   damageTypes: 0
-  baseDamage: 3
+  baseDamage: 1
   vcam_offset_Y: 1.5
   castingVCam: {fileID: 0}
   executingVCam: {fileID: 0}
@@ -67,6 +67,7 @@ MonoBehaviour:
   og_model_pos: {x: 0, y: 0, z: 0}
   textManager: {fileID: 0}
   isReactive: 0
+  isPincer: 0
   skillCastingVfxObj: {fileID: 0}
   atk1VFX: {fileID: 1494690074406284, guid: 57440dbfb1445424da3c053f987f61f4, type: 3}
   atk2VFX: {fileID: 1494690074406284, guid: c6f5514a3e652ae40b6168d2a6c69643, type: 3}

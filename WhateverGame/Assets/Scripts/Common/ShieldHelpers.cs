@@ -26,19 +26,19 @@ public static class ShieldHelpers
 
         if (skill.damageTypes == DamageTypes.PHYSICAL)
         {
-            ret.output = (((skill.baseDamage + caster.actorStats.currentStats.pAtk) * bonus_multiplier)) - target.actorStats.currentStats.pDef;
+            ret.output = (int)(((skill.baseDamageMultiplier * caster.actorStats.currentStats.pAtk) * bonus_multiplier)) - target.actorStats.currentStats.pDef;
         }
         else if (skill.damageTypes == DamageTypes.MAGICAL)
         {
-            ret.output = (((skill.baseDamage + caster.actorStats.currentStats.mAtk) * bonus_multiplier)) - target.actorStats.currentStats.mDef;
+            ret.output = (int)(((skill.baseDamageMultiplier * caster.actorStats.currentStats.mAtk) * bonus_multiplier)) - target.actorStats.currentStats.mDef;
         }
         else if (skill.damageTypes == DamageTypes.MIXED)
         {
-            ret.output = (((skill.baseDamage + caster.actorStats.currentStats.pAtk + caster.actorStats.currentStats.mAtk) * bonus_multiplier)) - (target.actorStats.currentStats.pDef + target.actorStats.currentStats.mDef);
+            ret.output = (int)(((skill.baseDamageMultiplier * (caster.actorStats.currentStats.pAtk + caster.actorStats.currentStats.mAtk)) * bonus_multiplier)) - (target.actorStats.currentStats.pDef + target.actorStats.currentStats.mDef);
         }
         else if (skill.damageTypes == DamageTypes.PURE)
         {
-            ret.output = (((skill.baseDamage + caster.actorStats.currentStats.pAtk + caster.actorStats.currentStats.mAtk) * bonus_multiplier));
+            ret.output = (int)(((skill.baseDamageMultiplier * (caster.actorStats.currentStats.pAtk + caster.actorStats.currentStats.mAtk)) * bonus_multiplier));
         }
 
         if (ShieldHelpers.GetRandomNumber(0, 100) < (caster.actorStats.currentStats.accuracy + skill.skillAccuracyBonus) - target.actorStats.currentStats.dodgeChance)

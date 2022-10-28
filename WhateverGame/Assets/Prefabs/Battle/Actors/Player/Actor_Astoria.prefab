@@ -2983,8 +2983,8 @@ MonoBehaviour:
     level: 1
     healthPoint: 150
     speed: 100
-    pAtk: 5
-    mAtk: 5
+    pAtk: 10
+    mAtk: 10
     pDef: 5
     mDef: 5
     jump: 1

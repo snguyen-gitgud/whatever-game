@@ -6,6 +6,9 @@ using DG.Tweening;
 
 public class BattleMaster : SingletonBehavior<BattleMaster>
 {
+    [Header("Battle settings")]
+    public float baseTimeScale = 1f;
+
     [Header("Actors settings")]
     public Transform playerActorHolder;
     public Transform opponentActorHolder;

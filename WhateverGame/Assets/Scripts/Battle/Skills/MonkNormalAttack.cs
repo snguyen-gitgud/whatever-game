@@ -59,9 +59,9 @@ public class MonkNormalAttack : BaseSkill
                 if (data.isCrit) textManager.Add("Critical hit", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
                 textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
                 shake.m_AmplitudeGain = 1f;
-                Time.timeScale = 0.1f;
+                Time.timeScale = 0.1f * BattleMaster.GetInstance().baseTimeScale;
                 yield return new WaitForSecondsRealtime(.1f);
-                Time.timeScale = 1f;
+                Time.timeScale = BattleMaster.GetInstance().baseTimeScale;
                 shake.m_AmplitudeGain = 0f;
             }
             else if (data.isMiss)
@@ -103,10 +103,9 @@ public class MonkNormalAttack : BaseSkill
                     if (data.isCrit) textManager.Add("Critical hit", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
                     textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
                     shake.m_AmplitudeGain = 1f;
-                    Time.timeScale = 0.1f;
-
+                    Time.timeScale = 0.1f * BattleMaster.GetInstance().baseTimeScale;
                     yield return new WaitForSecondsRealtime(.25f);
-                    Time.timeScale = 1f;
+                    Time.timeScale = BattleMaster.GetInstance().baseTimeScale;
                     shake.m_AmplitudeGain = 0f;
                 }
                 else if (data.isMiss)
@@ -162,10 +161,9 @@ public class MonkNormalAttack : BaseSkill
                     }
 
                     shake.m_AmplitudeGain = 1f;
-                    Time.timeScale = 0.1f;
-
+                    Time.timeScale = 0.1f * BattleMaster.GetInstance().baseTimeScale;
                     yield return new WaitForSecondsRealtime(.5f);
-                    Time.timeScale = 1f;
+                    Time.timeScale = BattleMaster.GetInstance().baseTimeScale;
                     shake.m_AmplitudeGain = 0f;
                 }
                 else if (data.isMiss)

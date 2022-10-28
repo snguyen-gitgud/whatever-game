@@ -17,7 +17,7 @@ public class BaseSkill : MonoBehaviour
     public int skillMaxOverLoadLevel = 3;
     public int skillAccuracyBonus = 0;
     public DamageTypes damageTypes = DamageTypes.PHYSICAL;
-    public int baseDamage = 5;
+    public float baseDamageMultiplier = 1f;
 
     [Header("Vcam settings")]
     public float vcam_offset_Y = 1.5f;
@@ -119,7 +119,7 @@ public class BaseSkill : MonoBehaviour
         //pincer
         yield return StartCoroutine(PincerSkill());
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         EndSkill();
     }
 
