@@ -354,9 +354,9 @@ public class ActorController : MonoBehaviour
             vcam.Priority = 11;
 
             if (ap_bank < 0)
-                BattleMaster.GetInstance().OnShowAnnounce("Stamina reduced");
+                BattleMaster.GetInstance().OnShowAnnounce("Stamina reduced", actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor, StatusManager.GetInstance().GetStatusIconSprite(StatusManager.StatusIcons.AP_DECREASE));
             else if (ap_bank > 0)
-                BattleMaster.GetInstance().OnShowAnnounce("Stamina increased");
+                BattleMaster.GetInstance().OnShowAnnounce("Stamina increased", actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor, StatusManager.GetInstance().GetStatusIconSprite(StatusManager.StatusIcons.AP_INCREASE));
 
             actorStats.staminaPoint = actorStats.maxStaminaPoint + ap_bank;
             actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);

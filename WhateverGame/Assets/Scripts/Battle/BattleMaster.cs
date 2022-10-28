@@ -28,6 +28,8 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
     public Transform actorCastingProgressionHolder;
     public GameObject announceObj;
     public TextMeshProUGUI announceText;
+    public Sprite defaultAnnounceStatusIcon;
+    public Image announceStatusIconL, announceStatusIconR;
 
     //internals
     List<GameObject> actorAPProgressionsList = new List<GameObject>();
@@ -213,7 +215,7 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
         }
     }
 
-    public void OnShowAnnounce(string txt, Color color)
+    public void OnShowAnnounce(string txt, Color color, Sprite icon = null)
     {
         DOTween.Kill(announceObj);
         announceText.text = txt;
@@ -221,5 +223,20 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
         announceObj.transform.DOScaleY(1f, 0.25f).OnComplete(() => {
             announceObj.transform.DOScaleY(0f, 0.25f).SetDelay(2f);
         });
+
+        if (icon != null)
+        {
+            announceStatusIconL.gameObject.SetActive(true);
+            announceStatusIconR.gameObject.SetActive(true);
+            announceStatusIconL.sprite = icon;
+            announceStatusIconR.sprite = icon;
+        }
+        else
+        {
+            announceStatusIconL.gameObject.SetActive(false);
+            announceStatusIconR.gameObject.SetActive(false);
+            announceStatusIconL.sprite = defaultAnnounceStatusIcon;
+            announceStatusIconR.sprite = defaultAnnounceStatusIcon;
+        }
     }
 }

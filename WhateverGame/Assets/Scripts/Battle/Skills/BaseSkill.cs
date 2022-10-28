@@ -153,7 +153,8 @@ public class BaseSkill : MonoBehaviour
                                 Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up))
                     <= -0.9f)
                 {
-                    pincer_actor = tile.occupiedActor;
+                    if (tile.occupiedActor.actorTeams == actorController.actorTeams)
+                        pincer_actor = tile.occupiedActor;
                     break;
                 }
             }

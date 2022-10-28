@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -10488,21 +10488,21 @@ TextureImporter:
       gdb-xbox-2_52: 812656624
       gdb-xbox-2_62: 1600042932
       gdb-xbox-2_141: -676126026
+      gdb-xbox-2_462: 386202960
       gdb-xbox-2_41: 755082141
       gdb-xbox-2_72: 1850277399
-      gdb-xbox-2_292: 1092053801
       gdb-xbox-2_43: 1654985081
       gdb-xbox-2_191: -1202024008
       gdb-xbox-2_418: 1056593501
+      gdb-xbox-2_292: 1092053801
       gdb-xbox-2_289: 1270341128
       gdb-xbox-2_456: -553498851
       gdb-xbox-2_463: 1965635191
       gdb-xbox-2_137: 276097486
-      gdb-xbox-2_321: -1539567845
-      gdb-xbox-2_385: 817610045
       gdb-xbox-2_450: 147728434
+      gdb-xbox-2_385: 817610045
+      gdb-xbox-2_321: -1539567845
       gdb-xbox-2_118: -1308855269
-      gdb-xbox-2_462: 386202960
       gdb-xbox-2_406: -254978040
       gdb-xbox-2_255: 161420611
       gdb-xbox-2_207: -2131253656
@@ -10511,6 +10511,7 @@ TextureImporter:
       gdb-xbox-2_392: -828672018
       gdb-xbox-2_64: -1988050480
       gdb-xbox-2_318: -240217834
+      gdb-xbox-2_475: 1959484112
       gdb-xbox-2_279: -1205064434
       gdb-xbox-2_92: -205636151
       gdb-xbox-2_295: 230299972
@@ -10520,7 +10521,6 @@ TextureImporter:
       gdb-xbox-2_398: 667522412
       gdb-xbox-2_122: 5330214
       gdb-xbox-2_57: -221902878
-      gdb-xbox-2_475: 1959484112
       gdb-xbox-2_343: 15242639
       gdb-xbox-2_148: 28750282
       gdb-xbox-2_99: -1722359602
@@ -10551,6 +10551,7 @@ TextureImporter:
       gdb-xbox-2_133: -1371356640
       gdb-xbox-2_216: -864702694
       gdb-xbox-2_448: 728459739
+      gdb-xbox-2_419: -585047067
       gdb-xbox-2_70: -1335873402
       gdb-xbox-2_100: 1693402627
       gdb-xbox-2_219: 1535877917
@@ -10562,12 +10563,11 @@ TextureImporter:
       gdb-xbox-2_387: -1229412704
       gdb-xbox-2_129: 116280471
       gdb-xbox-2_143: 1839409145
+      gdb-xbox-2_324: 796146112
       gdb-xbox-2_309: -877730564
       gdb-xbox-2_288: 253207637
-      gdb-xbox-2_324: 796146112
       gdb-xbox-2_467: -132753431
       gdb-xbox-2_197: 820951726
-      gdb-xbox-2_419: -585047067
       gdb-xbox-2_208: 1383747436
       gdb-xbox-2_305: 68801986
       gdb-xbox-2_81: 1900566575
@@ -10589,16 +10589,16 @@ TextureImporter:
       gdb-xbox-2_293: -231297558
       gdb-xbox-2_311: -1131713996
       gdb-xbox-2_117: 2036702528
-      gdb-xbox-2_352: 346149019
-      gdb-xbox-2_402: -1969460375
       gdb-xbox-2_457: -1253505687
+      gdb-xbox-2_402: -1969460375
+      gdb-xbox-2_487: -2082597639
       gdb-xbox-2_204: 265411037
       gdb-xbox-2_179: -70446496
       gdb-xbox-2_239: 1405813249
       gdb-xbox-2_313: -136934330
-      gdb-xbox-2_362: 1741279693
+      gdb-xbox-2_352: 346149019
       gdb-xbox-2_410: 26737420
-      gdb-xbox-2_487: -2082597639
+      gdb-xbox-2_362: 1741279693
       gdb-xbox-2_42: 847692737
       gdb-xbox-2_481: 252477947
       gdb-xbox-2_243: -1443245320
@@ -10696,19 +10696,19 @@ TextureImporter:
       gdb-xbox-2_427: 19444177
       gdb-xbox-2_85: 825717122
       gdb-xbox-2_175: 1873103383
+      gdb-xbox-2_452: -1572438530
       gdb-xbox-2_378: 721116780
       gdb-xbox-2_173: -834417971
+      gdb-xbox-2_424: -58882233
       gdb-xbox-2_12: 1444827548
-      gdb-xbox-2_60: 393173574
-      gdb-xbox-2_95: -58177466
       gdb-xbox-2_469: -72623504
+      gdb-xbox-2_95: -58177466
+      gdb-xbox-2_60: 393173574
       gdb-xbox-2_237: 1461040554
-      gdb-xbox-2_452: -1572438530
       gdb-xbox-2_224: 2110561746
       gdb-xbox-2_158: 826145131
       gdb-xbox-2_157: 888048569
       gdb-xbox-2_68: -85282282
-      gdb-xbox-2_424: -58882233
       gdb-xbox-2_154: 932262759
       gdb-xbox-2_322: -131926347
       gdb-xbox-2_106: -1808945692
@@ -10744,17 +10744,17 @@ TextureImporter:
       gdb-xbox-2_454: 811642989
       gdb-xbox-2_14: 1084872458
       gdb-xbox-2_177: -340254626
+      gdb-xbox-2_254: 1842515059
       gdb-xbox-2_39: 1157668927
       gdb-xbox-2_87: -2010833602
       gdb-xbox-2_366: -1970537553
-      gdb-xbox-2_254: 1842515059
       gdb-xbox-2_86: 1920648807
       gdb-xbox-2_374: -1879394083
       gdb-xbox-2_67: -2037531283
       gdb-xbox-2_73: 1487906499
       gdb-xbox-2_103: 614365246
-      gdb-xbox-2_350: -1618604410
       gdb-xbox-2_357: 1573720879
+      gdb-xbox-2_350: -1618604410
       gdb-xbox-2_420: -1005494330
       gdb-xbox-2_38: 492355733
       gdb-xbox-2_446: -2017387947
