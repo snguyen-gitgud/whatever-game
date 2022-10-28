@@ -353,6 +353,11 @@ public class ActorController : MonoBehaviour
             Debug.Log(actor.gameObject.name + " starts turn.");
             vcam.Priority = 11;
 
+            if (ap_bank < 0)
+                BattleMaster.GetInstance().OnShowAnnounce("Stamina reduced");
+            else if (ap_bank > 0)
+                BattleMaster.GetInstance().OnShowAnnounce("Stamina increased");
+
             actorStats.staminaPoint = actorStats.maxStaminaPoint + ap_bank;
             actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
 
