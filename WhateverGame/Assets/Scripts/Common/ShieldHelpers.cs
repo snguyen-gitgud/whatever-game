@@ -26,15 +26,15 @@ public static class ShieldHelpers
 
         if (skill.damageTypes == DamageTypes.PHYSICAL)
         {
-            ret.output = (int)(((skill.baseDamageMultiplier * caster.actorStats.currentStats.pAtk) * bonus_multiplier)) - target.actorStats.currentStats.pDef;
+            ret.output = (int)((skill.baseDamageMultiplier * caster.actorStats.currentStats.pAtk) - target.actorStats.currentStats.pDef) * bonus_multiplier;
         }
         else if (skill.damageTypes == DamageTypes.MAGICAL)
         {
-            ret.output = (int)(((skill.baseDamageMultiplier * caster.actorStats.currentStats.mAtk) * bonus_multiplier)) - target.actorStats.currentStats.mDef;
+            ret.output = (int)((skill.baseDamageMultiplier * caster.actorStats.currentStats.mAtk) - target.actorStats.currentStats.mDef) * bonus_multiplier;
         }
         else if (skill.damageTypes == DamageTypes.MIXED)
         {
-            ret.output = (int)(((skill.baseDamageMultiplier * (caster.actorStats.currentStats.pAtk + caster.actorStats.currentStats.mAtk)) * bonus_multiplier)) - (target.actorStats.currentStats.pDef + target.actorStats.currentStats.mDef);
+            ret.output = (int)((skill.baseDamageMultiplier * (caster.actorStats.currentStats.pAtk + caster.actorStats.currentStats.mAtk)) - (target.actorStats.currentStats.pDef + target.actorStats.currentStats.mDef)) * bonus_multiplier;
         }
         else if (skill.damageTypes == DamageTypes.PURE)
         {

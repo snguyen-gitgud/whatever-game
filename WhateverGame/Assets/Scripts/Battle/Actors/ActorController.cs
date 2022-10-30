@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(ActorAnimationController))]
 [RequireComponent(typeof(ActorInfo))]
@@ -30,8 +31,9 @@ public class ActorController : MonoBehaviour
 
     public Color PlayerTeamBGColor;
     public Color OpponentTeamBGColor;
-    
+
     public GameObject commandControlUI;
+    public GameObject actionPreviewUI;
 
     public GameObject line;
 
@@ -81,6 +83,9 @@ public class ActorController : MonoBehaviour
         line.GetComponent<ArcTarget_C>().StartColor = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
         line.GetComponent<ArcTarget_C>().EndColor = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
         line.SetActive(false);
+
+        DOTween.Kill(commandControlUI.transform);
+        commandControlUI.transform.localScale = Vector3.zero;
 
         actorAnimationController.PlayIdle();
     }
@@ -181,6 +186,7 @@ public class ActorController : MonoBehaviour
 
             DOTween.Kill(commandControlUI.transform);
             commandControlUI.transform.DOScale(Vector3.zero, .25f);
+            
             ReadyToMoveState();
         }
 
@@ -293,6 +299,9 @@ public class ActorController : MonoBehaviour
             if (pincer_actor)
                 pincer_actor.line.SetActive(false);
 
+            DOTween.Kill(commandControlUI.transform);
+            commandControlUI.transform.DOScale(Vector3.zero, .25f);
+
             actorDetails.transform.GetChild(0).DOLocalMoveX(-800f, 0.25f).SetDelay(.25f);
             currentChosenSkill.CastingSkill(this, current_skill_overload_level, BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit());
             actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
@@ -347,7 +356,7 @@ public class ActorController : MonoBehaviour
     {
         if (this != actor)
             return;
-        
+
         if (currentChosenSkill == null) //new turn
         {
             Debug.Log(actor.gameObject.name + " starts turn.");
@@ -362,8 +371,15 @@ public class ActorController : MonoBehaviour
             actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
 
             actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
+            foreach (Transform child in commandControlUI.transform)
+            {
+                if (child.GetComponent<Image>() != null)
+                    child.GetComponent<Image>().color = Color.white;
+                foreach (Transform grandchild in child)
+                    grandchild.GetComponent<Image>().color = Color.white;
+            }
             DOTween.Kill(commandControlUI.transform);
-            commandControlUI.transform.DOScale(Vector3.one, .25f).SetDelay(.25f);
+            commandControlUI.transform.DOScale(Vector3.one, .25f);
 
             if (vcam_target != null)
                 DOTween.Kill(vcam_target);
@@ -480,8 +496,44 @@ public class ActorController : MonoBehaviour
         BattleMaster.GetInstance().gridManager.ClearAreaHighlight();
         BattleMaster.GetInstance().gridManager.ClearPathHighlight();
         //actorUI.headerHolder.gameObject.SetActive(true);
-        
+
         actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
+        foreach (Transform child in commandControlUI.transform)
+        {
+            if (is_acted == false && (child.GetSiblingIndex() == 1 ||
+                                      child.GetSiblingIndex() == 2 ||
+                                      child.GetSiblingIndex() == 3))
+            {
+                if (child.GetComponent<Image>() != null)
+                    child.GetComponent<Image>().color = Color.white;
+                foreach (Transform grandchild in child)
+                    grandchild.GetComponent<Image>().color = Color.white;
+            }    
+            else if (is_acted && (child.GetSiblingIndex() == 1 ||
+                                  child.GetSiblingIndex() == 2 ||
+                                  child.GetSiblingIndex() == 3))
+            {
+                if (child.GetComponent<Image>() != null)
+                    child.GetComponent<Image>().color = Color.gray * .7f;
+                foreach (Transform grandchild in child)
+                    grandchild.GetComponent<Image>().color = Color.gray * .7f; 
+            }
+
+            if (is_moved == false && child.GetSiblingIndex() == 0)
+            {
+                if (child.GetComponent<Image>() != null)
+                    child.GetComponent<Image>().color = Color.white;
+                foreach (Transform grandchild in child)
+                    grandchild.GetComponent<Image>().color = Color.white;
+            }
+            else if (is_moved == true && child.GetSiblingIndex() == 0)
+            {
+                if (child.GetComponent<Image>() != null)
+                    child.GetComponent<Image>().color = Color.gray * .7f;
+                foreach (Transform grandchild in child)
+                    grandchild.GetComponent<Image>().color = Color.gray * .7f;
+            }
+        }
         DOTween.Kill(commandControlUI.transform);
         commandControlUI.transform.DOScale(Vector3.one, .25f);
         DOTween.Kill(actorDetails.transform.GetChild(0));
@@ -508,6 +560,8 @@ public class ActorController : MonoBehaviour
 
     IEnumerator MoveSequence(List<GridUnit> move_path)
     {
+        commandControlUI.transform.DOScale(Vector3.zero, .25f);
+
         actorControlStates = ActorControlStates.MOVING;
 
         vcamTarget.DOMove(this.transform.position, 1f);

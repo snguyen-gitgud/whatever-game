@@ -194,3 +194,9 @@ public enum DamageTypes
     MIXED,
     PURE
 }
+
+public enum SkillTypes
+{
+    OFFENSIVE,
+    SUPPORTIVE
+}

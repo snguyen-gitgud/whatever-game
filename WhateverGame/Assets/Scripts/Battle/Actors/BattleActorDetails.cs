@@ -22,7 +22,7 @@ public class BattleActorDetails : MonoBehaviour
         actorPortrait.sprite = img;
         actorName.text = name;
         actorLevel.text = "Level: " + level.ToString();
-        actorHP.text = hp + "/" + hp_max;
+        actorHP.text = "HP: " + hp + "/" + hp_max;
         actorHPSlider.fillAmount = (hp * 1f) / (hp_max * 1f);
         if (actorAPSlider != null) actorAPSlider.fillAmount = ap;
         teamBG.color = team_color;
