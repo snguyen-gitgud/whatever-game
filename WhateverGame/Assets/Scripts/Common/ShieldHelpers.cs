@@ -11,7 +11,7 @@ public static class ShieldHelpers
         return Random.Range(min, max);
     }
 
-    public static ClashData CalculateClashOutput(ActorController caster, ActorController target, BaseSkill skill, int bonus_multiplier)
+    public static ClashData CalculateClashOutput(ActorController caster, ActorController target, BaseSkill skill, int bonus_multiplier, bool bypass_crit = false)
     {
         ClashData ret = new ClashData();
 
@@ -51,7 +51,7 @@ public static class ShieldHelpers
         else
             ret.isBlocked = false;
 
-        if (ShieldHelpers.GetRandomNumber(0, 100) < caster.actorStats.currentStats.critChance - target.actorStats.currentStats.critResist)
+        if (ShieldHelpers.GetRandomNumber(0, 100) < caster.actorStats.currentStats.critChance - target.actorStats.currentStats.critResist && bypass_crit == false)
         {
             ret.output *= 2;
             ret.isCrit = true;
@@ -61,7 +61,10 @@ public static class ShieldHelpers
 
         if (ret.isAmbush)
         {
-            ret.output *= 2;
+            ret.output *= 3;
+            ret.output /= 2;
+            ret.isMiss = false;
+            ret.isBlocked = false;
         }
 
         return ret;

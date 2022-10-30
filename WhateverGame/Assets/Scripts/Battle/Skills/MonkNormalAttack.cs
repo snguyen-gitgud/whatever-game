@@ -195,4 +195,33 @@ public class MonkNormalAttack : BaseSkill
     {
         base.EndSkill();
     }
+
+    public override SkillPreview GetPreviewValue(ActorController caster, ActorController target, int overload)
+    {
+        SkillPreview ret = new SkillPreview();
+
+        ClashData data1 = ShieldHelpers.CalculateClashOutput(caster, target, this, 1, true);
+        ClashData data2 = ShieldHelpers.CalculateClashOutput(caster, target, this, 1, true);
+        ClashData data3 = ShieldHelpers.CalculateClashOutput(caster, target, this, 2, true);
+
+        int sum = 0;
+        if (overload == 1)
+            sum = data1.output;
+        else if (overload == 2)
+            sum = data1.output + data2.output;
+        else if (overload >= 3)
+            sum = data1.output + data2.output + data3.output;
+
+        ret.chance_val = ((caster.actorStats.currentStats.accuracy + this.skillAccuracyBonus) - target.actorStats.currentStats.dodgeChance) / 100f;
+        ret.chance_text = (ret.chance_val * 100f) + "%";
+        ret.value = "-" + sum + " HP";
+        return ret;
+    }
+}
+
+public class SkillPreview
+{
+    public float chance_val = 0f; 
+    public string chance_text = "";
+    public string value = "";
 }

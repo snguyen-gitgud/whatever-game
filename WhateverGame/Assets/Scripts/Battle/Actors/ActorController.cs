@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [RequireComponent(typeof(ActorAnimationController))]
 [RequireComponent(typeof(ActorInfo))]
@@ -33,7 +34,16 @@ public class ActorController : MonoBehaviour
     public Color OpponentTeamBGColor;
 
     public GameObject commandControlUI;
+
+    [Header("Action preview")]
     public GameObject actionPreviewUI;
+    public Image actionPreviewBG;
+    public Image casterPortrait;
+    public Image targetPortrait;
+    public Image probabilityImg;
+    public TextMeshProUGUI actionNameText;
+    public TextMeshProUGUI actionChanceText;
+    public TextMeshProUGUI outputText;
 
     public GameObject line;
 
@@ -86,6 +96,9 @@ public class ActorController : MonoBehaviour
 
         DOTween.Kill(commandControlUI.transform);
         commandControlUI.transform.localScale = Vector3.zero;
+
+        DOTween.Kill(actionPreviewUI.transform);
+        actionPreviewUI.transform.localScale = Vector3.zero;
 
         actorAnimationController.PlayIdle();
     }
@@ -216,6 +229,15 @@ public class ActorController : MonoBehaviour
         currentChosenSkill = actorStats.actorNormalAttack;
         skill_range_area.Clear();
         skill_range_area = BattleMaster.GetInstance().gridManager.FindArea(occupied_grid_unit, currentChosenSkill.skillRange + 1, actorTeams, true);
+
+        actionPreviewUI.transform.DOScale(Vector3.one, 0.25f);
+        actionPreviewBG.color = actorTeams == GridUnitOccupationStates.PLAYER_TEAM? PlayerTeamBGColor:OpponentTeamBGColor;
+        casterPortrait.sprite = actorStats.actorPortrait;
+        actionNameText.text = currentChosenSkill.skillName;
+        targetPortrait.gameObject.SetActive(false);
+        probabilityImg.gameObject.SetActive(false);
+        actionChanceText.gameObject.SetActive(false);
+        outputText.gameObject.SetActive(false);
     }
 
     int current_skill_overload_level = 1;
@@ -285,6 +307,31 @@ public class ActorController : MonoBehaviour
                 pincer_actor.line.SetActive(false);
         }
 
+        if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() != null)
+        {
+            ActorController targetActor = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor;
+            if (targetActor != null && targetActor != this)
+            {
+                targetPortrait.gameObject.SetActive(true);
+                probabilityImg.gameObject.SetActive(true);
+                actionChanceText.gameObject.SetActive(true);
+                outputText.gameObject.SetActive(true);
+
+                SkillPreview preview = currentChosenSkill.GetPreviewValue(this, targetActor, current_skill_overload_level);
+                targetPortrait.sprite = targetActor.actorStats.actorPortrait;
+                probabilityImg.fillAmount = preview.chance_val;
+                actionChanceText.text = preview.chance_text;
+                outputText.text = preview.value;
+            }
+            else
+            {
+                targetPortrait.gameObject.SetActive(false);
+                probabilityImg.gameObject.SetActive(false);
+                actionChanceText.gameObject.SetActive(false);
+                outputText.gameObject.SetActive(false);
+            }
+        }
+
         if (InputProcessor.GetInstance().buttonSouth)
         {
             if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() == null ||
@@ -294,6 +341,8 @@ public class ActorController : MonoBehaviour
 
             if (skill_range_area.Contains(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit()) == false)
                 return;
+
+            actionPreviewUI.transform.DOScale(Vector3.zero, 0.25f);
 
             line.SetActive(false);
             if (pincer_actor)
@@ -326,6 +375,9 @@ public class ActorController : MonoBehaviour
             line.SetActive(false);
             if (pincer_actor)
                 pincer_actor.line.SetActive(false);
+
+            actionPreviewUI.transform.DOScale(Vector3.zero, 0.25f);
+
             actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
             actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
             currentChosenSkill = null;
@@ -371,7 +423,7 @@ public class ActorController : MonoBehaviour
             actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
 
             actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
-            foreach (Transform child in commandControlUI.transform)
+            foreach (Transform child in commandControlUI.transform.GetChild(1))
             {
                 if (child.GetComponent<Image>() != null)
                     child.GetComponent<Image>().color = Color.white;
@@ -498,7 +550,7 @@ public class ActorController : MonoBehaviour
         //actorUI.headerHolder.gameObject.SetActive(true);
 
         actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
-        foreach (Transform child in commandControlUI.transform)
+        foreach (Transform child in commandControlUI.transform.GetChild(1))
         {
             if (is_acted == false && (child.GetSiblingIndex() == 1 ||
                                       child.GetSiblingIndex() == 2 ||

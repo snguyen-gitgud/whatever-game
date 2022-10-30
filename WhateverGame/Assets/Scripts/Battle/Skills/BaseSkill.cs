@@ -185,6 +185,11 @@ public class BaseSkill : MonoBehaviour
         actorAnimationController.PlayIdle();
         actorController.WaitingForCommandState();
     }
+
+    public virtual SkillPreview GetPreviewValue(ActorController caster, ActorController target, int overload)
+    {
+        return null;
+    }
 }
 
 public enum DamageTypes
