@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc27a2913f514b348a07767a223cf1e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reactiveSkillName: Close Counter
+  react_skill: {fileID: 0}

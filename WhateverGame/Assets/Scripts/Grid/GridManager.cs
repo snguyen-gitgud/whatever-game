@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
@@ -25,6 +26,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
 
     [Header("UI")]
     public Transform actorDetails;
+    public TextMeshProUGUI reactiveText;
 
     //internals
     [HideInInspector] public GridCursor gridCursor;
@@ -332,6 +334,8 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                                                                            current_highlighted_grid_unit.occupiedActor.actorStats.baseStats.healthPoint,
                                                                            current_highlighted_grid_unit.occupiedActor.actorUI.apBar.fillAmount,
                                                                            current_highlighted_grid_unit.occupiedActor.actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? current_highlighted_grid_unit.occupiedActor.PlayerTeamBGColor : current_highlighted_grid_unit.occupiedActor.OpponentTeamBGColor);
+            if (current_highlighted_grid_unit.occupiedActor.actorStats.actorReactiveSkill != null)
+                reactiveText.text = current_highlighted_grid_unit.occupiedActor.actorStats.actorReactiveSkill.reactiveSkillName;
         }
 
         if (Mathf.Abs(InputProcessor.GetInstance().leftStick.magnitude) > 0f && cursor_lock == false)
@@ -371,6 +375,8 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                                                                                        current_highlighted_grid_unit.occupiedActor.actorStats.baseStats.healthPoint,
                                                                                        current_highlighted_grid_unit.occupiedActor.actorUI.apBar.fillAmount,
                                                                                        current_highlighted_grid_unit.occupiedActor.actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? current_highlighted_grid_unit.occupiedActor.PlayerTeamBGColor : current_highlighted_grid_unit.occupiedActor.OpponentTeamBGColor);
+                        if (current_highlighted_grid_unit.occupiedActor.actorStats.actorReactiveSkill != null)
+                            reactiveText.text = current_highlighted_grid_unit.occupiedActor.actorStats.actorReactiveSkill.reactiveSkillName;
                     }
                     else
                     {
@@ -419,6 +425,8 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                                                                                        current_highlighted_grid_unit.occupiedActor.actorStats.baseStats.healthPoint,
                                                                                        current_highlighted_grid_unit.occupiedActor.actorUI.apBar.fillAmount,
                                                                                        current_highlighted_grid_unit.occupiedActor.actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? current_highlighted_grid_unit.occupiedActor.PlayerTeamBGColor : current_highlighted_grid_unit.occupiedActor.OpponentTeamBGColor);
+                        if (current_highlighted_grid_unit.occupiedActor.actorStats.actorReactiveSkill != null)
+                            reactiveText.text = current_highlighted_grid_unit.occupiedActor.actorStats.actorReactiveSkill.reactiveSkillName;
                     }
                     else
                     {

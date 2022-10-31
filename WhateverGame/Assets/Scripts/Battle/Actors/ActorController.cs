@@ -41,9 +41,12 @@ public class ActorController : MonoBehaviour
     public Image casterPortrait;
     public Image targetPortrait;
     public Image probabilityImg;
+    public List<GameObject> previewOverloadLevelImgList = new List<GameObject>(); 
     public TextMeshProUGUI actionNameText;
     public TextMeshProUGUI actionChanceText;
     public TextMeshProUGUI outputText;
+    public GameObject unloadObj;
+    public GameObject backObj;
 
     public GameObject line;
 
@@ -320,6 +323,12 @@ public class ActorController : MonoBehaviour
                 SkillPreview preview = currentChosenSkill.GetPreviewValue(this, targetActor, current_skill_overload_level);
                 targetPortrait.sprite = targetActor.actorStats.actorPortrait;
                 probabilityImg.fillAmount = preview.chance_val;
+                probabilityImg.color = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
+                foreach (GameObject img in previewOverloadLevelImgList)
+                {
+                    img.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
+                    img.transform.GetChild(1).GetChild(0).GetComponent<Image>().fillAmount = probabilityImg.fillAmount;
+                }
                 actionChanceText.text = preview.chance_text;
                 outputText.text = preview.value;
             }
@@ -330,7 +339,7 @@ public class ActorController : MonoBehaviour
                 actionChanceText.gameObject.SetActive(false);
                 outputText.gameObject.SetActive(false);
             }
-        }
+        }       
 
         if (InputProcessor.GetInstance().buttonSouth)
         {
@@ -368,6 +377,37 @@ public class ActorController : MonoBehaviour
         if (InputProcessor.GetInstance().buttonShoulderL && current_skill_overload_level >= 1)
         {
             current_skill_overload_level--;
+        }
+
+        if (current_skill_overload_level == 1)
+        {
+            foreach (GameObject img in previewOverloadLevelImgList)
+            {
+                img.gameObject.SetActive(false);
+            }
+
+            for (int i = 0; i < current_skill_overload_level - 1; i++)
+            {
+                previewOverloadLevelImgList[i].gameObject.SetActive(true);
+            }
+
+            backObj.SetActive(true);
+            unloadObj.SetActive(false);
+        }
+        else
+        {
+            foreach (GameObject img in previewOverloadLevelImgList)
+            {
+                img.gameObject.SetActive(false);
+            }
+
+            for (int i = 0; i < current_skill_overload_level - 1; i++)
+            {
+                previewOverloadLevelImgList[i].gameObject.SetActive(true);
+            }
+
+            backObj.SetActive(false);
+            unloadObj.SetActive(true);
         }
 
         if (InputProcessor.GetInstance().buttonShoulderL && current_skill_overload_level <= 0)
