@@ -2505,7 +2505,7 @@ MonoBehaviour:
   vcam_offset_Y: 1.5
   baseStats:
     level: 1
-    healthPoint: 100
+    healthPoint: 120
     speed: 100
     pAtk: 10
     mAtk: 10
