@@ -24,8 +24,10 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
 
     [Header("UI")]
     public GameObject actorAPProgressionPref;
-    public Transform actorAPProgressionHolder;
-    public Transform actorCastingProgressionHolder;
+    public Transform actorPlayerAPProgressionHolder;
+    public Transform actorOpponentAPProgressionHolder;
+    public Transform actorPlayerCastingProgressionHolder;
+    public Transform actorOpponentCastingProgressionHolder;
     public GameObject announceObj;
     public TextMeshProUGUI announceText;
     public Sprite defaultAnnounceStatusIcon;
@@ -78,12 +80,12 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
         {
             targetGroup.AddMember(allActorsList[i].transform, 1f, 4f);
 
-            GameObject go = Instantiate(actorAPProgressionPref, actorAPProgressionHolder);
+            GameObject go = Instantiate(actorAPProgressionPref, allActorsList[i].actorTeams == GridUnitOccupationStates.PLAYER_TEAM? actorPlayerAPProgressionHolder:actorOpponentAPProgressionHolder);
             go.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = allActorsList[i].actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? allActorsList[i].PlayerTeamBGColor : allActorsList[i].OpponentTeamBGColor;
             go.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = allActorsList[i].actorStats.actorPortrait;
             actorAPProgressionsList.Add(go);
 
-            go = Instantiate(actorAPProgressionPref, actorCastingProgressionHolder);
+            go = Instantiate(actorAPProgressionPref, allActorsList[i].actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? actorPlayerCastingProgressionHolder : actorOpponentCastingProgressionHolder);
             go.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = allActorsList[i].actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? allActorsList[i].PlayerTeamBGColor : allActorsList[i].OpponentTeamBGColor;
             go.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetComponent<Image>().sprite = allActorsList[i].actorStats.actorPortrait;
             actorCastingProgressionsList.Add(go);

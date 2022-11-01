@@ -86,7 +86,7 @@ public class BaseSkill : MonoBehaviour
         isPincer = is_pincer;
 
         if (is_pincer == false)
-            BattleMaster.GetInstance().OnShowAnnounce(this.skillName, actorController.actorTeams == GridUnitOccupationStates.PLAYER_TEAM? actorController.PlayerTeamBGColor:actorController.OpponentTeamBGColor);
+            BattleMaster.GetInstance().OnShowAnnounce(this.skillName + " <color=#FFD700>x" + skillOverLoadLevel + "</color>", actorController.actorTeams == GridUnitOccupationStates.PLAYER_TEAM? actorController.PlayerTeamBGColor:actorController.OpponentTeamBGColor);
         else
             BattleMaster.GetInstance().OnShowAnnounce("Pincer: " + this.skillName, actorController.actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? actorController.PlayerTeamBGColor : actorController.OpponentTeamBGColor);
 

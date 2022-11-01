@@ -353,6 +353,8 @@ public class ActorController : MonoBehaviour
 
             actionPreviewUI.transform.DOScale(Vector3.zero, 0.25f);
 
+            actorUI.apBar.fillAmount = actorStats.apBar / 100f;
+
             line.SetActive(false);
             if (pincer_actor)
                 pincer_actor.line.SetActive(false);

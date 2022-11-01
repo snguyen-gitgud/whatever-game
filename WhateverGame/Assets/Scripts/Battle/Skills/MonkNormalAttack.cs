@@ -83,11 +83,13 @@ public class MonkNormalAttack : BaseSkill
         if (skillOverLoadLevel >= 2)
         {
             actorAnimationController.PlayNormalAttack_2();
+            
             atk_vfx = Instantiate(atk2VFX, actorController.transform.GetChild(0));
             atk_vfx.transform.position += Vector3.up * vcam_offset_Y;
 
             shake.m_FrequencyGain = 3f;
             yield return new WaitForSeconds(.3667f);
+            textManager.Add("Combo x2", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
             if (targetController != null)
             {
                 ClashData data = ShieldHelpers.CalculateClashOutput(actorController, targetController, this, 1);
@@ -128,11 +130,13 @@ public class MonkNormalAttack : BaseSkill
         if (skillOverLoadLevel >= 3)
         {
             actorAnimationController.PlayNormalAttack_3();
+            
             atk_vfx = Instantiate(atk3VFX, actorController.transform.GetChild(0));
             atk_vfx.transform.position += Vector3.up * vcam_offset_Y;
 
             shake.m_FrequencyGain = 5f;
             yield return new WaitForSeconds(.261f);
+            textManager.Add("Combo x3", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
             if (targetController != null)
             {
                 ClashData data = ShieldHelpers.CalculateClashOutput(actorController, targetController, this, 2);
@@ -214,7 +218,7 @@ public class MonkNormalAttack : BaseSkill
 
         ret.chance_val = ((caster.actorStats.currentStats.accuracy + this.skillAccuracyBonus) - target.actorStats.currentStats.dodgeChance) / 100f;
         ret.chance_text = (ret.chance_val * 100f) + "%";
-        ret.value = "-" + sum + " HP";
+        ret.value = "DMG : " + sum + " HP";
         return ret;
     }
 }
