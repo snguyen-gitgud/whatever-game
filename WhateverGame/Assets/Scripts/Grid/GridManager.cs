@@ -135,6 +135,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
         foreach (GridUnit unit in gridUnitsList)
         {
             unit.gridUnitPathScore = -1;
+            unit.gridUnitAreaScore = -1;
             if (high_light) unit.ClearAreaHighlight();
         }
 
@@ -166,8 +167,8 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
         if (high_light)
             foreach (GridUnit unit in ret_list)
             {
-                if (unit.gridUnitAreaScore <= stamina_range)
-                    unit.AreaHighlight(unit.gridUnitPathScore, occupation_team == GridUnitOccupationStates.PLAYER_TEAM? PlayerTeamBGColor : OpponentTeamBGColor);
+                if (unit.gridUnitPathScore <= stamina_range)
+                    unit.AreaHighlight(unit.gridUnitPathScore, occupation_team == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
                 else
                     unit.AreaHighlight(unit.gridUnitPathScore, occupation_team == GridUnitOccupationStates.PLAYER_TEAM ? playerOverloadBGColor : OpponentTeamBGColor);
             }

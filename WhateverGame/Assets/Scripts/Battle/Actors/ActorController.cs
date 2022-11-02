@@ -555,6 +555,9 @@ public class ActorController : MonoBehaviour
                 }
             }
             actorDetails.actorStaminaPreviewSlider.fillAmount = ((sum - 1) * 1f) / 16f;
+            if (actorDetails.actorStaminaPreviewSlider.fillAmount > actorDetails.actorStaminaSlider.fillAmount)
+                actorDetails.actorStaminaPreviewSlider.fillAmount = actorDetails.actorStaminaSlider.fillAmount;
+            actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = ((sum - 1) * 1f) / 16f;
         }
         else
         {
