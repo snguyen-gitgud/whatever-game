@@ -96,9 +96,9 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
         CurrentActorTurnEnds(new Vector3(0f, 6f, -15f), 0);
     }
 
-    public List<GridUnit> FindArea(GridUnit start_point, int range, GridUnitOccupationStates occupation_team)
+    public List<GridUnit> FindArea(GridUnit start_point, int stamina_range, int range, GridUnitOccupationStates occupation_team)
     {
-        return gridManager.FindArea(start_point, range, occupation_team);
+        return gridManager.FindArea(start_point, stamina_range, range, occupation_team);
     }
 
     public List<GridUnit> FindPath(GridUnit start_point, GridUnit end_point, GridUnitOccupationStates occupation_team)

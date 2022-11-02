@@ -15,6 +15,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
     public GameObject gridCur;
     public Color PlayerTeamBGColor;
     public Color OpponentTeamBGColor;
+    public Color playerOverloadBGColor;
 
     [Range(1, 10)] public int gridUnitSize = 2;
     [Range(15, 100)] public int gridSize = 10;
@@ -129,7 +130,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
         targetTerrain.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
     }
 
-    public List<GridUnit> FindArea(GridUnit start_point, int range, GridUnitOccupationStates occupation_team, bool include_occupied = false, bool high_light = true)
+    public List<GridUnit> FindArea(GridUnit start_point, int stamina_range, int range, GridUnitOccupationStates occupation_team, bool include_occupied = false, bool high_light = true)
     {
         foreach (GridUnit unit in gridUnitsList)
         {
@@ -165,7 +166,10 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
         if (high_light)
             foreach (GridUnit unit in ret_list)
             {
-                unit.AreaHighlight(unit.gridUnitPathScore, occupation_team == GridUnitOccupationStates.PLAYER_TEAM? PlayerTeamBGColor : OpponentTeamBGColor);
+                if (unit.gridUnitAreaScore <= stamina_range)
+                    unit.AreaHighlight(unit.gridUnitPathScore, occupation_team == GridUnitOccupationStates.PLAYER_TEAM? PlayerTeamBGColor : OpponentTeamBGColor);
+                else
+                    unit.AreaHighlight(unit.gridUnitPathScore, occupation_team == GridUnitOccupationStates.PLAYER_TEAM ? playerOverloadBGColor : OpponentTeamBGColor);
             }
 
         //CustomEvents.GetInstance().ToggleGridUnitRendererLock(false);

@@ -10,7 +10,7 @@ public class BaseReactiveSkill : MonoBehaviour
     public virtual bool ReactiveCheck(ActorController actor, ActorController target)
     {
         BaseSkill skill = actor.actorStats.actorNormalAttack;
-        List<GridUnit> aoe = BattleMaster.GetInstance().gridManager.FindArea(actor.occupied_grid_unit, skill.skillRange + 1, actor.actorTeams, true);
+        List<GridUnit> aoe = BattleMaster.GetInstance().gridManager.FindArea(actor.occupied_grid_unit, skill.skillRange + 1, skill.skillRange + 1, actor.actorTeams, true);
         BattleMaster.GetInstance().gridManager.ClearAreaHighlight();
         if (aoe.Contains(target.occupied_grid_unit))
             return true;

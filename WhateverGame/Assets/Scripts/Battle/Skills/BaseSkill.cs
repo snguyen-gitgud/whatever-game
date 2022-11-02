@@ -144,7 +144,7 @@ public class BaseSkill : MonoBehaviour
     public virtual IEnumerator PincerSkill()
     {
         ActorController pincer_actor = null;
-        List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, targetController.actorTeams, true);
+        List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, 2, targetController.actorTeams, true);
         foreach (GridUnit tile in pincer_range)
         {
             if (tile.occupiedActor != null)

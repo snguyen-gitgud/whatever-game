@@ -231,7 +231,7 @@ public class ActorController : MonoBehaviour
         current_skill_overload_level = 1;
         currentChosenSkill = actorStats.actorNormalAttack;
         skill_range_area.Clear();
-        skill_range_area = BattleMaster.GetInstance().gridManager.FindArea(occupied_grid_unit, currentChosenSkill.skillRange + 1, actorTeams, true);
+        skill_range_area = BattleMaster.GetInstance().gridManager.FindArea(occupied_grid_unit, currentChosenSkill.skillRange + 1, currentChosenSkill.skillRange + 1, actorTeams, true);
 
         actionPreviewUI.transform.DOScale(Vector3.one, 0.25f);
         actionPreviewBG.color = actorTeams == GridUnitOccupationStates.PLAYER_TEAM? PlayerTeamBGColor:OpponentTeamBGColor;
@@ -272,7 +272,7 @@ public class ActorController : MonoBehaviour
             ActorController targetController = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor;
             if (targetController != null && targetController != last_pincer_actor && targetController != this)
             {
-                List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, targetController.actorTeams, true, false);
+                List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, 2, targetController.actorTeams, true, false);
                 foreach (GridUnit tile in pincer_range)
                 {
                     if (tile.occupiedActor != null)
@@ -579,10 +579,11 @@ public class ActorController : MonoBehaviour
 
         actorControlStates = ActorControlStates.READY_TO_MOVE;
 
-        int range = actorStats.staminaPoint;
-        if (range > actorStats.maxStaminaPoint)
-            range = actorStats.maxStaminaPoint;
-        move_area = BattleMaster.GetInstance().FindArea(occupied_grid_unit, range + 1, actorTeams);
+        //int range = actorStats.staminaPoint;
+        //if (range > actorStats.maxStaminaPoint)
+        //    range = actorStats.maxStaminaPoint;
+
+        move_area = BattleMaster.GetInstance().FindArea(occupied_grid_unit, actorStats.staminaPoint + 1, actorStats.maxStaminaPoint + 1, actorTeams);
     }
 
     public void WaitingForCommandState()
