@@ -43,17 +43,17 @@ public class ActorAnimationController : MonoBehaviour
         animator.CrossFadeInFixedTime("Casting", .25f);
     }
 
-    public void PlayNormalAttack_1()
+    public void PlayUnarmedNormalAttack_1()
     {
         animator.CrossFadeInFixedTime("NormalAttack_1", .01f);
     }
 
-    public void PlayNormalAttack_2(GameObject vfx = null)
+    public void PlayUnarmedNormalAttack_2(GameObject vfx = null)
     {
         animator.CrossFadeInFixedTime("NormalAttack_2", .01f);
     }
 
-    public void PlayNormalAttack_3(GameObject vfx = null)
+    public void PlayUnarmedNormalAttack_3(GameObject vfx = null)
     {
         animator.CrossFadeInFixedTime("NormalAttack_3", .01f);
     }

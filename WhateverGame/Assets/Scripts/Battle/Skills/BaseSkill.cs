@@ -99,6 +99,10 @@ public class BaseSkill : MonoBehaviour
 
     public virtual IEnumerator ExecuteSkillSequence()
     {
+        //TODO: preemptive skill goes here:
+
+        //---------------------------
+
         BattleMaster.GetInstance().gridManager.cursor_lock = true;
         DOTween.Kill(BattleMaster.GetInstance().gridManager.gridCursor.transform);
         BattleMaster.GetInstance().gridManager.gridCursor.transform.position = targetGridUnit.cachedWorldPos + Vector3.up * BattleMaster.GetInstance().gridManager.gridUnitSize * 0.5f;

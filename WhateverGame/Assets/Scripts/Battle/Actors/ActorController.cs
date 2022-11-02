@@ -255,8 +255,14 @@ public class ActorController : MonoBehaviour
 
         actorDetails.actorStaminaPreviewSlider.fillAmount = (current_skill_overload_level * currentChosenSkill.skillStaminaCost) / 16f;
         if (actorDetails.actorStaminaPreviewSlider.fillAmount > actorDetails.actorStaminaSlider.fillAmount)
+        {
             actorDetails.actorStaminaPreviewSlider.fillAmount = actorDetails.actorStaminaSlider.fillAmount;
-        actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = (current_skill_overload_level * currentChosenSkill.skillStaminaCost) / 16f;
+            actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = (current_skill_overload_level * currentChosenSkill.skillStaminaCost) / 16f;
+        }
+        else
+        {
+            actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
+        }
 
         ActorController pincer_actor = null;
 
@@ -556,8 +562,14 @@ public class ActorController : MonoBehaviour
             }
             actorDetails.actorStaminaPreviewSlider.fillAmount = ((sum - 1) * 1f) / 16f;
             if (actorDetails.actorStaminaPreviewSlider.fillAmount > actorDetails.actorStaminaSlider.fillAmount)
+            {
                 actorDetails.actorStaminaPreviewSlider.fillAmount = actorDetails.actorStaminaSlider.fillAmount;
-            actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = ((sum - 1) * 1f) / 16f;
+                actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = ((sum - 1) * 1f) / 16f;
+            }
+            else
+            {
+                actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
+            }
         }
         else
         {

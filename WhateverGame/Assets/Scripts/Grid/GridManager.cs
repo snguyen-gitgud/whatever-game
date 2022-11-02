@@ -167,7 +167,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
         if (high_light)
             foreach (GridUnit unit in ret_list)
             {
-                if (unit.gridUnitPathScore <= stamina_range)
+                if (unit.gridUnitPathScore < stamina_range)
                     unit.AreaHighlight(unit.gridUnitPathScore, occupation_team == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
                 else
                     unit.AreaHighlight(unit.gridUnitPathScore, occupation_team == GridUnitOccupationStates.PLAYER_TEAM ? playerOverloadBGColor : OpponentTeamBGColor);

@@ -24,6 +24,9 @@ public class InputProcessor : PersistantAndSingletonBehavior<InputProcessor>
     public Vector2 rightStick = new Vector2();
     public bool invertRightStick = false;
 
+    [Header("Vibration")]
+    public float vibrationMultiplier = .75f;
+
     private void Start()
     {
         
@@ -197,7 +200,7 @@ public class InputProcessor : PersistantAndSingletonBehavior<InputProcessor>
     {
         Gamepad gamepad = Gamepad.current;
         if (gamepad != null)
-            StartCoroutine(VibrateControllerSequence(gamepad, magnitude_low, magnitude_high, duration));
+            StartCoroutine(VibrateControllerSequence(gamepad, magnitude_low * vibrationMultiplier, magnitude_high * vibrationMultiplier, duration));
     }
 
     IEnumerator VibrateControllerSequence(Gamepad gamepad, float magnitude_low, float magnitude_high, float duration)
