@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9daec29416b2c6948a5fc1efac114691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blinking_speed: 4
+  blinking_speed: 2
 --- !u!1 &2511235631489655586
 GameObject:
   m_ObjectHideFlags: 0

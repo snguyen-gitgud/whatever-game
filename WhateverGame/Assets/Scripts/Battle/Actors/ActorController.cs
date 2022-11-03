@@ -347,7 +347,10 @@ public class ActorController : MonoBehaviour
             }
         }       
 
-        if (InputProcessor.GetInstance().buttonSouth)
+        if (InputProcessor.GetInstance().buttonNorth ||
+            InputProcessor.GetInstance().buttonSouth ||
+            InputProcessor.GetInstance().buttonEast ||
+            InputProcessor.GetInstance().buttonWest)
         {
             if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() == null ||
                 //BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == null ||
