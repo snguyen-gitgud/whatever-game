@@ -857,8 +857,8 @@ MonoBehaviour:
   actorName: {fileID: 6732146652059958112}
   actorLevel: {fileID: 979440311018936588}
   actorHP: {fileID: 2179170582392422794}
-  actorHPSlider: {fileID: 0}
-  actorAPSlider: {fileID: 0}
+  actorHPSlider: {fileID: 2743413153365434343}
+  actorAPSlider: {fileID: 1594665526624227516}
   actorStaminaSlider: {fileID: 1594665526624227516}
   actorStaminaPreviewSlider: {fileID: 788276882053357468}
   actorStaminaInDebtPreviewSlider: {fileID: 6735666738002164828}
@@ -1498,7 +1498,7 @@ PrefabInstance:
     - target: {fileID: 2577466171340044418, guid: 09b3c2e8374908848abee0180f956798,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1900.7122
+      value: 1887.6
       objectReference: {fileID: 0}
     - target: {fileID: 2577466171340044418, guid: 09b3c2e8374908848abee0180f956798,
         type: 3}
@@ -1543,7 +1543,7 @@ PrefabInstance:
     - target: {fileID: 2577466171340044418, guid: 09b3c2e8374908848abee0180f956798,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 23.968918
+      value: 21.672
       objectReference: {fileID: 0}
     - target: {fileID: 2577466171340044418, guid: 09b3c2e8374908848abee0180f956798,
         type: 3}
@@ -1708,6 +1708,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f74a61c643552a4a9b4cdde72748d1b, type: 3}
+--- !u!114 &2743413153365434343 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5348031427001977678, guid: 7f74a61c643552a4a9b4cdde72748d1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7794193309985871017}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7599215027755518382 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 387129570391923975, guid: 7f74a61c643552a4a9b4cdde72748d1b,

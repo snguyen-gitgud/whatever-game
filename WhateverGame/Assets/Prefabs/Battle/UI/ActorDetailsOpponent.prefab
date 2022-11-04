@@ -1361,7 +1361,7 @@ PrefabInstance:
     - target: {fileID: 2577466171340044418, guid: 09b3c2e8374908848abee0180f956798,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1952.3689
+      value: 1887.6
       objectReference: {fileID: 0}
     - target: {fileID: 2577466171340044418, guid: 09b3c2e8374908848abee0180f956798,
         type: 3}
@@ -1406,7 +1406,7 @@ PrefabInstance:
     - target: {fileID: 2577466171340044418, guid: 09b3c2e8374908848abee0180f956798,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 33.008835
+      value: 21.672
       objectReference: {fileID: 0}
     - target: {fileID: 2577466171340044418, guid: 09b3c2e8374908848abee0180f956798,
         type: 3}
@@ -1428,12 +1428,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7113394496202247723, guid: 09b3c2e8374908848abee0180f956798,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 96b5d150cfc2ab64790ed2bf66c79de8,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09b3c2e8374908848abee0180f956798, type: 3}
 --- !u!224 &7641630045499919525 stripped
