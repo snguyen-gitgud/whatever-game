@@ -35,7 +35,7 @@ public class MonkNormalAttack : BaseSkill
         yield return base.ExecuteSkillSequence();
 
         //Debug.Log(actorController.gameObject.name + " executing Monk normal attack sequence.");
-        actorAnimationController.PlayUnarmedNormalAttack_1();
+        actorAnimationController.PlayUnarmedAttack_1();
         GameObject atk_vfx = Instantiate(atk1VFX, actorController.transform.GetChild(0));
         atk_vfx.transform.position += Vector3.up * vcam_offset_Y;
 
@@ -68,11 +68,18 @@ public class MonkNormalAttack : BaseSkill
             {
                 // miss
                 textManager.Add("Miss", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
+
+                targetController.actorAnimationController.PlayDodge();
             }
             else if (data.isBlocked)
             {
                 // blocked 
                 textManager.Add("block", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
+
+                targetController.actorAnimationController.PlayBlock();
+
+                GameObject hit_vfx = Instantiate(hitVFX, targetController.transform.GetChild(0));
+                hit_vfx.transform.position += (Vector3.up * vcam_offset_Y) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));
 
                 Vector3 new_forward = targetController.transform.GetChild(0).forward;
                 new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
@@ -82,7 +89,7 @@ public class MonkNormalAttack : BaseSkill
 
         if (skillOverLoadLevel >= 2)
         {
-            actorAnimationController.PlayUnarmedNormalAttack_2();
+            actorAnimationController.PlayUnarmedAttack_2();
             
             atk_vfx = Instantiate(atk2VFX, actorController.transform.GetChild(0));
             atk_vfx.transform.position += Vector3.up * vcam_offset_Y;
@@ -114,11 +121,18 @@ public class MonkNormalAttack : BaseSkill
                 {
                     // miss
                     textManager.Add("Miss", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
+
+                    targetController.actorAnimationController.PlayDodge();
                 }
                 else if (data.isBlocked)
                 {
                     // blocked 
                     textManager.Add("block", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
+
+                    targetController.actorAnimationController.PlayBlock();
+
+                    GameObject hit_vfx = Instantiate(hitVFX, targetController.transform.GetChild(0));
+                    hit_vfx.transform.position += (Vector3.up * vcam_offset_Y) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));
 
                     Vector3 new_forward = targetController.transform.GetChild(0).forward;
                     new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
@@ -129,7 +143,7 @@ public class MonkNormalAttack : BaseSkill
         
         if (skillOverLoadLevel >= 3)
         {
-            actorAnimationController.PlayUnarmedNormalAttack_3();
+            actorAnimationController.PlayUnarmedAttack_3();
             
             atk_vfx = Instantiate(atk3VFX, actorController.transform.GetChild(0));
             atk_vfx.transform.position += Vector3.up * vcam_offset_Y;
@@ -174,11 +188,18 @@ public class MonkNormalAttack : BaseSkill
                 {
                     // miss
                     textManager.Add("Miss", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
+
+                    targetController.actorAnimationController.PlayDodge();
                 }
                 else if (data.isBlocked)
                 {
                     // blocked 
                     textManager.Add("block", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
+
+                    targetController.actorAnimationController.PlayBlock();
+
+                    GameObject hit_vfx = Instantiate(hitVFX, targetController.transform.GetChild(0));
+                    hit_vfx.transform.position += (Vector3.up * vcam_offset_Y) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));
 
                     Vector3 new_forward = targetController.transform.GetChild(0).forward;
                     new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;

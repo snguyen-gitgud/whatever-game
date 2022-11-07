@@ -24,6 +24,7 @@ public class ActorController : MonoBehaviour
     [Header("UI")]
     public ActorUI actorUI;
     public BattleActorDetails actorDetails;
+    public TextMeshProUGUI apText;
 
     public Color normalAPGenColor;
     public Color exhautedAPGenColor;
@@ -253,7 +254,8 @@ public class ActorController : MonoBehaviour
             return;
         }
 
-        actorDetails.actorStaminaPreviewSlider.fillAmount = (current_skill_overload_level * currentChosenSkill.skillStaminaCost) / 16f;
+        int ap_cost = current_skill_overload_level * currentChosenSkill.skillStaminaCost;
+        actorDetails.actorStaminaPreviewSlider.fillAmount = (ap_cost) / 16f;
         if (actorDetails.actorStaminaPreviewSlider.fillAmount > actorDetails.actorStaminaSlider.fillAmount)
         {
             actorDetails.actorStaminaPreviewSlider.fillAmount = actorDetails.actorStaminaSlider.fillAmount;
@@ -263,6 +265,8 @@ public class ActorController : MonoBehaviour
         {
             actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
         }
+
+        apText.text = actorStats.staminaPoint.ToString() + (ap_cost >= 0 ? "<color=#D41F21>-" + ap_cost + "</color>": "<color=#D41F21>+" + ap_cost + "</color>");
 
         ActorController pincer_actor = null;
 
@@ -359,6 +363,8 @@ public class ActorController : MonoBehaviour
 
             if (skill_range_area.Contains(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit()) == false)
                 return;
+
+            apText.text = (actorStats.staminaPoint - current_skill_overload_level * currentChosenSkill.skillStaminaCost).ToString();
 
             actionPreviewUI.transform.DOScale(Vector3.zero, 0.25f);
 
@@ -493,6 +499,9 @@ public class ActorController : MonoBehaviour
             actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
 
             actorDetails.actorStaminaSlider.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f) * 0.5f;
+            int ap_cost = actorStats.staminaPoint;
+            apText.text = ap_cost.ToString();
+
             actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
             actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
 
@@ -573,6 +582,9 @@ public class ActorController : MonoBehaviour
             {
                 actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
             }
+
+            int ap_cost = (sum - 1);
+            apText.text = actorStats.staminaPoint.ToString() + (ap_cost >= 0 ? "<color=#D41F21>-" + ap_cost + "</color>": "<color=#D41F21>+" + ap_cost + "</color>");
         }
         else
         {
@@ -651,6 +663,8 @@ public class ActorController : MonoBehaviour
         commandControlUI.transform.DOScale(Vector3.one, .25f);
         DOTween.Kill(actorDetails.transform.GetChild(0));
         actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
+
+        apText.text = actorStats.staminaPoint.ToString();
 
         BattleMaster.GetInstance().gridManager.gridCur.transform.position = this.occupied_grid_unit.transform.position + Vector3.up * BattleMaster.GetInstance().gridManager.gridUnitSize * 0.5f;
     }
@@ -747,6 +761,8 @@ public class ActorController : MonoBehaviour
 
         actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
         actorDetails.actorStaminaSlider.fillAmount = actorUI.apPoints.fillAmount * 0.5f;
+
+        apText.text = actorStats.staminaPoint.ToString();
     }
 
     public void EndTurn()
