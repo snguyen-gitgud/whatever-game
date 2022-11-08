@@ -69,6 +69,26 @@ public static class ShieldHelpers
 
         return ret;
     }
+
+    public static void ChangeAP(ActorController targetController, int amount)
+    {
+        if (targetController.actorControlStates == ActorControlStates.AP_STAG)
+        {
+            targetController.actorStats.apBar += amount * 1f;
+            targetController.actorUI.apBar.fillAmount = targetController.actorStats.apBar / 100f;
+        }
+        else if (targetController.actorControlStates == ActorControlStates.CASTING_STAG)
+        {
+            targetController.current_casting_value += (targetController.current_casting_value * (1f - (amount / 100f)));
+            targetController.actorStats.apBar = targetController.current_casting_value / targetController.currentChosenSkill.skillCastingDuration;
+            targetController.actorUI.apBar.fillAmount = targetController.actorStats.apBar;
+        }
+    }
+
+    public static void ChangeStamina(ActorController targetController, int amount)
+    {
+        targetController.ap_bank += amount;
+    }
 }
 
 public class ClashData

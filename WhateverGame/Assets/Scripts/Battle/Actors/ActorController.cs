@@ -460,7 +460,7 @@ public class ActorController : MonoBehaviour
         }
     }
 
-    int ap_bank = 0;
+    /*[HideInInspector]*/ public int ap_bank = 0;
     public void StartTurn(ActorController actor)
     {
         if (this != actor)
@@ -498,7 +498,7 @@ public class ActorController : MonoBehaviour
             actorDetails.SetDisplayData(actorStats.actorPortrait, actorStats.actorName, actorStats.currentStats.level, actorStats.currentStats.healthPoint, actorStats.baseStats.healthPoint, actorUI.apBar.fillAmount, actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
             actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
 
-            actorDetails.actorStaminaSlider.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f) * 0.5f;
+            actorDetails.actorStaminaSlider.fillAmount = ((actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f)) * 0.5f;
             int ap_cost = actorStats.staminaPoint;
             apText.text = ap_cost.ToString();
 

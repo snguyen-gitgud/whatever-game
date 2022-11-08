@@ -166,17 +166,8 @@ public class MonkNormalAttack : BaseSkill
                     if (data.isCrit) textManager.Add("Critical hit", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
                     textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
 
-                    if (targetController.actorControlStates == ActorControlStates.AP_STAG)
-                    {
-                        targetController.actorStats.apBar -= 10f;
-                        targetController.actorUI.apBar.fillAmount = targetController.actorStats.apBar / 100f;
-                    }
-                    else if (targetController.actorControlStates == ActorControlStates.CASTING_STAG)
-                    {
-                        targetController.current_casting_value -= (targetController.current_casting_value * 0.9f);
-                        targetController.actorStats.apBar = targetController.current_casting_value / targetController.currentChosenSkill.skillCastingDuration;
-                        targetController.actorUI.apBar.fillAmount = targetController.actorStats.apBar;
-                    }
+                    ShieldHelpers.ChangeStamina(targetController, -2);
+                    textManager.Add("-2AP", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "status");
 
                     shake.m_AmplitudeGain = 1f;
                     Time.timeScale = 0.1f * BattleMaster.GetInstance().baseTimeScale;
