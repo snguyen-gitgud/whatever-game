@@ -858,7 +858,7 @@ MonoBehaviour:
   actorLevel: {fileID: 979440311018936588}
   actorHP: {fileID: 2179170582392422794}
   actorHPSlider: {fileID: 2743413153365434343}
-  actorAPSlider: {fileID: 1594665526624227516}
+  actorAPSlider: {fileID: 0}
   actorStaminaSlider: {fileID: 1594665526624227516}
   actorStaminaPreviewSlider: {fileID: 788276882053357468}
   actorStaminaInDebtPreviewSlider: {fileID: 6735666738002164828}

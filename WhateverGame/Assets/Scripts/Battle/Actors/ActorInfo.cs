@@ -12,9 +12,10 @@ public class ActorInfo : MonoBehaviour
     public float vcam_offset_Y = 1.5f;
 
     [Header("Specific stats")]
+    public int level = 0;
     public BaseActorStats baseStats = new BaseActorStats();
     public BaseActorStats currentStats;
-    public ActorClass actorClass = ActorClass.MONK;
+    public ActorClass actorClass = ActorClass.MAGITEK;
 
     [Header("Bio")]
     public string actorName = "";
@@ -40,6 +41,17 @@ public class ActorInfo : MonoBehaviour
         actorSkillsList.Clear();
         actorSkillsList.AddRange(skillsHolder.GetComponentsInChildren<BaseSkill>(true));
         actorReactiveSkill = reactiveHolder.GetComponentsInChildren<BaseReactiveSkill>(true)[0];
+
+        foreach (StatsGrowthScriptable classStatsGrowth in LevelAndStatsManager.GetInstance().classesStatsGrowthList)
+        {
+            if (actorClass == classStatsGrowth.actorClass)
+            {
+                baseStats = new BaseActorStats(LevelAndStatsManager.GetInstance().baseStats);
+                baseStats.AdjustStatsBasedOnLevel(classStatsGrowth.GetStatsAtLevel(level));
+                baseStats.level = level;
+                break;
+            }
+        }
 
         currentStats = new BaseActorStats(baseStats);
     }
@@ -81,20 +93,42 @@ public class BaseActorStats
         accuracy = stats.accuracy;
     }
 
+    public BaseActorStats(StatsScriptable stats)
+    {
+        healthPoint = stats.healthPoint;
+        speed = stats.speed;
+        pAtk = stats.pAtk;
+        mAtk = stats.mAtk;
+        pDef = stats.pDef;
+        mDef = stats.mDef;
+        jump = stats.jump;
+        dodgeChance = stats.dodgeChance;
+        blockChance = stats.blockChance;
+        critChance = stats.critChance;
+        critResist = stats.critResist;
+        accuracy = stats.accuracy;
+    }
+
+    public void AdjustStatsBasedOnLevel(StatsScriptable stats)
+    {
+        healthPoint += stats.healthPoint;
+        speed += stats.speed;
+        pAtk += stats.pAtk;
+        mAtk += stats.mAtk;
+        pDef += stats.pDef;
+        mDef += stats.mDef;
+        jump += stats.jump;
+        dodgeChance += stats.dodgeChance;
+        blockChance += stats.blockChance;
+        critChance += stats.critChance;
+        critResist += stats.critResist;
+        accuracy += stats.accuracy;
+    }
+
     public void HealthChange(int damage)
     {
         healthPoint += damage;
     }
-}
-
-[System.Serializable]
-public enum ActorClass
-{
-    KNIGHT = 0,
-    MONK,
-    SCHOLAR,
-    BERSERKER,
-    NATURE_WITCH
 }
 
 [System.Serializable]

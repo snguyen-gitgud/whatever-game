@@ -51,7 +51,7 @@ MonoBehaviour:
   skillMaxOverLoadLevel: 3
   skillAccuracyBonus: 15
   damageTypes: 0
-  baseDamage: 1
+  baseDamageMultiplier: 1
   vcam_offset_Y: 1.5
   castingVCam: {fileID: 0}
   executingVCam: {fileID: 0}
@@ -61,7 +61,7 @@ MonoBehaviour:
   actorAnimationController: {fileID: 0}
   shake: {fileID: 0}
   skillRange: 1
-  skillCastingDuration: 0.125
+  skillCastingDuration: 0
   skillCastingVfx: {fileID: 1524292575317532, guid: de2cde6e41b30c64f8972773425f5eb3,
     type: 3}
   og_model_pos: {x: 0, y: 0, z: 0}

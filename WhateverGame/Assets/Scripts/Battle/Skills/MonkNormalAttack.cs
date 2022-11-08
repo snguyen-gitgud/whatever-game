@@ -96,9 +96,10 @@ public class MonkNormalAttack : BaseSkill
 
             shake.m_FrequencyGain = 3f;
             yield return new WaitForSeconds(.3667f);
-            textManager.Add("Combo x2", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
+            
             if (targetController != null)
             {
+                textManager.Add("Combo x2", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
                 ClashData data = ShieldHelpers.CalculateClashOutput(actorController, targetController, this, 1);
 
                 if (!data.isMiss && !data.isBlocked || data.isAmbush && !data.isBlocked)
@@ -150,9 +151,11 @@ public class MonkNormalAttack : BaseSkill
 
             shake.m_FrequencyGain = 5f;
             yield return new WaitForSeconds(.261f);
-            textManager.Add("Combo x3", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
+            
             if (targetController != null)
             {
+                textManager.Add("Combo x3", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
+
                 ClashData data = ShieldHelpers.CalculateClashOutput(actorController, targetController, this, 2);
 
                 if (!data.isMiss && !data.isBlocked || data.isAmbush && !data.isBlocked)
@@ -166,7 +169,7 @@ public class MonkNormalAttack : BaseSkill
                     if (data.isCrit) textManager.Add("Critical hit", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
                     textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
 
-                    ShieldHelpers.ChangeStamina(targetController, -2);
+                    ShieldHelpers.ChangeStamina(actorController, 2);
                     textManager.Add("-2AP", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "status");
 
                     shake.m_AmplitudeGain = 1f;
@@ -230,7 +233,7 @@ public class MonkNormalAttack : BaseSkill
 
         ret.chance_val = ((caster.actorStats.currentStats.accuracy + this.skillAccuracyBonus) - target.actorStats.currentStats.dodgeChance) / 100f;
         ret.chance_text = (ret.chance_val * 100f) + "%";
-        ret.value = "DMG : " + sum + " HP";
+        ret.value = "-" + sum + " HP";
         return ret;
     }
 }

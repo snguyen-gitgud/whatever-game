@@ -147,36 +147,39 @@ public class BaseSkill : MonoBehaviour
 
     public virtual IEnumerator PincerSkill()
     {
-        ActorController pincer_actor = null;
-        List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, 2, targetController.actorTeams, true);
-        foreach (GridUnit tile in pincer_range)
+        if (targetController != null)
         {
-            if (tile.occupiedActor != null)
+            ActorController pincer_actor = null;
+            List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, 2, targetController.actorTeams, true);
+            foreach (GridUnit tile in pincer_range)
             {
-                if (Vector3.Dot(Vector3.ProjectOnPlane(tile.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up),
-                                Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up))
-                    <= -0.9f)
+                if (tile.occupiedActor != null)
                 {
-                    if (tile.occupiedActor.actorTeams == actorController.actorTeams)
-                        pincer_actor = tile.occupiedActor;
-                    break;
+                    if (Vector3.Dot(Vector3.ProjectOnPlane(tile.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up),
+                                    Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up))
+                        <= -0.9f)
+                    {
+                        if (tile.occupiedActor.actorTeams == actorController.actorTeams)
+                            pincer_actor = tile.occupiedActor;
+                        break;
+                    }
                 }
             }
-        }
 
-        if (pincer_actor != null)
-        {
-            BaseSkill pincer_skill = pincer_actor.actorStats.actorNormalAttack;
-            pincer_skill.isReactive = true;
-            pincer_skill.CastingSkill(pincer_actor, skillOverLoadLevel, targetController.occupied_grid_unit);
-            pincer_skill.Executekill(true);
-            yield return StartCoroutine(pincer_skill.ExecuteSkillSequence());
+            if (pincer_actor != null)
+            {
+                BaseSkill pincer_skill = pincer_actor.actorStats.actorNormalAttack;
+                pincer_skill.isReactive = true;
+                pincer_skill.CastingSkill(pincer_actor, skillOverLoadLevel, targetController.occupied_grid_unit);
+                pincer_skill.Executekill(true);
+                yield return StartCoroutine(pincer_skill.ExecuteSkillSequence());
 
-            pincer_skill.isReactive = false;
-            yield return new WaitForSeconds(1f);
-            pincer_actor.actorStats.actorNormalAttack.castingVCam.Priority = 0;
-            pincer_actor.actorStats.actorNormalAttack.executingVCam.Priority = 0;
-            pincer_actor.actorAnimationController.PlayIdle();
+                pincer_skill.isReactive = false;
+                yield return new WaitForSeconds(1f);
+                pincer_actor.actorStats.actorNormalAttack.castingVCam.Priority = 0;
+                pincer_actor.actorStats.actorNormalAttack.executingVCam.Priority = 0;
+                pincer_actor.actorAnimationController.PlayIdle();
+            }
         }
     }
 
