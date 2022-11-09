@@ -59,6 +59,7 @@
     <Compile Include="Assets\UniGLTF\Samples\UniHumanoid\RuntimeBvhLoader.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\ActorController.cs" />
     <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Demo\Scripts\TextDamageClicker.cs" />
+    <Compile Include="Assets\Scripts\Stats\StatsGrowthScriptable.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\ColorGradingCurve.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ECCameraShake.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Components\ScreenSpaceReflectionComponent.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Assets\PostProcessing\Runtime\Models\BloomModel.cs" />
     <Compile Include="Assets\Scriptables\Classes\ScriptableActorClass.cs" />
     <Compile Include="Assets\Scripts\Common\StatusManager.cs" />
+    <Compile Include="Assets\Scripts\Stats\LevelAndStatsManager.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\BattleActorDetails.cs" />
     <Compile Include="Assets\3rdParty\VFX\Pixelation\Example\Scripts\PointLight.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Components\FxaaComponent.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Demo\Scripts\Helpers\RandomizeOffsetX.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\DitheringModel.cs" />
     <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Scripts\UltimateTextDamageManager.cs" />
+    <Compile Include="Assets\Scripts\Stats\StatsScriptable.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\ActorAnimationController.cs" />
     <Compile Include="Assets\3rdParty\Stylized 3D Tools\Scripts\Rotator.cs" />
@@ -172,9 +175,6 @@
     <Compile Include="Assets\Scripts\Common\SelfSpinning.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\nextEffectMeleeCombat.cs" />
-    <Compile Include="Assets\Scripts\Stats\StatsScriptable.cs" />
-    <Compile Include="Assets\Scripts\Stats\LevelAndStatsManager.cs" />
-    <Compile Include="Assets\Scripts\Stats\StatsGrowthScriptable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />

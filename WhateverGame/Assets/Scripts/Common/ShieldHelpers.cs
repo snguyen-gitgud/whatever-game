@@ -41,6 +41,9 @@ public static class ShieldHelpers
             ret.output = (int)(((skill.baseDamageMultiplier * (caster.actorStats.currentStats.pAtk + caster.actorStats.currentStats.mAtk)) * bonus_multiplier));
         }
 
+        if (ret.output < 0)
+            ret.output = 1;
+
         if (ShieldHelpers.GetRandomNumber(0, 100) < (caster.actorStats.currentStats.accuracy + skill.skillAccuracyBonus) - target.actorStats.currentStats.dodgeChance)
             ret.isMiss = false;
         else

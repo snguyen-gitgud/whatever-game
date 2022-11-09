@@ -170,7 +170,7 @@ public class MonkNormalAttack : BaseSkill
                     textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
 
                     ShieldHelpers.ChangeStamina(actorController, 2);
-                    textManager.Add("-2AP", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "status");
+                    textManager.Add("+2 Stamina", actorController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "status");
 
                     shake.m_AmplitudeGain = 1f;
                     Time.timeScale = 0.1f * BattleMaster.GetInstance().baseTimeScale;
