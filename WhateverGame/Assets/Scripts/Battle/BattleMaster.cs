@@ -223,7 +223,7 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
         announceText.text = txt;
         announceObj.transform.GetChild(0).GetComponent<Image>().color = color;
         announceObj.transform.DOScaleY(1f, 0.25f).OnComplete(() => {
-            announceObj.transform.DOScaleY(0f, 0.25f).SetDelay(2f);
+            announceObj.transform.DOScaleY(0f, 0.25f).SetDelay(1f);
         });
 
         if (icon != null)

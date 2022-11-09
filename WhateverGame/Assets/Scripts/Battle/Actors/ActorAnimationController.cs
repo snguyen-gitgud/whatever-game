@@ -7,9 +7,19 @@ public class ActorAnimationController : MonoBehaviour
     public Animator animator;
     public EquippedWeaponTypes weaponTypes = EquippedWeaponTypes.UNARMED;
     public BodyTypes bodyTypes = BodyTypes.FEMALE;
+    public ActorInfo actorInfo;
+
+    private void Start()
+    {
+        actorInfo = this.GetComponent<ActorInfo>();
+    }
 
     public void PlayIdle()
     {
+        if (actorInfo == null)
+            actorInfo = this.GetComponent<ActorInfo>();
+
+        animator.SetFloat("Speed", (actorInfo.currentStats.speed * 1f) / 100f);
         animator.SetFloat("EquippedWeaponType", (int)weaponTypes * 1f);
         animator.SetFloat("Gender", (int)bodyTypes * 1f);
 

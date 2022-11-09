@@ -3351,6 +3351,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnloadCommand
       objectReference: {fileID: 0}
+    - target: {fileID: 1062302725495653986, guid: e63554835141e88439a44b4ace73e49f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6723350580322964418, guid: e63554835141e88439a44b4ace73e49f,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -3490,6 +3495,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OverloadAction
+      objectReference: {fileID: 0}
+    - target: {fileID: 1903771294957952545, guid: d66fb56a2f45b3d4ab4d8e0ab31c21bb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4078750840799191304, guid: d66fb56a2f45b3d4ab4d8e0ab31c21bb,
         type: 3}

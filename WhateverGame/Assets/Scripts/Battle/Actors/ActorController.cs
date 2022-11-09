@@ -468,53 +468,69 @@ public class ActorController : MonoBehaviour
 
         if (currentChosenSkill == null) //new turn
         {
-            Debug.Log(actor.gameObject.name + " starts turn.");
-            vcam.Priority = 11;
-
-            if (ap_bank < 0)
-                BattleMaster.GetInstance().OnShowAnnounce("Stamina reduced", actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor, StatusManager.GetInstance().GetStatusIconSprite(StatusManager.StatusIcons.AP_DECREASE));
-            else if (ap_bank > 0)
-                BattleMaster.GetInstance().OnShowAnnounce("Stamina increased", actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor, StatusManager.GetInstance().GetStatusIconSprite(StatusManager.StatusIcons.AP_INCREASE));
-
-            actorStats.staminaPoint = actorStats.maxStaminaPoint + ap_bank;
-            actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
-
-            actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
-            foreach (Transform child in commandControlUI.transform.GetChild(1))
-            {
-                if (child.GetComponent<Image>() != null)
-                    child.GetComponent<Image>().color = Color.white;
-                foreach (Transform grandchild in child)
-                    grandchild.GetComponent<Image>().color = Color.white;
-            }
-            DOTween.Kill(commandControlUI.transform);
-            commandControlUI.transform.DOScale(Vector3.one, .25f);
-
-            if (vcam_target != null)
-                DOTween.Kill(vcam_target);
-
-            vcam_target = vcamTarget.DOMove(this.transform.position, 1f);
-
-            actorDetails.SetDisplayData(actorStats.actorPortrait, actorStats.actorName, actorStats.currentStats.level, actorStats.currentStats.healthPoint, actorStats.baseStats.healthPoint, actorUI.apBar.fillAmount, actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
-            actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
-
-            actorDetails.actorStaminaSlider.fillAmount = ((actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f)) * 0.5f;
-            int ap_cost = actorStats.staminaPoint;
-            apText.text = ap_cost.ToString();
-
-            actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
-            actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
-
-            is_moved = false;
-            is_acted = false;
+            StartCoroutine(StartTurnSequence(actor));
         }
         else //continue casting
         {
             actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
             vcam.Priority = 11;
             //actorUI.headerHolder.gameObject.SetActive(false);
-            currentChosenSkill.Executekill();
+            currentChosenSkill.ExecuteSkill();
         }
+    }
+
+    IEnumerator StartTurnSequence(ActorController actor)
+    {
+        foreach (Transform status_obj in actorStats.statusesHolder)
+        {
+            BaseStatus status = status_obj.GetComponent<BaseStatus>();
+            if (status != null)
+            {
+                BattleMaster.GetInstance().OnShowAnnounce(status.name, actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor, status.sprite);
+                status.ProcStatus(this, actorStats);
+                yield return new WaitForSeconds(1f);
+            }
+        }
+        yield return null;
+        Debug.Log(actor.gameObject.name + " starts turn.");
+        vcam.Priority = 11;
+
+        if (ap_bank < 0)
+            BattleMaster.GetInstance().OnShowAnnounce("Stamina reduced", actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor, StatusManager.GetInstance().GetStatusIconSprite(StatusManager.StatusIcons.AP_DECREASE));
+        else if (ap_bank > 0)
+            BattleMaster.GetInstance().OnShowAnnounce("Stamina increased", actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor, StatusManager.GetInstance().GetStatusIconSprite(StatusManager.StatusIcons.AP_INCREASE));
+
+        actorStats.staminaPoint = actorStats.maxStaminaPoint + ap_bank;
+        actorUI.apPoints.fillAmount = (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
+
+        actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
+        foreach (Transform child in commandControlUI.transform.GetChild(1))
+        {
+            if (child.GetComponent<Image>() != null)
+                child.GetComponent<Image>().color = Color.white;
+            foreach (Transform grandchild in child)
+                grandchild.GetComponent<Image>().color = Color.white;
+        }
+        DOTween.Kill(commandControlUI.transform);
+        commandControlUI.transform.DOScale(Vector3.one, .25f);
+
+        if (vcam_target != null)
+            DOTween.Kill(vcam_target);
+
+        vcam_target = vcamTarget.DOMove(this.transform.position, 1f);
+
+        actorDetails.SetDisplayData(actorStats.actorPortrait, actorStats.actorName, actorStats.currentStats.level, actorStats.currentStats.healthPoint, actorStats.baseStats.healthPoint, actorUI.apBar.fillAmount, actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
+        actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
+
+        actorDetails.actorStaminaSlider.fillAmount = ((actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f)) * 0.5f;
+        int ap_cost = actorStats.staminaPoint;
+        apText.text = ap_cost.ToString();
+
+        actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
+        actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
+
+        is_moved = false;
+        is_acted = false;
     }
 
     new Camera camera;
@@ -801,6 +817,15 @@ public class ActorController : MonoBehaviour
         //    actorControlStates = ActorControlStates.BURNED_OUT_GEN;
         //    actorAnimationController.PlayBurnOut();
         //}
+
+        foreach (Transform status_obj in actorStats.statusesHolder)
+        {
+            BaseStatus status = status_obj.GetComponent<BaseStatus>();
+            if (status != null)
+            {
+                status.CheckClearStatus();
+            }
+        }
 
         DOTween.Kill(commandControlUI.transform);
         commandControlUI.transform.DOScale(Vector3.zero, .25f);

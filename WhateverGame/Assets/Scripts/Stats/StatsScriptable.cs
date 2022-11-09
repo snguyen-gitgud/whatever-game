@@ -140,24 +140,3 @@ public class StatsScriptable : ScriptableObject
     }
 }
 
-[System.Serializable]
-public enum ActorClass
-{
-    //tier 1 classes
-    MAGITEK = 0,
-    BRAWLER,
-    ARCHER,
-    PRIEST,
-    SCHOLAR,
-    WITCH,
-    THIEF,
-
-    //tier 2 classes
-
-    //tier 3 classes
-
-    //tier 4 classes
-
-    //tier 5 classes
-
-}

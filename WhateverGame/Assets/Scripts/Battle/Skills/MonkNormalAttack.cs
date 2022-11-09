@@ -18,7 +18,7 @@ public class MonkNormalAttack : BaseSkill
         actorAnimationController.PlayCasting();
     }
 
-    public override void Executekill(bool is_pincer = false)
+    public override void ExecuteSkill(bool is_pincer = false)
     {
         Vector3 new_forward = actorController.transform.GetChild(0).forward;
         new_forward = Vector3.ProjectOnPlane(targetGridUnit.cachedWorldPos - actorController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
@@ -26,7 +26,7 @@ public class MonkNormalAttack : BaseSkill
         //og_model_pos = actorController.transform.GetChild(0).position;
         //actorController.transform.GetChild(0).position += new_forward;
 
-        base.Executekill(is_pincer);
+        base.ExecuteSkill(is_pincer);
         //Debug.Log(actorController.gameObject.name + " executing Monk normal attack.");
     }
 
@@ -59,7 +59,7 @@ public class MonkNormalAttack : BaseSkill
                 if (data.isCrit) textManager.Add("Critical hit", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
                 textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
                 shake.m_AmplitudeGain = 1f;
-                Time.timeScale = 0.1f * BattleMaster.GetInstance().baseTimeScale;
+                Time.timeScale = 0.01f * BattleMaster.GetInstance().baseTimeScale;
                 yield return new WaitForSecondsRealtime(.1f);
                 Time.timeScale = BattleMaster.GetInstance().baseTimeScale;
                 shake.m_AmplitudeGain = 0f;
@@ -70,6 +70,10 @@ public class MonkNormalAttack : BaseSkill
                 textManager.Add("Miss", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
 
                 targetController.actorAnimationController.PlayDodge();
+
+                Vector3 new_forward = targetController.transform.GetChild(0).forward;
+                new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
+                targetController.transform.GetChild(0).forward = new_forward;
             }
             else if (data.isBlocked)
             {
@@ -113,7 +117,7 @@ public class MonkNormalAttack : BaseSkill
                     if (data.isCrit) textManager.Add("Critical hit", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
                     textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
                     shake.m_AmplitudeGain = 1f;
-                    Time.timeScale = 0.1f * BattleMaster.GetInstance().baseTimeScale;
+                    Time.timeScale = 0.01f * BattleMaster.GetInstance().baseTimeScale;
                     yield return new WaitForSecondsRealtime(.25f);
                     Time.timeScale = BattleMaster.GetInstance().baseTimeScale;
                     shake.m_AmplitudeGain = 0f;
@@ -124,6 +128,10 @@ public class MonkNormalAttack : BaseSkill
                     textManager.Add("Miss", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
 
                     targetController.actorAnimationController.PlayDodge();
+
+                    Vector3 new_forward = targetController.transform.GetChild(0).forward;
+                    new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
+                    targetController.transform.GetChild(0).forward = new_forward;
                 }
                 else if (data.isBlocked)
                 {
@@ -173,7 +181,7 @@ public class MonkNormalAttack : BaseSkill
                     textManager.Add("+2 Stamina", actorController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "status");
 
                     shake.m_AmplitudeGain = 1f;
-                    Time.timeScale = 0.1f * BattleMaster.GetInstance().baseTimeScale;
+                    Time.timeScale = 0.01f * BattleMaster.GetInstance().baseTimeScale;
                     yield return new WaitForSecondsRealtime(.5f);
                     Time.timeScale = BattleMaster.GetInstance().baseTimeScale;
                     shake.m_AmplitudeGain = 0f;
@@ -184,6 +192,10 @@ public class MonkNormalAttack : BaseSkill
                     textManager.Add("Miss", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
 
                     targetController.actorAnimationController.PlayDodge();
+
+                    Vector3 new_forward = targetController.transform.GetChild(0).forward;
+                    new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
+                    targetController.transform.GetChild(0).forward = new_forward;
                 }
                 else if (data.isBlocked)
                 {

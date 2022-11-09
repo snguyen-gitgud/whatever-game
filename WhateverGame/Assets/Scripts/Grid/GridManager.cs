@@ -331,6 +331,16 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
     {
         if (current_highlighted_grid_unit != null && current_highlighted_grid_unit.occupiedActor != null)
         {
+            foreach (Transform child in actorDetails.parent.GetComponent<BattleActorDetails>().statusIconsHolder)
+            {
+                Destroy(child.gameObject);
+            }
+
+            foreach (Transform child in current_highlighted_grid_unit.occupiedActor.actorDetails.statusIconsHolder)
+            {
+                Instantiate(child.gameObject, actorDetails.parent.GetComponent<BattleActorDetails>().statusIconsHolder);
+            }
+
             actorDetails.DOLocalMoveX(-250f, 0.25f);
             actorDetails.parent.GetComponent<BattleActorDetails>().SetDisplayData(current_highlighted_grid_unit.occupiedActor.actorStats.actorPortrait,
                                                                            current_highlighted_grid_unit.occupiedActor.actorStats.actorName,

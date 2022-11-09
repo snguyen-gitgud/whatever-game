@@ -76,9 +76,12 @@ public class BaseSkill : MonoBehaviour
 
         if (skillCastingVfx != null)
             skillCastingVfxObj = Instantiate(skillCastingVfx, actorController.transform.GetChild(0));
+
+        //if (skillCastingDuration == 0f)
+        //    ExecuteSkill();
     }
 
-    public virtual void Executekill(bool is_pincer = false)
+    public virtual void ExecuteSkill(bool is_pincer = false)
     {
         actorController.actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
         actorController.actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
@@ -171,7 +174,7 @@ public class BaseSkill : MonoBehaviour
                 BaseSkill pincer_skill = pincer_actor.actorStats.actorNormalAttack;
                 pincer_skill.isReactive = true;
                 pincer_skill.CastingSkill(pincer_actor, skillOverLoadLevel, targetController.occupied_grid_unit);
-                pincer_skill.Executekill(true);
+                pincer_skill.ExecuteSkill(true);
                 yield return StartCoroutine(pincer_skill.ExecuteSkillSequence());
 
                 pincer_skill.isReactive = false;

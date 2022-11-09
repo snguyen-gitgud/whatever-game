@@ -54,7 +54,7 @@ public static class ShieldHelpers
         else
             ret.isBlocked = false;
 
-        if (ShieldHelpers.GetRandomNumber(0, 100) < caster.actorStats.currentStats.critChance - target.actorStats.currentStats.critResist && bypass_crit == false)
+        if (ShieldHelpers.GetRandomNumber(0, 100) < (caster.actorStats.currentStats.critChance + (ret.isAmbush == true? 10 : 0)) - target.actorStats.currentStats.critResist && bypass_crit == false)
         {
             ret.output *= 2;
             ret.isCrit = true;
@@ -66,7 +66,6 @@ public static class ShieldHelpers
         {
             ret.output *= 3;
             ret.output /= 2;
-            ret.isMiss = false;
             ret.isBlocked = false;
         }
 

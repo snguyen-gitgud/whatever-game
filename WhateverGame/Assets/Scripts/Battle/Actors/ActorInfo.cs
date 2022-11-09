@@ -13,9 +13,9 @@ public class ActorInfo : MonoBehaviour
 
     [Header("Specific stats")]
     public int level = 0;
+    public List<ClassLevelData> classLevelDatas = new List<ClassLevelData>();
     public BaseActorStats baseStats = new BaseActorStats();
     public BaseActorStats currentStats;
-    public ActorClass actorClass = ActorClass.MAGITEK;
 
     [Header("Bio")]
     public string actorName = "";
@@ -33,6 +33,16 @@ public class ActorInfo : MonoBehaviour
     public List<BaseSkill> actorSkillsList = new List<BaseSkill>();
     public BaseReactiveSkill actorReactiveSkill;
 
+    [Header("Equipments")]
+    public Transform rightHandHolder;
+    public Transform leftHandHolder;
+    public Transform bodyHolder;
+    public Transform accessory1Holder;
+    public Transform accessory2Holder;
+
+    [Header("Statuses")]
+    public Transform statusesHolder;
+
     //internals
 
     private void Start()
@@ -42,17 +52,24 @@ public class ActorInfo : MonoBehaviour
         actorSkillsList.AddRange(skillsHolder.GetComponentsInChildren<BaseSkill>(true));
         actorReactiveSkill = reactiveHolder.GetComponentsInChildren<BaseReactiveSkill>(true)[0];
 
-        foreach (StatsGrowthScriptable classStatsGrowth in LevelAndStatsManager.GetInstance().classesStatsGrowthList)
+        level = 0;
+        baseStats = new BaseActorStats(LevelAndStatsManager.GetInstance().baseStats);
+        foreach (ClassLevelData level_data in classLevelDatas)
         {
-            if (actorClass == classStatsGrowth.actorClass)
+            level += level_data.level;
+
+            foreach (StatsGrowthScriptable classStatsGrowth in LevelAndStatsManager.GetInstance().classesStatsGrowthList)
             {
-                baseStats = new BaseActorStats(LevelAndStatsManager.GetInstance().baseStats);
-                baseStats.AdjustStatsBasedOnLevel(classStatsGrowth.GetStatsAtLevel(level));
-                baseStats.level = level;
-                break;
+                if (level_data.classID == classStatsGrowth.actorClass)
+                {
+                    baseStats.AdjustStatsBasedOnLevel(classStatsGrowth.GetStatsAtLevel(level_data.level));
+                    
+                    break;
+                }
             }
         }
 
+        baseStats.level = level;
         currentStats = new BaseActorStats(baseStats);
     }
 }
