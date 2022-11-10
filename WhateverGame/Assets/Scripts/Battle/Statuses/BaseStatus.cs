@@ -9,6 +9,7 @@ public class BaseStatus : MonoBehaviour
     public new string name = "";
     public int duration = 3;
     public Sprite sprite;
+    public GameObject vfx;
 
     public bool is_applied = false;
 
@@ -22,8 +23,15 @@ public class BaseStatus : MonoBehaviour
             ui_icon = Instantiate(actorController.actorDetails.statusIconPref, actorController.actorDetails.statusIconsHolder);
             ui_icon.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
 
+            GameObject go = GameObject.FindGameObjectWithTag("TextDamage");
+            Guirao.UltimateTextDamage.UltimateTextDamageManager textManager = go.GetComponent<Guirao.UltimateTextDamage.UltimateTextDamageManager>();
+            textManager.Add(name, actorController.transform.GetChild(0).position + Vector3.up * actorController.actorStats.vcam_offset_Y, "status");
+
             is_applied = true;
         }
+
+        if (vfx != null)
+            Instantiate(vfx, this.transform.position + Vector3.up * 1.5f, new Quaternion(), this.transform);
         
         duration--;
     }
@@ -49,7 +57,7 @@ public enum Statuses
     PARALIZE, //50% stun
     DAMP, //remove buffs + increase lightning dmg + reduce fire dmg
     ROOTED, //prevent move
-    STUN, //skip turn
+    STUN, //skip turn, cancel casting
     FOCUS, //+50% ACC
     BLIND, //-50% ACC
     DOOM, //death on timer
@@ -74,4 +82,6 @@ public enum Statuses
 
     BERSERKER, //player lose control and actor only use normal attack automatically at full overload
     SILENCED, //player cannot use skill
+
+    SLEEP, //stop AP gen
 }

@@ -222,8 +222,8 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
         DOTween.Kill(announceObj);
         announceText.text = txt;
         announceObj.transform.GetChild(0).GetComponent<Image>().color = color;
-        announceObj.transform.DOScaleY(1f, 0.25f).OnComplete(() => {
-            announceObj.transform.DOScaleY(0f, 0.25f).SetDelay(1f);
+        announceObj.transform.DOScaleY(1f, 0.125f).OnComplete(() => {
+            announceObj.transform.DOScaleY(0f, 0.125f).SetDelay(1f);
         });
 
         if (icon != null)

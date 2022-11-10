@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Stats\LevelAndStatsManager.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\BattleActorDetails.cs" />
     <Compile Include="Assets\3rdParty\VFX\Pixelation\Example\Scripts\PointLight.cs" />
+    <Compile Include="Assets\Scripts\Battle\Statuses\BaseStatus.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Components\FxaaComponent.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\Projectile.cs" />
     <Compile Include="Assets\Scripts\Battle\ReactiveSkills\CounterReactiveSkill.cs" />
@@ -170,13 +171,12 @@
     <Compile Include="Assets\PostProcessing\Runtime\Models\ColorGradingModel.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\ScreenSpaceReflectionModel.cs" />
     <Compile Include="Assets\Scripts\Battle\ReactiveSkills\BaseReactiveSkill.cs" />
+    <Compile Include="Assets\Scripts\Battle\Statuses\AttackStatus.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Components\FogComponent.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\DepthOfFieldModel.cs" />
     <Compile Include="Assets\Scripts\Common\SelfSpinning.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\nextEffectMeleeCombat.cs" />
-    <Compile Include="Assets\Scripts\Battle\Statuses\BaseStatus.cs" />
-    <Compile Include="Assets\Scripts\Battle\Statuses\AttackStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />

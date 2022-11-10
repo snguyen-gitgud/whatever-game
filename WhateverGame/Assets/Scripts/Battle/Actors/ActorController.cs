@@ -488,7 +488,7 @@ public class ActorController : MonoBehaviour
             {
                 BattleMaster.GetInstance().OnShowAnnounce(status.name, actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor, status.sprite);
                 status.ProcStatus(this, actorStats);
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(1.5f);
             }
         }
         yield return null;
