@@ -31,7 +31,7 @@ public class BaseStatus : MonoBehaviour
         }
 
         if (vfx != null)
-            Instantiate(vfx, this.transform.position + Vector3.up * 1.5f, new Quaternion(), this.transform);
+            Instantiate(vfx, this.transform);
         
         duration--;
     }

@@ -48,5 +48,6 @@ MonoBehaviour:
   name: Fear
   duration: 3
   sprite: {fileID: -760079727, guid: f12f55fe628b95a4fbddd0812b335653, type: 3}
+  vfx: {fileID: 9217644744154306737, guid: e326717217f4a0745a14c6b59cc2e8be, type: 3}
   is_applied: 0
   atkChangePercentage: -10

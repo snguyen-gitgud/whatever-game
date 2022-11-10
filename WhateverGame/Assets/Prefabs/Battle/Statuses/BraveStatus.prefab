@@ -48,4 +48,6 @@ MonoBehaviour:
   name: Brave
   duration: 3
   sprite: {fileID: -1993752890, guid: f12f55fe628b95a4fbddd0812b335653, type: 3}
+  vfx: {fileID: 3711260003886648451, guid: dcdb913d47485544c832e8955611abf3, type: 3}
+  is_applied: 0
   atkChangePercentage: 10
