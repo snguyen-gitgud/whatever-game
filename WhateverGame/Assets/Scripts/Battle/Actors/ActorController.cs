@@ -449,7 +449,7 @@ public class ActorController : MonoBehaviour
 
         vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
 
-        actorStats.apBar += (actorStats.baseSpeed * (actorStats.currentStats.speed * 0.01f)) * Time.deltaTime /** Mathf.Abs(stam_regen_rate + 1f)*/;
+        actorStats.apBar += (actorStats.baseSpeed * ((actorStats.currentStats.speed + ap_bank) * 0.01f)) * Time.deltaTime /** Mathf.Abs(stam_regen_rate + 1f)*/;
         actorUI.apBar.fillAmount = actorStats.apBar / 100f;
 
         if (actorStats.apBar >= 100f)
@@ -488,7 +488,7 @@ public class ActorController : MonoBehaviour
             {
                 BattleMaster.GetInstance().OnShowAnnounce(status.name, actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor, status.sprite);
                 status.ProcStatus(this, actorStats);
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(2f);
             }
         }
         yield return null;
