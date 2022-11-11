@@ -25,6 +25,7 @@ public class ActorAnimationController : MonoBehaviour
 
         animator.CrossFadeInFixedTime("Locomotion", .25f);
         animator.SetFloat("Move", 0f);
+        animator.SetBool("IsCasting", false);
     }
 
     public void PlayMove()
@@ -74,6 +75,7 @@ public class ActorAnimationController : MonoBehaviour
         animator.SetFloat("Gender", (int)bodyTypes * 1f);
 
         animator.CrossFadeInFixedTime("Casting", .25f);
+        animator.SetBool("IsCasting", true);
     }
 
     public void PlayUnarmedAttack_1()
