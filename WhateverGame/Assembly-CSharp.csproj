@@ -150,6 +150,7 @@
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\EffectActor.cs" />
     <Compile Include="Assets\3rdParty\VFX\Pixelation\Scripts\Pixelation.cs" />
     <Compile Include="Assets\3rdParty\VFX\Pixelation\Example\Scripts\Plane.cs" />
+    <Compile Include="Assets\Scripts\Battle\Statuses\DOTStatus.cs" />
     <Compile Include="Assets\Scripts\Common\SelfBlinkingUI.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\GraphicsUtils.cs" />
@@ -177,7 +178,6 @@
     <Compile Include="Assets\Scripts\Common\SelfSpinning.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\nextEffectMeleeCombat.cs" />
-    <Compile Include="Assets\Scripts\Battle\Statuses\DOTStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />

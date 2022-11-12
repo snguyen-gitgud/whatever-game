@@ -166,14 +166,27 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
             actor.vcam.Priority = 0;
         }
 
-        gridManager.gridCur.transform.position = action_queue[0].occupied_grid_unit.cachedWorldPos + Vector3.up * gridManager.gridUnitSize * 0.5f;
-        action_queue[0].vcamTransposer.m_FollowOffset = vcamFollowOffset;
-        action_queue[0].vcamTransposer.m_XAxis.Value = vcamXAxisValue;
+        if (last_actor.currentChosenSkill != null && last_actor.currentChosenSkill.skillCastingDuration == 0f)
+        {
+            gridManager.gridCur.transform.position = last_actor.occupied_grid_unit.cachedWorldPos + Vector3.up * gridManager.gridUnitSize * 0.5f;
+            last_actor.vcamTransposer.m_FollowOffset = vcamFollowOffset;
+            last_actor.vcamTransposer.m_XAxis.Value = vcamXAxisValue;
 
-        action_queue[0].StartTurn(action_queue[0]);
-        last_actor = action_queue[0];
-        action_queue.RemoveAt(0);
-        action_queue.TrimExcess();
+            last_actor.StartTurn(last_actor);
+            action_queue.Remove(last_actor);
+            action_queue.TrimExcess();
+        }
+        else
+        {
+            gridManager.gridCur.transform.position = action_queue[0].occupied_grid_unit.cachedWorldPos + Vector3.up * gridManager.gridUnitSize * 0.5f;
+            action_queue[0].vcamTransposer.m_FollowOffset = vcamFollowOffset;
+            action_queue[0].vcamTransposer.m_XAxis.Value = vcamXAxisValue;
+
+            action_queue[0].StartTurn(action_queue[0]);
+            last_actor = action_queue[0];
+            action_queue.RemoveAt(0);
+            action_queue.TrimExcess();
+        }
     }
 
     private void Update()

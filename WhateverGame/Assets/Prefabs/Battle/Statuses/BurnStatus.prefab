@@ -50,4 +50,4 @@ MonoBehaviour:
   sprite: {fileID: 1320088647, guid: f12f55fe628b95a4fbddd0812b335653, type: 3}
   vfx: {fileID: 460069115281322095, guid: aef94722704fe9247b0094a86e21bc4f, type: 3}
   is_applied: 0
-  hpChangePercentage: 6
+  hpChangePercentage: -6
