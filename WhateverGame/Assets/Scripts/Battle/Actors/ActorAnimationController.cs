@@ -101,6 +101,13 @@ public class ActorAnimationController : MonoBehaviour
 
         animator.CrossFadeInFixedTime("UnarmedAttack_3", .01f);
     }
+
+    public void PlayUnarmedBuff()
+    {
+        animator.SetFloat("EquippedWeaponType", (int)weaponTypes * 1f);
+        animator.SetFloat("Gender", (int)bodyTypes * 1f);
+        animator.CrossFadeInFixedTime("UnarmedBuff", .01f);
+    }    
 }
 
 [System.Serializable]

@@ -123,6 +123,7 @@
     <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\ActorAnimationController.cs" />
     <Compile Include="Assets\3rdParty\Stylized 3D Tools\Scripts\Rotator.cs" />
+    <Compile Include="Assets\Scripts\Battle\Skills\AttackStatsSkill.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ECCameraShakeProjectile.cs" />
     <Compile Include="Assets\Scripts\Common\CurvedLineRenderer.cs" />
     <Compile Include="Assets\Scripts\Common\BattleInputs.cs" />

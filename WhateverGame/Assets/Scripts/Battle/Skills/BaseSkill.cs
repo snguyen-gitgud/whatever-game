@@ -33,7 +33,8 @@ public class BaseSkill : MonoBehaviour
     public CinemachineBasicMultiChannelPerlin shake;
 
     [Header("Common VFX")]
-    [Range(1, 10)] public int skillRange = 1;
+    [Range(0, 10)] public int skillRange = 1;
+    public bool includeSelfCast = false;
     public float skillCastingDuration = 0.5f;
     public GameObject skillCastingVfx;
 
@@ -207,7 +208,9 @@ public enum DamageTypes
     PHYSICAL,
     MAGICAL,
     MIXED,
-    PURE
+    PURE,
+
+    BUFF
 }
 
 public enum SkillTypes

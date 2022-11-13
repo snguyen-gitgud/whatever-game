@@ -26,11 +26,14 @@ public class ActorInfo : MonoBehaviour
     public int staminaPoint = 6;
 
     [Header("Abilities")]
+    public ActorClass mainActorClass = ActorClass.BRAWLER;
     public Transform normalAttackHolder;
-    public Transform skillsHolder;
+    public Transform mainClassSkillsHolder;
+    public Transform subClassSkillsHolder;
     public Transform reactiveHolder;
     public BaseSkill actorNormalAttack;
-    public List<BaseSkill> actorSkillsList = new List<BaseSkill>();
+    public List<BaseSkill> actorMainSkillsList = new List<BaseSkill>();
+    public List<BaseSkill> actorSubSkillsList = new List<BaseSkill>();
     public BaseReactiveSkill actorReactiveSkill;
 
     [Header("Equipments")]
@@ -48,8 +51,10 @@ public class ActorInfo : MonoBehaviour
     private void Start()
     {
         actorNormalAttack = normalAttackHolder.GetComponentsInChildren<BaseSkill>(true)[0];
-        actorSkillsList.Clear();
-        actorSkillsList.AddRange(skillsHolder.GetComponentsInChildren<BaseSkill>(true));
+        actorMainSkillsList.Clear();
+        actorMainSkillsList.AddRange(mainClassSkillsHolder.GetComponentsInChildren<BaseSkill>(true));
+        actorSubSkillsList.Clear();
+        actorSubSkillsList.AddRange(subClassSkillsHolder.GetComponentsInChildren<BaseSkill>(true));
         actorReactiveSkill = reactiveHolder.GetComponentsInChildren<BaseReactiveSkill>(true)[0];
 
         level = 0;

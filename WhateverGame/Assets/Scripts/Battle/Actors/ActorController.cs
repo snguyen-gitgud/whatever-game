@@ -223,6 +223,18 @@ public class ActorController : MonoBehaviour
             commandControlUI.transform.DOScale(Vector3.zero, .25f);
             NormalAttackCommandSelected();
         }
+
+        if (InputProcessor.GetInstance().buttonNorth)
+        {
+            if (is_acted == true)
+                return;
+
+            //TODO: catch inputs if skill list UI is on
+
+            DOTween.Kill(commandControlUI.transform);
+            commandControlUI.transform.DOScale(Vector3.zero, .25f);
+            SkillsCommandSelected();
+        }
     }
 
     List<GridUnit> skill_range_area = new List<GridUnit>();
@@ -233,9 +245,38 @@ public class ActorController : MonoBehaviour
         currentChosenSkill = actorStats.actorNormalAttack;
         skill_range_area.Clear();
         skill_range_area = BattleMaster.GetInstance().gridManager.FindArea(occupied_grid_unit, currentChosenSkill.skillRange + 1, currentChosenSkill.skillRange + 1, actorTeams, true);
+        if (currentChosenSkill.includeSelfCast == true)
+            skill_range_area.Add(occupied_grid_unit);
 
         actionPreviewUI.transform.DOScale(Vector3.one, 0.25f);
         actionPreviewBG.color = actorTeams == GridUnitOccupationStates.PLAYER_TEAM? PlayerTeamBGColor:OpponentTeamBGColor;
+        casterPortrait.sprite = actorStats.actorPortrait;
+        actionNameText.text = currentChosenSkill.skillName;
+        targetPortrait.gameObject.SetActive(false);
+        probabilityImg.gameObject.SetActive(false);
+        actionChanceText.gameObject.SetActive(false);
+        outputText.gameObject.SetActive(false);
+    }
+
+    public void SkillsCommandSelected()
+    {
+        //TODO: skill choosing logic
+
+
+    }
+
+    public void SkillCommandWaitingForTarget(BaseSkill skill)
+    {
+        actorControlStates = ActorControlStates.WAITING_FOR_TARGET;
+        current_skill_overload_level = 1;
+        currentChosenSkill = skill;
+        skill_range_area.Clear();
+        skill_range_area = BattleMaster.GetInstance().gridManager.FindArea(occupied_grid_unit, currentChosenSkill.skillRange + 1, currentChosenSkill.skillRange + 1, actorTeams, true);
+        if (currentChosenSkill.includeSelfCast == true)
+            skill_range_area.Add(occupied_grid_unit);
+
+        actionPreviewUI.transform.DOScale(Vector3.one, 0.25f);
+        actionPreviewBG.color = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
         casterPortrait.sprite = actorStats.actorPortrait;
         actionNameText.text = currentChosenSkill.skillName;
         targetPortrait.gameObject.SetActive(false);
