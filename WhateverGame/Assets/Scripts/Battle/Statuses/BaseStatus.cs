@@ -14,6 +14,7 @@ public class BaseStatus : MonoBehaviour
     public bool is_applied = false;
 
     GameObject ui_icon;
+    ActorController actor;
 
     public virtual void ProcStatus(ActorController actorController, ActorInfo info)
     {
@@ -22,6 +23,8 @@ public class BaseStatus : MonoBehaviour
             duration += 1;
             ui_icon = Instantiate(actorController.actorDetails.statusIconPref, actorController.actorDetails.statusIconsHolder);
             ui_icon.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
+
+            actor = actorController;
 
             GameObject go = GameObject.FindGameObjectWithTag("TextDamage");
             Guirao.UltimateTextDamage.UltimateTextDamageManager textManager = go.GetComponent<Guirao.UltimateTextDamage.UltimateTextDamageManager>();
@@ -40,6 +43,8 @@ public class BaseStatus : MonoBehaviour
     {
         if (duration <= 0)
         {
+            BattleMaster.GetInstance().OnShowAnnounce(name + " faded", actor.actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? actor.PlayerTeamBGColor : actor.OpponentTeamBGColor, null);
+
             Destroy(ui_icon);
             Destroy(this.gameObject);
         }

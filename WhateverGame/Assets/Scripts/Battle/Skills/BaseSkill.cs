@@ -12,6 +12,7 @@ public class BaseSkill : MonoBehaviour
     [TextArea(15, 20)] public string skillDescription = "";
 
     [Header("Skill settings")]
+    public ActorClass requiredClass = ActorClass.BRAWLER;
     public int skillStaminaCost = 2;
     public int skillOverLoadLevel = 1;
     public int skillMaxOverLoadLevel = 3;

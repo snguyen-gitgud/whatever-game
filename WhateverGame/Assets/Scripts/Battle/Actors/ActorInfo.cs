@@ -30,6 +30,8 @@ public class ActorInfo : MonoBehaviour
     public Transform normalAttackHolder;
     public Transform mainClassSkillsHolder;
     public Transform subClassSkillsHolder;
+    public GameObject skillUIPrefab;
+    public Transform skillUIsholder;
     public Transform reactiveHolder;
     public BaseSkill actorNormalAttack;
     public List<BaseSkill> actorMainSkillsList = new List<BaseSkill>();
