@@ -46,6 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Fearless
   skillDescription: '- Self buff 10% p. attack'
+  skillSlot: 1
+  skillTypes: 1
+  requiredClass: 1
   skillStaminaCost: 4
   skillOverLoadLevel: 1
   skillMaxOverLoadLevel: 1

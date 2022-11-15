@@ -12,6 +12,8 @@ public class BaseSkill : MonoBehaviour
     [TextArea(15, 20)] public string skillDescription = "";
 
     [Header("Skill settings")]
+    public SkillSlot skillSlot = SkillSlot.NORMAL;
+    public SkillTypes skillTypes = SkillTypes.OFFENSIVE;
     public ActorClass requiredClass = ActorClass.BRAWLER;
     public int skillStaminaCost = 2;
     public int skillOverLoadLevel = 1;
@@ -218,4 +220,14 @@ public enum SkillTypes
 {
     OFFENSIVE,
     SUPPORTIVE
+}
+
+public enum SkillSlot
+{
+    NORMAL,
+    MAIN_SUB,
+    PREEMPTIVE,
+    REACTIVE,
+    PASSIVE,
+    ULTIMATE
 }
