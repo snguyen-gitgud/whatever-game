@@ -8,6 +8,7 @@ using DG.Tweening;
 public class BaseSkill : MonoBehaviour
 {
     [Header("Skill id")]
+    public Sprite skillClassIcon;
     public string skillName = "";
     [TextArea(15, 20)] public string skillDescription = "";
 

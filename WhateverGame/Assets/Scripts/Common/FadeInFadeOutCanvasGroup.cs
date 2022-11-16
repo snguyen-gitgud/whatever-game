@@ -13,6 +13,8 @@ public class FadeInFadeOutCanvasGroup : MonoBehaviour
         if (canvasGroup == null)
             canvasGroup = this.GetComponent<CanvasGroup>();
 
+        canvasGroup.alpha = 0f;
+
         float alpha = 0f;
         DOTween.To(() => alpha, x => alpha = x, 1f, 0.25f)
             .OnUpdate(() => {

@@ -148,8 +148,6 @@ GameObject:
   - component: {fileID: 1550557840101052156}
   - component: {fileID: 1113704665668133625}
   - component: {fileID: 2611147098144814621}
-  - component: {fileID: 8978137867761995451}
-  - component: {fileID: 5833416769853364732}
   m_Layer: 2
   m_Name: SkillOption
   m_TagString: Untagged
@@ -257,34 +255,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75744d6dcf3295142bf93fc0498ead9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillIcon: {fileID: 0}
-  skillName: {fileID: 0}
-  skillCost: {fileID: 0}
-  skillCastTime: {fileID: 0}
---- !u!225 &8978137867761995451
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 636102751273862702}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
---- !u!114 &5833416769853364732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 636102751273862702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 559cd541687df97478c24df16503d90d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  skillIcon: {fileID: 2154706448853323225}
+  skillName: {fileID: 894075449150427121}
+  skillCost: {fileID: 7555461127750930647}
+  skillCastTime: {fileID: 7631072843810900093}
 --- !u!1 &1054888448271372114
 GameObject:
   m_ObjectHideFlags: 0

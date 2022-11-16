@@ -31,6 +31,7 @@ public class ActorInfo : MonoBehaviour
     public Transform mainClassSkillsHolder;
     public Transform subClassSkillsHolder;
     public GameObject skillUIPrefab;
+    public GameObject skillUIPaddingPrefab;
     public Transform skillUIsholder;
     public Transform reactiveHolder;
     public BaseSkill actorNormalAttack;
@@ -59,6 +60,16 @@ public class ActorInfo : MonoBehaviour
         actorSubSkillsList.AddRange(subClassSkillsHolder.GetComponentsInChildren<BaseSkill>(true));
         actorReactiveSkill = reactiveHolder.GetComponentsInChildren<BaseReactiveSkill>(true)[0];
 
+        Instantiate(skillUIPaddingPrefab, skillUIsholder.GetChild(0).GetChild(0).GetChild(0)); //padding
+        Instantiate(skillUIPaddingPrefab, skillUIsholder.GetChild(0).GetChild(0).GetChild(0)); //padding
+        foreach (BaseSkill skill in actorMainSkillsList)
+        {
+            GameObject go = Instantiate(skillUIPrefab, skillUIsholder.GetChild(0).GetChild(0).GetChild(0));
+            go.GetComponent<SkillOptionBehavior>().SetData(skill.skillClassIcon, skill.skillName, skill.skillStaminaCost, skill.skillCastingDuration);
+        }
+        Instantiate(skillUIPaddingPrefab, skillUIsholder.GetChild(0).GetChild(0).GetChild(0)); //padding
+        Instantiate(skillUIPaddingPrefab, skillUIsholder.GetChild(0).GetChild(0).GetChild(0)); //padding
+
         level = 0;
         baseStats = new BaseActorStats(LevelAndStatsManager.GetInstance().baseStats);
         foreach (ClassLevelData level_data in classLevelDatas)
@@ -78,6 +89,8 @@ public class ActorInfo : MonoBehaviour
 
         baseStats.level = level;
         currentStats = new BaseActorStats(baseStats);
+
+        skillUIsholder.gameObject.SetActive(false);
     }
 }
 

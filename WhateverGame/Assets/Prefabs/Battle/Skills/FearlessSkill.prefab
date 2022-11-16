@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e661a5fa5fea314abbc7ccc507ffb11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillClassIcon: {fileID: -972245543, guid: f12f55fe628b95a4fbddd0812b335653, type: 3}
   skillName: Fearless
   skillDescription: '- Self buff 10% p. attack'
   skillSlot: 1

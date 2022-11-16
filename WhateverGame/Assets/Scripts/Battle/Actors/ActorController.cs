@@ -195,45 +195,61 @@ public class ActorController : MonoBehaviour
     {
         vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
 
-        //commands
-        if (InputProcessor.GetInstance().buttonSouth)
+        if (actorStats.skillUIsholder.gameObject.activeSelf == true)
         {
-            if (is_moved == true)
-                return;
+            //TODO: process choosing skill
+            if (InputProcessor.GetInstance().buttonSouth ||
+                InputProcessor.GetInstance().buttonNorth)
+            {
 
-            DOTween.Kill(commandControlUI.transform);
-            commandControlUI.transform.DOScale(Vector3.zero, .25f);
-            
-            ReadyToMoveState();
+
+
+                actorStats.skillUIsholder.gameObject.SetActive(false);
+            }
         }
-
-        if (InputProcessor.GetInstance().buttonShoulderL)
+        else
         {
-            DOTween.Kill(commandControlUI.transform);
-            commandControlUI.transform.DOScale(Vector3.zero, .25f);
-            EndTurn();
-        }
+            //commands
+            if (InputProcessor.GetInstance().buttonSouth)
+            {
+                if (is_moved == true)
+                    return;
 
-        if (InputProcessor.GetInstance().buttonWest)
-        {
-            if (is_acted == true)
-                return;
+                DOTween.Kill(commandControlUI.transform);
+                commandControlUI.transform.DOScale(Vector3.zero, .25f);
 
-            DOTween.Kill(commandControlUI.transform);
-            commandControlUI.transform.DOScale(Vector3.zero, .25f);
-            NormalAttackCommandSelected();
-        }
+                ReadyToMoveState();
+            }
 
-        if (InputProcessor.GetInstance().buttonNorth)
-        {
-            if (is_acted == true)
-                return;
+            if (InputProcessor.GetInstance().buttonShoulderL)
+            {
+                DOTween.Kill(commandControlUI.transform);
+                commandControlUI.transform.DOScale(Vector3.zero, .25f);
+                EndTurn();
+            }
 
-            //TODO: catch inputs if skill list UI is on
+            if (InputProcessor.GetInstance().buttonWest)
+            {
+                if (is_acted == true)
+                    return;
 
-            DOTween.Kill(commandControlUI.transform);
-            commandControlUI.transform.DOScale(Vector3.zero, .25f);
-            SkillsCommandSelected();
+                DOTween.Kill(commandControlUI.transform);
+                commandControlUI.transform.DOScale(Vector3.zero, .25f);
+                NormalAttackCommandSelected();
+            }
+
+            if (InputProcessor.GetInstance().buttonNorth)
+            {
+                if (is_acted == true)
+                    return;
+
+                if (actorStats.skillUIsholder.gameObject.activeSelf == false)
+                {
+                    DOTween.Kill(commandControlUI.transform);
+                    commandControlUI.transform.DOScale(Vector3.zero, .25f);
+                    SkillsCommandSelected();
+                }
+            }
         }
     }
 
@@ -260,9 +276,11 @@ public class ActorController : MonoBehaviour
 
     public void SkillsCommandSelected()
     {
-        //TODO: skill choosing logic
-
-
+        actorStats.skillUIsholder.gameObject.SetActive(true);
+        foreach (Transform child in actorStats.skillUIsholder)
+        {
+            child.gameObject.SetActive(true);
+        }
     }
 
     public void SkillCommandWaitingForTarget(BaseSkill skill)
