@@ -203,7 +203,7 @@ public class ActorController : MonoBehaviour
             {
 
 
-
+                BattleMaster.GetInstance().gridManager.cursor_lock = false;
                 actorStats.skillUIsholder.gameObject.SetActive(false);
             }
         }
@@ -276,6 +276,7 @@ public class ActorController : MonoBehaviour
 
     public void SkillsCommandSelected()
     {
+        BattleMaster.GetInstance().gridManager.cursor_lock = true;
         actorStats.skillUIsholder.gameObject.SetActive(true);
         foreach (Transform child in actorStats.skillUIsholder)
         {

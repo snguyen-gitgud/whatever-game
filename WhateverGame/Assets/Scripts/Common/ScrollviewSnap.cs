@@ -1,4 +1,4 @@
-using System.Collections;
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +11,7 @@ public class ScrollviewSnap : MonoBehaviour
     List<Transform> childrenList = new List<Transform>();
     List<float> childPosList = new List<float>();
     int highlightIndex = 0;
-    int totalIndex = 0;
+    int totalIndex = 1;
     float step = 0f;
 
     private void OnEnable()
@@ -23,8 +23,8 @@ public class ScrollviewSnap : MonoBehaviour
         {
             childrenList.Add(child);
         }
-
-        step = 1f / totalIndex;
+        totalIndex = childrenList.Count;
+        step = 1f / (totalIndex - 4);
 
         for (int i = 0; i < totalIndex; i++)
         {
@@ -38,5 +38,19 @@ public class ScrollviewSnap : MonoBehaviour
 
 
         //scrollRect.verticalNormalizedPosition = 1f - closest_pos;
+    }
+
+    Tween scroller = null;
+    private void Update()
+    {
+        if (Mathf.Abs(InputProcessor.GetInstance().leftStick.z) >= 0.1f)
+        {
+            scrollRect.verticalNormalizedPosition += InputProcessor.GetInstance().leftStick.z * Time.deltaTime * 1f;
+        }
+        else
+        {
+            //TODO: snap
+            Debug.Log(scrollRect.verticalNormalizedPosition);
+        }
     }
 }
