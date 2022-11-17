@@ -10,7 +10,7 @@ public class ScrollviewSnap : MonoBehaviour
 
     List<Transform> childrenList = new List<Transform>();
     List<float> childPosList = new List<float>();
-    int highlightIndex = 0;
+    public int highlightIndex = 2;
     int totalIndex = 1;
     float step = 0f;
 
@@ -40,17 +40,40 @@ public class ScrollviewSnap : MonoBehaviour
         //scrollRect.verticalNormalizedPosition = 1f - closest_pos;
     }
 
-    Tween scroller = null;
+    Coroutine snaping_cor = null;
     private void Update()
     {
-        if (Mathf.Abs(InputProcessor.GetInstance().leftStick.z) >= 0.1f)
+        //if (Mathf.Abs(InputProcessor.GetInstance().leftStick.z) >= 0.1f)
+        //{
+        //    scrollRect.verticalNormalizedPosition += InputProcessor.GetInstance().leftStick.z * Time.deltaTime * 1f;
+        //}
+        //else
+        //{
+        //    //TODO: snap
+        //    Debug.Log(scrollRect.verticalNormalizedPosition);
+        //}
+
+        if (InputProcessor.GetInstance().leftStick.z <= -0.95f)
         {
-            scrollRect.verticalNormalizedPosition += InputProcessor.GetInstance().leftStick.z * Time.deltaTime * 1f;
+            if (highlightIndex >= childrenList.Count - 3)
+                return;
+
+            if (ScrollViewFocusFunctions.is_cor_running == true)
+                return;
+
+            highlightIndex++;
+            snaping_cor = StartCoroutine(ScrollViewFocusFunctions.FocusOnItemCoroutine(scrollRect, childrenList[highlightIndex].GetComponent<RectTransform>(), 5f));
         }
-        else
+        else if (InputProcessor.GetInstance().leftStick.z >= 0.95f)
         {
-            //TODO: snap
-            Debug.Log(scrollRect.verticalNormalizedPosition);
+            if (highlightIndex <= 2)
+                return;
+
+            if (ScrollViewFocusFunctions.is_cor_running == true)
+                return;
+
+            highlightIndex--;
+            snaping_cor = StartCoroutine(ScrollViewFocusFunctions.FocusOnItemCoroutine(scrollRect, childrenList[highlightIndex].GetComponent<RectTransform>(), 5f));
         }
     }
 }

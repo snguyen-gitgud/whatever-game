@@ -19,7 +19,7 @@ public class AttackStatsSkill : BaseSkill
     {
         Vector3 new_forward = actorController.transform.GetChild(0).forward;
         new_forward = Vector3.ProjectOnPlane(targetGridUnit.cachedWorldPos - actorController.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
-        actorController.transform.GetChild(0).forward = new_forward;
+        //actorController.transform.GetChild(0).forward = new_forward;
 
         base.ExecuteSkill(is_pincer);
     }
@@ -51,6 +51,7 @@ public class AttackStatsSkill : BaseSkill
         SkillPreview ret = new SkillPreview();
 
         ret.chance_text = "100%";
+        ret.chance_val = 1f;
         ret.value = "+" + (baseDamageMultiplier * caster.actorStats.currentStats.pAtk) + " P.ATK";
         return ret;
     }

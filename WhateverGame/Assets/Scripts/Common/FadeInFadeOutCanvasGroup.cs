@@ -23,6 +23,22 @@ public class FadeInFadeOutCanvasGroup : MonoBehaviour
             .SetUpdate(UpdateType.Normal, true);
     }
 
+    public void FadeOut()
+    {
+        if (canvasGroup == null)
+            canvasGroup = this.GetComponent<CanvasGroup>();
+
+        float alpha = 1f;
+        DOTween.To(() => alpha, x => alpha = x, 0f, 0.25f)
+            .OnUpdate(() => {
+                canvasGroup.alpha = alpha;
+            })
+            .SetUpdate(UpdateType.Normal, true)
+            .OnComplete(() => {
+                this.gameObject.SetActive(false);
+            });
+    }
+
     private void OnDisable()
     {
         canvasGroup.alpha = 0f;

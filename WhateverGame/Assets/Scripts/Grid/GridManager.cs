@@ -31,7 +31,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
 
     //internals
     [HideInInspector] public GridCursor gridCursor;
-    GridUnit current_highlighted_grid_unit = null;
+    public GridUnit current_highlighted_grid_unit = null;
     Tween grid_cursor_tween;
     RaycastHit last_hit = new RaycastHit();
 

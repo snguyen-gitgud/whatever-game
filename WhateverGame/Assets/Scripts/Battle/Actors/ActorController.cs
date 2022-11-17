@@ -37,6 +37,7 @@ public class ActorController : MonoBehaviour
     public GameObject commandControlUI;
 
     [Header("Action preview")]
+    public ScrollviewSnap scrollviewSnap;
     public GameObject actionPreviewUI;
     public Image actionPreviewBG;
     public Image casterPortrait;
@@ -197,14 +198,42 @@ public class ActorController : MonoBehaviour
 
         if (actorStats.skillUIsholder.gameObject.activeSelf == true)
         {
-            //TODO: process choosing skill
             if (InputProcessor.GetInstance().buttonSouth ||
                 InputProcessor.GetInstance().buttonNorth)
             {
+                actorControlStates = ActorControlStates.WAITING_FOR_TARGET;
+                current_skill_overload_level = 1;
 
+                //TODO: check and swap main skills list / sub skills list
+                currentChosenSkill = actorStats.actorMainSkillsList[scrollviewSnap.highlightIndex - 2];
+
+                skill_range_area.Clear();
+                skill_range_area = BattleMaster.GetInstance().gridManager.FindArea(occupied_grid_unit, currentChosenSkill.skillRange + 1, currentChosenSkill.skillRange + 1, actorTeams, true);
+                if (currentChosenSkill.includeSelfCast == true)
+                {
+                    skill_range_area.Add(occupied_grid_unit);
+                    occupied_grid_unit.AreaHighlight(occupied_grid_unit.gridUnitPathScore, actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
+                }
+
+                actionPreviewUI.transform.DOScale(Vector3.one, 0.25f);
+                actionPreviewBG.color = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
+                casterPortrait.sprite = actorStats.actorPortrait;
+                actionNameText.text = currentChosenSkill.skillName;
+                targetPortrait.gameObject.SetActive(false);
+                probabilityImg.gameObject.SetActive(false);
+                actionChanceText.gameObject.SetActive(false);
+                outputText.gameObject.SetActive(false);
 
                 BattleMaster.GetInstance().gridManager.cursor_lock = false;
-                actorStats.skillUIsholder.gameObject.SetActive(false);
+                //actorStats.skillUIsholder.gameObject.SetActive(false);
+                actorStats.skillUIsholder.GetComponent<FadeInFadeOutCanvasGroup>().FadeOut();
+            }
+
+            if (InputProcessor.GetInstance().buttonShoulderL)
+            {
+                BattleMaster.GetInstance().gridManager.cursor_lock = false;
+                actorStats.skillUIsholder.GetComponent<FadeInFadeOutCanvasGroup>().FadeOut();
+                WaitingForCommandState();
             }
         }
         else
@@ -330,6 +359,7 @@ public class ActorController : MonoBehaviour
 
         ActorController pincer_actor = null;
 
+        //target line
         if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() != null)
         {
             if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == null)
@@ -380,10 +410,12 @@ public class ActorController : MonoBehaviour
                 pincer_actor.line.SetActive(false);
         }
 
+        //preview arrow
         if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() != null)
         {
             ActorController targetActor = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor;
-            if (targetActor != null && targetActor != this)
+            if (targetActor != null &&
+                skill_range_area.Contains(targetActor.occupied_grid_unit) == true)
             {
                 targetPortrait.gameObject.SetActive(true);
                 probabilityImg.gameObject.SetActive(true);
@@ -409,16 +441,56 @@ public class ActorController : MonoBehaviour
                 actionChanceText.gameObject.SetActive(false);
                 outputText.gameObject.SetActive(false);
             }
-        }       
+        }     
+        else
+        {
+            ActorController targetActor = this;
+            if (targetActor != null &&
+                skill_range_area.Contains(targetActor.occupied_grid_unit) == true)
+            {
+                targetPortrait.gameObject.SetActive(true);
+                probabilityImg.gameObject.SetActive(true);
+                actionChanceText.gameObject.SetActive(true);
+                outputText.gameObject.SetActive(true);
 
+                SkillPreview preview = currentChosenSkill.GetPreviewValue(this, targetActor, current_skill_overload_level);
+                targetPortrait.sprite = targetActor.actorStats.actorPortrait;
+                probabilityImg.fillAmount = preview.chance_val;
+                probabilityImg.color = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
+                foreach (GameObject img in previewOverloadLevelImgList)
+                {
+                    img.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
+                    img.transform.GetChild(1).GetChild(0).GetComponent<Image>().fillAmount = probabilityImg.fillAmount;
+                }
+                actionChanceText.text = preview.chance_text;
+                outputText.text = preview.value;
+            }
+            else
+            {
+                targetPortrait.gameObject.SetActive(false);
+                probabilityImg.gameObject.SetActive(false);
+                actionChanceText.gameObject.SetActive(false);
+                outputText.gameObject.SetActive(false);
+            }
+        }
+
+        //choose target
         if (InputProcessor.GetInstance().buttonNorth ||
             InputProcessor.GetInstance().buttonSouth ||
             InputProcessor.GetInstance().buttonEast ||
             InputProcessor.GetInstance().buttonWest)
         {
-            if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() == null ||
+            if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() == null && currentChosenSkill.includeSelfCast == false)
+            {
+                return;
+            }
+            else if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() == null && currentChosenSkill.includeSelfCast == true)
+            {
+                BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit = this.occupied_grid_unit;
+            }
+
                 //BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == null ||
-                BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == this)
+            if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == this && currentChosenSkill.includeSelfCast == false)
                 return;
 
             if (skill_range_area.Contains(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit()) == false)

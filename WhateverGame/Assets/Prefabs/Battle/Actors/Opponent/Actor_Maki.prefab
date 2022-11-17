@@ -1676,6 +1676,7 @@ MonoBehaviour:
   PlayerTeamBGColor: {r: 0, g: 0.2535378, b: 0.5188679, a: 1}
   OpponentTeamBGColor: {r: 0.5283019, g: 0.012006861, b: 0, a: 1}
   commandControlUI: {fileID: 6591377987859227475}
+  scrollviewSnap: {fileID: 8638823879116646744}
   actionPreviewUI: {fileID: 7986674287363957345}
   actionPreviewBG: {fileID: 461504492550694455}
   casterPortrait: {fileID: 5860735751158686556}
@@ -4325,6 +4326,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1674730075505223255}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8638823879116646744 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6980177745318645519, guid: 1819b685b2dc3d940a410de88805c408,
+    type: 3}
+  m_PrefabInstance: {fileID: 1674730075505223255}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11bee806d7c5233438c87c21ce5d7084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2804811942866537507
 PrefabInstance:
   m_ObjectHideFlags: 0
