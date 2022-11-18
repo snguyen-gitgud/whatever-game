@@ -770,6 +770,10 @@ public class ActorController : MonoBehaviour
         BattleMaster.GetInstance().gridManager.ClearPathHighlight();
         //actorUI.headerHolder.gameObject.SetActive(true);
 
+        actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
+        actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
+
+
         actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
         foreach (Transform child in commandControlUI.transform.GetChild(1))
         {
@@ -854,7 +858,7 @@ public class ActorController : MonoBehaviour
 
         if (path.Length > 1)
         {
-            this.transform.DOPath(path, move_path.Count - 1, PathType.Linear, PathMode.Full3D).OnWaypointChange((way_point_index) =>
+            this.transform.DOPath(path, (move_path.Count - 1) * 0.5f, PathType.Linear, PathMode.Full3D).SetEase(Ease.Linear).OnWaypointChange((way_point_index) =>
             {
                 if (path.Length > 0 && way_point_index < path.Length)
                 {
@@ -872,7 +876,7 @@ public class ActorController : MonoBehaviour
             Vector3 new_forward = Vector3.ProjectOnPlane((path[0] - this.transform.GetChild(0).position).normalized, Vector3.up);
             if (new_forward.magnitude > 0.1f)
                 this.transform.GetChild(0).forward = new_forward;
-            this.transform.DOMove(path[0], 1.0f);
+            this.transform.DOMove(path[0], .5f).SetEase(Ease.Linear);
 
             CalculateAndReduceStaminaAfterMove(new_forward);
             yield return new WaitForSeconds(1.0f);

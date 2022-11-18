@@ -94,6 +94,7 @@
     <Compile Include="Assets\PostProcessing\Editor\Models\DitheringModelEditor.cs" />
     <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Editor\UltimateTextDamageManagerEditor.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Monitors\VectorscopeMonitor.cs" />
+    <Compile Include="Assets\3rdParty\VFX\SineVFX\TopDownEffects\Resources\Scripts\Editor\CustomRampGeneratorEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

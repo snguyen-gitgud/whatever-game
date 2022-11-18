@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6771512075739398633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2812683470783819319}
+  - component: {fileID: 9204884874277585577}
+  m_Layer: 0
+  m_Name: HeavyKick
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2812683470783819319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6771512075739398633}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9204884874277585577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6771512075739398633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfa15ac23781be4f82d73d52b98ffd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillClassIcon: {fileID: -972245543, guid: f12f55fe628b95a4fbddd0812b335653, type: 3}
+  skillName: Heavy kick
+  skillDescription: '- A powerful kick that knocbacks target 1 tile'
+  skillSlot: 1
+  skillTypes: 0
+  requiredClass: 1
+  skillStaminaCost: 3
+  skillOverLoadLevel: 1
+  skillMaxOverLoadLevel: 2
+  skillAccuracyBonus: 0
+  damageTypes: 0
+  baseDamageMultiplier: 1
+  vcam_offset_Y: 1.5
+  castingVCam: {fileID: 0}
+  executingVCam: {fileID: 0}
+  actorController: {fileID: 0}
+  targetController: {fileID: 0}
+  targetGridUnit: {fileID: 0}
+  actorAnimationController: {fileID: 0}
+  shake: {fileID: 0}
+  skillRange: 1
+  includeSelfCast: 0
+  skillCastingDuration: 0.125
+  skillCastingVfx: {fileID: 1524292575317532, guid: 285668db62b73ea40a30fad187aad9e5,
+    type: 3}
+  og_model_pos: {x: 0, y: 0, z: 0}
+  textManager: {fileID: 0}
+  isReactive: 0
+  isPincer: 0
+  skillCastingVfxObj: {fileID: 0}
+  atk1VFX: {fileID: 1494690074406284, guid: 57440dbfb1445424da3c053f987f61f4, type: 3}
+  atk2VFX: {fileID: 1494690074406284, guid: 57440dbfb1445424da3c053f987f61f4, type: 3}
+  hitVFX: {fileID: 1014011059874384, guid: a3341f2ac95249741b428c0aba4e122c, type: 3}

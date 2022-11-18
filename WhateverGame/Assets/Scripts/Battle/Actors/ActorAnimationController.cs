@@ -78,6 +78,14 @@ public class ActorAnimationController : MonoBehaviour
         animator.SetBool("IsCasting", true);
     }
 
+    #region UNARMED
+    public void PlayUnarmedBuff()
+    {
+        animator.SetFloat("EquippedWeaponType", (int)weaponTypes * 1f);
+        animator.SetFloat("Gender", (int)bodyTypes * 1f);
+        animator.CrossFadeInFixedTime("UnarmedBuff", .01f);
+    }
+
     public void PlayUnarmedAttack_1()
     {
         animator.SetFloat("EquippedWeaponType", (int)weaponTypes * 1f);
@@ -102,12 +110,25 @@ public class ActorAnimationController : MonoBehaviour
         animator.CrossFadeInFixedTime("UnarmedAttack_3", .01f);
     }
 
-    public void PlayUnarmedBuff()
+    public void PlayUnarmedAttack_4()
     {
         animator.SetFloat("EquippedWeaponType", (int)weaponTypes * 1f);
         animator.SetFloat("Gender", (int)bodyTypes * 1f);
-        animator.CrossFadeInFixedTime("UnarmedBuff", .01f);
-    }    
+
+        animator.CrossFadeInFixedTime("UnarmedAttack_4", .01f);
+    }
+
+    public void PlayUnarmedAttack_5()
+    {
+        animator.SetFloat("EquippedWeaponType", (int)weaponTypes * 1f);
+        animator.SetFloat("Gender", (int)bodyTypes * 1f);
+
+        animator.CrossFadeInFixedTime("UnarmedAttack_5", .01f);
+    }
+    #endregion
+
+    #region SWORD
+    #endregion
 }
 
 [System.Serializable]

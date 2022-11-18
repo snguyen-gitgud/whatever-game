@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8655798945869291244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1340596656725620113}
+  - component: {fileID: 3406064822265627230}
+  m_Layer: 2
+  m_Name: Monk_NormalAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1340596656725620113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8655798945869291244}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3406064822265627230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8655798945869291244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ebf3d61de65c6049aed8a4f186e0ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillClassIcon: {fileID: -972245543, guid: f12f55fe628b95a4fbddd0812b335653, type: 3}
+  skillName: One - Two Combo
+  skillDescription: '- Brawler''s Default Attack
+
+    - Cost: 2 Stamina / combo
+
+    -
+    Maximum combo: 3
+
+    - Regain 2 Stamina at MAX combo'
+  skillSlot: 0
+  skillTypes: 0
+  requiredClass: 1
+  skillStaminaCost: 2
+  skillOverLoadLevel: 1
+  skillMaxOverLoadLevel: 3
+  skillAccuracyBonus: 10
+  damageTypes: 0
+  baseDamageMultiplier: 0.8
+  vcam_offset_Y: 1.5
+  castingVCam: {fileID: 0}
+  executingVCam: {fileID: 0}
+  actorController: {fileID: 0}
+  targetController: {fileID: 0}
+  targetGridUnit: {fileID: 0}
+  actorAnimationController: {fileID: 0}
+  shake: {fileID: 0}
+  skillRange: 1
+  includeSelfCast: 0
+  skillCastingDuration: 0
+  skillCastingVfx: {fileID: 1524292575317532, guid: de2cde6e41b30c64f8972773425f5eb3,
+    type: 3}
+  og_model_pos: {x: 0, y: 0, z: 0}
+  textManager: {fileID: 0}
+  isReactive: 0
+  isPincer: 0
+  skillCastingVfxObj: {fileID: 0}
+  atk1VFX: {fileID: 1494690074406284, guid: 57440dbfb1445424da3c053f987f61f4, type: 3}
+  atk2VFX: {fileID: 1494690074406284, guid: c6f5514a3e652ae40b6168d2a6c69643, type: 3}
+  atk3VFX: {fileID: 1494690074406284, guid: a21fc5d4bcc3bac41a5c224bd05c46f0, type: 3}
+  hitVFX: {fileID: 1014011059874384, guid: a3341f2ac95249741b428c0aba4e122c, type: 3}

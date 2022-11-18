@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8504384963688467112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4882509292754186277}
+  - component: {fileID: 2325913873171871052}
+  m_Layer: 0
+  m_Name: CalmBreathSkill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4882509292754186277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8504384963688467112}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2325913873171871052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8504384963688467112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e661a5fa5fea314abbc7ccc507ffb11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillClassIcon: {fileID: -972245543, guid: f12f55fe628b95a4fbddd0812b335653, type: 3}
+  skillName: Calm Breath
+  skillDescription: '- Self buff 10% p. attack'
+  skillSlot: 1
+  skillTypes: 1
+  requiredClass: 1
+  skillStaminaCost: 4
+  skillOverLoadLevel: 1
+  skillMaxOverLoadLevel: 1
+  skillAccuracyBonus: 0
+  damageTypes: 4
+  baseDamageMultiplier: 0.1
+  vcam_offset_Y: 1.5
+  castingVCam: {fileID: 0}
+  executingVCam: {fileID: 0}
+  actorController: {fileID: 0}
+  targetController: {fileID: 0}
+  targetGridUnit: {fileID: 0}
+  actorAnimationController: {fileID: 0}
+  shake: {fileID: 0}
+  skillRange: 0
+  includeSelfCast: 1
+  skillCastingDuration: 0.5
+  skillCastingVfx: {fileID: 1524292575317532, guid: de2cde6e41b30c64f8972773425f5eb3,
+    type: 3}
+  og_model_pos: {x: 0, y: 0, z: 0}
+  textManager: {fileID: 0}
+  isReactive: 0
+  isPincer: 0
+  skillCastingVfxObj: {fileID: 0}
+  statusPref: {fileID: 2024691880727362932, guid: fb391526b65e5b442adf5b371eb8f594,
+    type: 3}
+  vfxPref: {fileID: 1524292575317532, guid: 285668db62b73ea40a30fad187aad9e5, type: 3}
+  animParam: UnarmedBuff
