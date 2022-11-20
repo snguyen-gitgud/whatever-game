@@ -46,14 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillClassIcon: {fileID: -972245543, guid: f12f55fe628b95a4fbddd0812b335653, type: 3}
   skillName: One - Two Combo
-  skillDescription: '- Brawler''s Default Attack
-
-    - Cost: 2 Stamina / combo
-
-    -
-    Maximum combo: 3
-
-    - Regain 2 Stamina at MAX combo'
+  skillDescription: '- Overloaded Effect: Regain 2 Stamina at MAX combo'
   skillSlot: 0
   skillTypes: 0
   requiredClass: 1
@@ -62,7 +55,7 @@ MonoBehaviour:
   skillMaxOverLoadLevel: 3
   skillAccuracyBonus: 10
   damageTypes: 0
-  baseDamageMultiplier: 0.8
+  baseDamageMultiplier: 1
   vcam_offset_Y: 1.5
   castingVCam: {fileID: 0}
   executingVCam: {fileID: 0}

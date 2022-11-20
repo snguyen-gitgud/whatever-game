@@ -9,6 +9,7 @@ public class HeavyKick : BaseSkill
     public GameObject atk1VFX;
     public GameObject atk2VFX;
     public GameObject hitVFX;
+    public GameObject landingVFX;
 
     public override void CastingSkill(ActorController actor, int overload_level = 1, GridUnit target = null)
     {
@@ -104,7 +105,7 @@ public class HeavyKick : BaseSkill
             if (targetController != null)
             {
                 textManager.Add("Combo x2", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
-                ClashData data = ShieldHelpers.CalculateClashOutput(actorController, targetController, this, 2);
+                ClashData data = ShieldHelpers.CalculateClashOutput(actorController, targetController, this, 1);
 
                 if (!data.isMiss && !data.isBlocked || data.isAmbush && !data.isBlocked)
                 {
@@ -137,17 +138,20 @@ public class HeavyKick : BaseSkill
                     //move to new tile
                     if (knockbacked_to_grid_unit != null)
                     {
-                        //TODO: spawn landing smoke
                         targetController.occupied_grid_unit.occupiedActor = null;
                         targetController.transform.DOJump(knockbacked_to_grid_unit.cachedWorldPos, 2f, 1, .75f, false).SetEase(Ease.Linear).OnComplete(() => {
                             targetController.occupied_grid_unit = knockbacked_to_grid_unit;
                             knockbacked_to_grid_unit.occupiedActor = targetController;
+                            
+                            targetController.transform.GetChild(0).localPosition = Vector3.zero;
+                            Instantiate(landingVFX, targetController.transform.GetChild(0));
                         });
                     }
                     else
                     {
-                        //TODO: spawn landing smoke
-                        targetController.transform.DOJump(targetController.occupied_grid_unit.cachedWorldPos, 2f, 1, .75f, false).SetEase(Ease.Linear);
+                        targetController.transform.DOJump(targetController.occupied_grid_unit.cachedWorldPos, 2f, 1, .75f, false).SetEase(Ease.Linear).OnComplete(() => {
+                            Instantiate(landingVFX, targetController.transform.GetChild(0));
+                        });
                     }
 
                     shake.m_AmplitudeGain = 1f;

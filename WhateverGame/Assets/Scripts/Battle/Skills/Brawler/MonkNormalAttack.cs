@@ -166,7 +166,7 @@ public class MonkNormalAttack : BaseSkill
             {
                 textManager.Add("Combo x3", targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
 
-                ClashData data = ShieldHelpers.CalculateClashOutput(actorController, targetController, this, 2);
+                ClashData data = ShieldHelpers.CalculateClashOutput(actorController, targetController, this, 1);
 
                 if (!data.isMiss && !data.isBlocked || data.isAmbush && !data.isBlocked)
                 {

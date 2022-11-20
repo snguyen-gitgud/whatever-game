@@ -39,6 +39,8 @@ public class BaseSkill : MonoBehaviour
     [Header("Common VFX")]
     [Range(0, 10)] public int skillRange = 1;
     public bool includeSelfCast = false;
+    public bool mustTargetEmptyGrid = false;
+    public bool excludeDiagonal = false;
     public float skillCastingDuration = 0.5f;
     public GameObject skillCastingVfx;
 
@@ -65,7 +67,7 @@ public class BaseSkill : MonoBehaviour
         skillOverLoadLevel = overload_level;
         targetGridUnit = target_grid_tile;
         targetController = target_grid_tile.occupiedActor;
-        og_model_pos = actorController.transform.GetChild(0).position;
+        og_model_pos = actorController.transform.GetChild(0).localPosition;
 
         vcam_offset_Y = actor.actorStats.vcam_offset_Y;
 
@@ -195,7 +197,7 @@ public class BaseSkill : MonoBehaviour
     {
         castingVCam.Priority = 0;
         executingVCam.Priority = 0;
-        actorController.transform.GetChild(0).position = og_model_pos;
+        actorController.transform.GetChild(0).localPosition = og_model_pos;
         BattleMaster.GetInstance().gridManager.cursor_lock = false;
         actorAnimationController.PlayIdle();
         actorController.WaitingForCommandState();

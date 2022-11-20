@@ -209,6 +209,20 @@ public class ActorController : MonoBehaviour
 
                 skill_range_area.Clear();
                 skill_range_area = BattleMaster.GetInstance().gridManager.FindArea(occupied_grid_unit, currentChosenSkill.skillRange + 1, currentChosenSkill.skillRange + 1, actorTeams, true);
+                List<GridUnit> exclude_list = new List<GridUnit>(skill_range_area);
+                if (currentChosenSkill.excludeDiagonal)
+                {
+                    foreach (GridUnit grid_unit in exclude_list)
+                    {
+                        if (occupied_grid_unit.cachedWorldPos.x != grid_unit.cachedWorldPos.x && occupied_grid_unit.cachedWorldPos.z != grid_unit.cachedWorldPos.z)
+                        {
+                            grid_unit.ClearAreaHighlight();
+                            grid_unit.ClearPathHighlight();
+                            skill_range_area.Remove(grid_unit);
+                        }
+                    }
+                }
+                skill_range_area.TrimExcess();
                 if (currentChosenSkill.includeSelfCast == true)
                 {
                     skill_range_area.Add(occupied_grid_unit);
@@ -322,6 +336,21 @@ public class ActorController : MonoBehaviour
         skill_range_area = BattleMaster.GetInstance().gridManager.FindArea(occupied_grid_unit, currentChosenSkill.skillRange + 1, currentChosenSkill.skillRange + 1, actorTeams, true);
         if (currentChosenSkill.includeSelfCast == true)
             skill_range_area.Add(occupied_grid_unit);
+
+        if (currentChosenSkill.excludeDiagonal)
+        {
+            List<GridUnit> exclude_list = new List<GridUnit>(skill_range_area);
+            foreach (GridUnit grid_unit in exclude_list)
+            {
+                if (occupied_grid_unit.cachedWorldPos.x != grid_unit.cachedWorldPos.x && occupied_grid_unit.cachedWorldPos.z != grid_unit.cachedWorldPos.z)
+                {
+                    grid_unit.ClearAreaHighlight();
+                    grid_unit.ClearPathHighlight();
+                    skill_range_area.Remove(grid_unit);
+                }
+            }
+        }
+        skill_range_area.TrimExcess();
 
         actionPreviewUI.transform.DOScale(Vector3.one, 0.25f);
         actionPreviewBG.color = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
@@ -494,6 +523,9 @@ public class ActorController : MonoBehaviour
                 return;
 
             if (skill_range_area.Contains(BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit()) == false)
+                return;
+
+            if (currentChosenSkill.mustTargetEmptyGrid == true && BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor != null)
                 return;
 
             apText.text = (actorStats.staminaPoint - current_skill_overload_level * currentChosenSkill.skillStaminaCost).ToString();

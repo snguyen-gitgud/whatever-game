@@ -78,6 +78,7 @@
     <Compile Include="Assets\PostProcessing\Editor\Models\AmbientOcclusionModelEditor.cs" />
     <Compile Include="Assets\PostProcessing\Editor\PostProcessingFactory.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Utils\ReflectionUtils.cs" />
+    <Compile Include="Assets\3rdParty\VFX\SineVFX\TopDownEffects\Resources\Scripts\Editor\CustomRampGeneratorEditor.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Models\VignetteModelEditor.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Utils\EditorGUIHelper.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Utils\EditorResources.cs" />
@@ -94,7 +95,6 @@
     <Compile Include="Assets\PostProcessing\Editor\Models\DitheringModelEditor.cs" />
     <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Editor\UltimateTextDamageManagerEditor.cs" />
     <Compile Include="Assets\PostProcessing\Editor\Monitors\VectorscopeMonitor.cs" />
-    <Compile Include="Assets\3rdParty\VFX\SineVFX\TopDownEffects\Resources\Scripts\Editor\CustomRampGeneratorEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

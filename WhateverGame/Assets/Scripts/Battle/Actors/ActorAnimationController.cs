@@ -125,6 +125,14 @@ public class ActorAnimationController : MonoBehaviour
 
         animator.CrossFadeInFixedTime("UnarmedAttack_5", .01f);
     }
+
+    public void PlayUnarmedAttack_6()
+    {
+        animator.SetFloat("EquippedWeaponType", (int)weaponTypes * 1f);
+        animator.SetFloat("Gender", (int)bodyTypes * 1f);
+
+        animator.CrossFadeInFixedTime("UnarmedAttack_6", .01f);
+    }
     #endregion
 
     #region SWORD

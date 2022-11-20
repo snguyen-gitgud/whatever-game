@@ -22,7 +22,14 @@ public static class ShieldHelpers
             ret.isAmbush = true;
         }
         else
+        {
             ret.isAmbush = false;
+
+            if (dot_prod < -0.9f)
+                ret.isDirect = true;
+            else
+                ret.isDirect = false;
+        }
 
         if (skill.damageTypes == DamageTypes.PHYSICAL)
         {
@@ -68,6 +75,12 @@ public static class ShieldHelpers
             ret.output /= 2;
             ret.isBlocked = false;
         }
+        
+        if (ret.isDirect == false && ret.isAmbush == false)
+        {
+            ret.output *= 5;
+            ret.output /= 4;
+        }
 
         return ret;
     }
@@ -99,5 +112,6 @@ public class ClashData
     public bool isBlocked = false;
     public bool isCrit = false;
     public bool isAmbush = false;
+    public bool isDirect = false;
     public int output = 0;
 }

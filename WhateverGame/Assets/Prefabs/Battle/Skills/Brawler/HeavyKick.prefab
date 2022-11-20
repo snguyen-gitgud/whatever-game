@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillClassIcon: {fileID: -972245543, guid: f12f55fe628b95a4fbddd0812b335653, type: 3}
   skillName: Heavy kick
-  skillDescription: '- A powerful kick that knocbacks target 1 tile'
+  skillDescription: '- Overloaded Effect: knocbacks target 1 tile'
   skillSlot: 1
   skillTypes: 0
   requiredClass: 1
@@ -55,7 +55,7 @@ MonoBehaviour:
   skillMaxOverLoadLevel: 2
   skillAccuracyBonus: 0
   damageTypes: 0
-  baseDamageMultiplier: 1
+  baseDamageMultiplier: 1.25
   vcam_offset_Y: 1.5
   castingVCam: {fileID: 0}
   executingVCam: {fileID: 0}
@@ -77,3 +77,5 @@ MonoBehaviour:
   atk1VFX: {fileID: 1494690074406284, guid: 57440dbfb1445424da3c053f987f61f4, type: 3}
   atk2VFX: {fileID: 1494690074406284, guid: 57440dbfb1445424da3c053f987f61f4, type: 3}
   hitVFX: {fileID: 1014011059874384, guid: a3341f2ac95249741b428c0aba4e122c, type: 3}
+  landingVFX: {fileID: 5947466512642913548, guid: d93429c2b1c2c304982f08fe7cc72beb,
+    type: 3}
