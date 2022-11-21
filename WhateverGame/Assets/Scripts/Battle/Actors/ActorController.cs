@@ -112,13 +112,7 @@ public class ActorController : MonoBehaviour
     void Update()
     {
         //sync UI display
-        actorDetails.SetDisplayData(actorStats.actorPortrait,
-                                    actorStats.actorName,
-                                    actorStats.currentStats.level,
-                                    actorStats.currentStats.healthPoint,
-                                    actorStats.baseStats.healthPoint,
-                                    actorUI.apBar.fillAmount,
-                                    actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
+        actorDetails.SetDisplayData(this, actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
 
         //vcam control
         if (InputProcessor.GetInstance().rightStick.y > 0.05f && vcamTransposer.m_FollowOffset.y <= vcamYOffsetMax)
@@ -222,6 +216,18 @@ public class ActorController : MonoBehaviour
                         }
                     }
                 }
+                if (currentChosenSkill.mustTargetEmptyGrid)
+                {
+                    foreach (GridUnit grid_unit in exclude_list)
+                    {
+                        if (grid_unit.occupiedActor != null)
+                        {
+                            grid_unit.ClearAreaHighlight();
+                            grid_unit.ClearPathHighlight();
+                            skill_range_area.Remove(grid_unit);
+                        }
+                    }
+                }
                 skill_range_area.TrimExcess();
                 if (currentChosenSkill.includeSelfCast == true)
                 {
@@ -315,6 +321,8 @@ public class ActorController : MonoBehaviour
         probabilityImg.gameObject.SetActive(false);
         actionChanceText.gameObject.SetActive(false);
         outputText.gameObject.SetActive(false);
+
+        BattleMaster.GetInstance().gridManager.gridCur.transform.position = this.occupied_grid_unit.transform.position + Vector3.up * BattleMaster.GetInstance().gridManager.gridUnitSize * 0.5f;
     }
 
     public void SkillsCommandSelected()
@@ -360,6 +368,8 @@ public class ActorController : MonoBehaviour
         probabilityImg.gameObject.SetActive(false);
         actionChanceText.gameObject.SetActive(false);
         outputText.gameObject.SetActive(false);
+
+        BattleMaster.GetInstance().gridManager.gridCur.transform.position = this.occupied_grid_unit.transform.position + Vector3.up * BattleMaster.GetInstance().gridManager.gridUnitSize * 0.5f;
     }
 
     int current_skill_overload_level = 1;
@@ -640,6 +650,7 @@ public class ActorController : MonoBehaviour
             vcam.Priority = 11;
             //actorUI.headerHolder.gameObject.SetActive(false);
             currentChosenSkill.ExecuteSkill();
+            currentChosenSkill = null;
         }
     }
 
@@ -683,7 +694,7 @@ public class ActorController : MonoBehaviour
 
         vcam_target = vcamTarget.DOMove(this.transform.position, 1f);
 
-        actorDetails.SetDisplayData(actorStats.actorPortrait, actorStats.actorName, actorStats.currentStats.level, actorStats.currentStats.healthPoint, actorStats.baseStats.healthPoint, actorUI.apBar.fillAmount, actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
+        actorDetails.SetDisplayData(this, actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor);
         actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
 
         actorDetails.actorStaminaSlider.fillAmount = ((actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f)) * 0.5f;
@@ -788,6 +799,7 @@ public class ActorController : MonoBehaviour
             return;
 
         actorControlStates = ActorControlStates.READY_TO_MOVE;
+        BattleMaster.GetInstance().gridManager.gridCur.transform.position = this.occupied_grid_unit.transform.position + Vector3.up * BattleMaster.GetInstance().gridManager.gridUnitSize * 0.5f;
 
         //int range = actorStats.staminaPoint;
         //if (range > actorStats.maxStaminaPoint)

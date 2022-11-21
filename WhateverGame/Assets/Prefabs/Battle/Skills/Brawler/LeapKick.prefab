@@ -50,12 +50,12 @@ MonoBehaviour:
   skillSlot: 1
   skillTypes: 0
   requiredClass: 1
-  skillStaminaCost: 3
+  skillStaminaCost: 6
   skillOverLoadLevel: 1
   skillMaxOverLoadLevel: 1
   skillAccuracyBonus: 0
   damageTypes: 0
-  baseDamageMultiplier: 1.5
+  baseDamageMultiplier: 1.3
   vcam_offset_Y: 1.5
   castingVCam: {fileID: 0}
   executingVCam: {fileID: 0}

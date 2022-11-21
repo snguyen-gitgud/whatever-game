@@ -36,6 +36,22 @@ public class LeapKick : BaseSkill
         GridUnit jump_to_grid_unit = targetGridUnit;
         ActorController landing_actor = jump_to_grid_unit.occupiedActor;
 
+        GridUnit secondary_target_grid = null;
+        Vector3 presume_secondary_target_pos = jump_to_grid_unit.cachedWorldPos + (actorController.transform.GetChild(0).forward.normalized * BattleMaster.GetInstance().gridManager.gridUnitSize);
+        Ray ray = new Ray(presume_secondary_target_pos + (Vector3.up * 100f), Vector3.down);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.transform.tag.Contains("GridUnit") == true)
+            {
+                GridUnit unit = hit.transform.GetComponent<GridUnit>();
+                if (unit != null)
+                {
+                    secondary_target_grid = unit;
+                }
+            }
+        }
+
         //Debug.Log(actorController.gameObject.name + " executing Monk normal attack sequence.");
         actorAnimationController.PlayUnarmedAttack_6();
         GameObject atk_vfx = Instantiate(atkVFX, actorController.transform.GetChild(0));
@@ -46,9 +62,12 @@ public class LeapKick : BaseSkill
         GridUnit og_grid_unit = actorController.occupied_grid_unit;
         actorController.occupied_grid_unit.occupiedActor = null;
         actorController.transform.DOJump(jump_to_grid_unit.cachedWorldPos, 2f, 1, 0.86667f, false).SetEase(Ease.Linear).OnComplete(() => {
-            actorController.occupied_grid_unit = jump_to_grid_unit;
-            jump_to_grid_unit.occupiedActor = actorController;
-            
+            if (jump_to_grid_unit.occupiedActor == null)
+            {
+                actorController.occupied_grid_unit = jump_to_grid_unit;
+                jump_to_grid_unit.occupiedActor = actorController;
+            }
+
             actorController.transform.GetChild(0).localPosition = Vector3.zero;
             Instantiate(landingVFX, actorController.transform.GetChild(0));
         });
@@ -106,10 +125,56 @@ public class LeapKick : BaseSkill
         }
 
         //TODO: find and set secondary target
+        if (secondary_target_grid != null && secondary_target_grid.occupiedActor != null)
+        {
+            ActorController secondary_target = secondary_target_grid.occupiedActor;
 
+            ClashData data = ShieldHelpers.CalculateClashOutput(actorController, secondary_target, this, 2);
+            if (data.isAmbush)
+                textManager.Add("Ambush", secondary_target.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
 
+            if (!data.isMiss && !data.isBlocked || data.isAmbush && !data.isBlocked)
+            {
+                InputProcessor.GetInstance().VibrateController(.125f, .125f, .25f);
+                secondary_target.actorAnimationController.PlayGetHit();
+                GameObject hit_vfx = Instantiate(hitVFX, secondary_target.transform.GetChild(0));
+                hit_vfx.transform.position += (Vector3.up * vcam_offset_Y) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));
 
+                secondary_target.actorStats.currentStats.HealthChange(-data.output);
+                if (data.isCrit) textManager.Add("Critical hit", secondary_target.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "critical");
+                textManager.Add((-data.output).ToString(), secondary_target.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
+                shake.m_AmplitudeGain = 1f;
+                Time.timeScale = 0.01f * BattleMaster.GetInstance().baseTimeScale;
+                yield return new WaitForSecondsRealtime(.5f);
+                Time.timeScale = BattleMaster.GetInstance().baseTimeScale;
+                shake.m_AmplitudeGain = 0f;
+            }
+            else if (data.isMiss)
+            {
+                // miss
+                textManager.Add("Miss", secondary_target.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
 
+                secondary_target.actorAnimationController.PlayDodge();
+
+                Vector3 new_forward = secondary_target.transform.GetChild(0).forward;
+                new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - secondary_target.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
+                secondary_target.transform.GetChild(0).forward = new_forward;
+            }
+            else if (data.isBlocked)
+            {
+                // blocked 
+                textManager.Add("block", secondary_target.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
+
+                secondary_target.actorAnimationController.PlayBlock();
+
+                GameObject hit_vfx = Instantiate(hitVFX, secondary_target.transform.GetChild(0));
+                hit_vfx.transform.position += (Vector3.up * vcam_offset_Y) + new Vector3(Random.Range(-.25f, .25f), Random.Range(-.25f, .25f), Random.Range(-.25f, .25f));
+
+                Vector3 new_forward = secondary_target.transform.GetChild(0).forward;
+                new_forward = Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - secondary_target.occupied_grid_unit.cachedWorldPos, Vector3.up).normalized;
+                secondary_target.transform.GetChild(0).forward = new_forward;
+            }
+        }
 
 
         yield return new WaitForSeconds(1f);

@@ -19,14 +19,17 @@ public class BattleActorDetails : MonoBehaviour
     public Transform statusIconsHolder;
     public GameObject statusIconPref;
 
-    public void SetDisplayData(Sprite img, string name, int level, int hp, int hp_max, float ap, Color team_color)
+    public ActorController actorController = null;
+
+    public void SetDisplayData(ActorController actor, Color team_color)
     {
-        actorPortrait.sprite = img;
-        actorName.text = name;
-        actorLevel.text = "Level: " + level.ToString();
-        actorHP.text = "HP: " + hp + "/" + hp_max;
-        actorHPSlider.fillAmount = (hp * 1f) / (hp_max * 1f);
-        if (actorAPSlider != null) actorAPSlider.fillAmount = ap;
+        actorController = actor;
+        actorPortrait.sprite = actor.actorStats.actorPortrait;
+        actorName.text = actor.actorStats.actorName;
+        actorLevel.text = "Level: " + actor.actorStats.level.ToString();
+        actorHP.text = "HP: " + actor.actorStats.currentStats.healthPoint + "/" + actor.actorStats.baseStats.healthPoint;
+        actorHPSlider.fillAmount = (actor.actorStats.currentStats.healthPoint * 1f) / (actor.actorStats.baseStats.healthPoint * 1f);
+        if (actorAPSlider != null) actorAPSlider.fillAmount = actor.actorStats.apBar / 100f;
         teamBG.color = team_color;
     }
 }
