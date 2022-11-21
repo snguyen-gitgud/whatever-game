@@ -78,6 +78,14 @@ public class ActorAnimationController : MonoBehaviour
         animator.SetBool("IsCasting", true);
     }
 
+    public void PlayJump()
+    {
+        animator.SetFloat("EquippedWeaponType", (int)weaponTypes * 1f);
+        animator.SetFloat("Gender", (int)bodyTypes * 1f);
+
+        animator.CrossFadeInFixedTime("Jump", .25f);
+    }
+
     #region UNARMED
     public void PlayUnarmedBuff()
     {

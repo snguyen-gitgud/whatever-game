@@ -99,7 +99,7 @@ public class HeavyKick : BaseSkill
             atk_vfx = Instantiate(atk2VFX, actorController.transform.GetChild(0));
             atk_vfx.transform.position += Vector3.up * vcam_offset_Y;
 
-            shake.m_FrequencyGain = 3f;
+            shake.m_FrequencyGain = 5f;
             yield return new WaitForSeconds(.23f);
 
             if (targetController != null)
@@ -156,7 +156,7 @@ public class HeavyKick : BaseSkill
 
                     shake.m_AmplitudeGain = 1f;
                     Time.timeScale = 0.01f * BattleMaster.GetInstance().baseTimeScale;
-                    yield return new WaitForSecondsRealtime(.25f);
+                    yield return new WaitForSecondsRealtime(.5f);
                     Time.timeScale = BattleMaster.GetInstance().baseTimeScale;
                     shake.m_AmplitudeGain = 0f;
                 }

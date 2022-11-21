@@ -33,14 +33,17 @@ public class LeapKick : BaseSkill
     public override IEnumerator ExecuteSkillSequence()
     {
         yield return base.ExecuteSkillSequence();
+        GridUnit jump_to_grid_unit = targetGridUnit;
+        ActorController landing_actor = jump_to_grid_unit.occupiedActor;
 
         //Debug.Log(actorController.gameObject.name + " executing Monk normal attack sequence.");
         actorAnimationController.PlayUnarmedAttack_6();
         GameObject atk_vfx = Instantiate(atkVFX, actorController.transform.GetChild(0));
         atk_vfx.transform.position += Vector3.up * vcam_offset_Y;
-
-        GridUnit jump_to_grid_unit = targetGridUnit;
+        
         Instantiate(jumpingVFX, actorController.transform.GetChild(0));
+
+        GridUnit og_grid_unit = actorController.occupied_grid_unit;
         actorController.occupied_grid_unit.occupiedActor = null;
         actorController.transform.DOJump(jump_to_grid_unit.cachedWorldPos, 2f, 1, 0.86667f, false).SetEase(Ease.Linear).OnComplete(() => {
             actorController.occupied_grid_unit = jump_to_grid_unit;
@@ -50,12 +53,7 @@ public class LeapKick : BaseSkill
             Instantiate(landingVFX, actorController.transform.GetChild(0));
         });
 
-        //TODO: find and set target
-
-
-
-
-        shake.m_FrequencyGain = 1f;
+        shake.m_FrequencyGain = 5f;
         yield return new WaitForSeconds(.8667f);
 
         if (targetController != null)
@@ -76,7 +74,7 @@ public class LeapKick : BaseSkill
                 textManager.Add((-data.output).ToString(), targetController.transform.GetChild(0).position + Vector3.up * vcam_offset_Y, "default");
                 shake.m_AmplitudeGain = 1f;
                 Time.timeScale = 0.01f * BattleMaster.GetInstance().baseTimeScale;
-                yield return new WaitForSecondsRealtime(.1f);
+                yield return new WaitForSecondsRealtime(.5f);
                 Time.timeScale = BattleMaster.GetInstance().baseTimeScale;
                 shake.m_AmplitudeGain = 0f;
             }
@@ -107,7 +105,29 @@ public class LeapKick : BaseSkill
             }
         }
 
+        //TODO: find and set secondary target
+
+
+
+
+
+
         yield return new WaitForSeconds(1f);
+        if (landing_actor != null /*landing_actor*/)
+        {
+            //TODO: jump back
+            actorAnimationController.PlayJump();
+            actorController.occupied_grid_unit.occupiedActor = null;
+            actorController.transform.DOJump(og_grid_unit.cachedWorldPos, 2f, 1, 0.75f, false).SetEase(Ease.Linear).OnComplete(() => {
+                actorController.occupied_grid_unit = og_grid_unit;
+                og_grid_unit.occupiedActor = actorController;
+
+                actorController.transform.GetChild(0).localPosition = Vector3.zero;
+                Instantiate(landingVFX, actorController.transform.GetChild(0));
+                //actorAnimationController.PlayIdle();
+            });
+            yield return new WaitForSeconds(1.0f);
+        }
 
         if (isReactive == false && isPincer == false)
         {

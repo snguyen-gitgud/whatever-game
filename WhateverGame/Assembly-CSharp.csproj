@@ -122,6 +122,7 @@
     <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Demo\Scripts\Helpers\RandomizeOffsetX.cs" />
     <Compile Include="Assets\Scripts\Battle\Skills\Brawler\HeavyKick.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\DitheringModel.cs" />
+    <Compile Include="Assets\Scripts\Battle\Skills\Brawler\LeapKick.cs" />
     <Compile Include="Assets\3rdParty\VFX\UltimateTextDamage\Scripts\UltimateTextDamageManager.cs" />
     <Compile Include="Assets\Scripts\Stats\StatsScriptable.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
@@ -188,7 +189,6 @@
     <Compile Include="Assets\Scripts\Common\SelfSpinning.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\nextEffectMeleeCombat.cs" />
-    <Compile Include="Assets\Scripts\Battle\Skills\Brawler\LeapKick.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
