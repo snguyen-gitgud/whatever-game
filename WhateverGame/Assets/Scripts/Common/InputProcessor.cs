@@ -96,11 +96,22 @@ public class InputProcessor : PersistantAndSingletonBehavior<InputProcessor>
                 buttonShoulderL = false;
             }
 
-            Vector2 move = gamepad.leftStick.ReadValue();
-            if (move.magnitude > 0.05f)
-                leftStick = new Vector3(move.x, 0f, move.y).normalized;
-            else
-                leftStick = Vector3.zero;
+            if (gamepad.dpad.ReadValue().magnitude < 0.05f)
+            {
+                Vector2 move = gamepad.leftStick.ReadValue();
+                if (move.magnitude > 0.05f)
+                    leftStick = new Vector3(move.x, 0f, move.y).normalized;
+                else
+                    leftStick = Vector3.zero;
+            }
+            else if (gamepad.dpad.ReadValue().magnitude > 0.05f)
+            {
+                Vector2 move = gamepad.dpad.ReadValue();
+                if (move.magnitude > 0.05f)
+                    leftStick = new Vector3(move.x, 0f, move.y).normalized;
+                else
+                    leftStick = Vector3.zero;
+            }
 
             Vector2 cam = gamepad.rightStick.ReadValue();
             if (cam.magnitude > 0.05f)

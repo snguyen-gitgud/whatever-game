@@ -207,6 +207,11 @@ public class BaseSkill : MonoBehaviour
     {
         return null;
     }
+
+    public virtual List<GridUnit> GetPreviewAoE(ActorController caster, GridUnit highlighted_grid_unit)
+    {
+        return null;
+    }
 }
 
 public enum DamageTypes
