@@ -22,6 +22,8 @@ public class BaseSkill : MonoBehaviour
     public int skillAccuracyBonus = 0;
     public DamageTypes damageTypes = DamageTypes.PHYSICAL;
     public float baseDamageMultiplier = 1f;
+    public float heightLimit = 1f;
+    public bool canTriggerReactiveAndPincer = true;
 
     [Header("Vcam settings")]
     public float vcam_offset_Y = 1.5f;
@@ -110,7 +112,10 @@ public class BaseSkill : MonoBehaviour
     public virtual IEnumerator ExecuteSkillSequence()
     {
         //TODO: preemptive skill goes here:
+        if (canTriggerReactiveAndPincer == true)
+        {
 
+        }
         //---------------------------
 
         BattleMaster.GetInstance().gridManager.cursor_lock = true;
@@ -127,11 +132,14 @@ public class BaseSkill : MonoBehaviour
 
     public virtual IEnumerator PostAttack()
     {
-        //reactive
-        yield return StartCoroutine(ReactiveSkill());
+        if (canTriggerReactiveAndPincer == true) //AoE does not trigger pincer or reactive
+        {
+            //reactive
+            yield return StartCoroutine(ReactiveSkill());
 
-        //pincer
-        yield return StartCoroutine(PincerSkill());
+            //pincer
+            yield return StartCoroutine(PincerSkill());
+        }
 
         yield return new WaitForSeconds(2f);
         EndSkill();
@@ -159,37 +167,44 @@ public class BaseSkill : MonoBehaviour
     {
         if (targetController != null)
         {
-            ActorController pincer_actor = null;
-            List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, 2, targetController.actorTeams, true);
+            List<ActorController> pincer_actor_list = new List<ActorController>();
+            pincer_actor_list.Clear();
+            List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, 2, targetController.actorTeams, true, false);
             foreach (GridUnit tile in pincer_range)
             {
                 if (tile.occupiedActor != null)
                 {
-                    if (Vector3.Dot(Vector3.ProjectOnPlane(tile.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up),
-                                    Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up))
-                        <= -0.9f)
-                    {
-                        if (tile.occupiedActor.actorTeams == actorController.actorTeams)
-                            pincer_actor = tile.occupiedActor;
-                        break;
-                    }
+                    //if (Vector3.Dot(Vector3.ProjectOnPlane(tile.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up),
+                    //                Vector3.ProjectOnPlane(actorController.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up))
+                    //    <= -0.9f)
+                    //{
+                    //    if (tile.occupiedActor.actorTeams == actorController.actorTeams)
+                    //        pincer_actor_list.Add(tile.occupiedActor);
+                    //}
+                    if (tile.occupiedActor.actorTeams == actorController.actorTeams && tile.occupiedActor != actorController)
+                        pincer_actor_list.Add(tile.occupiedActor);
                 }
             }
 
-            if (pincer_actor != null)
+            foreach (ActorController pincer_actor in pincer_actor_list)
             {
-                BaseSkill pincer_skill = pincer_actor.actorStats.actorNormalAttack;
-                pincer_skill.isReactive = true;
-                pincer_skill.CastingSkill(pincer_actor, skillOverLoadLevel, targetController.occupied_grid_unit);
-                pincer_skill.ExecuteSkill(true);
-                yield return StartCoroutine(pincer_skill.ExecuteSkillSequence());
+                if (pincer_actor != null)
+                {
+                    BaseSkill pincer_skill = pincer_actor.actorStats.actorNormalAttack;
+                    pincer_skill.isReactive = true;
+                    pincer_skill.CastingSkill(pincer_actor, skillOverLoadLevel, targetController.occupied_grid_unit);
+                    pincer_skill.ExecuteSkill(true);
+                    yield return StartCoroutine(pincer_skill.ExecuteSkillSequence());
 
-                pincer_skill.isReactive = false;
-                yield return new WaitForSeconds(1f);
-                pincer_actor.actorStats.actorNormalAttack.castingVCam.Priority = 0;
-                pincer_actor.actorStats.actorNormalAttack.executingVCam.Priority = 0;
-                pincer_actor.actorAnimationController.PlayIdle();
+                    pincer_skill.isReactive = false;
+                    yield return new WaitForSeconds(1f);
+                    pincer_actor.actorStats.actorNormalAttack.castingVCam.Priority = 0;
+                    pincer_actor.actorStats.actorNormalAttack.executingVCam.Priority = 0;
+                    pincer_actor.actorAnimationController.PlayIdle();
+                    //yield return new WaitForSeconds(1f);
+                }
             }
+            
         }
     }
 

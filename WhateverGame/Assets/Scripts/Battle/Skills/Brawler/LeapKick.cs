@@ -38,7 +38,7 @@ public class LeapKick : BaseSkill
 
         GridUnit secondary_target_grid = null;
         Vector3 presume_secondary_target_pos = jump_to_grid_unit.cachedWorldPos + (actorController.transform.GetChild(0).forward.normalized * BattleMaster.GetInstance().gridManager.gridUnitSize);
-        Ray ray = new Ray(presume_secondary_target_pos + (Vector3.up * 100f), Vector3.down);
+        Ray ray = new Ray(presume_secondary_target_pos + (Vector3.up * BattleMaster.GetInstance().gridManager.gridUnitSize * heightLimit), Vector3.down);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
@@ -199,14 +199,20 @@ public class LeapKick : BaseSkill
                 Instantiate(landingVFX, actorController.transform.GetChild(0));
                 //actorAnimationController.PlayIdle();
             });
-            yield return new WaitForSeconds(1.0f);
         }
         else
         {
+            actorController.occupied_grid_unit = jump_to_grid_unit;
+            jump_to_grid_unit.occupiedActor = actorController;
+            jump_to_grid_unit.occupiedState = actorController.actorTeams;
+
             og_grid_unit.occupiedActor = null;
             og_grid_unit.occupiedState = GridUnitOccupationStates.FREE;
+
+            targetController = secondary_target_grid.occupiedActor;
         }
 
+        yield return new WaitForSeconds(1.0f);
         if (isReactive == false && isPincer == false)
         {
             StartCoroutine(base.PostAttack());

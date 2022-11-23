@@ -1706,6 +1706,8 @@ MonoBehaviour:
   is_acted: 0
   currentChosenSkill: {fileID: 0}
   current_casting_value: 0
+  skill_range_area: []
+  preview_aoe: []
   ap_bank: 0
 --- !u!114 &3298493525271875945
 MonoBehaviour:

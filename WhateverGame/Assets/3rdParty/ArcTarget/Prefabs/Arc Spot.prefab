@@ -166,7 +166,7 @@ MonoBehaviour:
   SectionDetail: 20
   StartSize: 0.1
   EndSize: 0.1
-  ArcHeight: 8
+  ArcHeight: 4
 --- !u!1 &4209225428385057397
 GameObject:
   m_ObjectHideFlags: 0

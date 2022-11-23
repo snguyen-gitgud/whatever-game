@@ -82,6 +82,9 @@ public static class ShieldHelpers
             ret.output /= 4;
         }
 
+        if (caster.actorTeams == target.actorTeams)
+            ret.output /= 2;
+
         return ret;
     }
 
