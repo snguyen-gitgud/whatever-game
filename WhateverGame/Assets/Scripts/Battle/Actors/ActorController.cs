@@ -963,7 +963,7 @@ public class ActorController : MonoBehaviour
                     CalculateAndReduceStaminaAfterMove(new_forward);
                 }
             });
-            yield return new WaitForSeconds(1.0f * (move_path.Count - 1));
+            yield return new WaitForSeconds(.5f * (move_path.Count - 1));
         }
         else if (path.Length > 0)
         {
@@ -973,7 +973,7 @@ public class ActorController : MonoBehaviour
             this.transform.DOMove(path[0], .5f).SetEase(Ease.Linear);
 
             CalculateAndReduceStaminaAfterMove(new_forward);
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(.5f);
         }
 
         actorAnimationController.PlayIdle();

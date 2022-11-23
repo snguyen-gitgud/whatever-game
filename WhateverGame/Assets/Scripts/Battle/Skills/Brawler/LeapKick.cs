@@ -61,13 +61,17 @@ public class LeapKick : BaseSkill
 
         GridUnit og_grid_unit = actorController.occupied_grid_unit;
         actorController.occupied_grid_unit.occupiedActor = null;
+        actorController.occupied_grid_unit.occupiedState = GridUnitOccupationStates.FREE;
         actorController.transform.DOJump(jump_to_grid_unit.cachedWorldPos, 2f, 1, 0.86667f, false).SetEase(Ease.Linear).OnComplete(() =>
         {
             if (jump_to_grid_unit.occupiedActor == null)
             {
                 actorController.occupied_grid_unit = jump_to_grid_unit;
                 jump_to_grid_unit.occupiedActor = actorController;
+                jump_to_grid_unit.occupiedState = actorController.actorTeams;
+
                 og_grid_unit.occupiedActor = null;
+                og_grid_unit.occupiedState = GridUnitOccupationStates.FREE;
             }
 
             actorController.transform.GetChild(0).localPosition = Vector3.zero;
@@ -184,10 +188,12 @@ public class LeapKick : BaseSkill
             //TODO: jump back
             actorAnimationController.PlayJump();
             actorController.occupied_grid_unit.occupiedActor = null;
+            actorController.occupied_grid_unit.occupiedState = GridUnitOccupationStates.FREE;
             actorController.transform.DOJump(og_grid_unit.cachedWorldPos, 2f, 1, 0.75f, false).SetEase(Ease.Linear).OnComplete(() =>
             {
                 actorController.occupied_grid_unit = og_grid_unit;
                 og_grid_unit.occupiedActor = actorController;
+                og_grid_unit.occupiedState = actorController.actorTeams;
 
                 actorController.transform.GetChild(0).localPosition = Vector3.zero;
                 Instantiate(landingVFX, actorController.transform.GetChild(0));
@@ -198,6 +204,7 @@ public class LeapKick : BaseSkill
         else
         {
             og_grid_unit.occupiedActor = null;
+            og_grid_unit.occupiedState = GridUnitOccupationStates.FREE;
         }
 
         if (isReactive == false && isPincer == false)

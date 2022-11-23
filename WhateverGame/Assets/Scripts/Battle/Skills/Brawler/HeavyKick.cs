@@ -139,10 +139,12 @@ public class HeavyKick : BaseSkill
                     if (knockbacked_to_grid_unit != null)
                     {
                         targetController.occupied_grid_unit.occupiedActor = null;
+                        targetController.occupied_grid_unit.occupiedState = GridUnitOccupationStates.FREE;
                         targetController.transform.DOJump(knockbacked_to_grid_unit.cachedWorldPos, 2f, 1, .75f, false).SetEase(Ease.Linear).OnComplete(() => {
                             targetController.occupied_grid_unit = knockbacked_to_grid_unit;
                             knockbacked_to_grid_unit.occupiedActor = targetController;
-                            
+                            knockbacked_to_grid_unit.occupiedState = targetController.actorTeams;
+
                             targetController.transform.GetChild(0).localPosition = Vector3.zero;
                             Instantiate(landingVFX, targetController.transform.GetChild(0));
                         });
