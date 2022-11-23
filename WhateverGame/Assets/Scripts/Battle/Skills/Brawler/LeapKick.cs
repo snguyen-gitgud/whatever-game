@@ -1,7 +1,7 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class LeapKick : BaseSkill
 {
@@ -56,16 +56,18 @@ public class LeapKick : BaseSkill
         actorAnimationController.PlayUnarmedAttack_6();
         GameObject atk_vfx = Instantiate(atkVFX, actorController.transform.GetChild(0));
         atk_vfx.transform.position += Vector3.up * vcam_offset_Y;
-        
+
         Instantiate(jumpingVFX, actorController.transform.GetChild(0));
 
         GridUnit og_grid_unit = actorController.occupied_grid_unit;
         actorController.occupied_grid_unit.occupiedActor = null;
-        actorController.transform.DOJump(jump_to_grid_unit.cachedWorldPos, 2f, 1, 0.86667f, false).SetEase(Ease.Linear).OnComplete(() => {
+        actorController.transform.DOJump(jump_to_grid_unit.cachedWorldPos, 2f, 1, 0.86667f, false).SetEase(Ease.Linear).OnComplete(() =>
+        {
             if (jump_to_grid_unit.occupiedActor == null)
             {
                 actorController.occupied_grid_unit = jump_to_grid_unit;
                 jump_to_grid_unit.occupiedActor = actorController;
+                og_grid_unit.occupiedActor = null;
             }
 
             actorController.transform.GetChild(0).localPosition = Vector3.zero;
@@ -124,7 +126,6 @@ public class LeapKick : BaseSkill
             }
         }
 
-        //TODO: find and set secondary target
         if (secondary_target_grid != null && secondary_target_grid.occupiedActor != null)
         {
             ActorController secondary_target = secondary_target_grid.occupiedActor;
@@ -183,7 +184,8 @@ public class LeapKick : BaseSkill
             //TODO: jump back
             actorAnimationController.PlayJump();
             actorController.occupied_grid_unit.occupiedActor = null;
-            actorController.transform.DOJump(og_grid_unit.cachedWorldPos, 2f, 1, 0.75f, false).SetEase(Ease.Linear).OnComplete(() => {
+            actorController.transform.DOJump(og_grid_unit.cachedWorldPos, 2f, 1, 0.75f, false).SetEase(Ease.Linear).OnComplete(() =>
+            {
                 actorController.occupied_grid_unit = og_grid_unit;
                 og_grid_unit.occupiedActor = actorController;
 
@@ -192,6 +194,10 @@ public class LeapKick : BaseSkill
                 //actorAnimationController.PlayIdle();
             });
             yield return new WaitForSeconds(1.0f);
+        }
+        else
+        {
+            og_grid_unit.occupiedActor = null;
         }
 
         if (isReactive == false && isPincer == false)
@@ -225,5 +231,36 @@ public class LeapKick : BaseSkill
         ret.chance_text = (ret.chance_val * 100f) + "%";
         ret.value = "-" + sum + " HP";
         return ret;
+    }
+
+    public override List<GridUnit> GetPreviewAoE(GridUnit root, GridUnit highlighted_grid_unit)
+    {
+        List<GridUnit> aoe_preview = base.GetPreviewAoE(root, highlighted_grid_unit);
+
+        if (highlighted_grid_unit == null || highlighted_grid_unit == root)
+            return aoe_preview;
+
+        aoe_preview.Add(highlighted_grid_unit);
+        GridUnit secondary_target_grid = null;
+        Vector3 presume_secondary_target_pos = highlighted_grid_unit.cachedWorldPos + ((highlighted_grid_unit.cachedWorldPos - root.cachedWorldPos).normalized * BattleMaster.GetInstance().gridManager.gridUnitSize);
+        Ray ray = new Ray(presume_secondary_target_pos + (Vector3.up * 100f), Vector3.down);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.transform.tag.Contains("GridUnit") == true)
+            {
+                GridUnit unit = hit.transform.GetComponent<GridUnit>();
+                if (unit != null)
+                {
+                    secondary_target_grid = unit;
+                }
+            }
+        }
+        aoe_preview.Add(secondary_target_grid);
+        aoe_preview.TrimExcess();
+
+        //Debug.Log(aoe_preview);
+
+        return aoe_preview;
     }
 }

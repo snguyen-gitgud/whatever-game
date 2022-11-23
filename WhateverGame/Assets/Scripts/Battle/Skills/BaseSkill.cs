@@ -208,9 +208,19 @@ public class BaseSkill : MonoBehaviour
         return null;
     }
 
-    public virtual List<GridUnit> GetPreviewAoE(ActorController caster, GridUnit highlighted_grid_unit)
+    List<GridUnit> aoePreview;
+    public virtual List<GridUnit> GetPreviewAoE(GridUnit root, GridUnit highlighted_grid_unit)
     {
-        return null;
+        if (aoePreview != null)
+        {
+            foreach (GridUnit grid_unit in aoePreview)
+                grid_unit?.ClearAoEHighlight();
+        }
+
+        aoePreview = new List<GridUnit>();
+        aoePreview.Clear();
+
+        return aoePreview;
     }
 }
 

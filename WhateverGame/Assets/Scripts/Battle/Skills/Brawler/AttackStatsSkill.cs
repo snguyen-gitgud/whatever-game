@@ -57,4 +57,16 @@ public class AttackStatsSkill : BaseSkill
         ret.value = "+" + (baseDamageMultiplier * caster.actorStats.currentStats.pAtk) + " P.ATK";
         return ret;
     }
+
+    public override List<GridUnit> GetPreviewAoE(GridUnit root, GridUnit highlighted_grid_unit)
+    {
+        List<GridUnit> aoe_preview = base.GetPreviewAoE(root, highlighted_grid_unit);
+
+        if (aoe_preview.Contains(root) == false)
+            aoe_preview.Add(root);
+
+        aoe_preview.TrimExcess();
+
+        return aoe_preview;
+    }
 }

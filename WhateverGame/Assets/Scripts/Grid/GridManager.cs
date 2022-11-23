@@ -348,10 +348,10 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
             actorDetails.parent.GetComponent<BattleActorDetails>().SetDisplayData(current_highlighted_grid_unit.occupiedActor, current_highlighted_grid_unit.occupiedActor.actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? current_highlighted_grid_unit.occupiedActor.PlayerTeamBGColor : current_highlighted_grid_unit.occupiedActor.OpponentTeamBGColor);
             if (current_highlighted_grid_unit.occupiedActor.actorStats.actorReactiveSkill != null)
                 reactiveText.text = current_highlighted_grid_unit.occupiedActor.actorStats.actorReactiveSkill.reactiveSkillName;
-            if (actorDetails.parent.GetComponent<BattleActorDetails>().actorController.currentChosenSkill != null) actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(true);
-            else actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(false);
-            if (last_line != null && last_line != actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line) last_line.SetActive(false);
-            last_line = actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line;
+            //if (actorDetails.parent.GetComponent<BattleActorDetails>().actorController.currentChosenSkill != null) actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(true);
+            //else actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(false);
+            //if (last_line != null && last_line != actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line) last_line.SetActive(false);
+            //last_line = actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line;
         }
 
         if (Mathf.Abs(InputProcessor.GetInstance().leftStick.magnitude) > 0f && cursor_lock == false)
@@ -387,10 +387,10 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                         actorDetails.parent.GetComponent<BattleActorDetails>().SetDisplayData(current_highlighted_grid_unit.occupiedActor, current_highlighted_grid_unit.occupiedActor.actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? current_highlighted_grid_unit.occupiedActor.PlayerTeamBGColor : current_highlighted_grid_unit.occupiedActor.OpponentTeamBGColor);
                         if (current_highlighted_grid_unit.occupiedActor.actorStats.actorReactiveSkill != null)
                             reactiveText.text = current_highlighted_grid_unit.occupiedActor.actorStats.actorReactiveSkill.reactiveSkillName;
-                        if (actorDetails.parent.GetComponent<BattleActorDetails>().actorController.currentChosenSkill != null) actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(true);
-                        else actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(false);
-                        if (last_line != null && last_line != actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line) last_line.SetActive(false);
-                        last_line = actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line;
+                        //if (actorDetails.parent.GetComponent<BattleActorDetails>().actorController.currentChosenSkill != null) actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(true);
+                        //else actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(false);
+                        //if (last_line != null && last_line != actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line) last_line.SetActive(false);
+                        //last_line = actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line;
                     }
                     else
                     {
@@ -398,7 +398,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                             DOTween.Kill(actorDetails);
 
                         actorDetails.DOLocalMoveX(800f, 0.25f);
-                        actorDetails.parent.GetComponent<BattleActorDetails>()?.actorController?.line?.SetActive(false);
+                        //actorDetails.parent.GetComponent<BattleActorDetails>()?.actorController?.line?.SetActive(false);
                     }
                 }
                 else
@@ -407,7 +407,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                         DOTween.Kill(actorDetails);
 
                     actorDetails.DOLocalMoveX(800f, 0.25f);
-                    actorDetails.parent.GetComponent<BattleActorDetails>()?.actorController?.line?.SetActive(false);
+                    //actorDetails.parent.GetComponent<BattleActorDetails>()?.actorController?.line?.SetActive(false);
                 }
             }
         }
@@ -437,10 +437,10 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                         actorDetails.parent.GetComponent<BattleActorDetails>().SetDisplayData(current_highlighted_grid_unit.occupiedActor, current_highlighted_grid_unit.occupiedActor.actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? current_highlighted_grid_unit.occupiedActor.PlayerTeamBGColor : current_highlighted_grid_unit.occupiedActor.OpponentTeamBGColor);
                         if (current_highlighted_grid_unit.occupiedActor.actorStats.actorReactiveSkill != null)
                             reactiveText.text = current_highlighted_grid_unit.occupiedActor.actorStats.actorReactiveSkill.reactiveSkillName;
-                        if (actorDetails.parent.GetComponent<BattleActorDetails>().actorController.currentChosenSkill != null) actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(true);
-                        else actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(false);
-                        if (last_line != null && last_line != actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line) last_line.SetActive(false);
-                        last_line = actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line;
+                        //if (actorDetails.parent.GetComponent<BattleActorDetails>().actorController.currentChosenSkill != null) actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(true);
+                        //else actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(false);
+                        //if (last_line != null && last_line != actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line) last_line.SetActive(false);
+                        //last_line = actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line;
                     }
                     else
                     {
@@ -448,16 +448,16 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                             DOTween.Kill(actorDetails);
 
                         actorDetails.DOLocalMoveX(800f, 0.25f);
-                        actorDetails.parent.GetComponent<BattleActorDetails>()?.actorController?.line?.SetActive(false);
+                        //actorDetails.parent.GetComponent<BattleActorDetails>()?.actorController?.line?.SetActive(false);
                     }
 
                     if (current_highlighted_grid_unit.occupiedActor != null)
                     {
                         actorDetails.DOLocalMoveX(-250f, 0.25f);
-                        if (actorDetails.parent.GetComponent<BattleActorDetails>().actorController.currentChosenSkill != null) actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(true);
-                        else actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(false);
-                        if (last_line != null && last_line != actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line) last_line.SetActive(false);
-                        last_line = actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line;
+                        //if (actorDetails.parent.GetComponent<BattleActorDetails>().actorController.currentChosenSkill != null) actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(true);
+                        //else actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line.SetActive(false);
+                        //if (last_line != null && last_line != actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line) last_line.SetActive(false);
+                        //last_line = actorDetails.parent.GetComponent<BattleActorDetails>().actorController.line;
                     }
                     else
                     {
@@ -465,7 +465,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                             DOTween.Kill(actorDetails);
 
                         actorDetails.DOLocalMoveX(800f, 0.25f);
-                        actorDetails.parent.GetComponent<BattleActorDetails>()?.actorController?.line?.SetActive(false);
+                        //actorDetails.parent.GetComponent<BattleActorDetails>()?.actorController?.line?.SetActive(false);
                     }
                 }
                 else
@@ -480,7 +480,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                         DOTween.Kill(actorDetails);
 
                     actorDetails.DOLocalMoveX(800f, 0.25f);
-                    actorDetails.parent.GetComponent<BattleActorDetails>()?.actorController?.line?.SetActive(false);
+                    //actorDetails.parent.GetComponent<BattleActorDetails>()?.actorController?.line?.SetActive(false);
                 }
             }
             else

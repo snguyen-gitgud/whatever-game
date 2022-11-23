@@ -250,6 +250,19 @@ public class MonkNormalAttack : BaseSkill
         ret.value = "-" + sum + " HP";
         return ret;
     }
+
+    public override List<GridUnit> GetPreviewAoE(GridUnit root, GridUnit highlighted_grid_unit)
+    {
+        List<GridUnit> aoe_preview = base.GetPreviewAoE(root, highlighted_grid_unit);
+
+        if (highlighted_grid_unit == null || highlighted_grid_unit == root)
+            return aoe_preview;
+
+        aoe_preview.Add(highlighted_grid_unit);
+        aoe_preview.TrimExcess();
+
+        return aoe_preview;
+    }
 }
 
 public class SkillPreview

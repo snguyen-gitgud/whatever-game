@@ -68,7 +68,7 @@ public class ActorController : MonoBehaviour
     bool is_moved = false;
     [HideInInspector] public bool is_acted = false;
     float current_burn_out = 0.0f;
-    [HideInInspector] public BaseSkill currentChosenSkill = null;
+    public BaseSkill currentChosenSkill = null;
     [HideInInspector] public float current_casting_value = 0f;
 
     private void OnEnable()
@@ -97,7 +97,8 @@ public class ActorController : MonoBehaviour
 
         line.GetComponent<ArcTarget_C>().StartColor = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
         line.GetComponent<ArcTarget_C>().EndColor = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
-        line.SetActive(false);
+        line.GetComponent<ArcTarget_C>().EndPoint = this.line.GetComponent<ArcTarget_C>().StartPoint;
+        line.SetActive(true);
 
         DOTween.Kill(commandControlUI.transform);
         commandControlUI.transform.localScale = Vector3.zero;
@@ -302,7 +303,7 @@ public class ActorController : MonoBehaviour
         }
     }
 
-    List<GridUnit> skill_range_area = new List<GridUnit>();
+    public List<GridUnit> skill_range_area = new List<GridUnit>();
     public void NormalAttackCommandSelected()
     {
         actorControlStates = ActorControlStates.WAITING_FOR_TARGET;
@@ -374,12 +375,29 @@ public class ActorController : MonoBehaviour
 
     int current_skill_overload_level = 1;
     ActorController last_pincer_actor = null;
+    public List<GridUnit> preview_aoe = null;
     public void ProcessWaitingForTarget()
     {
         if (currentChosenSkill == null)
         {
             actorControlStates = ActorControlStates.AP_GEN;
             return;
+        }
+
+        if (skill_range_area != null)
+        {
+            //Debug.Log("Pong!!!!");
+
+            preview_aoe = currentChosenSkill.GetPreviewAoE(this.occupied_grid_unit, BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit);
+
+            if (skill_range_area.Contains(BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit) &&
+                preview_aoe != null)
+            {
+                foreach (GridUnit grid_unit in preview_aoe)
+                {
+                    grid_unit?.AoEHighlight();
+                }
+            }
         }
 
         int ap_cost = current_skill_overload_level * currentChosenSkill.skillStaminaCost;
@@ -401,53 +419,59 @@ public class ActorController : MonoBehaviour
         //target line
         if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() != null)
         {
-            if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == null)
-                line.GetComponent<ArcTarget_C>().EndPoint = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().transform;
-            else
-                line.GetComponent<ArcTarget_C>().EndPoint = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor.line.GetComponent<ArcTarget_C>().StartPoint;
-
-            line.SetActive(true);
-
-            ActorController targetController = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor;
-            if (targetController != null && targetController != last_pincer_actor && targetController != this)
-            {
-                List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, 2, targetController.actorTeams, true, false);
-                foreach (GridUnit tile in pincer_range)
-                {
-                    if (tile.occupiedActor != null)
-                    {
-                        if (Vector3.Dot(Vector3.ProjectOnPlane(tile.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up),
-                                        Vector3.ProjectOnPlane(this.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up))
-                            <= -0.9f)
-                        {
-                            if (tile.occupiedActor.actorTeams == this.actorTeams)
-                                pincer_actor = tile.occupiedActor;
-
-                            break;
-                        }
-                    }
-                }
-
-                if (pincer_actor != null)
-                {
-                    pincer_actor.line.SetActive(true);
-                    pincer_actor.line.GetComponent<ArcTarget_C>().EndPoint = targetController.line.GetComponent<ArcTarget_C>().StartPoint;
-                }
-
-                last_pincer_actor = pincer_actor;
-            }
-            else
-            {
-                if (last_pincer_actor != null)
-                    last_pincer_actor.line.SetActive(false);
-            }
+            line.GetComponent<ArcTarget_C>().EndPoint = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().transform;
         }
-        else
-        {
-            line.SetActive(false);
-            if (pincer_actor != null)
-                pincer_actor.line.SetActive(false);
-        }
+
+        //if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() != null && BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor != this)
+        //{
+        //    if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == null)
+        //        line.GetComponent<ArcTarget_C>().EndPoint = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().transform;
+        //    else
+        //        line.GetComponent<ArcTarget_C>().EndPoint = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor.line.GetComponent<ArcTarget_C>().StartPoint;
+
+        //    line.SetActive(true);
+
+        //    ActorController targetController = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor;
+        //    if (targetController != null && targetController != last_pincer_actor && targetController != this)
+        //    {
+        //        List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, 2, targetController.actorTeams, true, false);
+        //        foreach (GridUnit tile in pincer_range)
+        //        {
+        //            if (tile.occupiedActor != null)
+        //            {
+        //                if (Vector3.Dot(Vector3.ProjectOnPlane(tile.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up),
+        //                                Vector3.ProjectOnPlane(this.occupied_grid_unit.cachedWorldPos - targetController.occupied_grid_unit.cachedWorldPos, Vector3.up))
+        //                    <= -0.9f)
+        //                {
+        //                    if (tile.occupiedActor.actorTeams == this.actorTeams)
+        //                        pincer_actor = tile.occupiedActor;
+
+        //                    break;
+        //                }
+        //            }
+        //        }
+
+        //        if (pincer_actor != null)
+        //        {
+        //            pincer_actor.line.SetActive(true);
+        //            pincer_actor.line.GetComponent<ArcTarget_C>().EndPoint = targetController.line.GetComponent<ArcTarget_C>().StartPoint;
+        //        }
+
+        //        last_pincer_actor = pincer_actor;
+        //    }
+        //    else
+        //    {
+        //        if (last_pincer_actor != null)
+        //            last_pincer_actor.line.SetActive(false);
+        //    }
+        //}
+        //else
+        //{
+        //    line.SetActive(false);
+        //    line.GetComponent<ArcTarget_C>().EndPoint = this.line.GetComponent<ArcTarget_C>().StartPoint;
+        //    if (pincer_actor != null)
+        //        pincer_actor.line.SetActive(false);
+        //}
 
         //preview arrow
         if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() != null)
@@ -544,9 +568,10 @@ public class ActorController : MonoBehaviour
 
             actorUI.apBar.fillAmount = actorStats.apBar / 100f;
 
-            line.SetActive(false);
-            if (pincer_actor)
-                pincer_actor.line.SetActive(false);
+            //line.SetActive(false);
+            line.GetComponent<ArcTarget_C>().EndPoint = this.line.GetComponent<ArcTarget_C>().StartPoint;
+            //if (pincer_actor)
+            //    pincer_actor.line.SetActive(false);
 
             DOTween.Kill(commandControlUI.transform);
             commandControlUI.transform.DOScale(Vector3.zero, .25f);
@@ -558,6 +583,14 @@ public class ActorController : MonoBehaviour
             BattleMaster.GetInstance().gridManager.ClearAreaHighlight();
             actorControlStates = ActorControlStates.CASTING_STAG;
             BattleMaster.GetInstance().CurrentActorTurnEnds(vcamTransposer.m_FollowOffset, vcamTransposer.m_XAxis.Value);
+
+            if (preview_aoe != null)
+            {
+                foreach (GridUnit grid_unit in preview_aoe)
+                {
+                    grid_unit?.ClearAoEHighlight();
+                }
+            }
         }
 
         if (InputProcessor.GetInstance().buttonShoulderR && current_skill_overload_level < currentChosenSkill.skillMaxOverLoadLevel /*&& (ap_bank >= 0 || ap_bank < 0 && actorStats.staminaPoint >= currentChosenSkill.skillStaminaCost)*/)
@@ -603,9 +636,18 @@ public class ActorController : MonoBehaviour
 
         if (InputProcessor.GetInstance().buttonShoulderL && current_skill_overload_level <= 0)
         {
-            line.SetActive(false);
-            if (pincer_actor)
-                pincer_actor.line.SetActive(false);
+            if (preview_aoe != null)
+            {
+                foreach (GridUnit grid_unit in preview_aoe)
+                {
+                    grid_unit?.ClearAoEHighlight();
+                }
+            }
+
+            //line.SetActive(false);
+            line.GetComponent<ArcTarget_C>().EndPoint = this.line.GetComponent<ArcTarget_C>().StartPoint;
+            //if (pincer_actor)
+            //    pincer_actor.line.SetActive(false);
 
             actionPreviewUI.transform.DOScale(Vector3.zero, 0.25f);
 
@@ -648,6 +690,14 @@ public class ActorController : MonoBehaviour
         {
             actorDetails.transform.GetChild(0).DOLocalMoveX(250f, 0.25f);
             vcam.Priority = 11;
+
+            if (preview_aoe != null)
+            {
+                foreach (GridUnit grid_unit in preview_aoe)
+                {
+                    grid_unit?.ClearAoEHighlight();
+                }
+            }
             //actorUI.headerHolder.gameObject.SetActive(false);
             currentChosenSkill.ExecuteSkill();
             currentChosenSkill = null;
@@ -973,30 +1023,6 @@ public class ActorController : MonoBehaviour
             actorControlStates = ActorControlStates.BURNED_OUT_GEN;
             actorAnimationController.PlayBurnOut();
         }
-        //stam_regen_rate = 1f + (actorStats.staminaPoint * 1f) / (actorStats.maxStaminaPoint * 1f);
-        //if (stam_regen_rate < 1f)
-        //{
-        //    //stam_regen_rate *= .5f;
-        //    actorUI.apBar.color = exhautedAPGenColor;
-        //}
-        //else if (stam_regen_rate == 1f)
-        //    actorUI.apBar.color = normalAPGenColor;
-        //else if (stam_regen_rate > 1f)
-        //{
-        //    //stam_regen_rate *= 2f;
-        //    actorUI.apBar.color = acceleratedAPGenColor;
-        //}
-        //else if (stam_regen_rate <= 0.0f)
-        //{
-        //    stam_regen_rate = 0.0f;
-        //    actorUI.apBar.color = exhautedAPGenColor;
-        //    current_burn_out = 0f;
-        //    burn_out_dur = 3f;
-        //    SelfBlinkingUI selfBlinking = actorUI.apBar.gameObject.AddComponent<SelfBlinkingUI>();
-        //    selfBlinking.blinking_speed = 4f;
-        //    actorControlStates = ActorControlStates.BURNED_OUT_GEN;
-        //    actorAnimationController.PlayBurnOut();
-        //}
 
         foreach (Transform status_obj in actorStats.statusesHolder)
         {

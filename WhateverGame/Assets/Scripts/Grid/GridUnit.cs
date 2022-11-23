@@ -57,4 +57,14 @@ public class GridUnit : MonoBehaviour
     {
         pathIndicator.SetActive(false);
     }
+
+    public void AoEHighlight()
+    {
+        aoeIndicator.SetActive(true);
+    }
+
+    public void ClearAoEHighlight()
+    {
+        aoeIndicator.SetActive(false);
+    }
 }
