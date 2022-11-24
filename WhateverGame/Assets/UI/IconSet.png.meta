@@ -113,6 +113,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -6197,8 +6209,8 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       IconSet_151: 100144072
-      IconSet_272: -1614909643
-      IconSet_129: -335448507
+      IconSet_162: 1757067202
+      IconSet_101: 1034903695
       IconSet_82: -546815751
       IconSet_160: 781183983
       IconSet_208: -1363395741
@@ -6228,8 +6240,8 @@ TextureImporter:
       IconSet_168: 648553428
       IconSet_183: 1897718332
       IconSet_167: 1346251592
-      IconSet_194: -747932768
       IconSet_281: -159946694
+      IconSet_194: -747932768
       IconSet_14: 975497271
       IconSet_187: -1426548792
       IconSet_200: 1916864693
@@ -6275,10 +6287,10 @@ TextureImporter:
       IconSet_91: -1531339287
       IconSet_174: -1535056436
       IconSet_95: -832861484
-      IconSet_252: 1164984526
+      IconSet_280: 1435723794
       IconSet_267: -1527304399
       IconSet_8: 168922446
-      IconSet_280: 1435723794
+      IconSet_252: 1164984526
       IconSet_227: -2143861877
       IconSet_270: 1023619284
       IconSet_50: -81245250
@@ -6325,33 +6337,33 @@ TextureImporter:
       IconSet_67: -1473338349
       IconSet_263: 1313120412
       IconSet_149: 63007551
-      IconSet_215: -2054667782
+      IconSet_278: -939389942
       IconSet_262: 908505138
+      IconSet_215: -2054667782
       IconSet_77: 488685874
       IconSet_243: -740014083
       IconSet_223: 161522569
-      IconSet_259: -2032827152
+      IconSet_286: 1706507840
       IconSet_177: 799188403
       IconSet_41: 1036307860
       IconSet_98: 1369009518
+      IconSet_259: -2032827152
       IconSet_170: -1449610626
       IconSet_7: -838438233
-      IconSet_286: 1706507840
       IconSet_133: 552077399
       IconSet_38: -1743746439
       IconSet_17: 308426413
       IconSet_264: 2143693237
-      IconSet_278: -939389942
       IconSet_132: -1383988216
       IconSet_51: -1643090124
       IconSet_108: 701475405
       IconSet_175: -1439112339
       IconSet_80: 1963443801
-      IconSet_116: -2147382559
       IconSet_238: 1718507934
       IconSet_100: -1481010443
       IconSet_47: 1568796749
       IconSet_92: 1209097550
+      IconSet_116: -2147382559
       IconSet_97: 695809521
       IconSet_33: 159273105
       IconSet_86: -1593903333
@@ -6483,8 +6495,8 @@ TextureImporter:
       IconSet_241: -1728528560
       IconSet_126: 1251575844
       IconSet_135: 1860166589
-      IconSet_162: 1757067202
-      IconSet_101: 1034903695
+      IconSet_129: -335448507
+      IconSet_272: -1614909643
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

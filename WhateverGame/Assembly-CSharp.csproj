@@ -128,7 +128,7 @@
     <Compile Include="Assets\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\ActorAnimationController.cs" />
     <Compile Include="Assets\3rdParty\Stylized 3D Tools\Scripts\Rotator.cs" />
-    <Compile Include="Assets\Scripts\Battle\Skills\Brawler\AttackStatsSkill.cs" />
+    <Compile Include="Assets\Scripts\Battle\Skills\AttackStatsSkill.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ECCameraShakeProjectile.cs" />
     <Compile Include="Assets\Scripts\Common\CurvedLineRenderer.cs" />
     <Compile Include="Assets\Scripts\Common\BattleInputs.cs" />
@@ -189,6 +189,9 @@
     <Compile Include="Assets\Scripts\Common\SelfSpinning.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\nextEffectMeleeCombat.cs" />
+    <Compile Include="Assets\3rdParty\VFX\OrdossFX\SelectionBasesFX\Scripts\SelectionBases_EffectList.cs" />
+    <Compile Include="Assets\Scripts\Battle\Skills\SpeedStatsSkill.cs" />
+    <Compile Include="Assets\Scripts\Battle\Statuses\SpeedStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
@@ -252,6 +255,7 @@
     <None Include="Assets\VRMShaders\GLTF\IO\Resources\UniGLTF\StandardMapImporter.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\3rdParty\Sweet Land GUI\READ ME.txt" />
+    <None Include="Assets\3rdParty\VFX\OrdossFX\SelectionBasesFX\Shaders\SelectionBases_Unlit.shader" />
     <None Include="Assets\3rdParty\Toon Fantasy Nature\ToonShading\Shaders\TFF_CustomToonVegetation.shader" />
     <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
     <None Include="Assets\3rdParty\Animations\Shinabro\Platform_Animation\Readme.txt" />
@@ -264,6 +268,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\3rdParty\Toon Fantasy Nature\ToonShading\Shaders\TFF_CustomToon.shader" />
     <None Include="Assets\VRMShaders\VRM10\MToon10\Resources\VRM10\vrmc_materials_mtoon_geometry_normal.hlsl" />
+    <None Include="Assets\3rdParty\VFX\OrdossFX\SelectionBasesFX\Shaders\SelectionBases_Blended.shader" />
     <None Include="Assets\3rdParty\SoftMask\Shaders\Resources\SoftMaskTemplate.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\3rdParty\SoftMask\Shaders\Resources\SoftMaskETC1PremultipliedAlpha.shader" />

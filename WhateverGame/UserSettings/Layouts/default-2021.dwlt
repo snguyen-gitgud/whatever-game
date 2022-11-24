@@ -323,22 +323,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Prefabs/Battle/Skills/Brawler
+    - Assets/3rdParty/VFX/ErbGameArt/Saiyan aura
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 60
   m_LastFolders:
-  - Assets/Prefabs/Battle/Skills/Brawler
+  - Assets/3rdParty/VFX/ErbGameArt/Saiyan aura
   m_LastFoldersGridSize: 60
   m_LastProjectPath: G:\work\GitGud\WhateverGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 324.3333}
-    m_SelectedIDs: d2070100
-    m_LastClickedID: 67538
-    m_ExpandedIDs: 00000000f4060100f6060100f8060100fa060100fc060100fe06010000070100020701000407010006070100080701000a0701000c0701000e0701001007010012070100140701001607010000ca9a3b
+    scrollPos: {x: 0, y: 479}
+    m_SelectedIDs: dcbb1000
+    m_LastClickedID: 1096668
+    m_ExpandedIDs: 00000000f4060100f6060100f8060100fa060100fc060100fe06010000070100020701000407010006070100080701000a0701000c0701000e07010010070100120701001407010016070100b6070100ce070100e4070100ee070100a4ef0700c4ef0700eeef0700d2670f00e0670f0000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -688,9 +688,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: d8ebffff
-      m_LastClickedID: -5160
-      m_ExpandedIDs: 1cf0ffffe6f3fffff2f3ffff06fbffff78a0000092ac0000d4b10000
+      m_SelectedIDs: 7c63f9ff
+      m_LastClickedID: 0
+      m_ExpandedIDs: 00d9f8ff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1035,7 +1035,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: -0.18847565, y: -0.30728775, z: 0.062229298, w: -0.9306884}
+  m_LastSceneViewRotation: {x: -0.11616655, y: -0.70457894, z: 0.1186329, w: -0.68992925}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -1515,7 +1515,7 @@ MonoBehaviour:
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: Debug
+    m_Text: Inspector
     m_Image: {fileID: -440750813802333266, guid: 0000000000000000d000000000000000,
       type: 0}
     m_Tooltip: 
@@ -1538,7 +1538,7 @@ MonoBehaviour:
   m_LastInspectedObjectInstanceID: -1
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
-  m_InspectorMode: 1
+  m_InspectorMode: 0
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}

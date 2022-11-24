@@ -1156,9 +1156,9 @@ RectTransform:
   m_Father: {fileID: 6757056768929358781}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 232, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 231, y: -41}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3916841350701051509
@@ -1693,7 +1693,6 @@ MonoBehaviour:
   outputText: {fileID: 7710054255915477566}
   unloadObj: {fileID: 4008721794410992623}
   backObj: {fileID: 7616675103715230411}
-  line: {fileID: 5505434223572029269}
   vcamTarget: {fileID: 4884441515334335917}
   vcam: {fileID: 4601393900616212150}
   vcamYOffsetMin: 0
@@ -6048,12 +6047,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20cf6011b0ca8e54dbbe3932c17d0939, type: 3}
---- !u!1 &5505434223572029269 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 185602, guid: 20cf6011b0ca8e54dbbe3932c17d0939,
-    type: 3}
-  m_PrefabInstance: {fileID: 5505434223571950167}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5505434223572402531 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 465716, guid: 20cf6011b0ca8e54dbbe3932c17d0939,

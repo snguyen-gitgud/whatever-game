@@ -7,6 +7,7 @@ public class ScrollviewSnap : MonoBehaviour
 {
     public Transform holder;
     public ScrollRect scrollRect;
+    public Coroutine snaping_cor = null;
 
     List<Transform> childrenList = new List<Transform>();
     List<float> childPosList = new List<float>();
@@ -40,7 +41,6 @@ public class ScrollviewSnap : MonoBehaviour
         //scrollRect.verticalNormalizedPosition = 1f - closest_pos;
     }
 
-    Coroutine snaping_cor = null;
     private void Update()
     {
         //if (Mathf.Abs(InputProcessor.GetInstance().leftStick.z) >= 0.1f)

@@ -50,8 +50,6 @@ public class ActorController : MonoBehaviour
     public GameObject unloadObj;
     public GameObject backObj;
 
-    public GameObject line;
-
     [Header("Vcam settings")]
     public Transform vcamTarget;
     public Cinemachine.CinemachineVirtualCamera vcam;
@@ -94,11 +92,6 @@ public class ActorController : MonoBehaviour
 
         if (actorStats == null)
             actorStats = this.GetComponent<ActorInfo>();
-
-        line.GetComponent<ArcTarget_C>().StartColor = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
-        line.GetComponent<ArcTarget_C>().EndColor = actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? PlayerTeamBGColor : OpponentTeamBGColor;
-        line.GetComponent<ArcTarget_C>().EndPoint = this.line.GetComponent<ArcTarget_C>().StartPoint;
-        line.SetActive(true);
 
         DOTween.Kill(commandControlUI.transform);
         commandControlUI.transform.localScale = Vector3.zero;
@@ -254,6 +247,9 @@ public class ActorController : MonoBehaviour
             {
                 BattleMaster.GetInstance().gridManager.cursor_lock = false;
                 actorStats.skillUIsholder.GetComponent<FadeInFadeOutCanvasGroup>().FadeOut();
+                if (scrollviewSnap.snaping_cor != null)
+                    StopCoroutine(scrollviewSnap.snaping_cor);
+                ScrollViewFocusFunctions.is_cor_running = false;
                 WaitingForCommandState();
             }
         }
@@ -388,7 +384,10 @@ public class ActorController : MonoBehaviour
         {
             //Debug.Log("Pong!!!!");
 
-            preview_aoe = currentChosenSkill.GetPreviewAoE(this.occupied_grid_unit, BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit);
+            if (skill_range_area.Contains(BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit) == true)
+                preview_aoe = currentChosenSkill.GetPreviewAoE(this.occupied_grid_unit, BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit);
+            else
+                preview_aoe = null;
 
             if (skill_range_area.Contains(BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit) &&
                 preview_aoe != null)
@@ -420,11 +419,6 @@ public class ActorController : MonoBehaviour
         //target line
         if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit() != null)
         {
-            if (BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor == null)
-                line.GetComponent<ArcTarget_C>().EndPoint = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().transform;
-            else
-                line.GetComponent<ArcTarget_C>().EndPoint = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor.line.GetComponent<ArcTarget_C>().StartPoint;
-
             ActorController targetController = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor;
             if (targetController != null /*&& last_pincer_actor_list.Contains(targetController)*/ && targetController != this)
             {
@@ -446,24 +440,8 @@ public class ActorController : MonoBehaviour
                     }
                 }
 
-                foreach (ActorController pincer_actor in pincer_actor_list)
-                {
-                    if (pincer_actor != null)
-                    {
-                        pincer_actor.line.GetComponent<ArcTarget_C>().EndPoint = targetController.line.GetComponent<ArcTarget_C>().StartPoint;
-                    }
-                }
-
                 last_pincer_actor_list.Clear();
                 last_pincer_actor_list = new List<ActorController>(pincer_actor_list);
-            }
-            else
-            {
-                foreach (ActorController last_pincer_actor in last_pincer_actor_list)
-                {
-                    if (last_pincer_actor != null)
-                        last_pincer_actor.line.GetComponent<ArcTarget_C>().EndPoint = last_pincer_actor.line.GetComponent<ArcTarget_C>().StartPoint;
-                }
             }
         }
 
@@ -562,11 +540,6 @@ public class ActorController : MonoBehaviour
 
             actorUI.apBar.fillAmount = actorStats.apBar / 100f;
 
-            //line.SetActive(false);
-            line.GetComponent<ArcTarget_C>().EndPoint = this.line.GetComponent<ArcTarget_C>().StartPoint;
-            //if (pincer_actor)
-            //    pincer_actor.line.SetActive(false);
-
             DOTween.Kill(commandControlUI.transform);
             commandControlUI.transform.DOScale(Vector3.zero, .25f);
 
@@ -638,16 +611,19 @@ public class ActorController : MonoBehaviour
                 }
             }
 
-            //line.SetActive(false);
-            line.GetComponent<ArcTarget_C>().EndPoint = this.line.GetComponent<ArcTarget_C>().StartPoint;
-            //if (pincer_actor)
-            //    pincer_actor.line.SetActive(false);
-
             actionPreviewUI.transform.DOScale(Vector3.zero, 0.25f);
 
             actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
             actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
             currentChosenSkill = null;
+            if (BattleMaster.GetInstance().gridManager.last_aoe_range != null)
+            {
+                foreach (GridUnit unit in BattleMaster.GetInstance().gridManager.last_aoe_range)
+                {
+                    unit.ClearAoEHighlight();
+                }
+                BattleMaster.GetInstance().gridManager.last_aoe_range = null;
+            }
             WaitingForCommandState();
         }
     }
@@ -678,6 +654,15 @@ public class ActorController : MonoBehaviour
 
         if (currentChosenSkill == null) //new turn
         {
+            if (preview_aoe != null)
+            {
+                foreach (GridUnit grid_unit in preview_aoe)
+                {
+                    grid_unit?.ClearAoEHighlight();
+                }
+            }
+            preview_aoe = null;
+            currentChosenSkill = null;
             StartCoroutine(StartTurnSequence(actor));
         }
         else //continue casting
@@ -696,6 +681,14 @@ public class ActorController : MonoBehaviour
             //actorUI.headerHolder.gameObject.SetActive(false);
             currentChosenSkill.ExecuteSkill();
             currentChosenSkill = null;
+            if (BattleMaster.GetInstance().gridManager.last_aoe_range != null)
+            {
+                foreach (GridUnit unit in BattleMaster.GetInstance().gridManager.last_aoe_range)
+                {
+                    unit.ClearAoEHighlight();
+                }
+                BattleMaster.GetInstance().gridManager.last_aoe_range = null;
+            }
         }
     }
 
@@ -862,6 +855,15 @@ public class ActorController : MonoBehaviour
         actorDetails.actorStaminaInDebtPreviewSlider.fillAmount = 0f;
         actorDetails.actorStaminaPreviewSlider.fillAmount = 0f;
 
+        currentChosenSkill = null;
+        if (BattleMaster.GetInstance().gridManager.last_aoe_range != null)
+        {
+            foreach (GridUnit unit in BattleMaster.GetInstance().gridManager.last_aoe_range)
+            {
+                unit.ClearAoEHighlight();
+            }
+            BattleMaster.GetInstance().gridManager.last_aoe_range = null;
+        }
 
         actorControlStates = ActorControlStates.WAITING_FOR_COMMAND;
         foreach (Transform child in commandControlUI.transform.GetChild(1))

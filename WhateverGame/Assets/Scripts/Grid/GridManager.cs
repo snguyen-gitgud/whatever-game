@@ -2,8 +2,8 @@ using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 [System.Serializable]
 public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
@@ -327,12 +327,9 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
     }
 
     [HideInInspector] public bool cursor_lock = false;
-    GameObject last_line = null;
-    List<GridUnit> last_aoe_range = new List<GridUnit>();
+    [HideInInspector] public List<GridUnit> last_aoe_range = new List<GridUnit>();
     private void Update()
     {
-        if (last_line != null) last_line.SetActive(false);
-
         if (current_highlighted_grid_unit != null && current_highlighted_grid_unit.occupiedActor != null)
         {
             foreach (Transform child in actorDetails.parent.GetComponent<BattleActorDetails>().statusIconsHolder)
@@ -354,14 +351,14 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
             {
                 foreach (GridUnit unit in last_aoe_range)
                     unit?.ClearAoEHighlight();
+            }
 
-                if (current_highlighted_grid_unit.occupiedActor.preview_aoe != null)
-                {
-                    last_aoe_range = new List<GridUnit>(current_highlighted_grid_unit.occupiedActor.preview_aoe);
+            if (current_highlighted_grid_unit.occupiedActor.preview_aoe != null)
+            {
+                last_aoe_range = new List<GridUnit>(current_highlighted_grid_unit.occupiedActor.preview_aoe);
 
-                    foreach (GridUnit unit in last_aoe_range)
-                        unit?.AoEHighlight();
-                }
+                foreach (GridUnit unit in last_aoe_range)
+                    unit?.AoEHighlight();
             }
         }
         else if (current_highlighted_grid_unit != null && current_highlighted_grid_unit.occupiedActor == null)
@@ -380,7 +377,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
             var forward = Camera.main.transform.forward;
             var right = Camera.main.transform.right;
             Vector3 desiredMoveDirection = forward * InputProcessor.GetInstance().leftStick.z + right * InputProcessor.GetInstance().leftStick.x;
-            
+
             desiredMoveDirection = Vector3.ProjectOnPlane(desiredMoveDirection, Vector3.up).normalized;
             gridCur.transform.position += desiredMoveDirection * Time.deltaTime * 8f;
 

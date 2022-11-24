@@ -71,7 +71,7 @@ MonoBehaviour:
   mustTargetEmptyGrid: 1
   excludeDiagonal: 1
   skillCastingDuration: 0.5
-  skillCastingVfx: {fileID: 1524292575317532, guid: 285668db62b73ea40a30fad187aad9e5,
+  skillCastingVfx: {fileID: 1524292575317532, guid: de2cde6e41b30c64f8972773425f5eb3,
     type: 3}
   og_model_pos: {x: 0, y: 0, z: 0}
   textManager: {fileID: 0}
