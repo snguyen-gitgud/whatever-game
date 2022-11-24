@@ -426,7 +426,7 @@ public class ActorController : MonoBehaviour
                 line.GetComponent<ArcTarget_C>().EndPoint = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor.line.GetComponent<ArcTarget_C>().StartPoint;
 
             ActorController targetController = BattleMaster.GetInstance().gridManager.GetHighLightedGridUnit().occupiedActor;
-            if (targetController != null && last_pincer_actor_list.Contains(targetController) && targetController != this)
+            if (targetController != null /*&& last_pincer_actor_list.Contains(targetController)*/ && targetController != this)
             {
                 List<GridUnit> pincer_range = BattleMaster.GetInstance().gridManager.FindArea(targetController.occupied_grid_unit, 2, 2, targetController.actorTeams, true, false);
                 foreach (GridUnit tile in pincer_range)
