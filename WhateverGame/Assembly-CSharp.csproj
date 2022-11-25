@@ -71,6 +71,7 @@
     <Compile Include="Assets\PostProcessing\Runtime\Components\MotionBlurComponent.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\CameraShakeCaller.cs" />
     <Compile Include="Assets\Scripts\Battle\Skills\Brawler\MonkNormalAttack.cs" />
+    <Compile Include="Assets\Scripts\Battle\Skills\SpeedStatsSkill.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\WebDemoAssets\scripts\ECProjectile.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\scripts\particleColorChangerMaster.cs" />
     <Compile Include="Assets\Scripts\Battle\Actors\ActorUI.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Assets\PostProcessing\Runtime\Models\ChromaticAberrationModel.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Components\DepthOfFieldComponent.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\instantiateEffectCallerMeleeCombat.cs" />
+    <Compile Include="Assets\3rdParty\VFX\OrdossFX\SelectionBasesFX\Scripts\SelectionBases_EffectList.cs" />
     <Compile Include="Assets\3rdParty\ArcTarget\Script\ArcTarget_C.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\scripts\ECparticleColorChangerMaster.cs" />
     <Compile Include="Assets\Scripts\Common\FadeInFadeOutCanvasGroup.cs" />
@@ -160,6 +162,7 @@
     <Compile Include="Assets\Scripts\Battle\Statuses\DOTStatus.cs" />
     <Compile Include="Assets\Scripts\Common\SelfBlinkingUI.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
+    <Compile Include="Assets\Scripts\Battle\Statuses\SpeedStatus.cs" />
     <Compile Include="Assets\3rdParty\VFX\SineVFX\TopDownEffects\Resources\Scripts\SineUIControllerTopDownEffects.cs" />
     <Compile Include="Assets\3rdParty\VFX\SineVFX\TopDownEffects\Resources\Scripts\RampGeneratorTDE.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Utils\GraphicsUtils.cs" />
@@ -189,9 +192,6 @@
     <Compile Include="Assets\Scripts\Common\SelfSpinning.cs" />
     <Compile Include="Assets\PostProcessing\Runtime\Models\AntialiasingModel.cs" />
     <Compile Include="Assets\3rdParty\VFX\EffectCore\packs\StylizedMeleeCombatPack1\WebBuild\scripts\nextEffectMeleeCombat.cs" />
-    <Compile Include="Assets\3rdParty\VFX\OrdossFX\SelectionBasesFX\Scripts\SelectionBases_EffectList.cs" />
-    <Compile Include="Assets\Scripts\Battle\Skills\SpeedStatsSkill.cs" />
-    <Compile Include="Assets\Scripts\Battle\Statuses\SpeedStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3rdParty\Animations\FightingUnityChan_FreeAsset\FightingUnityChan_FreeAsset\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />

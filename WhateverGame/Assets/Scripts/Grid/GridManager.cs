@@ -421,7 +421,7 @@ public class GridManager : MonoBehaviour, ISerializationCallbackReceiver
                 }
             }
         }
-        else
+        else if (cursor_lock == false)
         {
             Ray ray = new Ray(cursorRoot.position + (Vector3.up * 100f), Vector3.down);
             //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

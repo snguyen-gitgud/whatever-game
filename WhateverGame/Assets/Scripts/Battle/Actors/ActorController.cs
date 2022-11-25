@@ -269,9 +269,21 @@ public class ActorController : MonoBehaviour
 
             if (InputProcessor.GetInstance().buttonShoulderL)
             {
-                DOTween.Kill(commandControlUI.transform);
-                commandControlUI.transform.DOScale(Vector3.zero, .25f);
-                EndTurn();
+                if (BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit == this.occupied_grid_unit)
+                {
+                    DOTween.Kill(commandControlUI.transform);
+                    commandControlUI.transform.DOScale(Vector3.zero, .25f);
+                    EndTurn();
+                }
+                else
+                {
+                    if (unlock_cor != null)
+                        StopCoroutine(unlock_cor);
+
+                    BattleMaster.GetInstance().gridManager.cursor_lock = true;
+                    BattleMaster.GetInstance().gridManager.gridCur.transform.position = this.occupied_grid_unit.cachedWorldPos + Vector3.up * BattleMaster.GetInstance().gridManager.gridUnitSize * 0.5f;
+                    unlock_cor = StartCoroutine(UnlockCursor());
+                }
             }
 
             if (InputProcessor.GetInstance().buttonWest)
@@ -297,6 +309,13 @@ public class ActorController : MonoBehaviour
                 }
             }
         }
+    }
+
+    Coroutine unlock_cor = null;
+    IEnumerator UnlockCursor()
+    {
+        yield return new WaitForSeconds(0.5f);
+        BattleMaster.GetInstance().gridManager.cursor_lock = false;
     }
 
     public List<GridUnit> skill_range_area = new List<GridUnit>();
