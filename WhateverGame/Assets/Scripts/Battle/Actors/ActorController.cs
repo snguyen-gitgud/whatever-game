@@ -49,6 +49,7 @@ public class ActorController : MonoBehaviour
     public TextMeshProUGUI outputText;
     public GameObject unloadObj;
     public GameObject backObj;
+    public GameObject facingArrows;
 
     [Header("Vcam settings")]
     public Transform vcamTarget;
@@ -100,6 +101,8 @@ public class ActorController : MonoBehaviour
         actionPreviewUI.transform.localScale = Vector3.zero;
 
         actorAnimationController.PlayIdle();
+
+        facingArrows.SetActive(false);
     }
 
     // Update is called once per frame
@@ -180,6 +183,7 @@ public class ActorController : MonoBehaviour
         }
     }
 
+    List<GridUnit> facing_dirs = null;
     public void ProcessWaitingForCommandState()
     {
         vcam_target = vcamTarget.DOMove(BattleMaster.GetInstance().gridManager.gridCur.transform.position, 0.25f);
@@ -258,22 +262,36 @@ public class ActorController : MonoBehaviour
             //commands
             if (InputProcessor.GetInstance().buttonSouth)
             {
-                if (is_moved == true)
-                    return;
+                if (facingArrows.activeSelf == false)
+                {
+                    if (is_moved == true)
+                        return;
 
-                DOTween.Kill(commandControlUI.transform);
-                commandControlUI.transform.DOScale(Vector3.zero, .25f);
+                    DOTween.Kill(commandControlUI.transform);
+                    commandControlUI.transform.DOScale(Vector3.zero, .25f);
 
-                ReadyToMoveState();
+                    ReadyToMoveState();
+                }
+                else
+                {
+                    if (BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit != this.occupied_grid_unit &&
+                        facing_dirs != null &&
+                        facing_dirs.Contains(BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit) == true)
+                    {
+                        Vector3 new_forward = Vector3.ProjectOnPlane((BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit.cachedWorldPos - this.transform.GetChild(0).position).normalized, Vector3.up);
+                        this.transform.GetChild(0).forward = new_forward;
+
+                        ChangeStateToEndTurn();
+                    }
+                }
             }
 
             if (InputProcessor.GetInstance().buttonShoulderL)
             {
                 if (BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit == this.occupied_grid_unit)
                 {
-                    DOTween.Kill(commandControlUI.transform);
-                    commandControlUI.transform.DOScale(Vector3.zero, .25f);
-                    EndTurn();
+                    facingArrows.SetActive(true);
+                    facing_dirs = BattleMaster.GetInstance().gridManager.FindArea(this.occupied_grid_unit, 2, 2, actorTeams, false, true);
                 }
                 else
                 {
@@ -309,6 +327,14 @@ public class ActorController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ChangeStateToEndTurn()
+    {
+        DOTween.Kill(commandControlUI.transform);
+        commandControlUI.transform.DOScale(Vector3.zero, .25f);
+        BattleMaster.GetInstance().gridManager.ClearAreaHighlight();
+        EndTurn();
     }
 
     Coroutine unlock_cor = null;
@@ -1056,6 +1082,9 @@ public class ActorController : MonoBehaviour
         BattleMaster.GetInstance().birdEyeVcam.GetCinemachineComponent<Cinemachine.CinemachineOrbitalTransposer>().m_XAxis.Value = vcamTransposer.m_XAxis.Value;
         actorDetails.transform.GetChild(0).DOLocalMoveX(-800f, 0.25f).SetDelay(.25f);
         currentChosenSkill = null;
+
+        facingArrows.SetActive(false);
+
         BattleMaster.GetInstance().CurrentActorTurnEnds(vcamTransposer.m_FollowOffset, vcamTransposer.m_XAxis.Value);
     }
 }
