@@ -209,6 +209,8 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
             }
             else
                 go.SetActive(false);
+
+            go.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = allActorsList[index].actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? allActorsList[index].PlayerTeamBGColor : allActorsList[index].OpponentTeamBGColor;
         }
 
         foreach (GameObject go in actorCastingProgressionsList)
@@ -227,6 +229,28 @@ public class BattleMaster : SingletonBehavior<BattleMaster>
             }
             else
                 go.SetActive(false);
+
+            go.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = allActorsList[index].actorTeams == GridUnitOccupationStates.PLAYER_TEAM ? allActorsList[index].PlayerTeamBGColor : allActorsList[index].OpponentTeamBGColor;
+        }
+
+        foreach (GameObject go in actorAPProgressionsList)
+        {
+            int index = actorAPProgressionsList.IndexOf(go);
+
+            if (BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit != null && BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit.occupiedActor == allActorsList[index])
+            {
+                go.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = Color.yellow;
+            }
+        }
+
+        foreach (GameObject go in actorCastingProgressionsList)
+        {
+            int index = actorCastingProgressionsList.IndexOf(go);
+
+            if (BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit != null && BattleMaster.GetInstance().gridManager.current_highlighted_grid_unit.occupiedActor == allActorsList[index])
+            {
+                go.transform.GetChild(0).GetChild(0).GetComponent<Image>().color = Color.yellow;
+            }
         }
     }
 
